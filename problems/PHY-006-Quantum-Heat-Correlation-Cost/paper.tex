@@ -1,0 +1,174 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=24mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools,booktabs}
+\usepackage{tikz}
+\usepackage[colorlinks=true,linkcolor=blue!45!black,citecolor=blue!45!black,urlcolor=blue!45!black]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newcommand{\Id}{\mathbb I}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\calD}{\mathcal D}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\rhoA}{\rho_{A}}
+\newcommand{\rhoB}{\rho_{B}}
+\title{\textbf{Sharp Information Cost of Correlation-Assisted Heat Reversal}\\in Two Equal-Gap Qubits}
+\author{Tony Newton}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+For two equal-gap qubits with fixed, initially thermal marginal states, we determine the least initial quantum mutual information compatible with a prescribed energy transfer from the colder qubit to the hotter one under an arbitrary energy-conserving unitary. The lower bound is the binary-entropy difference between the initial and target local excitation populations. We give an explicit exchange rotation that attains it at every feasible transfer, terminating in a product state. The exact boundary implies a dimensionless, universally sharp quadratic strengthening of the familiar correlation-assisted Clausius inequality. We also characterize the entanglement of every protocol saturating this information bound using a closed-form partial-transpose threshold: sufficiently small reversals require initial energy-basis coherence but need not require entanglement. These statements provide an exact two-qubit resource benchmark; correlation-assisted heat reversal and the underlying unitary-orbit methods are well established, and priority of the particular trade-off is not asserted.
+\end{abstract}
+
+\section{Question and physical setting}
+In the absence of initial correlations, energy exchange between systems prepared at different temperatures is constrained by the usual thermodynamic arrow. Correlations change that inference: heat-flow reversal was analyzed by Partovi \cite{partovi} and Jennings and Rudolph \cite{jennings}, and was observed with locally thermal nuclear spins by Micadei and collaborators \cite{micadei}. The geometry of mutual information on two-qubit unitary orbits, including energy-constrained orbits, was investigated in detail by Jevtic, Jennings and Rudolph \cite{jevticprl,jevticpra}. We address a narrower quantitative question: for a specified reversed energy transfer, what is the \emph{smallest initial mutual information} that can make it possible, and can that bound be attained with an exactly energy-conserving operation?
+
+Let $A$ and $B$ be two distinguishable qubits with equal bare energy gap $\eps>0$ and noninteracting reference Hamiltonian
+\begin{equation}\label{eq:H}
+H_0=\eps\bigl(|1\rangle\langle1|_A\otimes\Id_B+\Id_A\otimes|1\rangle\langle1|_B\bigr).
+\end{equation}
+Their initially thermal, energy-diagonal marginal states have excitation probabilities
+\begin{equation}\label{eq:marg}
+\rhoA^{\mathrm i}=\operatorname{diag}(1-a,a),\qquad
+\rhoB^{\mathrm i}=\operatorname{diag}(1-b,b),\qquad 0<a<b<\frac12.
+\end{equation}
+In terms of inverse temperatures, $a=(1+e^{\beta_A\eps})^{-1}$ and $b=(1+e^{\beta_B\eps})^{-1}$, so $\beta_A>\beta_B>0$: $A$ is colder. We allow an arbitrary initial joint density operator $\rho_{AB}^{\mathrm i}$ with marginals \eqref{eq:marg}, including correlations and coherences between different total-energy sectors. A global unitary $U$ obeys $[U,H_0]=0$. Define the amount $q$ of \emph{reversed} energy transfer by
+\begin{equation}\label{eq:q}
+\Tr(H_A\rho_A^{\mathrm f})-\Tr(H_A\rho_A^{\mathrm i})=-\eps q,
+\qquad \rho_{AB}^{\mathrm f}=U\rho_{AB}^{\mathrm i}U^\dagger.
+\end{equation}
+Energy conservation forces the final excitation probabilities to be $a-q$ for $A$ and $b+q$ for $B$, so $0\le q\le a$. We refer to this bare-energy exchange as heat in the conventional two-qubit collision-model sense; preparing initial correlations and implementing a coupling can themselves consume resources not included in \eqref{eq:q}. Throughout, entropies use natural logarithms, $h(x)=-x\ln x-(1-x)\ln(1-x)$ with $h(0)=h(1)=0$, and $I(A\!:\!B)=S(\rho_A)+S(\rho_B)-S(\rho_{AB})$.
+
+\section{Exact and attainable correlation cost}
+\begin{theorem}[Optimal correlation budget]\label{th:main}
+For any initial state with the thermal marginals \eqref{eq:marg}, and any $U$ satisfying $[U,H_0]=0$ that transfers $\eps q$ from $A$ to $B$, the initial mutual information satisfies the \emph{sharp} inequality
+\begin{equation}\label{eq:cost}
+\boxed{\quad I(A\!:\!B)_{\mathrm i}\ \ge\ \mathcal C_{a,b}(q)
+:=h(a)+h(b)-h(a-q)-h(b+q),\quad 0\le q\le a.\quad}
+\end{equation}
+For every $q$ in this interval there exists an explicit joint state and energy-conserving unitary attaining equality. The final state for that realization is a product of two diagonal density operators.
+\end{theorem}
+\begin{proof}
+Let $S_A^{\mathrm f}$ and $S_B^{\mathrm f}$ be the final local entropies. Unitary invariance of the total entropy gives the exact identity
+\begin{equation}\label{eq:identity}
+I_{\mathrm i}-I_{\mathrm f}=h(a)+h(b)-S_A^{\mathrm f}-S_B^{\mathrm f}.
+\end{equation}
+For any single-qubit state whose excited population is $x$, its entropy is at most $h(x)$, with equality when it is diagonal in the energy basis. Since $I_{\mathrm f}\ge0$, \eqref{eq:identity} gives \eqref{eq:cost}. Notice that this step does not assume absence of global energy-sector coherence.
+
+To show equality construct the desired \emph{final} product state first. Write
+\begin{equation}\label{eq:pr}
+p=a-q,\qquad r=b+q,\qquad D=r-p=b-a+2q.
+\end{equation}
+Set $\rho_{AB}^{\mathrm f}=\operatorname{diag}(1-p,p)\otimes\operatorname{diag}(1-r,r)$ and choose $\theta\in[0,\pi/2]$ with
+\begin{equation}\label{eq:theta}
+\sin^2\theta=\frac{q}{D}\quad(q>0),\qquad \theta=0\quad(q=0).
+\end{equation}
+Here $D>q$ whenever $q>0$ because $b>a$. Let $X=|01\rangle\langle10|+|10\rangle\langle01|$ and $U_\theta=e^{-i\theta X}$. It commutes with $H_0$ since it acts only in the one-excitation eigenspace. Define $\rho_{AB}^{\mathrm i}=U_\theta^\dagger\rho_{AB}^{\mathrm f}U_\theta$. In the ordered basis $(|00\rangle,|01\rangle,|10\rangle,|11\rangle)$, the initial single-excitation populations are
+\[
+\begin{split}
+P_{10}^{\mathrm i}&=p(1-r)\cos^2\theta+(1-p)r\sin^2\theta=p(1-r)+q,\\
+P_{01}^{\mathrm i}&=(1-p)r\cos^2\theta+p(1-r)\sin^2\theta=(1-p)r-q.
+\end{split}
+\]
+The $|11\rangle$ population remains $pr$. Consequently $P_{10}^{\mathrm i}+pr=p+q=a$ and $P_{01}^{\mathrm i}+pr=r-q=b$. Both initial marginals are precisely \eqref{eq:marg}. Since the final state is a product, $I_{\mathrm f}=0$, and both its marginals are diagonal, equality holds throughout the preceding bound. The construction is positive because it is a unitary conjugate of a density matrix, including at $p=0$.
+\end{proof}
+
+The saturation protocol is not restricted to a special pure state or infinitesimal interaction. At every target $q$ it specifies an elementary, experimentally meaningful two-dimensional exchange rotation. Its initial single-excitation coherence is
+\begin{equation}\label{eq:z}
+\bigl|\langle01|\rho_{AB}^{\mathrm i}|10\rangle\bigr|^2
+=q(b-a+q).
+\end{equation}
+For $q>0$ this is nonzero. Energy-basis diagonal initial states cannot reverse the heat current with such an energy-conserving two-qubit operation: their one-excitation populations initially satisfy $P_{01}-P_{10}=b-a>0$, and a $2\times2$ unitary mixing of these populations cannot reduce $P_{10}$. Coherence in the degenerate energy sector is therefore necessary for reversed exchange, although entanglement need not be.
+
+\begin{corollary}[Universally sharp quadratic correction]\label{co:quadratic}
+For the same initial thermal marginals and any reversed transfer $q$, the minimum resource obeys
+\begin{equation}\label{eq:strong}
+\boxed{\quad I_{\mathrm i}\ge \mathcal C_{a,b}(q)
+\ge (\beta_A-\beta_B)\eps q+4q^2.\quad}
+\end{equation}
+The coefficient $4$ is the largest parameter-independent quadratic coefficient valid for all $0<a<b<1/2$ and $0\le q\le a$ (with information measured in nats).
+\end{corollary}
+\begin{proof}
+The binary-entropy derivatives satisfy $h'(x)=\ln[(1-x)/x]$ and $h''(x)=-1/[x(1-x)]$. Therefore
+\[
+\mathcal C'(0)=h'(a)-h'(b)=(\beta_A-\beta_B)\eps,
+\quad \mathcal C''(q)=\frac{1}{(a-q)(1-a+q)}+\frac{1}{(b+q)(1-b-q)}\ge8.
+\]
+Integrating twice from zero proves \eqref{eq:strong}, with endpoint values obtained by continuity. To see optimality, take $a,b\uparrow1/2$ with $a<b$ and $q\downarrow0$ sufficiently faster than $b-a$. Then $\mathcal C''(0)\to8$, and the ratio $[\mathcal C(q)-\mathcal C'(0)q]/q^2\to4$. Thus no larger universal coefficient is possible.
+\end{proof}
+
+\section{When does optimal reversal need entanglement?}
+Energy exchange requires a coherence between $|01\rangle$ and $|10\rangle$, but the distinction between coherence and entanglement matters. There is a closed separability criterion for \emph{every} initial state attaining equality in Theorem~\ref{th:main}.
+\begin{theorem}[Entanglement boundary of the optimal protocols]\label{th:ppt}
+For $0<a<b<1/2$ and $0<q\le a$, every energy-conserving protocol saturating \eqref{eq:cost} has an initial state with only one off-diagonal energy-sector coherence $z=\langle01|\rho_{AB}^{\mathrm i}|10\rangle$ (up to its phase). Its magnitude is given by \eqref{eq:z}. The initial state is separable if and only if
+\begin{equation}\label{eq:PPT}
+\boxed{\quad q(b-a+q)\le(a-q)(b+q)(1-a+q)(1-b-q).\quad}
+\end{equation}
+There is a unique $q_{\mathrm{sep}}\in(0,a)$ at which equality holds: all optimal protocols are separable for $0\le q\le q_{\mathrm{sep}}$ and entangled for $q_{\mathrm{sep}}<q\le a$. Writing $t=a+b$, $\delta=b-a$, one explicit expression is
+\begin{equation}\label{eq:qsep}
+d_*=\frac{-(2-t)+\sqrt{(2-t)^2+4ab}}2,
+\qquad
+q_{\mathrm{sep}}=\frac{-\delta+\sqrt{\delta^2+4(ab-d_*)}}2.
+\end{equation}
+\end{theorem}
+\begin{proof}
+Equality in \eqref{eq:cost} forces $I_{\mathrm f}=0$ and diagonal final marginals, so the final state must be the particular product state of \eqref{eq:pr}. Energy conservation preserves the populations of $|00\rangle$ and $|11\rangle$, which are respectively $(1-p)(1-r)$ and $pr$. Thus every equality-optimal initial state has the block form
+\begin{equation}\label{eq:Xstate}
+\rho_{AB}^{\mathrm i}=
+\begin{pmatrix}
+(1-p)(1-r)&0&0&0\\
+0&b-pr&z&0\\
+0&z^*&a-pr&0\\
+0&0&0&pr
+\end{pmatrix},\qquad p=a-q,\quad r=b+q.
+\end{equation}
+The determinant of its single-excitation $2\times2$ block equals $p(1-r)(1-p)r$ by unitary invariance. Substituting the fixed diagonal entries yields $|z|^2=q(\delta+q)$, independent of the choice of saturating unitary. The partial transpose of \eqref{eq:Xstate} has a potentially negative $2\times2$ block on $(|00\rangle,|11\rangle)$; positivity is equivalent to $|z|^2\le(1-p)(1-r)pr$. The Peres--Horodecki criterion is necessary and sufficient for two-qubit separability \cite{peres,horodecki}, yielding \eqref{eq:PPT}.
+
+Put $d(q)=pr=ab-q(\delta+q)$. Subtracting the two sides of \eqref{eq:PPT} yields
+\[
+\mathcal P(q)=d(q)\bigl[2-a-b+d(q)\bigr]-ab.
+\]
+Because $d(q)$ decreases strictly from $ab$ at $q=0$ to $0$ at $q=a$, and the function $d\mapsto d(2-a-b+d)-ab$ increases strictly on $d\ge0$, $\mathcal P(q)$ decreases strictly from $ab(1-a)(1-b)>0$ to $-ab<0$. It has one zero. Solving the two quadratics for $d$ and then for $q$ gives \eqref{eq:qsep}.
+\end{proof}
+
+\section{Illustrative exactly controlled exchange}
+Take $a=1/5$, $b=2/5$. With $q=1/20$, the product endpoint has $p=3/20$, $r=9/20$, and the required exchange rotation has $\sin^2\theta=1/6$. The initial thermal marginals are reconstructed exactly; the coherent block has $|z|^2=1/80$, while the partial-transpose determinant test gives $(1-p)(1-r)pr-|z|^2=\tfrac{3049}{160000}>0$. Thus a separable but coherent initial state attains the optimal cold-to-hot transfer $\eps/20$. For $q=1/10$, the same construction has $|z|^2=3/100$ and partial-transpose margin $-3/400<0$, hence requires an entangled initial state. The exact threshold from \eqref{eq:qsep} is approximately $q_{\mathrm{sep}}=0.0871271$.
+
+\begin{table}[h]
+\centering
+\caption{The attainable information cost for $a=1/5$, $b=2/5$. Information is in nats. The numerical values illustrate the exact formulas rather than establish them.}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Reversed excitation $q$ & $\mathcal C_{a,b}(q)$ & $\delta\beta\eps q+4q^2$ & Optimal initial state\\
+\midrule
+$0.01$&$0.010333$&$0.010208$&Separable\\
+$0.05$&$0.062566$&$0.059041$&Separable\\
+$0.10$&$0.155184$&$0.138083$&Entangled\\
+$0.20$&$0.500402$&$0.356166$&Entangled\\
+\bottomrule
+\end{tabular}
+\label{tab:cost}
+\end{table}
+
+The maximal transfer $q=a$ leaves the initially colder qubit in its ground state and raises the hot-qubit excitation to $a+b<1$. The correlation resource consumed in this full-reversal operation is exactly $h(a)+h(b)-h(a+b)$. These are finite-size, single-shot average-energy statements. They do not include noise, catalytic systems, repeated-use preparation cost, switching work or arbitrary unequal-gap dynamics.
+
+\section{Discussion}
+The inequality \eqref{eq:cost} is a direct combination of entropy conservation, qubit entropy maximization at fixed energy, and a saturating degenerate-energy exchange rotation. Its value is not the bare observation of cold-to-hot energy transfer, which has a substantial history \cite{partovi,jennings,micadei}, nor the general use of two-qubit unitary-orbit optimization \cite{jevticprl,jevticpra}. What is established here is a compact explicit boundary and constructive equality protocol for the specified marginal-temperature and energy-conservation constraints, together with its quadratic correction and PPT characterization. A more comprehensive comparison with existing energy-constrained mutual-information optimizations is needed before any claim of mathematical priority or publication novelty.
+
+The distinction between an energy-conserving mean transfer and a fully costed thermodynamic cycle remains essential: preparing the initial correlated state can require work or an information reservoir. The protocol converts that resource into an energetically reversed local exchange without violating global entropy conservation. For the specified family, the lower-bound theorem applies even when the initial global state contains inter-sector coherences, while the equality-achieving realization requires coherence only between the degenerate single-excitation levels. Extensions to unequal gaps, non-unitary contacts, or finite-time driving require new hypotheses and are not consequences of the present proof.
+
+\begin{thebibliography}{9}
+\bibitem{partovi} M. H. Partovi, ``Entanglement versus Stosszahlansatz: Disappearance of the thermodynamic arrow in a high-correlation environment,'' \emph{Phys. Rev. E} \textbf{77}, 021110 (2008), \url{https://doi.org/10.1103/PhysRevE.77.021110}.
+\bibitem{jennings} D. Jennings and T. Rudolph, ``Entanglement and the thermodynamic arrow of time,'' \emph{Phys. Rev. E} \textbf{81}, 061130 (2010), \url{https://doi.org/10.1103/PhysRevE.81.061130}.
+\bibitem{jevticprl} S. Jevtic, D. Jennings and T. Rudolph, ``Maximally and minimally correlated states attainable within a closed evolving system,'' \emph{Phys. Rev. Lett.} \textbf{108}, 110403 (2012), \url{https://doi.org/10.1103/PhysRevLett.108.110403}.
+\bibitem{jevticpra} S. Jevtic, D. Jennings and T. Rudolph, ``Quantum mutual information along unitary orbits,'' \emph{Phys. Rev. A} \textbf{85}, 052121 (2012), \url{https://doi.org/10.1103/PhysRevA.85.052121}.
+\bibitem{micadei} K. Micadei \emph{et al.}, ``Reversing the direction of heat flow using quantum correlations,'' \emph{Nat. Commun.} \textbf{10}, 2456 (2019), \url{https://doi.org/10.1038/s41467-019-10333-7}.
+\bibitem{peres} A. Peres, ``Separability criterion for density matrices,'' \emph{Phys. Rev. Lett.} \textbf{77}, 1413--1415 (1996), \url{https://doi.org/10.1103/PhysRevLett.77.1413}.
+\bibitem{horodecki} M. Horodecki, P. Horodecki and R. Horodecki, ``Separability of mixed states: Necessary and sufficient conditions,'' \emph{Phys. Lett. A} \textbf{223}, 1--8 (1996), \url{https://doi.org/10.1016/S0375-9601(96)00706-2}.
+\end{thebibliography}
+
+\noindent\texttt{tony.newton79@gmail.com}
+\end{document}
