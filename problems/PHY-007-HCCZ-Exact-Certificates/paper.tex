@@ -259,7 +259,7 @@ proof-assistant certification.
 One standard-library checker simulates the actual gate matrices by maintaining signed integer amplitudes with a common factor $2^{-h/2}$. It checks the full clean-ancilla basis for n=3 through 12 (8,184 inputs), all 32 borrowed-ancilla basis inputs, 321 canonical-normal-form cases, H-count parity, and deliberate invalid rewrites. A separately implemented checker uses the exact 2-by-2 Toffoli conjugation identity and Boolean XOR operations rather than simulating Hadamards; it checks n=3 through 14 (32,760 inputs), the borrowed identity and Boolean normal forms. Finite verification reinforces rather than replaces the general inductive proofs.
 
 The proof-carrying suite independently certifies
-108 family and randomized source instances,
+112 family and randomized source instances,
 compares 1,712 actual exact-amplitude basis
 executions with the expected phase, and
 rejects 12 deliberately altered artifacts,
