@@ -11,6 +11,9 @@ Each folder should contain:
 6. An honest status label, limitations, and next unresolved target.
 7. CI that checks the code and builds the PDF from source.
 
+### Manuscript title-page policy
+The title page of every paper is reserved for the scientific title and author/affiliation block (with required affiliation footnote). Never print the release date, repository ID, `internal proof`, `external priority unverified`, or similar process/status labels on a manuscript title page. For LaTeX set `\\date{}`. Keep these tracking details in the repository index, per-problem README and audit log. This is a standing rule for every future paper.
+
 ### Evidence tiers
 
 - **OPEN:** unproved or unresolved.
