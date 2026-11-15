@@ -446,4 +446,87 @@ Thus this is an exact property of the
 specified scalar Gaussian heat prior,
 not an observer-invariant CMB detection.
 
-% PHY004_REMAINING
+
+\section{Independent exact verification and limits}
+A first Python verifier uses exact integer and rational
+arithmetic. It checks the quadratic form in
+\eqref{eq:Q}, its invariance under positive
+and negative monodromy powers, and the
+nonsquare discriminant for twenty-eight
+integer traces $3\le T\le30$. In each trace
+it checks every dual-lattice mode in a
+$25\times25$ square, for $17{,}500$ exact
+mode/trace evaluations, plus power recurrences.
+It also verifies each entry of the rational
+spectral comparison in
+Theorem~\ref{thm:first}; no floating point
+number decides mathematical acceptance.
+
+A second, independently structured verifier
+uses explicit $2\times2$ integer
+matrix products and inverse powers for
+$3\le T\le20$, testing the form invariant
+over a $15\times15$ lattice grid. It derives
+the first-eigenvalue inequality via a
+separate rational computation, and checks
+that opposite wavevectors have the same
+$Q_T$ but no common positive-eigenvalue
+orbit. The two programs agree.
+
+The heat-kernel statement in
+Theorem~\ref{thm:cov} is an
+\emph{analytic} Feynman--Kac argument,
+not a finite numerical hypothesis.
+The Sol spectral/number-theoretic
+separation has important precedent
+\cite{bdv}, while existing COMPACT
+observational covariance papers
+incorporate transfer and observer
+effects absent from this model
+\cite{compact,overview}.
+A comprehensive historical originality
+audit and external refereeing have
+not been performed. We do not assert
+that the special trace-three to
+trace-five gap identification is new.
+
+The physically decisive next question
+is whether topology-selected
+correlations survive a
+constraint-preserving coupled
+Einstein--matter evolution with
+Thomson scattering and photon
+visibility, with observer
+marginalization and actual CMB
+$T/E/B$ covariance. Neither
+that evolution nor an observed
+cosmic topology is constructed here.
+
+\begin{thebibliography}{9}
+\bibitem{bdv} A. V. Bolsinov, H. R. Dullin,
+and A. P. Veselov,
+Spectra of Sol-manifolds: arithmetic and quantum monodromy,
+\emph{Communications in Mathematical Physics}
+\textbf{264}, 583--611 (2006).
+\url{https://doi.org/10.1007/s00220-006-1543-6}.
+\bibitem{compact} J. R. Eskilt et al.
+(COMPACT Collaboration),
+Cosmic topology. Part IIa: Eigenmodes,
+correlation matrices, and detectability of
+orientable Euclidean manifolds,
+\emph{Journal of Cosmology and
+Astroparticle Physics}
+\textbf{2024}(03), 036 (2024).
+\url{https://doi.org/10.1088/1475-7516/2024/03/036}.
+\bibitem{overview} C. J. Copi et al.,
+The Topology of the Universe,
+arXiv:2606.24886 (2026).
+\url{https://arxiv.org/abs/2606.24886}.
+\bibitem{feynman} B. Simon,
+\emph{Functional Integration and Quantum Physics},
+2nd edition (American Mathematical Society, 2005).
+\end{thebibliography}
+
+\noindent\texttt{tony.newton79@gmail.com}
+\end{document}
+
