@@ -126,6 +126,25 @@ for nn in ((s.Rational(3,5),s.Rational(4,5),s.S(0)),
            (s.Integer(1),s.Integer(-2),s.Integer(3))):
     A=principal(nn)
     check("30-field arbitrary-direction symmetric "+str(nn),A==A.T)
+# The constrained vacuum Fourier fiber n=e3 has only the
+# two transverse STF amplitudes B1,B3 for E and H (four variables).
+# Check explicitly that its Weyl symbol has only speed +/-1.
+phys=[B[0],B[2]]
+nprev=n
+n=(s.Integer(0),s.Integer(0),s.Integer(1))
+Cphys=s.Matrix(2,2,lambda i,j:sum(
+    phys[i][p,q]*curl_stf(phys[j])[p,q]
+    for p in range(3) for q in range(3))/2)
+check("physical transverse Weyl curl has J^2=-I",
+      Cphys*Cphys==-s.eye(2))
+Wphys=s.zeros(4)
+Wphys[:2,2:]=-Cphys
+Wphys[2:,:2]=Cphys
+zz=s.symbols("zz")
+check("constrained vacuum Weyl polarization polynomial",
+      s.simplify(Wphys.charpoly(zz).as_expr()-(zz*zz-1)**2)==0)
+n=nprev
+
 # Algebraic lower-order source G maps the 12 curl-jet fields
 # F01,F02,F12 (each sigma,vx,vy,vz) into 3 electric constraints.
 G=s.zeros(3,12)
