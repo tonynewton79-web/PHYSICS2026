@@ -131,10 +131,19 @@ for mu in range(4):
 N=s.Matrix(s.symbols("n1 n2 n3"))
 r=c*s.Matrix([[0,N[0],N[1],N[2]],[N[0],0,0,0],
               [N[1],0,0,0],[N[2],0,0,0]])
-zz=s.Matrix(s.symbols("z0 z1 z2 z3"))
+U=s.Matrix(s.symbols("U0 U1 U2 U3"))
+Ws=[s.Matrix(s.symbols("W"+str(i)+"0:"+str(i)+"4")) for i in range(3)]
+dU=-s.I*r*U
+dWs=[-s.I*r*w for w in Ws]
 for i in range(3):
-    OK("gradient constraint homogeneous "+str(i),r*zz==r*zz)
+    Zi=Ws[i]-s.I*N[i]*U
+    dZi=dWs[i]-s.I*N[i]*dU
+    OK("actual Fourier gradient defining-constraint propagation "+str(i),
+       (dZi+s.I*r*Zi).applyfunc(s.simplify)==s.zeros(4,1))
 for i in range(3):
     for j in range(i+1,3):
-        OK("curl gradient constraint homogeneous "+str(i)+str(j),r*zz==r*zz)
+        Fij=s.I*(N[i]*Ws[j]-N[j]*Ws[i])
+        dFij=s.I*(N[i]*dWs[j]-N[j]*dWs[i])
+        OK("actual Fourier curl-constraint propagation "+str(i)+str(j),
+           (dFij+s.I*r*Fij).applyfunc(s.simplify)==s.zeros(4,1))
 print("ALL",count,"EXACT COUPLED PRINCIPAL-SKELETON TESTS PASS")
