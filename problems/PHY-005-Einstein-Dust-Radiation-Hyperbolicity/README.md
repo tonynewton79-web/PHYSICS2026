@@ -37,6 +37,46 @@ The raw synchronous ADM metric subsystem admits high-frequency gauge modes and c
 
 The missing result is therefore **one unified nonlinear strongly hyperbolic gravitational + material system**, not the material repair by itself. Separate prior art includes Friedrich (1998), Normann--Valiente Kroon (2020), Walton's symmetric relativistic Euler treatment (2005), and Fournodavlos--Marshall--Oliynyk's July 2026 tilted two-positive-sound-speed theorem; that 2026 result does **not** include a pressureless dust species at cs=0. No originality, full two-velocity Einstein existence theorem, numerical coupled evolution or CMB prediction is claimed here.
 
+## Attack 03: explicit curvature–radiation principal block, with auxiliary stress gradients
+
+**Completed restricted theorem:** At a point of a background solution, freeze the metric/frame and radiation coefficients. The local ten-variable electric/magnetic Weyl block has STF curl symbol W(n)=[[0,-C(n)],[C(n),0]], where C(n) is the explicit 5×5 basis matrix of the trace-free tensor curl (given in the manuscript). In its basis the positive Weyl Gram symmetrizer is H_W=diag(D,D), D=diag(2,6,2,2,2), and W(n) has characteristic speeds 0, ±|n|/2, ±|n|.
+
+The radiation perturbation U=(sigma,v1,v2,v3) obeys a symmetric acoustic principal equation with sound speed 1/sqrt(3). Introduce twelve extra variables W_i=∂_i U (i=1,2,3). In the radiation stress's Schouten tensor, **all first spacetime stress derivatives can then be written algebraically in W_i** after using the Euler equations to eliminate time derivatives. The stress Cotton source still exists, but it is *lower differential order* in the enlarged system.
+
+The exact frozen **26-field** principal matrix is
+
+    A(n) = diag(W(n), R(n), R(n), R(n), R(n)),
+
+where R(n)=c_s[[0,n^T],[n,0_3]]. It has explicit positive symmetrizer
+
+    H26 = diag(H_W, I4, I4, I4, I4).
+
+The exact characteristic polynomial at a comoving background is
+
+    z^10 (z^2-|n|^2)^2 (z^2-|n|^2/4)^2 (z^2-|n|^2/3)^4.
+
+For a **frozen tilted radiation** state with |v|<1, each R^mu is replaced by the known symmetric relativistic-Euler principal block. Its time eigenvalues gamma twice and gamma(1±c_s|v|) are positive. This certifies the coupled **local curvature–radiation principal skeleton**, not the entire Einstein frame or its gauge.
+
+The auxiliary gradient and curl constraints Z_i=W_i-∂_i U and F_ij=∂_i W_j-∂_j W_i satisfy *homogeneous acoustic subsidiary equations* in the constant-coefficient system. This does **not** prove propagation of geometric Weyl-divergence, torsion, tetrad, harmonic/dust-coordinate or complete Einstein constraints.
+
+**Prior-art gate:** Normann--Valiente Kroon's existing symmetric-hyperbolic Einstein–matter construction introduces Z-type stress derivative fields, but its matter stress ansatz is spatial in the selected material frame. Independently tilted radiation carries nonzero dust-frame heat flux J_i=(4/3)rho_r gamma^2 v_i, so its theorem cannot be invoked unchanged. Derivative prolongation and Weyl curls are established methods; no new general-relativistic breakthrough is claimed.
+
+### Exact Attack 03 scripts
+
+- [verify_curvature_radiation.py](verify_curvature_radiation.py): SymPy STF Weyl curl matrices, 26×26 weighted symmetries, relative-tilt time positivity, stress/Schouten identities, and actual symbolic auxiliary-constraint propagation.
+- [verify_curvature_radiation_independent.py](verify_curvature_radiation_independent.py): separate Fraction-only 5×5 STF curl reconstruction, Gram-adjoint/minimal-polynomial audit, rational stress derivatives, acoustic and constraint tests.
+
+Run both after the four previous verifiers. GitHub Actions automatically executes all six and compiles the single cumulative paper.
+
+### Remaining decisive proof gates
+
+1. Specify all dust-adapted tetrad/frame and connection unknowns, including their derivative sources and gauge choices.
+2. Certify one positive **combined gravitational + radiation + auxiliary jet** time symmetrizer in those equations, not only its 26-field Weyl–radiation subset.
+3. Prove a homogeneous well-posed subsidiary system for **all** torsion, Weyl-divergence, Einstein, frame, gauge, stress-jet and material constraints, without tacit special initial constraints.
+4. Close an inhomogeneous nonlinear energy estimate and local existence theorem, plus eventually a constraint-convergent numerical evolution.
+
+**STATUS:** proved restricted combined principal skeleton + radiation-jet subsidiary propagation; complete Einstein–dust–radiation theorem remains OPEN.
+
 ## Files and reproduction
 
 - [paper.tex](paper.tex): manuscript, full proofs, conditional Einstein harmonic constraints, and **Appendix A: Precise Mathematical Formulation of the Main Result**
@@ -55,8 +95,10 @@ Reproduce:
     python verify_independent.py
     python verify_material.py
     python verify_material_independent.py
+    python verify_curvature_radiation.py
+    python verify_curvature_radiation_independent.py
 
-GitHub Actions runs all four verifiers for every commit, then compiles the cumulative PDF.
+GitHub Actions runs all six verifiers for every commit, then compiles the cumulative PDF.
 
 ## Prior art and scientific classification
 
@@ -66,4 +108,4 @@ GitHub Actions runs all four verifiers for every commit, then compiles the cumul
 
 ## Next meaningful goal
 
-Build a unified, constraint-propagating, strongly hyperbolic **dynamical Einstein + material-dust + tilted-radiation** first-order reduction, including the curvature--stress derivative couplings. Prove a closed nonlinear energy estimate and only then add a photon kinetic/Thomson sector. The completed nonlinear **matter-sector** repair is necessary but does not solve that coupled gravitational PDE problem.
+Build a unified, constraint-propagating, strongly hyperbolic **dynamical Einstein + material-dust + tilted-radiation** first-order reduction, extending the now-certified 26-field Weyl–radiation principal block to the actual connection, frame and geometric constraints. Prove a closed nonlinear energy estimate and only then add a photon kinetic/Thomson sector. The completed nonlinear **matter-sector** repair is necessary but does not solve that coupled gravitational PDE problem.
