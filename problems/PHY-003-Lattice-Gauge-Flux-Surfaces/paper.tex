@@ -333,7 +333,7 @@ This is a low-order recovery of classical lattice-gauge
 strong-coupling technology \cite{drouffe,kogut}; it is not
 a newly discovered continuum result.
 
-\section{A twelve-face example and limits of surface-entropy bounds}
+\section{Twelve-face control and an all-orders SU(2) polymer gate}
 Four elementary three-dimensional hypercube facets incident to a vertex of one four-dimensional hypercube have pairwise distinct shared square faces. Their mod-two boundary contains \(4\cdot6-2\binom42=12\) plaquettes and is closed because \(\partial^2=0\). Thus one cannot extrapolate the six--ten classification automatically to the next stratum.
 
 The graph joining plaquettes that share an edge has maximum degree at most \(4[2(4-1)-1]=20\) in four dimensions. Any connected set of \(h\) plaquettes rooted at a fixed plaquette has a canonically chosen spanning tree. Encoding its rooted ordered tree, of which there are at most \(C_{h-1}\le4^{h-1}\), and a choice of one of at most twenty incident neighbor edges for each nonroot node, gives the rigorous but coarse bound
@@ -341,8 +341,174 @@ The graph joining plaquettes that share an edge has maximum degree at most \(4[2
 N_h^{\mathrm{closed,edge\ connected}}(p)
 \le N_h^{\mathrm{edge\ connected}}(p)\le80^{h-1}.
 \]
-This is far too weak for the required nonabelian four-dimensional all-area surface entropy, cluster expansion or continuum Yang--Mills mass gap.
+This bound is extremely weak but, combined with the vanishing of dangling-edge activities, still suffices for an explicit tiny complex strong-coupling disk below. It cannot furnish sharp physical-scale or continuum Yang--Mills mass-gap estimates.
 
+
+
+\subsection{Full-spin polymer representation}
+For fixed $L\ge4$, consider the standard $SU(2)$ Wilson measure,
+with $\beta$ now allowed to be complex. The Haar-normalized
+one-plaquette factor has the exact decomposition
+\begin{equation}\label{eq:full-v}
+\frac{\exp[(\beta/2)\operatorname{Tr}U]}{c_0(\beta)}
+=1+v_\beta(U),\qquad
+v_\beta(U)=\sum_{j\in\frac12\mathbb Z_{>0}}
+(2j+1)u_j(\beta)\chi_j(U),
+\end{equation}
+where the coefficients are those in \eqref{eq:char}.
+For every finite edge-connected set $\gamma$ of distinct plaquettes,
+define
+\begin{equation}\label{eq:polymer-activity}
+w_\gamma(\beta)=\int\prod_{e\in E(\gamma)}dU_e\,
+\prod_{p\in\gamma}v_\beta(U_p).
+\end{equation}
+The Haar integrals retain \emph{all} spins, all admissible
+invariant tensors and all intersections implicitly. Two
+polymers are compatible exactly when they share neither a plaquette
+nor an edge. Expanding the product of \eqref{eq:full-v}
+and splitting each plaquette subset into its edge-connected
+components gives the \emph{exact} hard-core polymer gas
+\begin{equation}\label{eq:polymer-gas}
+\frac{Z_{L,SU(2)}(\beta)}{c_0(\beta)^{6V}}
+=\sum_{\substack{\Gamma\text{ finite family}\\
+                 \text{pairwise edge-compatible}}}
+\prod_{\gamma\in\Gamma}w_\gamma(\beta).
+\end{equation}
+There are no approximation or fixed-spin truncation steps
+in \eqref{eq:polymer-gas}.
+
+If some edge belongs to exactly one plaquette of $\gamma$, its
+link integration yields
+$\int_{SU(2)}v_\beta(AU_eB)\,dU_e=0$,
+because $c_0(\beta)$ is the one-link Haar average of the
+Boltzmann factor. Hence $w_\gamma=0$ whenever $\gamma$ has
+a singly occupied edge. Lemma~\ref{lem:nofree} shows that
+every nonzero polymer has at least six plaquettes, regardless
+of spin labels, self-intersections, or branching.
+
+\subsection{An explicit volume-uniform Koteck\'y--Preiss gate}
+\begin{theorem}[Certified non-Abelian analytic strong-coupling disk]
+\label{thm:kp}
+Let $L\ge4$, with normalized $SU(2)$ Haar measure and
+the four-dimensional periodic Wilson action used in
+Theorem~\ref{thm:su2}. For all complex couplings satisfying
+\begin{equation}\label{eq:radius}
+ |\beta|\le r_0:=\frac1{250},
+\end{equation}
+the full-spin polymer expansion \eqref{eq:polymer-gas}
+satisfies the Koteck\'y--Preiss sufficient criterion
+with polymer size function $a(\gamma)=|\gamma|$.
+In particular $Z_{L,SU(2)}(\beta)\ne0$ throughout the
+closed disk, and its logarithm has an absolutely convergent
+cluster expansion with bounds uniform in $L$.
+Moreover the infinite-volume intensive pressure obtained
+from periodic four-tori exists and is analytic for
+$|\beta|<1/250$. These are fixed-lattice strong-coupling
+statements, not weak-coupling or continuum mass-gap results.
+\end{theorem}
+\begin{proof}
+For $r>0$ with $c_0(r)<2$, write
+\begin{equation}\label{eq:qdef}
+q(r):=\frac{e^r-c_0(r)}{2-c_0(r)},\qquad
+c_0(r)=\sum_{n=0}^\infty
+\frac{r^{2n}}{4^n n!(n+1)!}.
+\end{equation}
+All coefficients of the modified Bessel functions and of
+$c_0$ are nonnegative. Therefore, for $|\beta|\le r$,
+\[
+|c_0(\beta)|\ge1-(c_0(r)-1)=2-c_0(r)>0.
+\]
+Using $|\chi_j(U)|\le 2j+1$ and the exact identity
+\[
+e^r-c_0(r)=\sum_{j\in\frac12\mathbb Z_{>0}}
+(2j+1)^2\frac{2I_{2j+1}(r)}r,
+\]
+the character series in \eqref{eq:full-v} gives the
+\emph{all-representation} bound
+\begin{equation}\label{eq:qbound}
+|v_\beta(U)|\le q(r),\qquad
+|w_\gamma(\beta)|\le q(r)^{|\gamma|},
+\quad \text{for all }U\in SU(2).
+\end{equation}
+No tensor-contraction estimate is assumed; normalized
+Haar integration is bounded by the supremum.
+
+The plaquette edge-contact graph has degree at most twenty.
+The rooted connected-set bound in \eqref{eq:entropy},
+together with the absence of any nonzero polymer of
+area less than six, gives for each root plaquette $p$
+\begin{equation}\label{eq:rootmajorant}
+\sum_{\gamma\ni p}|w_\gamma(\beta)|e^{|\gamma|}
+\le\sum_{h=6}^\infty80^{h-1}[e\,q(r)]^h
+=\frac{80^5[e\,q(r)]^6}{1-80e\,q(r)},
+\end{equation}
+whenever $80e\,q(r)<1$.
+
+Any polymer $\eta$ incompatible with $\gamma$ contains
+at least one plaquette equal to, or sharing an edge with,
+some plaquette of $\gamma$. There are at most
+$21|\gamma|$ such root positions. Thus
+\begin{equation}\label{eq:KPbound}
+\sum_{\eta\not\sim\gamma}|w_\eta(\beta)|e^{|\eta|}
+\le |\gamma|\,
+\underbrace{\frac{21}{80}
+ \frac{[80e\,q(r)]^6}{1-80e\,q(r)}}_{=:K(r)}.
+\end{equation}
+
+It remains to certify a strict numerical-looking
+inequality by \emph{exact rational} bounds. Put
+$r=r_0=1/250$, and define
+\[
+d_r:=\frac{r^2}{8(1-r^2/24)},\qquad
+x_r:=\frac{68}{25}\,
+\frac{80r}{(1-r)(1-d_r)}.
+\]
+The positive series for $c_0$ yields
+$c_0(r)-1\le d_r$ (the ratios of successive
+nonconstant terms are at most $r^2/24$).
+The elementary factorial tail for Euler's constant
+gives $e<68/25$, and $e^r-1\le r/(1-r)$.
+Consequently $80e\,q(r)\le x_r$.
+Direct exact rational simplification gives
+\begin{equation}\label{eq:certificate}
+0<x_r<1,\qquad
+\frac{21}{80}\frac{x_r^6}{1-x_r}
+<\frac{93}{100}<1.
+\end{equation}
+The two accompanying independent exact scripts replay
+this certificate using respectively coarse closed-form
+rational bounds and direct series interval arithmetic.
+
+Equations \eqref{eq:KPbound}--\eqref{eq:certificate}
+give the Koteck\'y--Preiss criterion
+$\sum_{\eta\not\sim\gamma}|w_\eta|e^{|\eta|}
+\le|\gamma|$. The standard abstract polymer-cluster
+theorem \cite{kp} therefore ensures absolute
+convergence and a zero-free normalized partition
+function for complex $|\beta|\le r_0$.
+As $c_0$ has no zeros there, the original partition
+function is also zero-free.
+
+Finally the strict bound with uniform slack
+makes the rooted cluster sums locally uniformly
+summable, with exponentially summable size tails
+on every smaller disk $|\beta|\le r'<r_0$.
+Fixed finite clusters stabilize under the
+$L\to\infty$ periodic-volume limit, giving the
+intensive-pressure limit by dominated convergence;
+its analyticity follows from locally uniform
+convergence of analytic cluster sums.
+\end{proof}
+
+The explicit radius $1/250$ is intentionally
+conservative. We use the elementary all-animal
+bound $80^{h-1}$ rather than exploiting exact
+higher-area non-Abelian cancellations, so the
+criterion is in no sense an optimal or novel
+lattice strong-coupling threshold. In the
+weak-coupling/continuum tuning $\beta\to\infty$,
+$q(\beta)$ does not remain small, and this
+argument gives no useful continuum mass-gap bound.
 
 \section{Independent non-Abelian replay and adversarial checks}
 The group-integral claim in \eqref{eq:groupweights} was attacked using
@@ -395,6 +561,7 @@ The small-surface strong-coupling expansion is established prior art \cite{drouf
 \bibitem{kogut} J. B. Kogut, \emph{An introduction to lattice gauge theory and spin systems}, Rev. Mod. Phys. \textbf{51}, 659--713 (1979). \url{https://doi.org/10.1103/RevModPhys.51.659}.
 \bibitem{drouffe} J.-M. Drouffe and J.-B. Zuber, \emph{Strong coupling and mean field methods in lattice gauge theories}, Phys. Rep. \textbf{102}, 1--119 (1983). \url{https://doi.org/10.1016/0370-1573(83)90034-0}.
 \bibitem{forsstrom} M. P. Forsstr\"om, \emph{Decay of correlations in finite Abelian lattice gauge theories}, Commun. Math. Phys. \textbf{393}, 1311--1346 (2022). \url{https://doi.org/10.1007/s00220-022-04391-0}.
+\bibitem{kp} R. Koteck\'y and D. Preiss, \emph{Cluster expansion for abstract polymer models}, Commun. Math. Phys. \textbf{103}, 491--498 (1986), \url{https://doi.org/10.1007/BF01211762}.
 \end{thebibliography}
 \end{document}
 
