@@ -1,4 +1,4 @@
-# Sharp Derivative Loss and Singular Sound-Speed Symmetrizers for Eulerian Dust–Radiation Cauchy Systems
+# Eulerian Hyperbolicity Obstructions and Nonlinear Material-Frame Repairs for Einstein–Dust–Radiation Cauchy Systems
 
 **PHY-005 — a new Einstein–matter Cauchy-theory investigation**, separate from electron magnetohydrodynamics (PHY-001/002), lattice gauge theory (PHY-003), and Sol scalar topology (PHY-004).
 
@@ -17,11 +17,33 @@ A positive dust sound speed c gives the symmetric longitudinal block [[0,1],[c²
 
 Under separate smooth matter conservation, generalized-harmonic Einstein gauge constraints satisfy the **conditional** subsidiary equation box(C)_nu+R_nu^mu C_mu=0. This is not a construction of a smooth coupled solution.
 
+## Nonlinear continuation: an exact matter-sector repair, not a complete Einstein Cauchy theorem
+
+For **irrotational geodesic dust before caustics**, choose synchronous material coordinates with metric -dτ²+h_ij(τ,X)dX^i dX^j and u_d=∂τ. The *exact fully nonlinear* dust conservation law reduces to
+
+    ∂τ m(X)=0,  m=ρ_d sqrt(det h),  ρ_d=m(X)/sqrt(det h).
+
+Allow radiation to have a **separate tilted four-velocity** u_r=γ(n+v), with γ=(1-|v|²)^(-1/2), |v|<1, and sound speed cs=1/sqrt(3). In an orthonormal radiation velocity-tangent basis, the radiation principal matrices are symmetric and the time-matrix eigenvalues are
+
+    γ, γ, γ(1-cs|v|), γ(1+cs|v|).
+
+These are positive for every strictly subluminal tilt. Consequently the **combined material-dust plus tilted-radiation subsystem** is locally symmetrizable hyperbolic on a *prescribed smooth metric*, with the dust mass label contributing a trivial positive one-dimensional time block.
+
+The paper now also writes the full nonlinear Einstein ADM sources, including the **nonzero radiation momentum flux** J_i=(4/3)ρ_r γ² v_i, and proves **conditional** Hamiltonian and momentum constraint propagation by the contracted Bianchi identity. The exact homogeneous FLRW dust+radiation equations provide a nonlinear positive control.
+
+### Why the complete problem is still open
+
+The raw synchronous ADM metric subsystem admits high-frequency gauge modes and cannot be declared strongly hyperbolic merely by coupling it to a symmetric matter block. In a curvature/frame Einstein reduction, the Schouten/Cotton source contains derivatives of the **tilted radiation stress**, which introduce off-diagonal principal couplings requiring a new symmetrizer, auxiliary fields, and a full torsion/frame/gauge constraint closure.
+
+The missing result is therefore **one unified nonlinear strongly hyperbolic gravitational + material system**, not the material repair by itself. Separate prior art includes Friedrich (1998), Normann--Valiente Kroon (2020), Walton's symmetric relativistic Euler treatment (2005), and Fournodavlos--Marshall--Oliynyk's July 2026 tilted two-positive-sound-speed theorem; that 2026 result does **not** include a pressureless dust species at cs=0. No originality, full two-velocity Einstein existence theorem, numerical coupled evolution or CMB prediction is claimed here.
+
 ## Files and reproduction
 
 - [paper.tex](paper.tex): manuscript, full proofs, conditional Einstein harmonic constraints, and **Appendix A: Precise Mathematical Formulation of the Main Result**
 - [verify.py](verify.py): **25 exact SymPy assertions** for the 3D characteristic, Jordan, radiation and pressure-regularization identities
 - [verify_independent.py](verify_independent.py): separately coded **standard-library exact Fraction** Gaussian elimination and matrix arithmetic
+- [verify_material.py](verify_material.py): symbolic Lorentz-frame, radiation positivity, nonlinear FLRW constraint and synchronous gauge-mode checks
+- [verify_material_independent.py](verify_material_independent.py): independently derived exact Fraction cross-checks
 - [AUDIT.md](AUDIT.md): limitations, structural counterexamples and proof boundaries
 - [PDF_FILENAME.txt](PDF_FILENAME.txt): title-named compiled PDF
 - [requirements.txt](requirements.txt): SymPy pinned to 1.14.0
@@ -31,8 +53,10 @@ Reproduce:
     python -m pip install -r requirements.txt
     python verify.py
     python verify_independent.py
+    python verify_material.py
+    python verify_material_independent.py
 
-GitHub Actions runs both verifiers for every commit, then compiles the full PDF.
+GitHub Actions runs all four verifiers for every commit, then compiles the cumulative PDF.
 
 ## Prior art and scientific classification
 
@@ -42,4 +66,4 @@ GitHub Actions runs both verifiers for every commit, then compiles the full PDF.
 
 ## Next meaningful goal
 
-Construct a constraint-propagating, Lagrangian or mixed-regularity **fully evolving** Einstein–dust–radiation formulation, prove a closed nonlinear energy estimate and then add a conservative photon kinetic/Thomson sector. The present frozen-symbol result alone does not solve that problem.
+Build a unified, constraint-propagating, strongly hyperbolic **dynamical Einstein + material-dust + tilted-radiation** first-order reduction, including the curvature--stress derivative couplings. Prove a closed nonlinear energy estimate and only then add a photon kinetic/Thomson sector. The completed nonlinear **matter-sector** repair is necessary but does not solve that coupled gravitational PDE problem.
