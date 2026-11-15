@@ -75,4 +75,42 @@ The four cubes per lattice site similarly give \(M_6=4\).
 \end{proof}
 The mixed type uses all four coordinate directions, unlike the coplanar type. This geometric distinction does not constitute an observable continuum gauge signature by itself.
 
+
+\section{Exact \(\mathbb Z_2\) gauge expansion and \(SU(2)\) parity}
+Consider the \(L^4\) periodic cubic lattice, \(L\ge4\), with \(V=L^4\) sites, \(4V\) positively oriented links and \(6V\) plaquettes. Put \(u_e=\pm1\), \(u_p=\prod_{e\in\partial p}u_e\), and
+\[
+Z_L(\beta)=\sum_{\{u_e=\pm1\}}\exp\!\left(\beta\sum_p u_p\right),
+\qquad t=\tanh\beta.
+\]
+\begin{proposition}\label{prop:z}
+For any fixed integer \(L\ge4\),
+\[
+\frac{Z_L(\beta)}{2^{4V}(\cosh\beta)^{6V}}
+=1+4Vt^6+36Vt^{10}+O_L(t^{12}),
+\]
+and
+\[
+\frac1V\log\frac{Z_L(\beta)}
+{2^{4V}(\cosh\beta)^{6V}}
+=4t^6+36t^{10}+O_L(t^{12}).
+\]
+The remainder is a fixed-finite-volume Taylor statement, not a uniform thermodynamic or continuum estimate.
+\end{proposition}
+\begin{proof}
+Expanding \(e^{\beta u_p}=\cosh\beta(1+tu_p)\), the independent sum over every link sign kills exactly the plaquette sets with odd incidence at any edge. Therefore the normalized partition function equals \(\sum_{S:\partial S=0}t^{|S|}\) exactly. A nonzero homology class in \(H_2(\mathbb T_L^4;\mathbb F_2)\) projects nontrivially onto one of the six coordinate two-tori. Such a projection must contain all \(L^2\) squares of the two-torus, so the original surface has at least \(L^2\ge16\) faces. A connected closed surface with at most eleven faces cannot wrap geometrically around a coordinate direction either: each occupied slab in that direction contains at least four faces, so there can be at most two active slabs; an unused slab allows an unwrapping cut. A surface with two nonempty edge-connected closed components has at least twelve faces. Thus all surfaces of area below twelve lift to the finite-support classification of Theorem~\ref{thm:small}, with the multiplicities of Theorem~\ref{thm:counts}. These give \(4V\) and \(36V\) at degrees six and ten, and no other coefficients before twelve. The square of the first nonconstant term in the logarithm starts at degree twelve.
+\end{proof}
+
+\begin{proposition}\label{prop:center}
+In the Wilson \(SU(2)\) plaquette-character expansion
+\[
+e^{(\beta/2)\operatorname{Tr}U_p}
+=\sum_{j\in\frac12\mathbb Z_{\ge0}}c_j(\beta)\chi_j(U_p),
+\]
+every term that survives all independent link Haar integrations has an even number of adjacent half-integer-spin plaquettes at each link. The half-integer-spin support is therefore a closed mod-two two-chain.
+\end{proposition}
+\begin{proof}
+For any fixed link \(e\), Haar measure is invariant under \(U_e\mapsto-U_e\). The central matrix \(-I\) acts on the spin-\(j\) character by the sign \((-1)^{2j}\), independent of link orientation. If an odd number of incident plaquettes carry half-integer spin, the product of their characters changes sign and the link integral vanishes. Thus every edge has even half-integer incidence.
+\end{proof}
+This \(SU(2)\) condition is necessary but not sufficient. Representation and intertwiner multiplicities remain, so the abelian partition coefficients \(4,36\) must not be presented as actual \(SU(2)\) Wilson-series coefficients.
+
 % MORE_CONTENT_HERE
