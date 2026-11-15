@@ -34,6 +34,22 @@ Its raw-beta series through order 10 is 3 beta^2/4 - beta^4/64 + 7 beta^6/1536 -
 - verify_su2_coefficients.py: exact rational factorial/Bessel series and exhaustive local exterior-plaquette geometry (no third-party modules)
 - verify_su2_gluing_s3.cpp: a separate 2-dimensional non-Abelian representation of S3; exhaustive 7776 + 10077696 + 10077696 group assignments. Its exact cube, coplanar-pair and mixed-pair averages are 1/16, 1/256 and 1/256. This is an independent check of the group-independent gluing identity, not an assertion that S3 equals SU2.
 
+## Third attack: an all-orders volume-uniform SU(2) analytic window
+
+The cumulative manuscript now goes beyond the exact order-ten coefficients. Expanding the fully normalized Wilson plaquette factors as 1+v_beta(U) yields an **exact** hard-core gas of edge-connected plaquette polymers. Its integrated activities include every nontrivial SU(2) spin and every allowed Haar/intertwiner contraction, with no spin cutoff.
+
+An incident edge occupied by exactly one nontrivial plaquette makes that polymer activity vanish by the zero Haar average of v_beta. Therefore every contributing polymer uses at least six faces.
+
+For complex |beta|<=r, let c0(r)=2I1(r)/r and
+q(r)=(exp(r)-c0(r))/(2-c0(r)). Then every polymer gamma satisfies
+|w_gamma|<=q(r)^|gamma|. Every connected rooted plaquette set of size h is bounded by 80^(h-1); combining this with the minimum six-face support and the maximum 21 incompatible rooted positions per plaquette gives the explicit Kotecky-Preiss condition
+
+    x=80 e q(r)<1,      (21/80)*x^6/(1-x) < 1.
+
+At **r=1/250**, a first exact rational certificate bounds the last quantity by **<93/100**, and a second independently recomputes the Bessel and exponential intervals from the positive factorial series. The abstract KP theorem yields a **volume-uniform zero-free partition function** on |beta|<=1/250 and convergence of the infinite-volume analytic pressure on its interior.
+
+This is a very small fixed-lattice strong-coupling window, obtained using long-established polymer convergence theory. It is NOT a continuum Yang-Mills theorem, a novel optimal bound, or a claim of a physical-scale mass gap.
+
 ## Reproduce all exact checks
 
 Requirements: Python 3.11+, standard library only. Run:
@@ -41,6 +57,8 @@ Requirements: Python 3.11+, standard library only. Run:
     python verify.py
     python verify_independent.py
     python verify_su2_coefficients.py
+    python verify_su2_allorders_kp.py
+    python verify_su2_allorders_independent.py
     g++ -O2 -std=c++17 verify_su2_gluing_s3.cpp -o /tmp/phy003_s3 && /tmp/phy003_s3
 
 The first program explores 30,259 rooted partial states and regenerates the exact 4+60 catalogue by a separate cube-pair method. The second uses periodic L=4 cell incidence: 1,536 plaquettes, 1,024 cubes, and 9,216 distinct face-sharing pairs.
