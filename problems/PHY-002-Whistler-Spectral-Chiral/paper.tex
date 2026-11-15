@@ -1,0 +1,168 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,microtype}
+\usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newcommand{\br}[2]{\{#1,#2\}}
+\newcommand{\TT}{\mathbb T^2}
+\title{\textbf{Algebraic Whistler Spectral Barriers and Nonlinear Chiral-Mode Leakage}\\in Two-and-a-Half-Dimensional Electron Magnetohydrodynamics}
+\author{Tony Newton\\Newton Astro Labs\thanks{Newton Astro Labs is the trading name under which Tony Newton conducts independent computational research in the United Kingdom; it is not a limited company.}\\London, UK\\\texttt{tony.newton79@gmail.com}}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+We obtain a restricted spectral obstruction, an exact nonlinear chiral-mode coupling formula and a family of positive controls for ideal two-and-a-half-dimensional electron magnetohydrodynamics (EMHD). Its linearized Fourier generator has irreducible quadratic characteristic polynomial over \(\mathbb C(k_x,k_y)\); rational-symbol scalar diagonalization is therefore impossible, and a square-root nonlocal Fourier multiplier is necessary and sufficient. An exact quadratic coefficient measures instantaneous nonlinear leakage between chiral whistler families: a pair of noncollinear planar modes leaks precisely when their wavenumber magnitudes differ. Modes of equal magnitude, by contrast, generate finite-amplitude exact Beltrami-shell solutions. Finally, for any matrix size, a flat connection with potentials depending pointwise only on \((\psi,\beta,\Delta\psi)\) is trivial. These are limited algebraic results and known-type positive controls; we neither construct a full Lax pair nor claim general EMHD nonintegrability. Priority of the present formulations has not been established.
+\end{abstract}
+
+\section{Model and assumptions}
+Define \(\{f,g\}=f_xg_y-f_yg_x\), \(\Delta=\partial_x^2+\partial_y^2\).
+With magnetic field \(\mathbf B=(a_y,-a_x,b)\), ideal inertia-free EMHD reduces to
+\begin{equation}\label{eq:emhd}
+ a_t=\{a,b\},\qquad b_t=\{\Delta a,a\}.
+\end{equation}
+Let \(a=B_0y+\psi\), \(b=\beta\), where \(B_0\ne0\), and let the perturbations be smooth and \(2\pi\)-periodic in \(x,y\). The physical magnetic field is periodic even though its background potential has an affine term. The exact perturbation equations read
+\begin{equation}\label{eq:pert}
+ \psi_t=-B_0\beta_x+\{\psi,\beta\},\qquad
+ \beta_t=B_0(\Delta\psi)_x+\{\Delta\psi,\psi\}.
+\end{equation}
+Let \(\Lambda=\sqrt{-\Delta}\) be the periodic multiplier \(\widehat{\Lambda f}(k)=|k|\widehat f(k)\).
+The 2.5D reduction and nonlinear whistlers are established subjects
+\cite{peng,lyutikov,shaikh}. Morozov's ideal-MHD Lax representations
+\cite{morozov} concern a different physical system.
+
+\section{Minimal spectral algebraic extension}
+The linearized Fourier generator at \(k=(k_x,k_y)\) is
+\begin{equation}\label{eq:matrix}
+ A(k)=-iB_0k_x
+ \begin{pmatrix}0&1\\k_x^2+k_y^2&0\end{pmatrix},\qquad
+ \det(zI-A)=z^2+B_0^2k_x^2(k_x^2+k_y^2).
+\end{equation}
+\begin{theorem}[Sharp rational diagonalization barrier]\label{thm:barrier}
+Let \(K=\mathbb C(k_x,k_y)\), \(B_0\ne0\).
+The characteristic polynomial of \eqref{eq:matrix} is irreducible in \(K[z]\). Therefore no invertible \(K\)-valued similarity transformation can diagonalize \(A\) into scalar rational Fourier symbols. Nor can a one-field first-order-in-time evolution with rational Fourier symbol produce either whistler eigenfrequency on generic planar modes. The smallest splitting field is \(K(s)\) with \(s^2=k_x^2+k_y^2\). In physical variables, \(w_\pm=\beta\pm\Lambda\psi\) satisfy exactly
+\begin{equation}\label{eq:diag}
+ (w_+)_t=-B_0\Lambda\partial_xw_+,\qquad
+ (w_-)_t=+B_0\Lambda\partial_xw_-,
+\end{equation}
+under the linearized equation.
+\end{theorem}
+\begin{proof}
+Over \(\mathbb C[k_x,k_y]\),
+\(k_x^2+k_y^2=(k_x+ik_y)(k_x-ik_y)\).
+The two distinct irreducible linear factors occur with odd exponents, hence this polynomial is not a square in \(K\). Multiplication by \((iB_0k_x)^2\) preserves its square class. Thus the quadratic characteristic polynomial has no root in \(K\). A rational-symbol diagonalizer would produce such eigenvalues in \(K\), contradiction. Both eigenvalues are in the quadratic extension \(K(s)\), which is minimal. For \(s\ne0\), the matrix
+\[
+ S=\begin{pmatrix}s&1\\-s&1\end{pmatrix}
+\]
+satisfies \(SAS^{-1}=\operatorname{diag}(-iB_0k_xs,+iB_0k_xs)\). Substituting \(s\mapsto\Lambda\) proves \eqref{eq:diag}.
+\end{proof}
+This excludes scalar \emph{rational} diagonalization, not local matrix evolution: the original \(2\times2\) system is local and already realizes both branches. Such a linear evolution matrix is not in itself a Lax pair.
+
+\section{Exact nonlinear chiral leakage}
+Using \(w_\pm=\beta\pm\Lambda\psi\), the nonlinear system \eqref{eq:pert} is exactly
+\begin{equation}\label{eq:chiral}
+ (w_\pm)_t=\mp B_0\Lambda\partial_xw_\pm+
+ \{\Delta\psi,\psi\}\pm\Lambda\{\psi,\beta\}.
+\end{equation}
+On initial data with \(w_-=0\), hence \(\beta=\Lambda\psi\), the normal time derivative is
+\begin{equation}\label{eq:leak}
+ (w_-)_t=\mathcal D(\psi):=\{\Delta\psi,\psi\}-\Lambda\{\psi,\Lambda\psi\}.
+\end{equation}
+\begin{theorem}[Pairwise chiral-leakage multiplier]\label{thm:pair}
+For any periodic trigonometric polynomial \(\psi=\sum_p\psi_pe^{ip\cdot x}\),
+\begin{equation}\label{eq:fourier}
+ \widehat{\mathcal D(\psi)}(k)=\frac12
+ \sum_{p+q=k}(p_xq_y-p_yq_x)
+ (|p|-|q|)(|p|+|q|-|p+q|)\psi_p\psi_q.
+\end{equation}
+For two distinct nonzero modes \(\psi=Ae^{ip\cdot x}+Ce^{iq\cdot x}\) with \(AC\ne0\), the coefficient at \(p+q\) is
+\begin{equation}\label{eq:two}
+ AC(p_xq_y-p_yq_x)(|p|-|q|)(|p|+|q|-|p+q|).
+\end{equation}
+It is nonzero exactly when the wavevectors are noncollinear and have different lengths.
+\end{theorem}
+\begin{proof}
+The Fourier bracket formula is
+\(\widehat{\{f,g\}}(k)=-\sum_{p+q=k}(p\times q)\widehat f(p)\widehat g(q)\).
+Substituting \(\widehat{\Delta\psi}(p)=-|p|^2\psi_p\) and \(\widehat{\Lambda\psi}(q)=|q|\psi_q\) in \eqref{eq:leak} gives the unsymmetrized coefficient
+\(\sum_{p+q=k}(p\times q)(|p|^2+|k||q|)\psi_p\psi_q\).
+Average with the same sum after swapping \(p,q\). Its coefficient becomes
+\(\tfrac12(p\times q)(|p|-|q|)(|p|+|q|-|k|)\), proving \eqref{eq:fourier}. For two modes the ordered pairs add to \eqref{eq:two}; self-pairs vanish. For noncollinear vectors, both \(p\times q\ne0\) and the strict triangle inequality \(|p+q|<|p|+|q|\) hold. The only remaining zero condition is \(|p|=|q|\).
+\end{proof}
+A real exact witness is
+\[
+ \psi=\cos x+\cos(2y),\qquad
+ \beta=\cos x+2\cos(2y)=\Lambda\psi.
+\]
+Here \(\{\Delta\psi,\psi\}=6\sin x\sin(2y)\), \(\{\psi,\Lambda\psi\}=2\sin x\sin(2y)\), and \(\Lambda\sin x\sin(2y)=\sqrt5\sin x\sin(2y)\), so
+\begin{equation}\label{eq:witness}
+ (w_-)_t=(6-2\sqrt5)\sin x\sin(2y)\ne0
+\end{equation}
+at the initial data, independently of \(B_0\). This formal derivative does not invoke an ideal-EMHD Cauchy existence result. If a twice time-differentiable smooth solution exists through these data, then \(E_-=\frac14\int_{\mathbb T^2}w_-^2\) obeys
+\(E_-'(0)=0\) and \(E_-''(0)=\frac{\pi^2}{2}(6-2\sqrt5)^2>0\).
+
+\section{Exact finite-amplitude equal-radius shells}
+\begin{proposition}[Beltrami whistler positive control]\label{prop:wave}
+If \(\kappa>0\), \(\sigma=\pm1\), and
+\(-\Delta\psi_0=\kappa^2\psi_0\), then
+\begin{equation}\label{eq:wave}
+ \psi(x,y,t)=\psi_0(x-\sigma B_0\kappa t,y),\qquad
+ \beta(x,y,t)=\sigma\kappa\psi(x,y,t)
+\end{equation}
+is an exact finite-amplitude solution of both nonlinear equations \eqref{eq:pert}. The eigenfunction may superpose noncollinear wavevectors on the same Fourier circle.
+\end{proposition}
+\begin{proof}
+At every time \(\Delta\psi=-\kappa^2\psi\), \(\beta=\sigma\kappa\psi\), so \(\{\psi,\beta\}=\{\Delta\psi,\psi\}=0\). The surviving equations are
+\(\psi_t=-\sigma B_0\kappa\psi_x\) and
+\(\beta_t=-B_0\kappa^2\psi_x\), exactly \eqref{eq:wave}. The magnetic perturbation \((\psi_y,-\psi_x,\beta)\) is Beltrami:
+\(\nabla\times\delta B=\sigma\kappa\delta B\).
+\end{proof}
+This construction is included as a known-type harmonic/Beltrami whistler control, not claimed to be new \cite{lyutikov}.
+\begin{proposition}[Energy consistency]
+Any sufficiently smooth periodic solution conserves
+\[
+ E=\frac12\int_{\mathbb T^2}(\beta^2+|\nabla\psi|^2)
+ =\frac14\int_{\mathbb T^2}(w_+^2+w_-^2).
+\]
+\end{proposition}
+\begin{proof}
+Let \(q=\Delta\psi\). The derivative is
+\[
+ \dot E=\int_{\mathbb T^2}\bigl[
+ \beta(B_0q_x+\{q,\psi\})-q(-B_0\beta_x+\{\psi,\beta\})\bigr].
+\]
+The background terms are a total derivative; the Jacobian terms cancel by cyclic integration. The final formula follows from Parseval.
+\end{proof}
+
+\section{Matrix point-potential second-jet gate}
+\begin{theorem}[Triviality of a declared flat-connection grammar]
+For any \(N\ge1\) and spectator spectral parameter \(\lambda\), let \(U,V,W\in\mathrm{Mat}_N(\mathbb C)\) depend smoothly only on the pointwise variables \((\psi,\beta,q;\lambda)\), where \(q=\Delta\psi\). If the linear auxiliary system
+\[
+ \Phi_x=U\Phi,\quad\Phi_y=V\Phi,\quad\Phi_t=W\Phi
+\]
+is flat on every freely specified spatial solution jet of \eqref{eq:pert}, then all three matrices are independent of \(\psi,\beta,q\) and commute pairwise. The flat connection carries no EMHD dynamics.
+\end{theorem}
+\begin{proof}
+The spatial curvature is
+\[
+ U_\psi\psi_y+U_\beta\beta_y+U_qq_y-
+ V_\psi\psi_x-V_\beta\beta_x-V_qq_x+[U,V]=0.
+\]
+The six displayed first derivatives can be specified independently as smooth jets; in particular \(q_x,q_y\) are set by independent third derivatives of \(\psi\). Thus all six matrix coefficients vanish and \([U,V]=0\). In the temporal \(xt\) curvature, \(U\) is now state-independent and the equation becomes
+\(-W_\psi\psi_x-W_\beta\beta_x-W_qq_x+[U,W]=0\).
+Coefficient matching forces \(W\) state-independent and \([U,W]=0\). The \(yt\) curvature then yields \([V,W]=0\).
+\end{proof}
+This is a generic jet-counting gate and is not an obstruction for genuine derivative-dependent matrix Lax connections, higher-order spectral differential operators, or nonlocal coverings.
+
+\section{Verification, limits and next question}
+The bundled exact SymPy verifier checks the characteristic polynomial, algebraic diagonalization, two-mode coupling coefficient, real leakage witness and both helicities of a noncollinear equal-radius wave. A separate standard-library-only verifier independently checks integer mode-pair geometry and the strict positivity of the real leakage coefficient. Their coverage is explicitly stated in the accompanying audit. These checks support, but do not replace, the proofs above.
+
+The square-root diagonalization has familiar wave-physics antecedents; whistler interactions and exact Beltrami waves are known \cite{lyutikov}. Morozov's MHD Lax representation concerns a different model \cite{morozov}. We did not certify priority of the present precise spectral and convolution statements. No complete nonlinear EMHD Lax pair, matrix integrability theorem, general no-go theorem, or new plasma observation is established. The next target is to test a genuine derivative-dependent matrix or pseudodifferential spectral grammar against the \emph{full nonlinear} system.
+
+\begin{thebibliography}{9}
+\bibitem{peng} Q. Peng, \emph{Local well-posedness for the two-and-a-half-dimensional EMHD system with split fractional dissipation}, arXiv:2605.20845 (2026), \url{https://arxiv.org/abs/2605.20845}.
+\bibitem{lyutikov} M. Lyutikov, \emph{Electron magnetohydrodynamics: Dynamics and turbulence}, Phys. Rev. E \textbf{88}, 053103 (2013), \url{https://doi.org/10.1103/PhysRevE.88.053103}.
+\bibitem{morozov} O. I. Morozov, \emph{Lax representations and variational Poisson structures for magnetohydrodynamics equations}, Analysis and Mathematical Physics \textbf{15}, 120 (2025), \url{https://doi.org/10.1007/s13324-025-01119-w}.
+\bibitem{shaikh} D. Shaikh, \emph{Theory and simulations of whistler wave propagation}, J. Plasma Phys. \textbf{75}, 117--132 (2009), \url{https://doi.org/10.1017/S0022377808007198}.
+\end{thebibliography}
+\end{document}
