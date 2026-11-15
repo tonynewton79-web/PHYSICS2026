@@ -441,6 +441,205 @@ of any matrix entry, proving
 \eqref{eq:diverge}.
 \end{proof}
 
+
+\section{Nonlinear dust material coordinates and a tilted-radiation symmetrizer}
+\label{sec:material}
+The Eulerian obstruction in Theorem~\ref{thm:jordan}
+need not persist in a dust \emph{material gauge}.
+Here we make that limited repair exact.
+Suppose the future-directed dust four-velocity
+is geodesic and hypersurface-orthogonal and
+the dust worldline map is a diffeomorphism on
+a finite time interval before caustic formation.
+Proper-time coordinates along its integral curves
+give the \emph{synchronous material metric}
+\begin{equation}\label{eq:materialmetric}
+g=-d\tau^2+h_{ij}(\tau,X)\,dX^i dX^j,
+\qquad u_{\mathrm d}=\partial_\tau,\qquad h_{ij}>0.
+\end{equation}
+The restriction to irrotational geodesic dust
+is essential; it does not cover an arbitrary
+vortical dust congruence.
+
+\begin{theorem}[Exact nonlinear material dust repair]
+\label{thm:material}
+For any smooth positive-definite spatial metric
+$h_{ij}$ of the form \eqref{eq:materialmetric},
+the full pressureless dust conservation system
+$\nabla_\mu(\rho_{\mathrm d}u_{\mathrm d}^\mu
+u_{\mathrm d}^\nu)=0$ is equivalent, where
+$\rho_{\mathrm d}>0$, to
+\begin{equation}\label{eq:materialmass}
+\boxed{\quad
+\partial_\tau m(X)=0,\qquad
+m:=\rho_{\mathrm d}\sqrt{\det h},\qquad
+\rho_{\mathrm d}(\tau,X)
+=\frac{m(X)}{\sqrt{\det h(\tau,X)}}.
+\quad}
+\end{equation}
+In particular there are \emph{no spatial derivatives}
+of an independently evolved dust-velocity variable
+in the material density equation. This is a fully
+nonlinear identity on a prescribed or evolving
+synchronous metric, not a coupled Einstein existence theorem.
+\end{theorem}
+\begin{proof}
+Equation \eqref{eq:materialmetric} gives
+$\sqrt{-\det g}=\sqrt{\det h}$ and
+$\Gamma^\mu_{\tau\tau}=0$.
+Thus the chosen dust flow is unit timelike
+and geodesic. Projecting
+$\nabla_\mu T_{\mathrm d}^{\mu\nu}=0$
+parallel to $u_{\mathrm d}$ gives
+$\nabla_\mu(\rho_{\mathrm d}u_{\mathrm d}^\mu)=0$,
+or
+$\partial_\tau(\rho_{\mathrm d}\sqrt{\det h})=0$.
+The orthogonal momentum equation reduces
+to $\rho_{\mathrm d}
+u_{\mathrm d}^\mu\nabla_\mu u_{\mathrm d}^\nu=0$
+and vanishes because
+$\Gamma^\mu_{\tau\tau}=0$.
+Conversely these two identities imply all
+four components of dust stress conservation.
+\end{proof}
+
+Keep a \emph{separate} radiation four-velocity
+$u_{\mathrm r}=\gamma(n+v)$, where
+$n=\partial_\tau$, $n\cdot v=0$,
+$|v|_h<1$ and
+$\gamma=(1-|v|_h^2)^{-1/2}$.
+No equal-velocity condition is imposed.
+Set $c_s=1/\sqrt3$ and
+\[
+\sigma=\frac{c_s}{1+c_s^2}
+\log(\rho_{\mathrm r}/\rho_\star),
+\qquad \rho_\star>0,\qquad
+P_{\mu\nu}=g_{\mu\nu}
++(u_{\mathrm r})_\mu(u_{\mathrm r})_\nu .
+\]
+The \emph{nonlinear}, separately conserved
+barotropic radiation Euler equations are
+equivalent to
+\begin{equation}\label{eq:covrad}
+\begin{aligned}
+u_{\mathrm r}^\mu\nabla_\mu\sigma
++c_s\nabla_\mu u_{\mathrm r}^\mu&=0,\\
+u_{\mathrm r}^\mu\nabla_\mu(u_{\mathrm r})_\nu
++c_sP_\nu{}^\mu\nabla_\mu\sigma&=0,
+\qquad u_{\mathrm r}^\mu(u_{\mathrm r})_\mu=-1.
+\end{aligned}
+\end{equation}
+
+\begin{theorem}[Symmetric hyperbolicity of the fully nonlinear
+material dust plus independently tilted radiation subsystem]
+\label{thm:tilted}
+Assume \eqref{eq:materialmetric} is a given
+smooth Lorentzian metric, $\rho_{\mathrm r}>0$,
+and $|v|_h<1$. In local smooth velocity
+coordinates the combined system
+\eqref{eq:materialmass}, \eqref{eq:covrad}
+has a positive smooth symmetrizer.
+Specifically, let
+$(u_{\mathrm r},E_1,E_2,E_3)$ be any
+radiation-orthonormal tetrad, and
+$\tau_\mu=-n_\mu$ the future-time covector.
+The $4\times4$ radiation symmetric
+principal matrix in an orthonormal tangent
+basis to the unit-velocity hyperboloid is
+\begin{equation}\label{eq:Axi}
+\mathsf A(\xi)=
+\begin{pmatrix}
+u_{\mathrm r}^\mu\xi_\mu &
+c_s E_b^\mu\xi_\mu\\
+c_s E_a^\mu\xi_\mu&
+(u_{\mathrm r}^\mu\xi_\mu)\delta_{ab}
+\end{pmatrix}.
+\end{equation}
+Its time matrix
+$\mathsf A(\tau)$ has eigenvalues
+\begin{equation}\label{eq:A0eigen}
+\boxed{\quad
+\gamma,\ \gamma,\
+\gamma(1-c_s|v|_h),\
+\gamma(1+c_s|v|_h)>0.
+\quad}
+\end{equation}
+The dust mass label adds a separate
+one-dimensional positive time block with
+zero spatial principal symbol. In the
+stated gauge, the full five-field matter
+subsystem is therefore \emph{symmetrizable
+hyperbolic}, without taking $c_s\to0$.
+On any fixed smooth background, smooth
+positive-density subluminal initial data
+admit the usual local Sobolev Cauchy
+theory for a quasilinear symmetric
+hyperbolic system. This assertion does
+\emph{not} include hyperbolicity of the
+dynamical Einstein metric equations.
+\end{theorem}
+\begin{proof}
+For the radiation stress tensor
+$T_{\mu\nu}=(\rho_{\mathrm r}+p_{\mathrm r})
+(u_{\mathrm r})_\mu(u_{\mathrm r})_\nu
++p_{\mathrm r}g_{\mu\nu}$ with
+$p_{\mathrm r}=c_s^2\rho_{\mathrm r}$,
+the parallel conservation equation is
+$u_{\mathrm r}\cdot\nabla\log\rho_{\mathrm r}
++(1+c_s^2)\nabla\cdot u_{\mathrm r}=0$.
+Multiplication by $c_s/(1+c_s^2)$ gives
+the first equation in \eqref{eq:covrad}.
+The orthogonal Euler equation gives the
+second one after the same substitution.
+
+A velocity variation $\delta u_{\mathrm r}$
+is orthogonal to $u_{\mathrm r}$.
+Express it as $\delta u_{\mathrm r}
+=E_a\,\delta w^a$.
+In the frozen principal part,
+the scalar equation has coefficients
+$u_{\mathrm r}^\mu\xi_\mu$ and
+$c_sE_a^\mu\xi_\mu$;
+projection of the Euler equations onto
+$E_a$ produces their transpose and
+$(u_{\mathrm r}^\mu\xi_\mu)\delta_{ab}$.
+Derivatives of the smooth tetrad
+and connection are lower differential
+order in the \emph{given-metric} matter
+equations, yielding \eqref{eq:Axi}.
+Changing from orthonormal tangent
+components $\delta w^a$ to ordinary
+local velocity coordinates is an
+invertible smooth state-dependent
+change, and congruence with its
+Jacobian preserves symmetry and
+positive definiteness.
+
+Since $u_{\mathrm r}=\gamma(n+v)$,
+\[
+u_{\mathrm r}\cdot\tau=\gamma,\qquad
+\sum_a(E_a\cdot\tau)^2
+=\gamma^2-1=\gamma^2|v|_h^2.
+\]
+The block matrix \eqref{eq:Axi}
+therefore has two time eigenvalues
+$\gamma$ and the remaining two
+$\gamma\pm c_s\sqrt{\gamma^2-1}$,
+giving \eqref{eq:A0eigen}. For
+$|v|_h<1$ and $c_s<1$, these are
+strictly positive. The dust equation
+is simply $\partial_\tau m=0$.
+Taking the direct sum of its positive
+time coefficient and the radiation
+time matrix proves the material
+matter-sector assertion.
+Classical symmetric-hyperbolic
+local-existence theory applies on
+the positive-density, subluminal
+state-space patch of any prescribed
+smooth metric \cite{walton,friedrich}.
+\end{proof}
+
 \section{What the generalized-harmonic constraints do and do not repair}
 The principal-symbol no-go is \emph{not} a claim that
 the Einstein constraints themselves fail to propagate.
