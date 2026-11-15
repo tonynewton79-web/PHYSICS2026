@@ -8,7 +8,8 @@ The entries below are **open future obligations**, not solved results. Restricte
 | PHY-003 follow-up | Four-dimensional lattice gauge theory | Improve the completed all-spin SU2 Kotecky--Preiss certificate (|beta|<=1/250) into strong physical-scale estimates with controlled continuum tuning; continuum Yang--Mills mass gap remains open. |
 | PHY-004 follow-up | Compact Sol cosmic topology / cosmological perturbations | Beyond the completed exact scalar gap and topology-selected heat-Gaussian covariances, construct constraint-preserving coupled Einstein--massive-Vlasov--massless-Vlasov perturbations, add Thomson scattering, and compute observer-marginalized physical CMB T/E/B transfer matrices. |
 | PHY-005 follow-up | Einstein–matter Cauchy theory | Beyond the completed frozen Eulerian Jordan/derivative-loss obstruction, build an actual Lagrangian or mixed-regularity **strongly hyperbolic, nonlinear, constraint-propagating** Einstein–dust–radiation evolution. Then replace perfect radiation with a physical photon kinetic/Thomson sector. |
-| PHY-006 | Quantum gate identities | Construct exact H–CCZ circuit identities with unitary/certificate checks, and investigate provable uniform compiler bounds without asserting classical lower bounds. |
+| PHY-006 follow-up | Quantum thermodynamics | Extend the exact equal-gap correlation/heat reversal resource boundary to dephasing-robust operations, a finite-time Hamiltonian control budget and realistic work-storage models; do not assume equal-gap energy preservation survives unequal-gap swaps. |
+| PHY-007 (tentative) | Quantum gate identities | Construct exact H–CCZ circuit identities with unitary/certificate checks, and investigate provable uniform compiler bounds without asserting classical lower bounds. |
 
 ## Selection rule
 
