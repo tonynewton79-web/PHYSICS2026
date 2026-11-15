@@ -15,4 +15,29 @@ We classify the first two nonempty mod-two closed plaquette-surface strata of th
 \end{abstract}
 \section{Definitions and prior results}
 Let \(C_k(\mathbb Z^d;\mathbb F_2)\) denote finitely supported cubical chains. A two-chain \(S\) of unit plaquettes is closed when \(\partial S=0\), equivalently each lattice edge has even incidence. The area \(|S|\) counts distinct unoriented plaquettes. The closed-surface strong-coupling expansion is classical \cite{wegner,kogut,drouffe}; related rigorous four-dimensional small-surface results appear in \cite{forsstrom}. We do not claim novelty of the initial cube terms.
+
+\section{Minimum cubical-cycle weight and parity}
+\begin{lemma}\label{lem:min}
+For \(1\le k<d\), any nonempty finitely supported mod-two cubical \(k\)-cycle in \(\mathbb Z^d\) contains at least \(2(k+1)\) cells. The minima for \(k=1,2,3\) are therefore \(4,6,8\).
+\end{lemma}
+\begin{proof}
+A nonempty finite one-cycle in the bipartite nearest-neighbor grid graph contains a simple cycle of at least four edges. For induction, select any coordinate direction \(j\) occurring in the support of a \(k\)-cycle. The \(j\)-containing \(k\)-cells in the slab \(n\le x_j\le n+1\) project to a transverse \((k-1)\)-chain \(C_n\). The \(j\)-parallel part of the boundary condition implies \(\partial C_n=0\), so each nonzero \(C_n\) has at least \(2k\) cells by induction. Let \(H_n\) be the horizontal \(k\)-chain at coordinate \(x_j=n\). The other part of the boundary condition is
+\[
+\partial H_n=C_{n-1}+C_n\quad\text{over }\mathbb F_2.
+\]
+The first and last nonzero slabs each require a nonempty horizontal cap. Hence at least \(2k+2\) cells occur in total.
+\end{proof}
+\begin{lemma}\label{lem:even}
+Every finite mod-two closed plaquette two-chain in \(\mathbb Z^d\) has even area.
+\end{lemma}
+\begin{proof}
+For a positively oriented edge based at \(x\) along direction \(j\), define the mod-two one-cochain
+\(\eta(x,j)=\sum_{i<j}x_i\bmod2\).
+On every coordinate plaquette with axes \(i<j\), \(\delta\eta=1\): the \(j\)-edge contribution changes by one along \(i\) while the \(i\)-edge contribution does not change along \(j\). Thus for \(\partial S=0\),
+\[
+|S|\bmod2=\langle\delta\eta,S\rangle
+=\langle\eta,\partial S\rangle=0.
+\]
+\end{proof}
+
 % MORE_CONTENT_HERE
