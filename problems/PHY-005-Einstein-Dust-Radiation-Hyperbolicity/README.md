@@ -79,7 +79,7 @@ Run both after the four previous verifiers. GitHub Actions automatically execute
 
 ## Attack 04: sourced Weyl divergence and 30-component homogeneous subsidiary
 
-The previous curvature–radiation principal system alone only propagated the defining gradient constraints. This continuation now closes an additional **six genuine Weyl-divergence constraints** in the comoving, constant-coefficient *sourceful* model, without imposing a false vacuum divergence-free condition on radiation-sourced curvature.
+The previous curvature–radiation principal system alone only propagated the defining gradient constraints. **This subsidiary concerns the radiation contribution to the Weyl source at a frozen comoving event; the dust-source Schouten derivatives are not set to zero in the complete Einstein system.** This continuation now closes an additional **six genuine Weyl-divergence constraints** in the comoving, constant-coefficient *sourceful* model, without imposing a false vacuum divergence-free condition on radiation-sourced curvature.
 
 Let E,H be the STF Weyl electric and magnetic fields, U=(sigma,v), and W_i=(S_i,V_ij) with S_i=∂i sigma and V_ij=∂i v_j. Let cs=1/sqrt(3), b=2κ rho_r/3 and define
 
@@ -106,7 +106,9 @@ The theorem reconstructs all 24 components of the contracted Weyl Bianchi identi
 - [verify_weyl_subsidiary.py](verify_weyl_subsidiary.py): independently reconstructs the 4-index Weyl tensor, checks all 24 sourced contracted-Bianchi residuals, both sourceful subsidiary identities, 30×30 spatial matrix symmetries and exact GG^T=2I.
 - [verify_weyl_subsidiary_independent.py](verify_weyl_subsidiary_independent.py): implements the entire calculation again using only standard-library rational Fraction arithmetic, with a different density coordinate chi=sigma/cs, independently rebuilt Weyl tensors and a weighted 30×30 symmetrizer.
 
-**Scope:** A new *restricted fixed-coefficient Weyl geometric-subsidiary certificate*, not a full nonlinear geometric constraint closure or complete Einstein Cauchy theorem. Nonlinear moving-frame, torsion, connection, gauge, dust and Einstein constraints remain open. The gravitoelectromagnetic constraint machinery and Weyl light-speed physical polarization restriction have major prior art, including van Elst–Ellis (1999), so this is a transparent exact reproducibility/extension benchmark, not an originality claim.
+**Additional exact dust-source identity:** in synchronous material coordinates, rho_d=m(X)/sqrt(det h), with time-independent m. Thus rho_d,t=rho_d K and rho_d,i=m_i/sqrt(det h)−(rho_d/2) h^{jk} h_{jk,i}. The dust Schouten tensor is L_d=(κ/2)rho_d(n⊗n+g/3); its first derivatives are algebraic in m,m_i, the metric and first metric/connection variables. This crucial **additional** Cotton source is not covered by the 30-field radiation-only subsidiary. Both exact and independent Fraction tests include the material dust derivative identity.
+
+**Scope:** A new *restricted fixed-coefficient radiation-sourced Weyl geometric-subsidiary certificate*, not a full two-fluid Bianchi closure, nonlinear geometric constraint closure or complete Einstein Cauchy theorem. Nonlinear moving-frame, torsion, connection, gauge, dust and Einstein constraints remain open. The gravitoelectromagnetic constraint machinery and Weyl light-speed physical polarization restriction have major prior art, including van Elst–Ellis (1999), so this is a transparent exact reproducibility/extension benchmark, not an originality claim.
 
 ## Files and reproduction
 
