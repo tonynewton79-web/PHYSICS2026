@@ -5,7 +5,7 @@ The entries below are **open future obligations**, not solved results. Restricte
 | Tentative ID | Area | Next mathematical obligation |
 |---|---|---|
 | PHY-002 follow-up | 2.5D electron magnetohydrodynamics | Beyond completed square-class and point-potential gates, test genuinely derivative-dependent matrix connections or pseudodifferential Lax operators against both nonlinear equations; the full integrability question remains OPEN. |
-| PHY-003 | Four-dimensional Wilson SU(2) lattice gauge theory | Establish certified free constrained-operator lower bounds and distinguish finite lattice strong-coupling estimates from the continuum Yang–Mills mass-gap problem. |
+| PHY-003 follow-up | Four-dimensional lattice gauge theory | Beyond the completed low-area Z2 surface census, derive a sharp all-area rooted closed-surface entropy bound and independently controlled mixed-representation SU2 spin-foam polymer inequality. The continuum mass-gap problem remains open. |
 | PHY-004 | Compact Sol cosmic topology | Independently reproduce exact spectral crossing calculations for golden monodromy and verify comparison to trace-4 and trace-5 controls, before claiming any observational signature. |
 | PHY-005 | Einstein–matter Cauchy theory | Identify a genuinely strongly hyperbolic formulation for coupled dust plus radiation including the physical constraints; mathematical model and gauge must be specified. |
 | PHY-006 | Quantum gate identities | Construct exact H–CCZ circuit identities with unitary/certificate checks, and investigate provable uniform compiler bounds without asserting classical lower bounds. |
