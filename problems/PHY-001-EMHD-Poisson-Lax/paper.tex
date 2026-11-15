@@ -1,0 +1,204 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=27mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[colorlinks=true,urlcolor=blue,citecolor=blue]{hyperref}
+\usepackage{microtype}
+\newtheorem{theorem}{Theorem}
+\title{\textbf{Classification of Zero-Order Scalar Poisson Evolution Laws}\\for Two-and-a-Half-Dimensional Ideal Electron Magnetohydrodynamics}
+\author{Tony Newton\\Newton Astro Labs\thanks{Newton Astro Labs is the trading name under which Tony Newton conducts independent computational research in the United Kingdom; it is not a limited company.}\\London, UK\\\texttt{tony.newton79@gmail.com}}
+\date{15 November 2026\\\small PHYSICS2026 / PHY-001; internal proof, external priority unverified}
+\begin{document}
+\maketitle
+\begin{abstract}
+For two-and-a-half-dimensional ideal electron magnetohydrodynamics (EMHD)
+we classify zero-order scalar Poisson evolution identities
+\(L_t=\{M,L\}\), where \(L=F(a,b,\Delta a;\lambda)\),
+\(M=G(a,b,\Delta a;\lambda)\) and \(F,G\) are arbitrary smooth functions.
+On each regular patch the only universal nonconstant identities have
+\(L=f(a;\lambda)\), \(M=-b+h(a;\lambda)\); they encode only one of the
+two coupled equations. The obstruction has no polynomial-degree or
+spectral-degree cutoff. We supply an exact parent-field reduction,
+linear dispersion and a known nonlinear whistler positive control,
+together with symbolic checks. This is a restricted theorem, not a
+general nonintegrability result or an exclusion of matrix,
+higher-derivative or nonlocal Lax constructions.
+\end{abstract}
+
+\section{Model and declared question}
+Consider the ideal inertia-free parent EMHD equation
+\begin{equation}\label{eq:parent}
+ {\bf B}_t+\nabla\times((\nabla\times{\bf B})\times{\bf B})=0,
+ \qquad \nabla\cdot{\bf B}=0.
+\end{equation}
+We use the spatial Jacobian bracket
+\(\{f,g\}=f_xg_y-f_yg_x\), \(\Delta=\partial_x^2+\partial_y^2\).
+This is not the noncanonical functional Hamiltonian bracket of
+extended MHD \cite{abdelhamid2015}. The 2.5D reduced equations have
+been studied before \cite{peng2026}; exact nonlinear whistlers are
+known \cite{lyutikov2013}. We investigate just a pointwise scalar
+evolution identity, not arbitrary Lax or zero-curvature systems.
+
+\section{Exact 2.5D reduction}
+Let \(a=a(x,y,t)\), \(b=b(x,y,t)\), \(q=\Delta a\) and set
+\[
+ {\bf B}=\nabla\times(a{\bf e}_z)+b{\bf e}_z=(a_y,-a_x,b).
+\]
+Then
+\[
+ \nabla\times{\bf B}=(b_y,-b_x,-q),\qquad
+ (\nabla\times{\bf B})\times{\bf B}
+ =(-bb_x-qa_x,-bb_y-qa_y,-\{a,b\}).
+\]
+The horizontal components of \eqref{eq:parent} imply
+\(\nabla_{x,y}(a_t-\{a,b\})=0\). Remove this spatially constant
+potential-gauge freedom. The vertical equation is
+\(b_t+\{a,q\}=0\). Thus, exactly,
+\begin{equation}\label{eq:reduced}
+ a_t=\{a,b\},\qquad b_t=\{q,a\},\qquad q=\Delta a.
+\end{equation}
+No dissipation or electron-inertia terms are present.
+
+\section{Classification of zero-order scalar identities}
+By universal solution-jet identity we mean a local differential
+identity valid after substituting \eqref{eq:reduced} for every
+freely assigned smooth spatial jet of \(a,b\). This definition does
+not assume ideal-EMHD Cauchy well-posedness.
+
+\begin{theorem}[Complete local classification]\label{thm:main}
+Fix a spectator parameter \(\lambda\). Let
+\(F(a,b,q;\lambda)\) and \(G(a,b,q;\lambda)\) be \(C^2\)
+on an open state-space domain. Suppose
+\begin{equation}\label{eq:lax}
+ \partial_t F(a,b,\Delta a;\lambda)
+ =\{G(a,b,\Delta a;\lambda),F(a,b,\Delta a;\lambda)\}
+\end{equation}
+is a universal differential consequence of \eqref{eq:reduced}.
+Then \(F_q=F_b=0\). On any connected regular local patch where
+\(F_a\ne0\), one necessarily has
+\begin{equation}\label{eq:forms}
+ F=f(a;\lambda),\qquad G=-b+h(a;\lambda).
+\end{equation}
+Conversely all these pairs obey \eqref{eq:lax}.
+Their sole dynamical content is the \(a\)-equation. If \(F\)
+is locally constant, \eqref{eq:lax} is tautological and
+does not constrain \(G\).
+\end{theorem}
+
+\begin{proof}
+The time chain rule and \eqref{eq:reduced} give
+\begin{equation}\label{eq:lhs}
+ L_t=F_a\{a,b\}+F_b\{q,a\}+F_q\Delta\{a,b\}.
+\end{equation}
+The right side of \eqref{eq:lax} uses only first spatial
+derivatives of \(a,b,q\), while
+\begin{equation}\label{eq:delta}
+ \Delta\{a,b\}
+ =\{\Delta a,b\}+\{a,\Delta b\}
+ +2\{a_x,b_x\}+2\{a_y,b_y\}
+\end{equation}
+contains unconstrained third spatial derivatives of \(b\).
+For a concrete jet family at the origin take
+\[
+ a=a_0+x+\frac{q_0}{4}(x^2+y^2),\qquad
+ b=b_0+\frac{s}{6}y^3.
+\]
+At the origin the state values \(a_0,b_0,q_0\), and all first
+spatial derivatives of \(a,b,q\), are independent of \(s\),
+but \(\Delta\{a,b\}=s\). Equation \eqref{eq:lax}
+for every \(s\) forces \(F_q=0\), at every state point.
+
+With \(F=F(a,b)\), the bracket expands as
+\[
+ \{G,F\}=(G_aF_b-G_bF_a)\{a,b\}
+     +G_qF_a\{q,a\}+G_qF_b\{q,b\}.
+\]
+Gradients of \(a,b,q\) can be assigned independently as
+spatial jets. Their three two-by-two Jacobian minors are
+independent polynomial channels. Comparing coefficients yields
+\begin{align}
+ F_a&=G_aF_b-G_bF_a,\label{eq:c1}\\
+ F_b&=G_qF_a,\label{eq:c2}\\
+ 0&=G_qF_b.\label{eq:c3}
+\end{align}
+If \(F_b\ne0\), \eqref{eq:c3} implies \(G_q=0\),
+whereupon \eqref{eq:c2} gives \(F_b=0\), contradiction.
+Thus \(F_b=0\). On \(F_a\ne0\), the two remaining
+equations force \(G_q=0\) and \(G_b=-1\), giving
+\eqref{eq:forms}. Conversely,
+\(\{-b+h(a),f(a)\}=f'(a)\{a,b\}=\partial_tf(a)\).
+\end{proof}
+
+\paragraph{Precise boundary.}
+The theorem covers nonlinear \(F,G\) with any \(C^2\)
+pointwise dependence on \((a,b,\Delta a)\), and any spectator
+spectral parameter. It excludes neither explicitly
+position-dependent potentials, matrix-valued objects,
+higher jets, differential or pseudodifferential spectral
+operators, nonlocal coverings, nor additional compatibility
+equations. The valid scalar identity
+\(a_t=\{-b,a\}\) is not a Lax representation of both EMHD
+equations.
+
+\section{Physical checks}
+\subsection{Linear whistler dispersion}
+Around \(a=B_0y+\psi\) and \(b=\beta\), keeping terms
+linear in \(\psi,\beta\) gives
+\[
+ \psi_t+B_0\beta_x=0,\qquad
+ \beta_t-B_0(\Delta\psi)_x=0.
+\]
+A Fourier mode proportional to
+\(\exp(i(k_xx+k_yy-\omega t))\) therefore satisfies
+\begin{equation}\label{eq:whistler}
+ \omega^2=B_0^2k_x^2(k_x^2+k_y^2).
+\end{equation}
+This dispersive principal symbol constrains subsequent
+higher-jet spectral searches.
+
+\subsection{Known nonlinear helical-wave control}
+For the three-dimensional parent equation, set
+\[
+ {\bf B}=(A\cos\theta,A\sin\theta,B_0),\qquad
+ \theta=kz-\omega t,\qquad \omega=-B_0k^2.
+\]
+Direct substitution gives \(\nabla\cdot{\bf B}=0\)
+and zero EMHD residual. This is a known exact harmonic
+whistler \cite{lyutikov2013}, not an original discovery
+and not a \(z\)-independent 2.5D configuration.
+
+\section{Independent audit and limitations}
+The accompanying exact SymPy code verifies the parent reduction,
+linearization, Fourier determinant, nonlinear-wave residual,
+third-jet witness, coefficient contradiction and a nonconstant
+positive example. The independent mathematical audit uses the
+explicit one-parameter jet family rather than a heuristic
+order-counting argument, then treats the three Jacobian
+minors as freely variable formal coefficients.
+These exact calculations corroborate but do not replace the
+displayed universal proof.
+
+The screening of prior art was selective rather than
+exhaustive. The reduced equations and harmonic whistlers are
+established prior art. Novelty of this precise scalar
+classification has not been externally certified. In
+particular, no global nonintegrability statement follows.
+The next target is a matrix or second-jet spectral grammar
+respecting \eqref{eq:whistler}.
+
+\begin{thebibliography}{9}
+\bibitem{peng2026}
+Q. Peng, \emph{Local well-posedness for the two-and-a-half-dimensional
+EMHD system with split fractional dissipation},
+arXiv:2605.20845 (2026).
+\url{https://arxiv.org/abs/2605.20845}.
+\bibitem{lyutikov2013}
+M. Lyutikov, \emph{Electron magnetohydrodynamics: Dynamics and turbulence},
+Phys.\ Rev.\ E \textbf{88}, 053103 (2013).
+\url{https://doi.org/10.1103/PhysRevE.88.053103}.
+\bibitem{abdelhamid2015}
+H. M. Abdelhamid, Y. Kawazura and Z. Yoshida,
+\emph{Hamiltonian formalism of extended magnetohydrodynamics},
+J.\ Phys.\ A: Math.\ Theor.\ \textbf{48}, 235502 (2015).
+\url{https://doi.org/10.1088/1751-8113/48/23/235502}.
+\end{thebibliography}
+\end{document}
