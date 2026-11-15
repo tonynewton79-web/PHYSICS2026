@@ -27,3 +27,67 @@ Primary checker: exact signed integer basis simulation, n=3..12 all 8184 clean i
 ## Prior art and limitations
 
 Barenco et al. (1995) and Khattar/Gidney (2025) developed related generalized Toffoli and clean/dirty/conditionally-clean ancilla synthesis. Exact quantum circuit equivalence is a mature subject. The manuscript's proved restricted identities should be treated as transparent independently verified constructions, not an unqualified novel result. There is no Lean verification, formal proof of global optimality, quantum advantage, asymptotic complexity lower bound or implemented scalable compiler. Independent human peer review and exhaustive priority study remain open.
+
+
+## Uniform proof-carrying phase-polynomial compiler (2026-11-15)
+
+This continuation constructs a deterministic compiler for explicitly
+enumerated Boolean phase polynomials with monomial degrees >=3,
+emitting only H and CCZ. Source monomials are canonically XOR-cancelled,
+then sequentially lowered by CCZ, clean-ladder, or borrowed-four-body
+blocks. A clean scratch register is reusable after every proven
+uncompute; therefore the actual clean scratch cost is the maximum
+k-3 among clean-ladder terms, not the sum. Borrowed-four-body blocks
+reuse a single unknown borrowed qubit, restored even if externally
+entangled.
+
+**Soundness statement:** Any certificate accepted by the separate
+verify_certificate.py checker within its finite size limits implements
+the source phase polynomial on the declared subspace and restores
+all ancillas. This claim rests on the exact quantum identity
+H-target CCZ H-target = CCX, exact GF2 algebraic normal form,
+the check of every actual emitted block, and linearity. The checker
+does not import the compiler or accept expected phases as evidence.
+General unmatched H patterns are UNSUPPORTED, not disproved.
+
+**Exact construction resources:** For cubic term count t3, clean
+ladder terms C with degree >=4 and borrowed quartic count b4,
+CCZ=t3+sum_C(2k-5)+4b4,
+H=4 sum_C(k-3)+4b4,
+clean=max_C(k-3) (zero if none), borrowed=1 if b4>0.
+These are upper bounds of a serial schedule, not lower bounds,
+hardware resource estimates, or proven optimal syntheses.
+
+**Independent tests:** Dedicated GitHub Actions run
+43773055923 passed 108 deterministic/randomized compiled instances,
+1,712 exact basis-amplitude executions using the older, separate
+H/CCZ integer simulator, 12 deliberately malformed/rehashed
+certificates, and source/ancilla insufficiency rejections. It
+also emitted two standalone sample JSON certificates and ran
+the independent verifier CLI successfully. Previous original
+PHY-007 tests were rerun. The complete continuous-integration
+result confirms functional reproducibility, not Lean/Coq
+formalization, historical priority or external specialist
+proof review.
+
+**Adversarial safety:** A recomputed SHA-256 digest does not bypass
+semantic verification. Wrong or absent borrowed compensation,
+changed CCZ operands, resource forgery, changed task, undeclared
+clean/borrowed wires, unverified trailing gates, and unmatched
+Hadamards are rejected or explicitly unsupported.
+The checker enforces bounded symbolic resource limits, and may
+decline to certify otherwise correct circuits.
+
+**Publication priority:** Recent VOQC/Coq work (Hietala et al.,
+2023), Khattar--Gidney (2025) on conditional ancillas,
+AlchemQ (Laabs, arXiv:2609.19160, 2026) for proof-carrying
+per-result equivalence certificates, and Li et al.
+(arXiv:2608.13099, 2026) on ancilla safety are close prior art.
+This work is a transparent narrow specialization, not a
+generally novel proof-carrying quantum compiler.
+
+**Unresolved:** arbitrary-unitary H/CCZ equality, context-sensitive
+rewrites, ancilla-free high-degree synthesis, general dirty-ancilla
+resource tradeoffs, authenticated signatures, verified checker
+code in a proof assistant, fault-tolerant cost optimization,
+hardware connectivity and noise.
