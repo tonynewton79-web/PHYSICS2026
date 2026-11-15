@@ -79,7 +79,7 @@ assert S.simplify(qq.subs({x:0,y:0})-q0) == 0
 Fa, Fb, Gq, invFb = S.symbols("Fa Fb Gq invFb")
 gb = S.groebner([Fb-Gq*Fa, Gq*Fb, invFb*Fb-1],
                 Fa, Fb, Gq, invFb, order="lex")
-assert gb.is_zero_dimensional and list(gb) == [S.Integer(1)], list(gb)
+assert list(gb) == [S.Integer(1)], list(gb)
 PASS.append("Groebner contradiction for F_b nonzero")
 print("PASS: Groebner contradiction for F_b nonzero")
 
@@ -87,8 +87,7 @@ print("PASS: Groebner contradiction for F_b nonzero")
 f = a**3 + 2*a
 h = a**2 + a
 L, M = f, -b+h
-zero(bracket(M, L) - S.diff(f, a) * bracket(a,b)
-     if False else bracket(M,L) - (3*a**2+2)*bracket(a,b),
+zero(bracket(M,L) - (3*a**2+2)*bracket(a,b),
      "classification positive example")
 
 print("ALL PASSED:", len(PASS), "exact checks")
