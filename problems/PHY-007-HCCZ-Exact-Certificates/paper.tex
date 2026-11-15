@@ -9,7 +9,7 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-We give exact controlled-phase circuit identities in the Hadamard--CCZ gate set, explicitly distinguishing initialized from borrowed ancillary qubits. We provide a constructive n-body phase formula, a four-body borrowed-ancilla construction, a unique cubic phase normal form for CCZ-only words, and a parity obstruction for exact equivalence of H--CCZ words. We further construct a uniform proof-carrying compiler for explicitly listed Boolean phase polynomials of degree at least three. A standalone Boolean-algebra checker verifies each emitted gate block, its exact phase, clean/borrowed ancilla restoration and resource counts, independently of the compiler. These are restricted constructions with substantial prior art, not optimal gate-count or complexity-theoretic lower bounds.
+We give exact controlled-phase circuit identities in the Hadamard--CCZ gate set, explicitly distinguishing initialized from borrowed ancillary qubits. We provide a constructive n-body phase formula, a four-body borrowed-ancilla construction, a unique cubic phase normal form for CCZ-only words, and a parity obstruction for exact equivalence of H--CCZ words. We further construct a uniform proof-carrying compiler for explicitly listed Boolean phase polynomials of degree at least three. A standalone Boolean-algebra checker verifies each emitted gate block, its exact phase, clean/borrowed ancilla restoration and resource counts, independently of the compiler. For shared-prefix families of high-degree monomials we also prove a strictly smaller circuit, relative to the independent-block compiler, by temporarily borrowing a prefix \emph{data} wire without allocating any extra unknown-state qubit. These are restricted constructions with substantial prior art, not globally optimal gate-count or complexity-theoretic lower bounds.
 \end{abstract}
 \section{Exact gate identities}
 For computational basis bits a,b,c, CCZ contributes the phase $(-1)^{abc}$, while $H=2^{-1/2}\bigl(\begin{smallmatrix}1&1\\1&-1\end{smallmatrix}\bigr)$.
@@ -255,6 +255,146 @@ with explicit clean/borrowed contracts,
 not a claim of first discovery or
 proof-assistant certification.
 
+
+\section{Shared-prefix phase synthesis with temporary data borrowing}
+\label{sec:shared-prefix}
+For an explicitly given family of diagonal phase monomials
+with a common prefix, scratch values need not be
+recomputed for every term. Let
+$p_1,\ldots,p_k$ be distinct data wires, $k\ge3$,
+and let $T_1,\ldots,T_m$, $m\ge2$, be distinct
+three-element subsets of the remaining data wires.
+Their supports may overlap. Consider
+\begin{equation}\label{eq:shared-target}
+P_F|x\rangle=(-1)^{F(x)}|x\rangle,\qquad
+F(x)=\bigoplus_{j=1}^{m}
+\left(\prod_{\ell=1}^{k}x_{p_\ell}\right)
+\left(\prod_{t\in T_j}x_t\right).
+\end{equation}
+The independent clean-ladder compiler
+of Theorem~2, when applied separately to
+each degree-$(k+3)$ monomial, requires
+$k$ initialized scratch bits,
+$m(2k+1)$ CCZ gates and $4km$ Hadamards.
+The following improvement concerns
+\emph{that specific earlier baseline};
+stronger individual controlled-gate
+decompositions exist \cite{khattar,lee}.
+
+\begin{theorem}[Amortized shared-prefix construction]
+\label{thm:shared-prefix}
+The phase \eqref{eq:shared-target} can be realized
+by an exact H--CCZ circuit using
+\begin{equation}\label{eq:shared-counts}
+N_{\mathrm{CCZ}}=2(k-1)+4m,\qquad
+N_H=4(k-1)+4m,
+\end{equation}
+and $k-1$ clean scratch bits.
+It allocates \emph{no} additional
+unknown-state borrowed ancilla:
+a temporarily borrowed wire is one
+of the original prefix \emph{data} bits
+and is restored exactly.
+For every $k\ge3$, $m\ge2$, this
+saves, relative to separate clean ladders,
+\begin{equation}\label{eq:shared-savings}
+\Delta_{\mathrm{CCZ}}
+=m(2k-3)-2(k-1)>0,\quad
+\Delta_H=4(k-1)(m-1)>0,
+\end{equation}
+and one initialized and one total physical qubit.
+The operator identity holds for arbitrary data
+superpositions, including entanglement with
+external systems.
+\end{theorem}
+\begin{proof}
+Compute the prefix conjunction
+$A=\prod_{\ell=1}^{k}x_{p_\ell}$
+into $k-1$ initially zero scratch bits
+using the usual $k-1$ Toffoli ladder.
+Keep its final scratch bit unchanged
+while processing all suffixes.
+For each $T_j=\{u,v,w\}$ apply the
+compensated sequence
+\[
+\mathrm{CCX}_{A,u\to p_1},\quad
+\mathrm{CCZ}_{p_1,v,w},\quad
+\mathrm{CCX}_{A,u\to p_1},\quad
+\mathrm{CCZ}_{p_1,v,w}.
+\]
+Here $A$ denotes the \emph{scratch wire}
+holding the conjunction, not a second
+use of the original data wire $p_1$.
+The four active phase operands
+$(A,u,v,w)$ are therefore distinct
+from the borrowed target $p_1$.
+By the full-operator borrowed-ancilla
+identity, this block contributes
+$(-1)^{Ax_ux_vx_w}$ and restores $p_1$
+even when the prefix data and scratch
+are already entangled. After all
+$m$ blocks, reverse the conjunction
+ladder to restore every clean scratch
+bit. Their accumulated exponent
+is exactly \eqref{eq:shared-target}.
+There are $2(k-1)$ Toffolis outside
+the borrowed-phase blocks and four
+CCZ plus four Hadamard gates within
+each such block, giving
+\eqref{eq:shared-counts}.
+Subtracting the independent-ladder
+counts gives \eqref{eq:shared-savings};
+their smallest positive CCZ saving is
+two at $(k,m)=(3,2)$.
+\end{proof}
+For instance, when $k=4$ and $m=3$
+the old compiler uses $27$ CCZ,
+$48$ Hadamards and four clean scratch
+bits. The construction above uses
+$18$ CCZ, $24$ Hadamards and three
+clean scratch bits, with no extra
+borrowed physical qubit.
+
+A separate proof-carrying implementation
+of this restricted workload family
+is contained in
+\texttt{shared\_prefix\_compiler.py}.
+Its independent checker,
+\texttt{verify\_shared\_prefix.py},
+replays the actual emitted gate list
+using exact Boolean algebraic normal
+forms with \emph{all original data bits
+independent}, checks the phase polynomial,
+returns every data and initialized
+scratch expression to its prescribed
+value, and recounts resources.
+It imports no compiler routines.
+A second exact-amplitude checker
+verifies small instances directly.
+The regression suite covers 262
+certificate instances, 1408 full
+basis-amplitude inputs and 14 altered
+certificates rejected. A separate
+symbolic stress case reaches 256
+data wires. Finite checks support,
+rather than replace, the general proof.
+
+The construction is an amortized
+improvement only relative to the
+specified independent clean-ladder
+baseline. Conditional-ancilla
+methods already provide much smaller
+clean-ancilla requirements for
+individual multi-controlled gates
+\cite{khattar,dutta,lee}. Sharing
+compute--uncompute subexpressions
+is also established optimization
+practice, including the SPARE
+compiler \cite{spare}. Neither historical
+priority nor an optimum gate/resource
+trade-off among all H--CCZ circuits
+has been established here.
+
 \section{Independent exact verification}
 One standard-library checker simulates the actual gate matrices by maintaining signed integer amplitudes with a common factor $2^{-h/2}$. It checks the full clean-ancilla basis for n=3 through 12 (8,184 inputs), all 32 borrowed-ancilla basis inputs, 321 canonical-normal-form cases, H-count parity, and deliberate invalid rewrites. A separately implemented checker uses the exact 2-by-2 Toffoli conjugation identity and Boolean XOR operations rather than simulating Hadamards; it checks n=3 through 14 (32,760 inputs), the borrowed identity and Boolean normal forms. Finite verification reinforces rather than replaces the general inductive proofs.
 
@@ -291,6 +431,24 @@ J. Li, J. Mei, W. Fang and J. Guan,
 Formal verification of quantum ancilla
 safety, arXiv:2608.13099 (2026).
 \url{https://arxiv.org/abs/2608.13099}.
+\bibitem{dutta}
+S. Dutta, S. Wang, A. Baksi, A. Chattopadhyay
+and S. Maitra, On exact space--depth trade-offs
+in multi-controlled Toffoli decomposition,
+\emph{Phys. Rev. A} \textbf{111}, 052611 (2025).
+\url{https://doi.org/10.1103/PhysRevA.111.052611}.
+\bibitem{lee}
+J. Lee and Y. Kang, Logarithmic-depth MCT gate
+implementation method on a given arbitrary
+number of clean ancillae, \emph{Quantum Inf.
+Process.} \textbf{25}, 33 (2026).
+\url{https://doi.org/10.1007/s11128-026-05056-w}.
+\bibitem{spare}
+R. Sharma and S. Achour, Optimizing ancilla-based
+quantum circuits with SPARE,
+\emph{Proc. ACM Program. Lang.} \textbf{9},
+PLDI, 176--200 (2025).
+\url{https://doi.org/10.1145/3729253}.
 \bibitem{preskill} J. Preskill, Quantum computation lecture notes, Chapter 5, \url{https://www.preskill.caltech.edu/ph219/chap5_15.pdf}.
 \end{thebibliography}
 \medskip\noindent\texttt{tony.newton79@gmail.com}
