@@ -1,5 +1,8 @@
 # PHYSICS2026 — New problem template
 
+## Publication title-page rule
+The LaTeX paper title page must contain only the scientific title, author, affiliation and appropriate footnote; do **not** print a date, repository/project ID, internal-proof status, external-priority note, verification label or other administrative release metadata on the manuscript title page. Use `\\date{}` in LaTeX. Keep version, date, ID and verification status in the problem README, INDEX and AUDIT documents instead.
+
 ## Identity
 - ID: PHY-XXX
 - Precise title:
