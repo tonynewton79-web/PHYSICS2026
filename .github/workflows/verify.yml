@@ -26,6 +26,9 @@ jobs:
             echo "REPRODUCING $folder"
             python -m pip install -r "$folder/requirements.txt"
             python "$folder/verify.py"
+            if [ -f "$folder/verify_independent.py" ]; then
+              python "$folder/verify_independent.py"
+            fi
             count=$((count + 1))
           done
           test "$count" -gt 0
