@@ -9,7 +9,7 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-We give exact controlled-phase circuit identities in the Hadamard--CCZ gate set, explicitly distinguishing initialized from borrowed ancillary qubits. We provide a constructive n-body phase formula, a four-body borrowed-ancilla construction, a unique cubic phase normal form for CCZ-only words, and a parity obstruction for exact equivalence of H--CCZ words. These are mathematically proved restricted constructions with substantial prior art, not optimal gate-count or complexity-theoretic lower bounds.
+We give exact controlled-phase circuit identities in the Hadamard--CCZ gate set, explicitly distinguishing initialized from borrowed ancillary qubits. We provide a constructive n-body phase formula, a four-body borrowed-ancilla construction, a unique cubic phase normal form for CCZ-only words, and a parity obstruction for exact equivalence of H--CCZ words. We further construct a uniform proof-carrying compiler for explicitly listed Boolean phase polynomials of degree at least three. A standalone Boolean-algebra checker verifies each emitted gate block, its exact phase, clean/borrowed ancilla restoration and resource counts, independently of the compiler. These are restricted constructions with substantial prior art, not optimal gate-count or complexity-theoretic lower bounds.
 \end{abstract}
 \section{Exact gate identities}
 For computational basis bits a,b,c, CCZ contributes the phase $(-1)^{abc}$, while $H=2^{-1/2}\bigl(\begin{smallmatrix}1&1\\1&-1\end{smallmatrix}\bigr)$.
@@ -83,13 +83,214 @@ Squarefree Boolean monomials form a basis of functions on $\mathbb F_2^n$, with 
 \end{proof}
 This degree obstruction is only for the CCZ-only sublanguage; it is not a lower bound for all circuits containing Hadamards.
 
+
+\section{Proof-carrying compilation of phase polynomials}
+Let $\mathcal S$ be a finite list of subsets of
+$\{0,\ldots,n-1\}$, each of cardinality at least three.
+The target is the explicitly given diagonal unitary
+\begin{equation}\label{eq:phasefun}
+P_f|x\rangle=(-1)^{f(x)}|x\rangle,\qquad
+f(x)=\bigoplus_{S\in\mathcal S}\prod_{j\in S}x_j .
+\end{equation}
+Repeated subsets cancel in pairs over $\mathbb F_2$.
+After canonical cancellation let $\mathcal T$ be the
+remaining set of distinct monomials.
+For each cubic monomial apply one CCZ.
+A monomial of degree $k\ge4$ is realized by
+the clean-ancilla construction above, or, if
+$k=4$, by the borrowed-ancilla construction.
+All blocks are concatenated, reusing the
+same scratch register only after the preceding
+block has restored it.
+
+\begin{theorem}[Uniform resource and ancilla contract]
+\label{thm:pcc}
+Suppose the explicitly listed monomials in
+\eqref{eq:phasefun} all have degree at least three,
+and adequate ancillas are provided for the
+chosen block implementations. The deterministic
+compiler terminates and emits a finite
+H--CCZ circuit $C_f$ satisfying
+\begin{equation}\label{eq:pcccontract}
+C_f\bigl(|\psi\rangle_D|0\rangle_C|\phi\rangle_B\bigr)
+=(P_f|\psi\rangle_D)|0\rangle_C|\phi\rangle_B
+\end{equation}
+for arbitrary data states and arbitrary borrowed
+ancilla states, including states entangled with
+an unacted-upon external reference.
+Let $\mathcal C$ be the terms of degree at
+least four implemented by clean ladders,
+let $t_3$ be the number of cubic terms,
+and let $t_{4,B}$ be the number of quartics
+implemented using a borrowed ancilla. Then
+the exact gate counts of this construction are
+\begin{equation}\label{eq:counts-pcc}
+\begin{aligned}
+N_{\rm CCZ}&=t_3+
+\sum_{S\in\mathcal C}(2|S|-5)+4t_{4,B},\\
+N_H&=4\sum_{S\in\mathcal C}(|S|-3)+4t_{4,B}.
+\end{aligned}
+\end{equation}
+Its clean scratch requirement is
+$\max_{S\in\mathcal C}(|S|-3)$, interpreted
+as zero if $\mathcal C$ is empty.
+At most one borrowed scratch qubit is required
+for the sequential borrowed-quartic blocks.
+The declared serial schedule has depth
+$N_H+N_{\rm CCZ}$. These are construction
+costs, not optimal gate-count or depth bounds.
+\end{theorem}
+\begin{proof}
+Canonical cancellation preserves the target
+function because each Boolean monomial added
+twice contributes zero modulo two. Every
+cubic block contributes the required phase
+without changing any bit. The clean-ladder
+and borrowed-quartic identities proved
+above each contribute their designated
+monomial phase while restoring the
+respective ancillary register \emph{exactly}.
+Therefore the composition contributes
+the XOR of all monomial phases, restores
+each shared scratch register after every
+block, and establishes \eqref{eq:pcccontract}
+on a complete computational basis of
+data and borrowed systems. Linearity proves
+the assertion for all superpositions and
+arbitrary external entanglement.
+The compiler performs finitely many
+operations per explicitly listed term,
+so it terminates. Counting each block
+and summing gives \eqref{eq:counts-pcc};
+sequential reuse makes the clean capacity
+a maximum rather than a sum.
+\end{proof}
+
+The compiler emits a machine-readable artifact
+recording the source polynomial, the canonical
+terms, a contiguous gate interval for each
+block, its clean or borrowed ancilla role,
+the circuit, exact gate counts and a digest.
+The hash detects accidental changes but is
+\emph{not} a mathematical proof and does not
+authenticate a malicious compiler.
+
+\begin{theorem}[Soundness of the restricted
+independent certificate checker]\label{thm:checker}
+Consider a certificate which is accepted by
+the standalone checker under its declared
+finite resource limits and exact
+H--CCZ block grammar. Then the emitted
+circuit implements precisely
+\eqref{eq:pcccontract}, and the reported
+gate counts and ancillary usage agree with
+its gate list. The checker may decline
+to certify otherwise valid H--CCZ circuits
+outside its restricted grammar.
+\end{theorem}
+\begin{proof}
+The checker does not import the compiler.
+It parses each CCZ as the exact Boolean
+phase $(-1)^{abc}$ and each contiguous
+$H_t\mathrm{CCZ}_{abt}H_t$ as the exact
+reversible assignment $t\mapsto t\oplus ab$.
+These identities hold as quantum operators.
+It maintains, over the Boolean ring
+$\mathbb F_2[x_1,\ldots,x_N]/(x_i^2-x_i)$,
+a polynomial for the value of each output
+bit in terms of the original data and
+borrowed input bits, along with an
+accumulated phase polynomial.
+Initial clean bits are represented by
+zero, and borrowed bits by \emph{independent}
+Boolean variables. XOR and Boolean
+multiplication update these polynomials
+exactly after each recognized gate.
+Acceptance requires every block to restore
+all wire polynomials, contribute exactly
+its independently reconstructed target
+monomial, use only its declared ancillary
+wires, and match the separately counted
+H and CCZ operations. The checker also
+recomputes the source cancellation and
+verifies that blocks partition the
+entire circuit without gaps or trailing
+gates. Thus the accepted circuit has
+the desired action on every computational
+basis vector satisfying the clean
+precondition, with the entire borrowed
+register unchanged. Operator linearity
+gives \eqref{eq:pcccontract}.
+Unrecognized Hadamard patterns are reported
+as unsupported, not asserted incorrect.
+\end{proof}
+
+The implementation accepts explicit source
+lists; therefore its running time and
+output length are bounded in terms of the
+\emph{input support size}, not necessarily
+polynomial in $n$ for exponentially many
+listed monomials. The current standalone
+checker enforces a finite size cap and
+does not certify arbitrary quantum
+programs or general rewrite optimality.
+The construction applies to ideal
+H--CCZ gates, with no measurements or
+device noise.
+
+Proof-carrying quantum optimizers
+and ancilla-safety verification have
+substantial recent prior art.
+VOQC is a formally verified quantum
+circuit optimizer \cite{voqc};
+AlchemQ studies per-result
+equivalence certificates \cite{alchemq},
+and Li and collaborators explicitly
+study ancillary-state restoration
+\cite{ancillasafe}. The present
+scheme is narrower: its value is
+an exactly checkable, small
+phase-polynomial certificate format
+with explicit clean/borrowed contracts,
+not a claim of first discovery or
+proof-assistant certification.
+
 \section{Independent exact verification}
 One standard-library checker simulates the actual gate matrices by maintaining signed integer amplitudes with a common factor $2^{-h/2}$. It checks the full clean-ancilla basis for n=3 through 12 (8,184 inputs), all 32 borrowed-ancilla basis inputs, 321 canonical-normal-form cases, H-count parity, and deliberate invalid rewrites. A separately implemented checker uses the exact 2-by-2 Toffoli conjugation identity and Boolean XOR operations rather than simulating Hadamards; it checks n=3 through 14 (32,760 inputs), the borrowed identity and Boolean normal forms. Finite verification reinforces rather than replaces the general inductive proofs.
 
-These results are ideal-gate and precisely scoped. A general compiler, formal Lean checker, gate-optimal synthesis theorem, and hardware-cost model have not been constructed. Generalized Toffoli synthesis and clean/dirty ancilla techniques have established priority \cite{barenco,khattar}; no unprecedented quantum algorithm is claimed.
+The proof-carrying suite independently certifies
+108 family and randomized source instances,
+compares 1,712 actual exact-amplitude basis
+executions with the expected phase, and
+rejects 12 deliberately altered artifacts,
+including mutations whose digests were
+recomputed. The certificate checker is
+separate from the compiler and does not
+use the compiler's expected gate templates.
+These are ideal-gate and precisely scoped:
+a general-purpose quantum compiler,
+formal Lean checker, gate-optimality
+theorem, and hardware-cost model have
+not been constructed. Generalized Toffoli synthesis and clean/dirty ancilla techniques have established priority \cite{barenco,khattar}; no unprecedented quantum algorithm is claimed.
 \begin{thebibliography}{9}
 \bibitem{barenco} A. Barenco et al., Elementary gates for quantum computation, \emph{Physical Review A} \textbf{52}, 3457 (1995), \url{https://doi.org/10.1103/PhysRevA.52.3457}.
 \bibitem{khattar} T. Khattar and C. Gidney, Rise of conditionally clean ancillae for efficient quantum circuit constructions, \emph{Quantum} \textbf{9}, 1752 (2025), \url{https://doi.org/10.22331/q-2025-05-21-1752}.
+\bibitem{voqc}
+K. Hietala, R. Rand, L. Li, S.-H. Hung, X. Wu
+and M. Hicks, A verified optimizer for
+quantum circuits, \emph{ACM Trans. Program.
+Lang. Syst.} \textbf{45} (2023).
+\url{https://rand.cs.uchicago.edu/publication/hietala-2023-verified/}.
+\bibitem{alchemq}
+A. Laabs, AlchemQ: Proof-carrying quantum
+circuit optimization with per-result equivalence
+certificates, arXiv:2609.19160 (2026).
+\url{https://arxiv.org/abs/2609.19160}.
+\bibitem{ancillasafe}
+J. Li, J. Mei, W. Fang and J. Guan,
+Formal verification of quantum ancilla
+safety, arXiv:2608.13099 (2026).
+\url{https://arxiv.org/abs/2608.13099}.
 \bibitem{preskill} J. Preskill, Quantum computation lecture notes, Chapter 5, \url{https://www.preskill.caltech.edu/ph219/chap5_15.pdf}.
 \end{thebibliography}
 \medskip\noindent\texttt{tony.newton79@gmail.com}
