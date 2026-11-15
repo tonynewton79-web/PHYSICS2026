@@ -1,0 +1,42 @@
+name: PHY-007 proof-carrying H-CCZ compiler
+on:
+  push:
+    paths:
+      - 'problems/PHY-007-HCCZ-Exact-Certificates/**'
+      - '.github/workflows/phy007.yml'
+  pull_request:
+    paths:
+      - 'problems/PHY-007-HCCZ-Exact-Certificates/**'
+      - '.github/workflows/phy007.yml'
+  workflow_dispatch:
+
+jobs:
+  pcc:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: problems/PHY-007-HCCZ-Exact-Certificates
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Previous two exact H-CCZ verifiers
+        run: |
+          python verify.py
+          python verify_independent.py
+      - name: Independently checked proof-carrying compiler
+        run: python verify_proof_compiler.py
+      - name: Produce and verify a self-contained certificate
+        run: |
+          python proof_compiler.py --n 4 --term 0,1,2,3 --clean 0 --borrowed 1 --policy prefer_borrowed --out /tmp/phy007-borrowed.json
+          python verify_certificate.py /tmp/phy007-borrowed.json
+          python proof_compiler.py --n 7 --term 0,1,2,3,4,5,6 --clean 4 --out /tmp/phy007-clean.json
+          python verify_certificate.py /tmp/phy007-clean.json
+      - name: Upload sample checker artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: PHY007-independent-proof-certificates
+          path: |
+            /tmp/phy007-borrowed.json
+            /tmp/phy007-clean.json
