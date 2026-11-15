@@ -1,0 +1,166 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=24mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,booktabs,microtype}
+\usepackage{tikz}
+\usepackage[colorlinks=true,urlcolor=blue,linkcolor=blue,citecolor=blue]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newcommand{\T}{\mathbb T}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Hs}{H^s}
+\newcommand{\dd}{\mathrm d}
+\title{\textbf{Sharp Derivative Loss and Singular Sound-Speed Symmetrizers}\\for Eulerian Dust--Radiation Cauchy Systems}
+\author{Tony Newton}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+We give an exact principal-symbol audit of a comoving pressureless-dust plus perfect-radiation model used in first-order Einstein--matter Cauchy reductions. For the conventional Eulerian density and velocity variables, the three-dimensional frozen matter symbol contains a size-two nilpotent dust Jordan block in every nonzero spatial direction, notwithstanding the radiation sound waves at speed $1/\sqrt3$. An algebraic, pointwise invertible change of unknowns cannot remove this block. The pressureless density equation admits an exact $H^s$ bound when the initial dust velocity is in $H^{s+1}$, and this one-derivative loss is optimal. Giving the dust a sound speed $c>0$ produces a symmetrizable block with an optimal positive-symmetrizer condition number $c^{-2}$ for $0<c\le1$; the propagator recovers the dust Jordan shear as $c\to0$. We spell out the conditional generalized-harmonic constraint subsidiary equation and distinguish a frozen-coefficient obstruction from well-posed Lagrangian Einstein--dust reductions. All claims are proved for the specified principal grammar; the weak hyperbolicity of pressureless Euler and techniques overcoming Einstein--dust derivative loss are established prior art. This is not a full coupled Einstein--dust--radiation existence theorem.
+\end{abstract}
+
+\section{Physical setup, reductions and exact claim limits}
+Use signature $(-,+,+,+)$ and units in which the speed of light is one. Consider smooth Einstein equations with two separately conserved perfect-fluid components:
+\begin{equation}\label{eq:Einstein}
+G_{\mu\nu}+\Lambda g_{\mu\nu}=8\pi(T^{\mathrm d}_{\mu\nu}+T^{\mathrm r}_{\mu\nu}),
+\qquad \nabla^\mu T^{\mathrm d}_{\mu\nu}=0,\quad
+\nabla^\mu T^{\mathrm r}_{\mu\nu}=0,
+\end{equation}
+where
+\begin{equation}\label{eq:stress}
+T^{\mathrm d}_{\mu\nu}=\rho_{\mathrm d}u^{\mathrm d}_\mu u^{\mathrm d}_\nu,\qquad
+T^{\mathrm r}_{\mu\nu}=(\rho_{\mathrm r}+p_{\mathrm r})
+u^{\mathrm r}_\mu u^{\mathrm r}_\nu+p_{\mathrm r}g_{\mu\nu},\quad
+p_{\mathrm r}=\frac13\rho_{\mathrm r}.
+\end{equation}
+We assume a smooth comoving Friedmann--Lema\^itre--Robertson--Walker
+background with $\rho_{\mathrm d}>0$, $\rho_{\mathrm r}>0$ and
+$u_{\mathrm d}=u_{\mathrm r}$, and use an orthonormal local rest frame
+at one event. We \emph{freeze all coefficients} at that event,
+retain only first spatial derivatives of perturbation variables,
+and omit background expansion and connection terms because they
+are lower differential order in a standard first-order
+Einstein-wave reduction.
+
+The radiation component here is a \emph{barotropic perfect fluid}.
+It is not a collisionless Boltzmann photon distribution, a
+multi-moment radiative transfer closure, or a Thomson collision model.
+The result concerns a \emph{specific} first-order
+\emph{Eulerian} density--velocity formulation. Prior general
+relativistic Lagrangian symmetric-hyperbolic formulations for
+pressureless matter are known \cite{friedrich,normann};
+the nontrivial density regularity hierarchy also occurs in
+the Einstein--dust stability proof of Had\v{z}i\'c and Speck
+\cite{hadzic}. Our restricted negative result does not
+contradict those positive theorems.
+
+Let $\delta_{\mathrm d}=\delta\rho_{\mathrm d}/\rho_{\mathrm d}$,
+$\delta_{\mathrm r}=\delta\rho_{\mathrm r}/(\rho_{\mathrm r}+p_{\mathrm r})$,
+and let $v_{\mathrm d},v_{\mathrm r}\in\R^3$ denote first-order
+three-velocities. The positive background densities make the
+normalization pointwise invertible. The frozen fluid principal
+equations are
+\begin{equation}\label{eq:model}
+\begin{aligned}
+\partial_t\delta_{\mathrm d}+\nabla\cdot v_{\mathrm d}&=0,
+&\partial_t v_{\mathrm d}&=0,\\
+\partial_t\delta_{\mathrm r}+\nabla\cdot v_{\mathrm r}&=0,
+&\partial_t v_{\mathrm r}+\frac13\nabla\delta_{\mathrm r}&=0 .
+\end{aligned}
+\end{equation}
+To derive these formulas, decompose
+$\nabla_\mu T^{\mu\nu}=0$ into its fluid-parallel and
+orthogonal projections. The parallel equation is
+$u^\mu\nabla_\mu\rho+(\rho+p)\nabla_\mu u^\mu=0$;
+the orthogonal equation is
+$(\rho+p)u^\mu\nabla_\mu u^\alpha+
+(g^{\alpha\mu}+u^\alpha u^\mu)\nabla_\mu p=0$.
+In the frozen rest frame, $\partial_t\delta\rho+
+(\rho+p)\nabla\cdot v=0$ and
+$\partial_tv+(\rho+p)^{-1}\nabla\delta p=0$.
+Putting $p_{\mathrm d}=0$ and
+$\delta p_{\mathrm r}=\delta\rho_{\mathrm r}/3$
+gives \eqref{eq:model}.
+
+\section{The exact three-dimensional Jordan obstruction}
+Set $U=(\delta_{\mathrm d},v_{\mathrm d}^1,v_{\mathrm d}^2,v_{\mathrm d}^3,
+\delta_{\mathrm r},v_{\mathrm r}^1,v_{\mathrm r}^2,v_{\mathrm r}^3)^\mathsf T$.
+For a nonzero spatial covector $n\in\R^3$, the frozen
+directional symbol in $\partial_tU+\sum_i A^i\partial_iU=0$ is
+\begin{equation}\label{eq:symbol}
+A(n)=A_{\mathrm d}(n)\oplus A_{\mathrm r}(n),\quad
+A_{\mathrm d}(n)=
+\begin{pmatrix}0&n^\mathsf T\\0_{3\times1}&0_{3\times3}\end{pmatrix},
+\quad
+A_{\mathrm r}(n)=
+\begin{pmatrix}0&n^\mathsf T\\\frac13n&0_{3\times3}\end{pmatrix}.
+\end{equation}
+The two transverse radiation velocities have zero
+characteristic speed; the longitudinal radiation modes travel
+with relative speeds $\pm1/\sqrt3$ for $|n|=1$.
+
+\begin{theorem}[Eulerian principal-symbol no-go]\label{thm:jordan}
+For every $n\ne0$, the matter symbol \eqref{eq:symbol}
+has characteristic polynomial
+\begin{equation}\label{eq:charpoly}
+\det(zI-A(n))=z^6\Bigl(z^2-\frac{|n|^2}{3}\Bigr),
+\qquad \dim\ker A(n)=5.
+\end{equation}
+Its zero characteristic root has algebraic multiplicity six,
+but geometric multiplicity five. The dust block is a
+nonzero nilpotent matrix of index two and cannot be
+diagonalized. Thus \eqref{eq:model} is weakly but not
+strongly hyperbolic as an eight-variable first-order
+Eulerian system. No pointwise invertible change of the
+eight unknowns can make its principal symbol diagonalizable.
+\end{theorem}
+\begin{proof}
+For a unit vector $\hat n=n/|n|$, split each
+three-velocity into its longitudinal scalar and
+two transverse components. On the longitudinal dust
+pair, the symbol is $|n|J$,
+\[
+J=\begin{pmatrix}0&1\\0&0\end{pmatrix},
+\quad J\ne0,\qquad J^2=0.
+\]
+The two transverse dust variables have zero symbol.
+The longitudinal radiation pair has
+$|n|\left(\begin{smallmatrix}0&1\\1/3&0\end{smallmatrix}\right)$,
+whose eigenvalues are $\pm |n|/\sqrt3$,
+and the transverse radiation block contributes two more
+zeros. Therefore the characteristic polynomial is
+\eqref{eq:charpoly}; the zero eigenspace has
+$3+2=5$ dimensions, versus algebraic multiplicity
+$4+2=6$. A complex matrix with a nontrivial Jordan
+chain cannot be diagonalized.
+
+A pointwise invertible change $U=S(x)W$, with
+$S$ and $S^{-1}$ bounded and with no derivatives in
+the change of variables, sends the frozen principal
+symbol to $S^{-1}A(n)S$. Similarity preserves
+Jordan normal form and geometric multiplicities.
+Hence no change of this declared class removes
+the defect.
+\end{proof}
+
+In a standard first-order generalized-harmonic
+Einstein reduction, the metric first derivatives
+are independent evolved variables.
+The Einstein wave principal matrix contains no
+spatial derivatives of the perfect-fluid unknowns
+because $T_{\mu\nu}$ in \eqref{eq:stress}
+is algebraic in the matter fields. Conversely
+the fluid connection forces contain first
+derivatives of $g$ represented by those independent
+metric derivative variables, \emph{without spatial
+derivatives of the first-order metric variables}
+in the fluid principal matrix. With a gauge source
+depending on the metric but not on fluid derivatives,
+the coupled frozen principal matrix is therefore
+block diagonal between gravitational variables
+and \eqref{eq:symbol}. It inherits the dust Jordan
+block. This is a statement about that declared
+Eulerian first-order reduction and not every
+possible Einstein--matter gauge or variable
+choice.
+% PHY005_APPEND
