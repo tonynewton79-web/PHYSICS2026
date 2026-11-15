@@ -20,6 +20,10 @@ A restricted theorem is **not** advertised as the solution of a broader open pro
 
 See [INDEX.md](INDEX.md) for the numbered inventory, paper locations, proof artifacts, and verification status.
 
+### Next proof targets and release template
+
+See [BACKLOG.md](BACKLOG.md) for the open research queue, [PROBLEM_TEMPLATE.md](PROBLEM_TEMPLATE.md) for the one-problem-one-proof format, and [PHY-002 issue #1](https://github.com/tonynewton79-web/PHYSICS2026/issues/1) for the next active EMHD search.
+
 ### Reproducing an investigation
 
 Each investigation includes a statement of scope, a paper source, proof notes, a verifier, explicit software requirements, and a manifest describing what the tests do *and do not* establish. GitHub Actions runs the public verification suite and builds a PDF manuscript.
