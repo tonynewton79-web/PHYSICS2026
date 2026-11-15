@@ -59,7 +59,7 @@ These are upper bounds of a serial schedule, not lower bounds,
 hardware resource estimates, or proven optimal syntheses.
 
 **Independent tests:** Dedicated GitHub Actions run
-43773055923 passed 108 deterministic/randomized compiled instances,
+43773055923 passed 112 deterministic/randomized compiled instances,
 1,712 exact basis-amplitude executions using the older, separate
 H/CCZ integer simulator, 12 deliberately malformed/rehashed
 certificates, and source/ancilla insufficiency rejections. It
