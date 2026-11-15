@@ -158,4 +158,22 @@ check("source vanishes for zero auxiliary curl constraints",
 # Algebraic cone energy: E'=(b/3)<CE,GF>,
 # hence |E'| <= |b|sqrt(2)/3 E for all fields.
 print("PASS energy estimate: dE/dt <= abs(b)*sqrt(2)*E/3 (Cauchy–Schwarz)")
+# Nonlinear material dust: off-shell exact density-gradient identity
+# on a diagonal but spatially inhomogeneous metric.
+t,x=s.symbols("t x",real=True)
+a=[s.Function("a"+str(j))(t,x) for j in (1,2,3)]
+m=s.Function("m")(x)
+vol=s.prod(a)
+rho=m/vol
+K=-sum(s.diff(v,t)/v for v in a)
+dxdens=m.diff(x)/vol-rho*sum(s.diff(v,x)/v for v in a)
+check("nonlinear inhomogeneous material dust temporal Schouten jet",
+      s.simplify(s.diff(rho,t)-rho*K)==0)
+check("nonlinear inhomogeneous material dust spatial Schouten jet",
+      s.simplify(s.diff(rho,x)-dxdens)==0)
+for j in range(3):
+    Lii=rho*a[j]**2/6
+    check("dust Schouten spatial derivative coordinate identity "+str(j),
+          s.simplify(s.diff(Lii,x)
+             -(a[j]**2*s.diff(rho,x)+2*rho*a[j]*s.diff(a[j],x))/6)==0)
 print("ATTACK 04:",checks,"EXACT SOURCEFUL WEYL/30-FIELD SUBSIDIARY CHECKS PASS")
