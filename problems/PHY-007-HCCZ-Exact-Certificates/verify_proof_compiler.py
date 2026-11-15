@@ -74,6 +74,14 @@ def main():
         assert g["resources"]["h"]==4*(k-3)
         assert g["resources"]["clean_peak"]==max(0,k-3)
         tests+=1;inputs+=exact_matrix_control(g)
+    # Parametric high-wire stress test without exponential basis enumeration.
+    # Covers the checker's declared 256-data-wire cap, not unbounded runtime.
+    for k in (32,64,128,256):
+        cert=accepted(task(k,[list(range(k))],clean=k-3))
+        assert cert["resources"]["ccz"]==2*k-5
+        assert cert["resources"]["h"]==4*(k-3)
+        assert cert["resources"]["serial_depth"]==6*k-17
+        tests+=1
     # Four-body borrowed contract, including arbitrary initial borrowed bit.
     dirty=accepted(task(4,[[0,1,2,3]],borrowed=1,policy="prefer_borrowed"))
     assert dirty["resources"]["ccz"]==4 and dirty["resources"]["h"]==4
