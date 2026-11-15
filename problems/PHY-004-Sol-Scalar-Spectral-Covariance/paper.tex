@@ -1,0 +1,191 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=24mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,booktabs,microtype}
+\usepackage{tikz}
+\usepackage[colorlinks=true,urlcolor=blue,citecolor=blue,linkcolor=blue]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\R}{\mathbb R}
+\newcommand{\T}{\mathbb T}
+\newcommand{\Dlt}{\Delta}
+\newcommand{\e}{\mathrm e}
+\title{\textbf{Exact Scalar Spectral Gaps and Topology-Selected Heat Covariances}\\on Compact Sol Manifolds}
+\author{Tony Newton}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+For a canonically area-normalized family of compact hyperbolic torus bundles with Sol geometry, we prove an explicit trace-dependent spectral lower bound for every nonzero fiber Fourier sector, and identify the complete first positive scalar Laplace eigenvalue for monodromy traces three, four and five. The arithmetic input is a nonvanishing integral indefinite quadratic form conserved along each monodromy orbit; it reduces the scalar Laplacian exactly to confining one-dimensional Schrodinger operators. A harmonic-oscillator comparison excludes all fiber modes from the first eigenspace for these three traces. For a centered Gaussian scalar field with a prescribed Laplace heat covariance, we prove an exact Fourier-orbit selection rule, strict positivity within an orbit, and a covariance bound combining winding-distance Gaussian decay with the arithmetic spectral barrier. In a fixed canonical lattice basis, two selected modes correlate for trace three and are exactly uncorrelated for traces four and five. These are geometric scalar-field statements: no coupled Einstein--Boltzmann perturbation dynamics, CMB temperature/polarization prediction or observational discovery follows. Spectral arithmetic and quantum monodromy on Sol manifolds are established prior art; priority of the special explicit gap comparison is not established.
+\end{abstract}
+
+\section{Geometry, normalization, and scope}
+For an integer $T\ge3$ define the hyperbolic unimodular matrix
+\begin{equation}\label{eq:AT}
+ A_T=\begin{pmatrix}T-1&T-2\\1&1\end{pmatrix},
+ \quad D_T=T^2-4,\quad
+ \lambda_T=\frac{T+\sqrt{D_T}}2,\quad
+ k_T=\log\lambda_T=\operatorname{arcosh}(T/2)>0.
+\end{equation}
+Let
+\[
+P_T=
+\begin{pmatrix}
+\lambda_T-1&(\lambda_T^{-1}-1)/\sqrt{D_T}\\
+1&1/\sqrt{D_T}
+\end{pmatrix}.
+\]
+A direct computation gives $\det P_T=1$ and
+$A_TP_T=P_T\operatorname{diag}(\lambda_T,\lambda_T^{-1})$.
+On the universal cover $\R^2_x\times\R_w$ set $y=P_T^{-1}x$ and define
+\begin{equation}\label{eq:metric}
+g_T=dw^2+\e^{-2w}dy_1^2+\e^{2w}dy_2^2 .
+\end{equation}
+Take the quotient by $x\mapsto x+n$ for $n\in\Z^2$ and by
+\[
+(x,w)\mapsto(A_Tx,w+k_T).
+\]
+This is a compact torus bundle $M_T$ over a circle. The deck map acts
+in the $y$-coordinates as
+$(y_1,y_2,w)\mapsto(\lambda_Ty_1,\lambda_T^{-1}y_2,w+k_T)$,
+which preserves \eqref{eq:metric}; the fiber translations also act
+isometrically. Thus $g_T$ descends to $M_T$.
+The determinant-one normalization makes $d\operatorname{vol}_{g_T}=d^2x\,dw$
+and the $w$-circle has length $k_T$.
+
+The displayed metric in $(y,w)$ is \emph{exactly the same local Sol
+metric for every trace} $T$. Only its global identifications and
+lattice-to-eigenframe maps differ. The question here concerns a
+prescribed geometric scalar Laplacian and a Gaussian heat prior, not
+a dynamically evolved cosmological perturbation. The classical
+spectral separation of hyperbolic torus bundles and the relevant
+indefinite quadratic forms were studied by Bolsinov, Dullin and
+Veselov \cite{bdv}. The physical cosmic-topology covariance
+programme in the COMPACT Collaboration concerns observables and
+transfer functions well beyond this scalar model \cite{compact,overview}.
+
+\section{An integral monodromy invariant and exact operator splitting}
+\begin{lemma}[Nonzero integer orbit discriminant]\label{lem:q}
+For $m=(m_1,m_2)\in\Z^2$, put
+\begin{equation}\label{eq:Q}
+Q_T(m):=\det(m,A_T^{\mathsf T}m)
+=(T-2)m_1^2-(T-2)m_1m_2-m_2^2 .
+\end{equation}
+Then $Q_T(A_T^{\mathsf T}m)=Q_T(m)$.
+For every nonzero integer $m$ one has $Q_T(m)\ne0$, hence
+$|Q_T(m)|\ge1$. All nonzero dual-lattice orbits
+$\{(A_T^{\mathsf T})^jm:j\in\Z\}$ are infinite.
+\end{lemma}
+\begin{proof}
+The identity \eqref{eq:Q} follows by direct multiplication.
+Since $\det A_T=1$,
+\[
+Q_T(A_T^{\mathsf T}m)
+=\det(A_T^{\mathsf T}m,(A_T^{\mathsf T})^2m)
+=\det(A_T^{\mathsf T})Q_T(m)=Q_T(m).
+\]
+The discriminant of the binary form is
+$(T-2)^2+4(T-2)=T^2-4=D_T$, which lies strictly
+between $(T-1)^2$ and $T^2$ for every integer $T\ge3$.
+It is not a rational square. Were $Q_T(m)=0$
+for a nonzero integer vector, the rational projective slope
+of $m$ would be a root of this quadratic, a contradiction
+(the cases $m_1=0$ and $m_2=0$ are also immediate).
+Finally the two eigenvalues of every nonzero integer power of
+$A_T^{\mathsf T}$ are $\lambda_T^{\pm j}\ne1$,
+so no nonzero orbit can be periodic.
+\end{proof}
+
+Let $\alpha=P_T^{\mathsf T}m=(\alpha_1,\alpha_2)$.
+The scalar Laplacian on the universal cover is
+\[
+-\Dlt_{g_T}=-\partial_w^2
+-\e^{2w}\partial_{y_1}^2-\e^{-2w}\partial_{y_2}^2.
+\]
+Thus a fiber mode $\exp(2\pi i m\cdot x)$ is acted on by
+\begin{equation}\label{eq:schrod}
+H_m=-\frac{d^2}{dw^2}+V_m(w),\qquad
+V_m(w)=4\pi^2\left(\alpha_1^2\e^{2w}
++\alpha_2^2\e^{-2w}\right).
+\end{equation}
+The explicit eigenvectors give the exact arithmetic identity
+\begin{equation}\label{eq:product}
+\alpha_1\alpha_2
+=-\frac{Q_T(m)}{\sqrt{D_T}}.
+\end{equation}
+Hence both components of $\alpha$ are nonzero whenever
+$m\in\Z^2\setminus\{0\}$, and the potential grows
+exponentially toward both ends of $\R$. Each $H_m$ is a
+confining self-adjoint Schrodinger operator with discrete spectrum.
+
+\begin{lemma}[Unitary orbit decomposition]\label{lem:orbit}
+For each nonzero dual-lattice orbit $\mathcal O(m)$, the scalar
+$L^2(M_T)$ Fourier sector is unitarily equivalent to $L^2(\R,dw)$,
+under which $-\Delta_{g_T}$ becomes $H_m$. The base Fourier
+sector $m=0$ is the ordinary circle Laplacian
+$-\partial_w^2$ on $\R/k_T\Z$.
+\end{lemma}
+\begin{proof}
+The torus-bundle identification for an invariant scalar
+$f$ is $f(A_Tx,w+k_T)=f(x,w)$. Writing
+$f(x,w)=\sum_m f_m(w)\e^{2\pi im\cdot x}$ yields
+\[
+f_{A_T^{\mathsf T}m}(w)=f_m(w+k_T).
+\]
+Choose a representative $m$ of one orbit and define
+$\psi(s)=f_m(s)$ on $\R$. Its complete Fourier orbit
+is $f_{(A_T^{\mathsf T})^jm}(w)=\psi(w+jk_T)$.
+Consequently
+\[
+\sum_{j\in\Z}\int_0^{k_T}
+|f_{(A_T^{\mathsf T})^jm}(w)|^2dw
+=\int_{\R}|\psi(s)|^2ds.
+\]
+The operator is compatible because
+$V_{(A_T^{\mathsf T})^jm}(w)=V_m(w+jk_T)$.
+For $m=0$, the deck condition is simply
+$k_T$-periodicity in $w$.
+\end{proof}
+
+\section{A sharp trace-dependent potential inequality}
+\begin{theorem}[All nonbase scalar modes: explicit spectral barrier]
+\label{thm:barrier}
+On the orthogonal complement of functions constant on each fiber,
+\begin{equation}\label{eq:gapweak}
+-\Dlt_{g_T}\ \ge\
+\nu_T:=\frac{8\pi^2}{\sqrt{T^2-4}}
+\end{equation}
+as a quadratic-form inequality. In fact the stronger bound holds:
+\begin{equation}\label{eq:gapstrong}
+-\Dlt_{g_T}\ \ge\
+\nu_T+\sqrt{2\nu_T}
+=\frac{8\pi^2}{\sqrt{T^2-4}}
++\frac{4\pi}{(T^2-4)^{1/4}}
+\end{equation}
+on that subspace. These are rigorous lower bounds, not
+claims that either quantity is an attained eigenvalue.
+\end{theorem}
+\begin{proof}
+For $m\ne0$, \eqref{eq:product} and the arithmetic
+nonvanishing lemma give
+\[
+V_m(w)\ge 8\pi^2|\alpha_1\alpha_2|
+=\frac{8\pi^2|Q_T(m)|}{\sqrt{D_T}}
+=:\mu_m\ge\nu_T.
+\]
+For the unique center $w_m=\tfrac12\log|\alpha_2/\alpha_1|$,
+the potential can be written exactly as
+$V_m(w)=\mu_m\cosh(2(w-w_m))$.
+Since $\cosh(2s)\ge1+2s^2$ for all real $s$,
+\[
+H_m\ge-\partial_w^2+
+\mu_m+2\mu_m(w-w_m)^2.
+\]
+The standard one-dimensional harmonic oscillator on the right
+has ground energy $\mu_m+\sqrt{2\mu_m}$, which is increasing
+in $\mu_m\ge\nu_T$.
+Apply the unitary orbit decomposition
+of Lemma~\ref{lem:orbit} and sum over all nonzero orbits.
+\end{proof}
+% PHY004_REMAINING
