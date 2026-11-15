@@ -12,7 +12,7 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-We classify the first two nonempty mod-two closed plaquette-surface strata of the four-dimensional cubic lattice. Every finite closed surface with fewer than twelve faces is the six-face boundary of an elementary cube or the ten-face symmetric difference of two distinct elementary cubes sharing a face. The second presentation is unique. Rooted multiplicities are four at area six and sixty at area ten, with the latter split into twenty same-orientation and forty mixed-orientation cases. We derive the first two coefficients of the reduced finite-volume abelian lattice-gauge partition function, and explain the corresponding necessary parity rule in SU(2) character expansions. These are known-type strong-coupling results with independently reproduced exact counts, not a new continuum Yang--Mills mass-gap theorem.
+We classify the first two nonempty mod-two closed plaquette-surface strata of the four-dimensional cubic lattice. Every finite closed surface with fewer than twelve faces is the six-face boundary of an elementary cube or the ten-face symmetric difference of two distinct elementary cubes sharing a face. The second presentation is unique. Rooted multiplicities are four at area six and sixty at area ten, with the latter split into twenty same-orientation and forty mixed-orientation cases. We derive the first two coefficients of the reduced finite-volume abelian gauge partition function and, using complete SU(2) Haar character integrations and representation-degree exclusion gates, derive the actual finite-volume SU(2) Wilson coefficients through order ten. The six-face and ten-face fundamental character integrals are respectively 1/16 and 1/256, with the mixed four-dimensional ten-face configuration having the same weight as the coplanar case. Independent finite-group and Bessel-series checks reproduce the nonabelian factors. Strong-coupling coefficients are established prior art; these are exact reproducibility results, not a new confinement or continuum Yang--Mills mass-gap theorem.
 \end{abstract}
 
 \begin{center}
@@ -343,10 +343,52 @@ N_h^{\mathrm{closed,edge\ connected}}(p)
 \]
 This is far too weak for the required nonabelian four-dimensional all-area surface entropy, cluster expansion or continuum Yang--Mills mass gap.
 
+
+\section{Independent non-Abelian replay and adversarial checks}
+The group-integral claim in \eqref{eq:groupweights} was attacked using
+an algebraically independent finite \emph{non-Abelian} gauge group:
+the standard irreducible representation of $S_3$, of dimension two.
+Its exact character is the number of fixed points of the permutation
+minus one, taking the values $2,0,-1$. Link-gauge-fixing on a spanning
+tree of the one-cube plaquette complex leaves five group variables;
+for each ten-face two-cube complex it leaves nine. The brute-force
+finite-group sums, divided by $6^5$ and $6^9$ respectively, were
+\[
+\begin{array}{c|c|c|c}
+\text{surface}&\text{number of assignments}&
+\text{sum of character products}&\text{mean}\\ \hline
+\text{one cube}&7776&486&1/16\\
+\text{two cubes, coplanar}&10077696&39366&1/256\\
+\text{two cubes, mixed}&10077696&39366&1/256
+\end{array}
+\]
+This is not a substitute for Haar integration over continuous
+$SU(2)$: it is a genuinely separate check of the \emph{group-independent}
+two-disk gluing law and of the mixed-geometry combinatorics.
+
+A second independent verifier expands the modified Bessel functions
+from their defining factorial series using exact rational arithmetic.
+It reconstructs $u=\beta/4-\beta^3/96+\beta^5/1536
+-\beta^7/23040+O(\beta^9)$ and matches all coefficients of
+\eqref{eq:beta-pressure} through order ten. It also exhaustively tests
+the geometric fact that an exterior unit square meets the edge skeleton
+of one elementary cube in at most one edge. Neither verification route
+derives the theorem by assuming the desired strong-coupling coefficients.
+
+The mathematical and historical claim boundaries are deliberate.
+The no-dangling-edge and character-degree arguments prove only
+the low-order exclusion required for $O_L(\beta^{12})$; they do not
+give uniform all-area spin-foam bounds. Classic publications have
+strong-coupling group-factor machinery and higher-order $SU(2)$
+series \cite{drouffe,kogut}. Therefore the present calculation is
+an independent exact reconstruction and verification benchmark.
+It is \emph{not} released as an original breakthrough or as a
+continuum Yang--Mills result.
+
 \section{Reproducibility and limits}
 A deterministic rooted parity-closure enumerator explores \(30{,}259\) partial plaquette sets, finding exactly four six-face and sixty ten-face rooted closed surfaces. A separate cube-pair constructor agrees with the exact rooted sets and checks the coplanar/mixed split \((20,40)\). An independent periodic-volume algorithm on \(L=4\) builds \(1{,}536\) plaquettes, \(1{,}024\) cubes and \(9{,}216\) distinct face-sharing pairs, with \(3{,}072\) same-orientation and \(6{,}144\) mixed. Both tests are pure Python standard-library exact integer calculations. Their results corroborate, but do not replace, the universal chain proofs.
 
-The small-surface strong-coupling expansion is established prior art \cite{drouffe,kogut,forsstrom}. No original confinement result, rigorous \(SU(2)\) character coefficient or continuum mass gap is claimed. The next target is a sharp uniform all-area closed-surface entropy bound together with actual nonabelian spin-intertwiner weights and continuum control.
+The small-surface strong-coupling expansion is established prior art \cite{drouffe,kogut,forsstrom}. No original confinement theorem or continuum mass gap is claimed. In contrast to the first abelian stage, we now derive actual low-order \(SU(2)\) Wilson coefficients, but classical strong-coupling literature predates these series. The next target is a sharp, uniform all-area closed-surface entropy bound together with higher-representation spin-intertwiner control and continuum estimates.
 
 \begin{thebibliography}{9}
 \bibitem{wegner} F. J. Wegner, \emph{Duality in generalized Ising models and phase transitions without local order parameters}, J. Math. Phys. \textbf{12}, 2259--2272 (1971). \url{https://doi.org/10.1063/1.1665530}.
