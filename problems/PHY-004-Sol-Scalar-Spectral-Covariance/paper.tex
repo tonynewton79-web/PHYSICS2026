@@ -361,4 +361,89 @@ over positive $\tau$. The prefactor remains
 $\tau$ dependent; this is not a uniform
 time-independent pointwise bound.
 
+
+\section{An exact trace-three / trace-four / trace-five contrast}
+Consider the same two formal lattice labels in the
+canonical integer basis for each bundle:
+\[
+m=(1,0),\qquad n=(2,1).
+\]
+From \eqref{eq:Q}, the arithmetic invariants are
+\begin{equation}\label{eq:triplet}
+\begin{array}{c|ccc}
+T&Q_T(m)&Q_T(n)&\text{same orbit?}\\ \hline
+3&1&1&\mathrm{yes}: n=A_3^{\mathsf T}m\\
+4&2&3&\mathrm{no}\\
+5&3&5&\mathrm{no}
+\end{array}
+\end{equation}
+The no statements follow from unequal invariant
+values; the yes statement is the explicit multiplication
+$A_3^{\mathsf T}(1,0)=(2,1)$.
+Theorem~\ref{thm:cov} therefore gives the
+\emph{exact}, model-dependent contrast
+\begin{equation}\label{eq:contrast}
+\boxed{\quad
+\mathbb E[F_{(1,0)}\overline{F_{(2,1)}}]
+\begin{cases}
+>0,&T=3,\\
+=0,&T=4\text{ or }5,
+\end{cases}
+\qquad(\tau>0).
+\quad}
+\end{equation}
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}
+\node[draw,rounded corners,minimum width=9cm,
+minimum height=0.8cm] at (0,2) {};
+\node[draw,rounded corners,minimum width=9cm,
+minimum height=0.8cm] at (0,1) {};
+\node[draw,rounded corners,minimum width=9cm,
+minimum height=0.8cm] at (0,0) {};
+\node at (-3.55,2) {$T=3$};
+\node at (-3.55,1) {$T=4$};
+\node at (-3.55,0) {$T=5$};
+\node[draw,circle] at (-2.3,2) {$m$};
+\node[draw,circle] at (-2.3,1) {$m$};
+\node[draw,circle] at (-2.3,0) {$m$};
+\node[draw,circle] at (0.2,2) {$n$};
+\node[draw,circle] at (0.2,1) {$n$};
+\node[draw,circle] at (0.2,0) {$n$};
+\draw[->,thick](-1.9,2)--(-0.2,2);
+\node[above] at (-1.05,2) {\scriptsize $A_3^{\mathsf T}$};
+\draw[dashed,gray](-1.9,1)--(-0.2,1);
+\draw[dashed,gray](-1.9,0)--(-0.2,0);
+\node at (2.05,2) {\scriptsize $Q=(1,1)$};
+\node at (2.05,1) {\scriptsize $Q=(2,3)$};
+\node at (2.05,0) {\scriptsize $Q=(3,5)$};
+\end{tikzpicture}
+\caption{Canonical-coordinate orbit selection for
+$m=(1,0)$ and $n=(2,1)$. The solid arrow
+represents a genuine deck Fourier link for $T=3$.
+Dashed segments show no link at $T=4$ or $5$.}
+\label{fig:selection}
+\end{figure}
+
+Equality of the conserved integer $Q_T$
+is \emph{not sufficient} for orbit membership.
+For instance
+$Q_T(0,1)=Q_T(0,-1)=-1$ for every trace,
+but no integer power of $A_T^{\mathsf T}$
+takes a nonzero vector to its negative:
+its eigenvalues are strictly positive.
+The verification scripts therefore test
+actual matrix powers, rather than
+promoting an equality of $Q_T$
+to an orbit-matching test.
+
+The contrast \eqref{eq:contrast} is in a
+\emph{chosen canonical lattice basis}.
+An observer transformation or physical
+radiation transfer map could change how
+the relevant harmonics are represented.
+Thus this is an exact property of the
+specified scalar Gaussian heat prior,
+not an observer-invariant CMB detection.
+
 % PHY004_REMAINING
