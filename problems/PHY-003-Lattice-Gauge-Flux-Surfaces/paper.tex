@@ -113,4 +113,19 @@ For any fixed link \(e\), Haar measure is invariant under \(U_e\mapsto-U_e\). Th
 \end{proof}
 This \(SU(2)\) condition is necessary but not sufficient. Representation and intertwiner multiplicities remain, so the abelian partition coefficients \(4,36\) must not be presented as actual \(SU(2)\) Wilson-series coefficients.
 
+\section{A twelve-face example and limits of surface-entropy bounds}
+Four elementary three-dimensional hypercube facets incident to a vertex of one four-dimensional hypercube have pairwise distinct shared square faces. Their mod-two boundary contains \(4\cdot6-2\binom42=12\) plaquettes and is closed because \(\partial^2=0\). Thus one cannot extrapolate the six--ten classification automatically to the next stratum.
+
+The graph joining plaquettes that share an edge has maximum degree at most \(4[2(4-1)-1]=20\) in four dimensions. Any connected set of \(h\) plaquettes rooted at a fixed plaquette has a canonically chosen spanning tree. Encoding its rooted ordered tree, of which there are at most \(C_{h-1}\le4^{h-1}\), and a choice of one of at most twenty incident neighbor edges for each nonroot node, gives the rigorous but coarse bound
+\[
+N_h^{\mathrm{closed,edge\ connected}}(p)
+\le N_h^{\mathrm{edge\ connected}}(p)\le80^{h-1}.
+\]
+This is far too weak for the required nonabelian four-dimensional all-area surface entropy, cluster expansion or continuum Yang--Mills mass gap.
+
+\section{Reproducibility and limits}
+A deterministic rooted parity-closure enumerator explores \(30{,}259\) partial plaquette sets, finding exactly four six-face and sixty ten-face rooted closed surfaces. A separate cube-pair constructor agrees with the exact rooted sets and checks the coplanar/mixed split \((20,40)\). An independent periodic-volume algorithm on \(L=4\) builds \(1{,}536\) plaquettes, \(1{,}024\) cubes and \(9{,}216\) distinct face-sharing pairs, with \(3{,}072\) same-orientation and \(6{,}144\) mixed. Both tests are pure Python standard-library exact integer calculations. Their results corroborate, but do not replace, the universal chain proofs.
+
+The small-surface strong-coupling expansion is established prior art \cite{drouffe,kogut,forsstrom}. No original confinement result, rigorous \(SU(2)\) character coefficient or continuum mass gap is claimed. The next target is a sharp uniform all-area closed-surface entropy bound together with actual nonabelian spin-intertwiner weights and continuum control.
+
 % MORE_CONTENT_HERE
