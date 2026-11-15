@@ -188,4 +188,177 @@ in $\mu_m\ge\nu_T$.
 Apply the unitary orbit decomposition
 of Lemma~\ref{lem:orbit} and sum over all nonzero orbits.
 \end{proof}
+
+\section{Exact first positive eigenvalue for three trace controls}
+The lower bound in Theorem~\ref{thm:barrier} can be combined
+with a simple exact lower estimate for the deck length $k_T$.
+
+\begin{theorem}[First scalar Laplace eigenvalue, $T=3,4,5$]
+\label{thm:first}
+For the metric \eqref{eq:metric}, if $T\in\{3,4,5\}$
+the first positive eigenvalue of the entire scalar Laplacian is
+\begin{equation}\label{eq:first}
+\boxed{\quad
+\lambda_1(M_T,g_T)
+=\left(\frac{2\pi}{\log[(T+\sqrt{T^2-4})/2]}\right)^2 .
+\quad}
+\end{equation}
+Its real eigenspace is exactly two-dimensional, spanned by
+$\cos(2\pi w/k_T)$ and $\sin(2\pi w/k_T)$.
+There is no nonzero fiber Fourier eigenfunction at or below this
+eigenvalue. The trace restriction is essential to the proof below.
+\end{theorem}
+\begin{proof}
+The base-circle eigenvalues are $(2\pi n/k_T)^2$,
+$n\in\Z$, with first positive value $B_T=(2\pi/k_T)^2$.
+We prove $B_T<\nu_T+\sqrt{2\nu_T}$ by strictly rational
+inequalities.
+
+Put $r_T=(T-2)/(T+2)\in(0,1)$.
+The identity
+\[
+k_T=2\,\mathrm{artanh}(\sqrt{r_T})
+=2\sum_{n=0}^{\infty}\frac{r_T^{n+1/2}}{2n+1}
+>2\sqrt{r_T}\left(1+\frac{r_T}{3}\right)
+\]
+implies $B_T<C_T\pi^2$ with
+\[
+C_T=\frac{1}{r_T(1+r_T/3)^2}.
+\]
+In the table, choose upper rational bounds
+$\sqrt{D_T}<s_T$ and $D_T^{1/4}<h_T$.
+Then
+$\nu_T+\sqrt{2\nu_T}>a_T\pi^2+b_T\pi$
+where $a_T=8/s_T$, $b_T=4/h_T$.
+Every entry in the final column is \emph{strictly positive}:
+\[
+\begin{array}{c|c|c|c|c}
+T&C_T&a_T&b_T&
+b_T-(C_T-a_T)\cdot(22/7)\\ \hline
+3&1125/256&32/9&8/3&241/8064\\
+4&243/100&16/7&2&3789/2450\\
+5&343/192&8/5&16/9&12013/10080
+\end{array}
+\]
+The radical upper bounds used here are, respectively,
+$(s_T,h_T)=(9/4,3/2),(7/2,2),(5,9/4)$.
+They are certified simply by squaring and taking fourth powers
+of positive rational numbers.
+Since $\pi<22/7$, the table shows
+$C_T\pi^2<a_T\pi^2+b_T\pi$ in each of
+the three cases. Theorem~\ref{thm:barrier} therefore excludes
+the entire nonzero-fiber subspace at energy $B_T$.
+The circle modes $n=\pm1$ attain $B_T$ and constitute
+precisely the stated real eigenspace.
+\end{proof}
+
+\begin{table}[t]
+\centering
+\caption{Exact first spectral gap from Theorem~\ref{thm:first},
+and a weaker general nonzero-fiber potential barrier. Entries
+are shown numerically only as an aid to comparison; the proof is
+exact and uses the rational table above.}
+\begin{tabular}{ccccc}
+\toprule
+$T$ & $k_T$ & $\nu_T$ & $\nu_T+\sqrt{2\nu_T}$ & $\lambda_1$\\
+\midrule
+3 & $0.962424$ & $35.311$ & $43.714$ & $42.621$\\
+4 & $1.316958$ & $22.793$ & $29.545$ & $22.762$\\
+5 & $1.566799$ & $17.230$ & $23.100$ & $16.082$\\
+\bottomrule
+\end{tabular}
+\label{tab:spectrum}
+\end{table}
+
+\section{Exact Gaussian heat-covariance selection}
+Fix a trace $T\ge3$ and $\tau>0$. Let $X_T$ be a
+centered real Gaussian scalar field on $M_T$ with prescribed
+covariance
+\[
+C_{\tau,T}=\exp(-\tau[-\Delta_{g_T}]).
+\]
+This is a smooth positive trace-class covariance on the
+compact manifold. Define the complex Fourier amplitudes of
+its restriction to the section $w=0$ by
+\[
+F_m=\int_{\T^2}X_T(x,0)\e^{-2\pi i m\cdot x}\,d^2x.
+\]
+For $m\ne0$ write $m_j=(A_T^{\mathsf T})^j m$, and let
+$K_m(s,s';\tau)$ denote the continuous integral kernel
+of the positive Schrodinger heat semigroup $\e^{-\tau H_m}$
+on $L^2(\R)$.
+
+\begin{theorem}[Exact orbit mask and spectral heat bound]
+\label{thm:cov}
+For every nonzero $m,n\in\Z^2$,
+\begin{equation}\label{eq:mask}
+\mathbb E[F_m\overline{F_n}]=
+\begin{cases}
+K_m(0,jk_T;\tau)>0,
+ &n=(A_T^{\mathsf T})^j m\quad(j\in\Z),\\
+0,&n\notin\{(A_T^{\mathsf T})^j m:j\in\Z\}.
+\end{cases}
+\end{equation}
+For modes $m_j,m_\ell$ on a common orbit,
+the sharper coefficient-level statement is
+\begin{equation}\label{eq:heat}
+\boxed{\;
+0<K_m(jk_T,\ell k_T;\tau)
+\le \frac{\exp[-\mu_m\tau
+-(j-\ell)^2k_T^2/(4\tau)]}{\sqrt{4\pi\tau}},
+\qquad
+\mu_m=\frac{8\pi^2|Q_T(m)|}{\sqrt{T^2-4}}.
+\;}
+\end{equation}
+The upper bound holds for every $\tau>0$ and
+is not an assertion that the covariance itself
+is nonzero for arbitrary choices of a spectral prior.
+\end{theorem}
+\begin{proof}
+Different nonzero $A_T^{\mathsf T}$-orbits define orthogonal
+invariant subspaces of $-\Delta_{g_T}$ by
+Lemma~\ref{lem:orbit}, and therefore also of its heat
+covariance $C_{\tau,T}$. Their cross covariance vanishes.
+On one orbit the unitary map of Lemma~\ref{lem:orbit}
+identifies the two fiber coefficients at $w=0$ with
+the evaluations of a one-dimensional field at
+$s=jk_T$ and $s'=\ell k_T$. Its covariance kernel
+is exactly $K_m(s,s';\tau)$, with no additional
+volume factor because $\det P_T=1$.
+
+By the Feynman--Kac Brownian-bridge representation
+for $H_m=-\partial_s^2+V_m(s)$, the kernel
+$K_m(s,s';\tau)$ is strictly positive at all
+finite $s,s'$ and $\tau>0$. Indeed the free
+Brownian-bridge kernel is positive, and the
+exponential of the integral of the continuous
+real confining potential is positive on every
+continuous bridge path. The barrier
+$V_m\ge\mu_m$ from \eqref{eq:product} bounds
+that expectation by $\e^{-\tau\mu_m}$,
+so
+\[
+0<K_m(s,s';\tau)\le
+\frac{\e^{-\tau\mu_m}}{\sqrt{4\pi\tau}}\,
+\e^{-(s-s')^2/(4\tau)}.
+\]
+Set $s=jk_T$, $s'=\ell k_T$ to obtain
+\eqref{eq:heat}. The heat-kernel method is
+standard \cite{feynman}, not a new physical
+interaction law.
+\end{proof}
+
+A useful additional consequence of \eqref{eq:heat}
+is the all-time exponential winding-distance envelope
+\[
+K_m(jk_T,\ell k_T;\tau)\le
+\frac{1}{\sqrt{4\pi\tau}}\,
+\exp\!\left[-|j-\ell|k_T\sqrt{\mu_m}\right],
+\]
+obtained by minimizing
+$\mu_m\tau+(j-\ell)^2k_T^2/(4\tau)$
+over positive $\tau$. The prefactor remains
+$\tau$ dependent; this is not a uniform
+time-independent pointwise bound.
+
 % PHY004_REMAINING
