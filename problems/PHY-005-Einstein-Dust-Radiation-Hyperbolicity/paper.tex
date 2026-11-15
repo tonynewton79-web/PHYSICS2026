@@ -974,6 +974,459 @@ Einstein--dust--radiation Cauchy
 theorem remains unproved in
 this work.
 
+
+\section{An exact 26-field curvature--radiation principal certificate}
+\label{sec:curvature-radiation}
+The full metric--matter coupling in
+Sect.~\ref{sec:closure} remains open.
+We can nevertheless close the
+\emph{linearized Weyl--radiation
+principal block}, including the
+derivatives of the radiation stress,
+by an explicit first-gradient
+prolongation. We distinguish this
+restricted result from an Einstein
+frame/connection Cauchy theorem.
+
+\subsection{Why the standard spatial-stress auxiliary scheme does not apply directly}
+In the dust proper-time frame, the
+total stress tensor has momentum flux
+$J_i=\frac43\rho_{\mathrm r}\gamma^2v_i$
+from \eqref{eq:tiltstress}.
+A decomposition of the form
+$T_{ab}=\rho\,n_an_b+\Pi_{ab}$
+with $\Pi_{ab}n^a=0$ would force
+$T_{0i}=0$, and hence $J_i=0$.
+It cannot represent an independently
+tilted radiation component with
+$v_i\ne0$.
+The general frame construction of
+Normann--Valiente Kroon
+\cite{normann} expressly relies on
+a spatial stress tensor and
+introduces auxiliary derivative
+fields to handle its Cotton source.
+For tilted radiation the heat-flux
+components must be retained; one
+cannot invoke that spatial-stress
+theorem without changing its
+hypotheses.
+
+\subsection{The trace-free radiation Schouten jet}
+At an event of a smooth comoving
+background, take a local
+orthonormal dust frame, freeze the
+coefficients and let
+$U=(\sigma,v_1,v_2,v_3)^{\mathsf T}$
+denote linearized perfect-radiation
+variables. Here
+$c_s=1/\sqrt3$ and the normalized
+density perturbation is
+$\sigma=\frac{c_s}{1+c_s^2}
+\delta\rho_{\mathrm r}/\rho_{\mathrm r}$.
+The radiation system is
+\begin{equation}\label{eq:Rlinear}
+\partial_t U+\sum_{j=1}^3 R^j\partial_j U=0,
+\qquad
+R^j=c_s
+\begin{pmatrix}
+0&e_j^{\mathsf T}\\
+e_j&0_{3\times3}
+\end{pmatrix},
+\end{equation}
+where each $R^j$ is real symmetric.
+
+The radiation stress has zero trace,
+so its contribution to the
+Schouten tensor is
+$L^{\mathrm r}_{ab}
+=\frac{\kappa}{2}T^{\mathrm r}_{ab}$.
+Put $b=2\kappa\rho_{\mathrm r}/3$,
+so $b>0$ for positive radiation
+density. Its linear perturbation is
+\begin{equation}\label{eq:linear-schouten}
+\delta L^{\mathrm r}_{00}
+=\frac b{c_s}\sigma,\quad
+\delta L^{\mathrm r}_{0i}=-bv_i,\quad
+\delta L^{\mathrm r}_{ij}
+=\frac b{3c_s}\sigma\,\delta_{ij}.
+\end{equation}
+Introduce \emph{independent spatial
+radiation-gradient variables}
+\begin{equation}\label{eq:jet}
+W_i=\partial_iU,\qquad i=1,2,3,
+\end{equation}
+and abbreviate
+$S_i=(W_i)_0$ and
+$V_{ij}=(W_i)_j$,
+where the velocity indices $j$
+are numbered $1,2,3$.
+
+The radiation equations imply
+$\partial_t\sigma=-c_sV_{jj}$
+and $\partial_tv_i=-c_sS_i$.
+Therefore \emph{every} spacetime
+derivative of \eqref{eq:linear-schouten}
+is algebraic in the twelve
+variables $(S_i,V_{ij})$:
+\begin{equation}\label{eq:schouten-jet}
+\begin{array}{rclcrcl}
+\partial_t L^{\mathrm r}_{00}&=&-bV_{jj},
+&&\partial_iL^{\mathrm r}_{00}&=&bS_i/c_s,\\
+\partial_t L^{\mathrm r}_{0j}&=&bc_sS_j,
+&&\partial_iL^{\mathrm r}_{0j}&=&-bV_{ij},\\
+\partial_t L^{\mathrm r}_{jk}&=&-(b/3)V_{\ell\ell}\delta_{jk},
+&&\partial_iL^{\mathrm r}_{jk}&=&
+(b/3c_s)S_i\delta_{jk}.
+\end{array}
+\end{equation}
+Both the Schouten trace condition
+$\partial_\alpha L^{\mathrm r\,a}{}_a=0$
+and the radiation divergence identities
+$\partial^aL^{\mathrm r}_{ab}=0$
+follow exactly from
+$c_s^2=1/3$.
+For a concrete nonzero example,
+the contracted-Weyl source component
+$\partial_x L^{\mathrm r}_{0y}
+-\partial_t L^{\mathrm r}_{xy}
+=-bV_{xy}$.
+Thus the Cotton coupling is
+\emph{present} but contains no
+derivative of $W$.
+At nonzero tilt the analogous
+stress-jet map is state-dependent
+and contains all momentum-flux
+components; at fixed coefficients
+it remains algebraic in first
+radiation derivatives and frame
+coefficients.
+
+\subsection{An explicit ten-component STF Weyl block}
+Choose the following basis of
+real symmetric trace-free
+$3\times3$ matrices:
+\[
+\begin{aligned}
+B_1&=\operatorname{diag}(1,-1,0),
+&B_2&=\operatorname{diag}(1,1,-2),\\
+B_3&=e_1e_2^{\mathsf T}+e_2e_1^{\mathsf T},
+&B_4&=e_1e_3^{\mathsf T}+e_3e_1^{\mathsf T},\\
+B_5&=e_2e_3^{\mathsf T}+e_3e_2^{\mathsf T}.
+\end{aligned}
+\]
+The Frobenius Gram matrix of this
+basis is
+\begin{equation}\label{eq:Gram}
+D=\operatorname{diag}(2,6,2,2,2)>0.
+\end{equation}
+Define the symmetric-tracefree
+curl symbol by
+\[
+(\mathsf{curl}_n X)_{ij}
+=\tfrac12\bigl(
+\epsilon_{k\ell i}n^kX_{j\ell}
++\epsilon_{k\ell j}n^kX_{i\ell}
+\bigr).
+\]
+Its coordinate matrix
+$C(n)=\sum n_jC_j$ is
+\begin{equation}\label{eq:C-mats}
+\begin{gathered}
+C_1=
+\begin{pmatrix}
+0&0&0&0&1/2\\
+0&0&0&0&-1/2\\
+0&0&0&-1/2&0\\
+0&0&1/2&0&0\\
+-1/2&3/2&0&0&0
+\end{pmatrix},\\[3pt]
+C_2=
+\begin{pmatrix}
+0&0&0&1/2&0\\
+0&0&0&1/2&0\\
+0&0&0&0&1/2\\
+-1/2&-3/2&0&0&0\\
+0&0&-1/2&0&0
+\end{pmatrix},\qquad
+C_3=
+\begin{pmatrix}
+0&0&-1&0&0\\
+0&0&0&0&0\\
+1&0&0&0&0\\
+0&0&0&0&-1/2\\
+0&0&0&1/2&0
+\end{pmatrix}.
+\end{gathered}
+\end{equation}
+Direct exact multiplication gives
+$C_j^{\mathsf T}D+DC_j=0$
+for $j=1,2,3$.
+The source-free principal Weyl
+equations for its electric and
+magnetic STF tensors are represented
+by the $10\times10$ matrix
+\begin{equation}\label{eq:weyl-principal}
+\mathsf W(n)=
+\begin{pmatrix}
+0&-C(n)\\ C(n)&0
+\end{pmatrix},\qquad
+H_{\mathsf W}=\operatorname{diag}(D,D)>0 .
+\end{equation}
+Then $H_{\mathsf W}\mathsf W(n)$
+is symmetric for \emph{every}
+real spatial covector $n$.
+The source-free polynomial is
+\begin{equation}\label{eq:weyl-poly}
+\det(zI-\mathsf W(n))
+=z^2(z^2-|n|^2)^2
+(z^2-|n|^2/4)^2.
+\end{equation}
+The zero and half-light-speed
+branches include unconstrained
+curvature sectors; they must not
+be mistaken for additional freely
+propagating physical graviton modes.
+
+\begin{theorem}[Twenty-six-field frozen
+curvature--radiation symmetrizer]
+\label{thm:26}
+At a local frozen orthonormal
+background point, consider the
+STF Weyl electric/magnetic
+evolution equations with the
+contracted Bianchi Cotton source
+and the perfect-radiation Euler
+system \eqref{eq:Rlinear}.
+Introduce $W_i$ through
+\eqref{eq:jet}, and evolve them
+using the \emph{prolonged}
+radiation equations
+\begin{equation}\label{eq:prolong}
+\partial_tW_i+R^j\partial_jW_i=0,
+\qquad i=1,2,3 .
+\end{equation}
+After eliminating $\partial_t U$
+from the stress source by
+\eqref{eq:Rlinear}, the
+twenty-six-field principal
+matrix on
+\[
+\mathcal U=(E_1,\ldots,E_5,
+H_1,\ldots,H_5,U,W_1,W_2,W_3)
+\]
+is \emph{exactly}
+\begin{equation}\label{eq:A26}
+\boxed{\quad
+\mathsf A(n)=
+\operatorname{diag}\bigl(
+\mathsf W(n),R(n),R(n),R(n),R(n)
+\bigr),\qquad R(n)=n_jR^j.
+\quad}
+\end{equation}
+It is symmetrizable by the
+positive matrix
+\begin{equation}\label{eq:H26}
+H_{26}=
+\operatorname{diag}
+(H_{\mathsf W},I_4,I_4,I_4,I_4).
+\end{equation}
+For a comoving background its
+full characteristic polynomial is
+\begin{equation}\label{eq:poly26}
+\det(zI-\mathsf A(n))
+=z^{10}(z^2-|n|^2)^2
+(z^2-|n|^2/4)^2
+(z^2-|n|^2/3)^4.
+\end{equation}
+For a frozen \emph{tilted}
+radiation state, replace each
+$R^\mu$ by the symmetric
+radiation-frame bilinear forms
+\eqref{eq:Axi}. The combined
+time matrix becomes
+\[
+\mathsf M^0=
+\operatorname{diag}\bigl(
+H_{\mathsf W},
+R^0,R^0,R^0,R^0
+\bigr)>0
+\]
+because the radiation eigenvalues
+are exactly those in
+\eqref{eq:A0eigen}.
+The spatial matrices are symmetric
+in the same variable basis. Hence
+this \emph{frozen Weyl--radiation
+principal skeleton} remains
+strongly hyperbolic for all
+strictly subluminal tilts.
+The assertion excludes the
+unconstructed dynamical
+frame/connection equations and
+their geometric subsidiary system.
+\end{theorem}
+\begin{proof}
+At frozen coefficients, differentiating
+the symmetric radiation equations
+commutes with the constant matrices
+$R^j$, giving \eqref{eq:prolong}.
+The contracted Bianchi equations
+are a symmetric Weyl curl system
+with source linear in
+$\partial L^{\mathrm r}$.
+Equation \eqref{eq:schouten-jet}
+shows this source is
+\emph{algebraic in $W_i$};
+it therefore contributes
+only zero-derivative terms
+to the enlarged system.
+The Weyl principal matrices
+are \eqref{eq:weyl-principal}.
+Thus no derivative off-diagonal
+blocks survive, proving
+\eqref{eq:A26}.
+
+The matrix identity
+$C(n)^{\mathsf T}D=-DC(n)$
+gives the Weyl symmetrizer.
+Each $R^j$ is symmetric,
+so \eqref{eq:H26} is a
+strictly positive symmetrizer
+for all spatial directions.
+The scalar Weyl polynomial
+\eqref{eq:weyl-poly} and
+the radiation polynomial
+$z^2(z^2-|n|^2/3)$,
+repeated four times,
+give \eqref{eq:poly26}.
+
+For nonzero tilt the
+radiation-orthonormal-frame
+principal matrices are
+\eqref{eq:Axi} and remain
+symmetric. Their time block
+is positive by
+Theorem~\ref{thm:tilted}.
+Each spatial radiation-gradient
+equation is a copy of the
+same frozen first-order Euler
+system. Taking the direct sum
+with $H_{\mathsf W}$ therefore
+establishes the tilted
+frozen-principal claim.
+\end{proof}
+
+\begin{proposition}[Homogeneous
+radiation-gradient subsidiary system]
+\label{prop:W-sub}
+On the constant-coefficient
+system of Theorem~\ref{thm:26},
+define the radiation-gradient
+and curl zero quantities
+\[
+Z_i=W_i-\partial_iU,\qquad
+F_{ij}=\partial_iW_j-
+\partial_jW_i .
+\]
+They satisfy the \emph{homogeneous}
+symmetric-hyperbolic
+subsidiary equations
+\begin{equation}\label{eq:W-sub}
+\boxed{\quad
+\partial_tZ_i+R^k\partial_kZ_i=0,\qquad
+\partial_tF_{ij}+R^k\partial_kF_{ij}=0 .
+\quad}
+\end{equation}
+Hence $Z_i=0$ and $F_{ij}=0$
+are propagated by initial data.
+If the stress-derivative variables
+$P_{\alpha\mu\nu}:=
+\partial_\alpha\delta L^{\mathrm r}_{\mu\nu}$
+are defined algebraically from
+$W_i$ by \eqref{eq:schouten-jet},
+their defining identities also
+hold whenever $Z=0$ and the
+radiation Euler equations hold.
+This is \emph{not} a proof of
+the Weyl divergence, frame,
+torsion or Einstein constraint
+subsidiary system.
+\end{proposition}
+\begin{proof}
+Differentiate the radiation equation
+\eqref{eq:Rlinear} spatially and
+subtract from \eqref{eq:prolong}
+to obtain the $Z_i$ equations.
+Antisymmetrize spatial derivatives
+of \eqref{eq:prolong} to obtain
+the $F_{ij}$ equations. In both
+steps the constant $R^k$
+commutes with spatial
+differentiation. Symmetry of
+$R^k$ and the identity time matrix
+give a positive subsidiary
+symmetrizer. With $Z=0$,
+\eqref{eq:schouten-jet} reproduces
+the actual spatial stress
+derivatives, while its time
+derivatives use the original
+Euler equations. Thus the
+stress-jet defining relation
+is consistent for the same
+constant-coefficient solutions.
+\end{proof}
+
+\subsection{The actual remaining nonlinear Einstein proof gate}
+At nonzero curvature one must
+differentiate the \emph{covariant}
+radiation Euler equations rather
+than ordinary partial equations.
+Commuting covariant derivatives
+produces explicit curvature terms:
+\begin{equation}\label{eq:covprolong}
+\nabla_i(A^\mu(U,g)\nabla_\mu U)
+=A^\mu\nabla_\mu W_i
++(\nabla_i A^\mu)W_\mu
++A^\mu[\nabla_i,\nabla_\mu]U .
+\end{equation}
+The commutator is algebraic
+in the Riemann tensor and
+$U$ when $U$ is a tensor;
+however the \emph{moving-frame
+derivatives, time-gradient
+constraints, connection evolution
+and reduction choices} must all
+be fixed before this symbolic
+identity establishes a closed
+symmetric-hyperbolic system.
+A full material-frame
+Einstein reduction must also
+prove the torsion, gauge,
+Einstein, Weyl-divergence,
+radiation-jet and stress-jet
+zero quantities satisfy one
+homogeneous, well-posed
+subsidiary system.
+
+The 26-field theorem
+supplies an explicit local
+principal certificate and
+a homogeneous \emph{matter-jet}
+subsidiary subsystem.
+It does not prove those
+missing geometric reductions
+or a local-existence result
+for general inhomogeneous
+Einstein--dust--radiation data.
+The use of auxiliary
+stress derivatives is closely
+related to established frame
+techniques \cite{friedrich,normann}
+and should not be advertised
+as an unprecedented new
+general-relativistic method.
+
 \section{What the generalized-harmonic constraints do and do not repair}
 The principal-symbol no-go is \emph{not} a claim that
 the Einstein constraints themselves fail to propagate.
