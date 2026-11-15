@@ -41,6 +41,12 @@ jobs:
             if [ -f "$folder/verify_curvature_radiation_independent.py" ]; then
               python "$folder/verify_curvature_radiation_independent.py"
             fi
+            if [ -f "$folder/verify_weyl_subsidiary.py" ]; then
+              python "$folder/verify_weyl_subsidiary.py"
+            fi
+            if [ -f "$folder/verify_weyl_subsidiary_independent.py" ]; then
+              python "$folder/verify_weyl_subsidiary_independent.py"
+            fi
             if [ -f "$folder/verify_su2_coefficients.py" ]; then
               python "$folder/verify_su2_coefficients.py"
             fi
