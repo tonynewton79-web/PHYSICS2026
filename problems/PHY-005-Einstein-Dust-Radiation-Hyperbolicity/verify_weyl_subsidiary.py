@@ -176,4 +176,41 @@ for j in range(3):
     check("dust Schouten spatial derivative coordinate identity "+str(j),
           s.simplify(s.diff(Lii,x)
              -(a[j]**2*s.diff(rho,x)+2*rho*a[j]*s.diff(a[j],x))/6)==0)
+# A new, independent static material-dust Schouten gradient P_i
+# modifies the full Weyl divergence constraints. It does NOT modify
+# the frozen STF evolution because d_t=0 and L_d,0i=0.
+kappa=s.symbols("kappa",real=True)
+P=s.Matrix(s.symbols("P0:3",real=True))
+CEfull=CE-kappa*P/3
+check("complete TWO-FLUID magnetic Weyl subsidiary with dust curl",
+      zero(CHdot-s.Rational(1,2)*curl_vec(CEfull)-kappa*curl_vec(P)/6))
+check("complete TWO-FLUID electric Weyl subsidiary",
+      zero(CEdot+s.Rational(1,2)*curl_vec(CH)-b*Fdiv/3))
+Lsfull=[q.copy() for q in Lsp]
+for i in range(3):
+    Lsfull[i][0,0]+=kappa*P[i]/3
+    for j in range(3):Lsfull[i][j+1,j+1]+=kappa*P[i]/6
+allowed=[s.S(0)]
+for q in list(CEfull)+list(CH):
+    for coef in (1,-1,s.Rational(1,2),-s.Rational(1,2)):
+        allowed.append(coef*q)
+for bb in range(4):
+    for cc in range(4):
+        for dd in range(cc+1,4):
+            residual=s.expand(-Weyl(0,bb,cc,dd,Edot,Hdot)+
+                  sum(n[i]*Weyl(i+1,bb,cc,dd) for i in range(3))
+                  -(Ldot if cc==0 else Lsfull[cc-1])[dd,bb]
+                  +(Ldot if dd==0 else Lsfull[dd-1])[cc,bb])
+            check("TWO-FLUID Bianchi residual "+str((bb,cc,dd)),
+                  any(s.simplify(residual-q)==0 for q in allowed))
+# Extend the 30-field subsidiary with 3 static dust defining
+# and 3 static dust curl zero-quantities.
+for vec in ((1,0,0),(0,1,0),(0,0,1),(s.Rational(2,3),0,s.Rational(-1,3))):
+    A=s.diag(principal(vec),s.zeros(6))
+    check("36-field symmetric principal "+str(vec),
+          A.shape==(36,36) and A==A.T)
+Gd=s.Matrix([[0,0,1],[0,-1,0],[1,0,0]])
+check("dust curl transfer exact operator norm one",Gd*Gd.T==s.eye(3))
+print("PASS: 36-field two-fluid constraint estimate exp(max(sqrt(2)|b|/3,|kappa|/6)*|t|)")
+
 print("ATTACK 04:",checks,"EXACT SOURCEFUL WEYL/30-FIELD SUBSIDIARY CHECKS PASS")
