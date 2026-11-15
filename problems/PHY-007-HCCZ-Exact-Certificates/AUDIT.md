@@ -91,3 +91,69 @@ rewrites, ancilla-free high-degree synthesis, general dirty-ancilla
 resource tradeoffs, authenticated signatures, verified checker
 code in a proof assistant, fault-tolerant cost optimization,
 hardware connectivity and noise.
+
+
+## Shared-prefix/data-borrowed phase construction (15 November 2026)
+
+A restricted family of m>=2 diagonal phase monomials with one
+common k>=3 data prefix and distinct three-variable suffixes
+admits a strict constructive improvement over PHY-007's
+original independent clean-ladder synthesis. Compute
+the AND of the prefix once using k-1 clean scratch wires.
+For each three-variable suffix, apply the exact borrowed
+four-body phase using the computed prefix scratch and
+the three suffix variables as active operands, with the
+**original first prefix data bit** as the temporary borrowed
+target. The borrowed data bit is NOT one of the four
+active phase operands: the computed prefix is stored in
+a separate scratch wire. The four-body operator identity
+acts as the identity on its borrowed wire even if
+entangled with the computed conjunction. Return the
+borrowed data bit after every phase, then uncompute the
+common prefix ladder.
+
+**Exactly proven resources:** CCZ=2(k-1)+4m,
+H=4(k-1)+4m, clean=k-1, added borrowed qubits=0.
+The previous independent clean-ladder baseline uses
+CCZ=m(2k+1), H=4km, clean=k.
+The exact savings m(2k-3)-2(k-1)>0 CCZ,
+4(k-1)(m-1)>0 H, and one initialized/total
+physical qubit hold for all k>=3, m>=2.
+This is a strict Pareto improvement ONLY relative
+to that specified prior PHY-007 compiler, not global
+optimality against 2025-2026 cond-clean literature.
+
+**Independent proof replay:** The untrusted
+shared_prefix_compiler.py is interpreted by a distinct
+verify_shared_prefix.py module importing no compiler
+code. It symbolically tracks every data wire as an
+independent GF2 ANF variable, every clean scratch as
+zero, every actual CCZ phase, and every exact H-CCZ-H
+reversible Toffoli update. It requires the original
+data bits and all clean scratch bits to be returned,
+the exact desired diagonal phase, and independent
+recounting of gates/physical wires. Mutants with
+recomputed SHA-256 digests are rejected. The separate
+verify_shared_prefix_suite.py invokes the old signed-
+integer exact H/CCZ simulator for smaller circuits.
+
+**GitHub CI certificate:** 266 program instances
+(including n=256 symbolic input), 1,408 actual
+basis-amplitude executions, and 14/14 mutated
+certificates rejected. A compiler-generated JSON
+certificate for k=4,m=3 is also independently
+verified by a distinct CLI invocation. These tests
+support, but are not a substitute for, the written
+general operator proof.
+
+**External priority boundary:** Khattar--Gidney
+(Quantum 2025) already have one-clean/two-clean
+multicontrolled gates with strong linear counts;
+Dutta et al. (PRA 2025), Lee--Kang (QIP 2026)
+study depth-space tradeoffs; SPARE (PLDI 2025)
+shares compute/uncompute structure; Jung et al.
+(Constraints 2026) optimize multiple controls.
+No claim is made that this particular borrowing
+trick is historically new, a globally optimal
+resource frontier, or a formally verified
+Lean/Coq development.
