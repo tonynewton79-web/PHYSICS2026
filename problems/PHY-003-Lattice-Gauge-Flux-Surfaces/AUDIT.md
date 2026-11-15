@@ -30,6 +30,29 @@
 
 **Priority limitation:** The SU2 low-order series and general group integration method are not claimed to be newly discovered; Kogut and Drouffe--Zuber give foundational and higher-order strong-coupling results. This is a transparent, independently reproduced finite-volume specialization. No all-area convergence, uniform thermodynamic bound, continuum mass-gap proof, or external peer review is implied.
 
+## All-orders SU(2) polymer certificate: adversarial proof audit
+
+1. **Exact representation-complete polymer expansion.** Divide each plaquette Wilson Boltzmann factor by c0(beta)=2I1(beta)/beta and write 1+v_beta(U_p). Expand the full product into subsets of nontrivial plaquettes. Distinct components under plaquette adjacency by a shared *link* have disjoint sets of Haar integration variables, so all corresponding terms factor. This is the exact hard-core polymer gas, with incompatibility meaning sharing an edge or plaquette; touching at vertices is compatible.
+
+2. **No singly incident link.** The average over the sole link variable in v_beta(A U_e B) is zero by normalized Haar integration. Thus any polymer with a singly incident link vanishes, including all nontrivial spin/intertwiner assignments. The geometric minimum for a set without such a link is six faces in a 4D periodic L>=4 lattice; it applies to all spin labels, branchings and intersections.
+
+3. **Complete character majorant.** At |beta|<=r, the c0 series is even with positive coefficients, and |c0(beta)|>=2-c0(r)>0. The sum of absolute coefficients times maximal character dimensions obeys sum_{j>0}(2j+1)^2 |I_(2j+1)(beta)/I1(beta)| <= (exp(r)-c0(r))/(2-c0(r))=:q(r). This follows from the exact SU2 character identity evaluated at the group identity; it bounds every irrep jointly, not a spin truncation. Therefore |w_gamma|<=q(r)^|gamma|.
+
+4. **Rooting and incompatibility gate.** The plaquette graph has degree<=20. A_h(p)<=80^(h-1) from canonical Catalan spanning-tree encodings. The nonzero activity condition starts h>=6, so for alpha=e q(r), a root mass <=80^5 alpha^6/(1-80 alpha). Any size-m polymer gamma has at most 21m plaquette root locations at graph distance <=1 from gamma, and every incompatible polymer contains one. Thus KP majorant is (21/80)*(80 e q)^6/(1-80 e q). It is a sufficient (not necessary) bound.
+
+5. **First independent rational certificate.** At r=1/250, c0(r)-1 <= d=r^2/(8(1-r^2/24)); exp(r)-1 <= r/(1-r); Euler e < 68/25 from a factorial tail. Thus x=80e q <= (68/25)*80r/((1-r)(1-d)), and exact Fraction arithmetic shows 0<x<1 and (21/80)x^6/(1-x)<93/100.
+
+6. **Second independent direct-series calculation.** A separate Fraction-based verifier evaluates c0(r) and exp(r) from direct positive series with separately bounded tails, and Euler e from independent finite factorial bounds. It forms an upper interval for q(r) and then the KP geometric tail without reusing the coarse first certificate. Both strict results pass.
+
+7. **Strongest released claim.** Standard abstract Kotecky--Preiss cluster convergence guarantees finite-volume zero-freeness for complex |beta|<=1/250, uniform in L>=4. Its locality and strict size-weighted bound yield an infinite-volume pressure analytic on |beta|<1/250. The theorem does not establish continuum-scale Wilson mass, string tension, physical-scale clustering, a large-beta RG flow, or novelty over known strong-coupling polymer constructions.
+
+### Independent reproducibility commands
+
+    python verify_su2_allorders_kp.py
+    python verify_su2_allorders_independent.py
+
+Both are automatically run by the GitHub workflow in addition to all previous PHY-003 checks and the C++ nonabelian finite-group replay.
+
 ## Limitations and provenance
 The early strong-coupling terms and 4D abelian plaquette analysis have prior art: Wegner (1971); Kogut (1979); Drouffe--Zuber (1983); Forsstrom (2022). Scientific originality is not established. The Z2 pressure coefficients 4 and 36 are not SU2 Wilson coefficients. The finite-volume remainder O_L(t^12) is not continuum-uniform. The all-area rooted animal bound 80^(h-1) is too weak for any continuum Yang--Mills claim. No peer review or priority certificate is claimed.
 
