@@ -104,6 +104,26 @@ for idx,(n,b) in enumerate(cases):
     dpr(n,b,ee,hh,S,V)
     print("PASS independently reconstructed 24 sourceful Bianchi identities and CE/CH subsidiary",idx)
 
+# Independently restrict the vacuum Weyl operator to two
+# transverse physical tensor amplitudes for n=e3.
+np=(Q(0),Q(0),Q(1))
+phys=[stf_mat([Q(1),Q(0),Q(0),Q(0),Q(0)]),
+      stf_mat([Q(0),Q(0),Q(1),Q(0),Q(0)])]
+C=M(2,2)
+for j in range(2):
+    Z=curl_stf(np,phys[j])
+    for i in range(2):
+        C[i][j]=sum(phys[i][k][l]*Z[k][l]
+                    for k in range(3) for l in range(3))/2
+assert mm(C,C)==[[-Q(i==j) for j in range(2)] for i in range(2)]
+Aw=M(4,4)
+for i in range(2):
+    for j in range(2):
+        Aw[i][j+2]=-C[i][j]
+        Aw[i+2][j]=C[i][j]
+assert mm(Aw,Aw)==[[Q(i==j) for j in range(4)] for i in range(4)]
+print("PASS independent constrained vacuum Weyl 4D fiber has light speeds +/-1")
+
 # Full 30-component subsidiary principal with exact rational
 # H=diag(I6,H_R,H_R,H_R,H_R,H_R,H_R).
 HR=[Q(1,3),Q(1),Q(1),Q(1)]
