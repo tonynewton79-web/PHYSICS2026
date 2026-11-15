@@ -1,0 +1,96 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=24mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,amsmath,amssymb,amsthm,booktabs,microtype,hyperref}
+\newtheorem{theorem}{Theorem}
+\title{Exact Equivalence and Ancilla Contracts in Hadamard--CCZ Quantum Circuits}
+\author{Tony Newton}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+We give exact controlled-phase circuit identities in the Hadamard--CCZ gate set, explicitly distinguishing initialized from borrowed ancillary qubits. We provide a constructive n-body phase formula, a four-body borrowed-ancilla construction, a unique cubic phase normal form for CCZ-only words, and a parity obstruction for exact equivalence of H--CCZ words. These are mathematically proved restricted constructions with substantial prior art, not optimal gate-count or complexity-theoretic lower bounds.
+\end{abstract}
+\section{Exact gate identities}
+For computational basis bits a,b,c, CCZ contributes the phase $(-1)^{abc}$, while $H=2^{-1/2}\bigl(\begin{smallmatrix}1&1\\1&-1\end{smallmatrix}\bigr)$.
+Conjugation on the target gives an exact Toffoli gate:
+\[
+\mathrm{CCX}_{ab\to t}=H_t\,\mathrm{CCZ}_{abt}\,H_t.
+\]
+Indeed $H\operatorname{diag}(1,(-1)^{ab})H=X^{ab}$ on either possible control product. The equality holds as an operator, including on arbitrary entangled states.
+
+\begin{theorem}[Hadamard-count parity]
+If an H--CCZ circuit contains h Hadamards, then its full matrix is $U=2^{-h/2}M$, with integer entries in M. Two exactly equal nonzero H--CCZ unitary matrices must have Hadamard counts of the same parity. For matching parity, their exact equivalence reduces to comparing integer matrices after multiplication by an appropriate integer power of two.
+\end{theorem}
+\begin{proof}
+Each Hadamard multiplies amplitudes by $2^{-1/2}$ times an integral matrix; CCZ is an integral diagonal sign matrix. Induction gives the stated factorization. If two equal unitaries had opposite H-count parity, a nonzero entry would be rational and an irrational rational multiple of $\sqrt2$, impossible. All unitary matrices have nonzero entries. For equal parity the normalizing ratio is an integer power of two.
+\end{proof}
+An irrelevant overall complex phase between real unitaries must be a real sign, so it does not change this parity test. Parity equality alone is not sufficient for equivalence.
+
+\section{A clean-ancilla multi-body phase}
+Let $P_n$ act on n data qubits by
+\[
+P_n|x_0\cdots x_{n-1}\rangle =
+(-1)^{x_0x_1\cdots x_{n-1}}|x_0\cdots x_{n-1}\rangle.
+\]
+For n=3 this is CCZ. For n at least four, initialize n-3 ancillary qubits $a_1,\ldots,a_{n-3}$ to zero. Compute $a_1=x_0x_1$ with Toffoli and then successively compute $a_j=a_{j-1}x_j$ for $2\le j\le n-3$. Apply CCZ to the last ancilla and the final two data wires; finally reverse the entire Toffoli ladder.
+\begin{theorem}[Clean-ancilla construction]
+For each integer $n\ge3$ the described circuit maps
+\[
+|\psi\rangle|0^{n-3}\rangle\longmapsto
+(P_n|\psi\rangle)|0^{n-3}\rangle
+\]
+for every data state, using precisely n-3 clean ancillas, 2n-5 CCZ gates, and $4(n-3)$ Hadamards.
+\end{theorem}
+\begin{proof}
+On a basis input, induction gives $a_j=\prod_{k=0}^{j}x_k$. The central CCZ therefore contributes exactly the desired n-bit sign. All Toffolis are uncomputed in reverse order, restoring each scratch bit without further phase. The assertion follows for any input by linearity, including external entanglement. There are n-3 Toffolis in each half of the ladder and each Toffoli compiles to one CCZ plus two H; add the central CCZ.
+\end{proof}
+\begin{center}
+\begin{tabular}{rrrr}\toprule
+Data n & Clean ancillas & CCZ & H\\\midrule
+3&0&1&0\\4&1&3&4\\5&2&5&8\\
+6&3&7&12\\$n\ge3$&$n-3$&$2n-5$&$4(n-3)$\\\bottomrule
+\end{tabular}
+\end{center}
+
+\section{A borrowed-ancilla identity}
+Let a,b,c,d be four data wires and z a borrowed auxiliary wire in an arbitrary, possibly externally entangled, state. In temporal order apply
+\[
+\mathrm{CCX}_{ab\to z},\quad
+\mathrm{CCZ}_{zcd},\quad
+\mathrm{CCX}_{ab\to z},\quad
+\mathrm{CCZ}_{zcd}.
+\]
+\begin{theorem}[Borrowed-ancilla four-body phase]
+The above circuit equals $P_4\otimes I_z$ on all five physical qubits and uses exactly four CCZ and four Hadamard gates after Toffoli decomposition.
+\end{theorem}
+\begin{proof}
+The first Toffoli toggles z to $z\oplus ab$. The first CCZ contributes $(-1)^{(z\oplus ab)cd}$. The second Toffoli restores z, and the last CCZ contributes $(-1)^{zcd}$. The total exponent modulo two is $abcd$, independent of z. Operator equality on every basis state implies exact restoration for all borrowed quantum inputs, including entanglement.
+\end{proof}
+Dropping the last CCZ fails: for $(a,b,c,d,z)=(0,0,1,1,1)$ it produces a minus sign where the desired gate produces a plus sign. Substituting a dirty initial scratch bit into the clean ladder also fails.
+
+\section{A diagonal Boolean phase obstruction}
+\begin{theorem}[CCZ-only normal form]
+The subgroup generated by CCZ gates on distinct triples of n wires is isomorphic to $(\mathbb Z/2\mathbb Z)^{\binom n3}$. Its unique phase polynomial is
+\[
+f(x)=\sum_{S\subseteq\{1,\ldots,n\},\,|S|=3}
+\alpha_S\prod_{j\in S}x_j\quad\bmod2.
+\]
+No CCZ-only circuit implements $P_n$ for $n\ge4$, even with unused ancillas initially zero.
+\end{theorem}
+\begin{proof}
+Squarefree Boolean monomials form a basis of functions on $\mathbb F_2^n$, with uniqueness by Boolean M\"obius inversion. The cubic monomials indexed by triples are independent, and each CCZ toggles one coefficient. An n-body monomial of degree at least four cannot occur. A gate incident to an ancilla that remains zero contributes no phase on the clean-ancilla input subspace.
+\end{proof}
+This degree obstruction is only for the CCZ-only sublanguage; it is not a lower bound for all circuits containing Hadamards.
+
+\section{Independent exact verification}
+One standard-library checker simulates the actual gate matrices by maintaining signed integer amplitudes with a common factor $2^{-h/2}$. It checks the full clean-ancilla basis for n=3 through 12 (8,184 inputs), all 32 borrowed-ancilla basis inputs, 321 canonical-normal-form cases, H-count parity, and deliberate invalid rewrites. A separately implemented checker uses the exact 2-by-2 Toffoli conjugation identity and Boolean XOR operations rather than simulating Hadamards; it checks n=3 through 14 (32,760 inputs), the borrowed identity and Boolean normal forms. Finite verification reinforces rather than replaces the general inductive proofs.
+
+These results are ideal-gate and precisely scoped. A general compiler, formal Lean checker, gate-optimal synthesis theorem, and hardware-cost model have not been constructed. Generalized Toffoli synthesis and clean/dirty ancilla techniques have established priority \cite{barenco,khattar}; no unprecedented quantum algorithm is claimed.
+\begin{thebibliography}{9}
+\bibitem{barenco} A. Barenco et al., Elementary gates for quantum computation, \emph{Physical Review A} \textbf{52}, 3457 (1995), \url{https://doi.org/10.1103/PhysRevA.52.3457}.
+\bibitem{khattar} T. Khattar and C. Gidney, Rise of conditionally clean ancillae for efficient quantum circuit constructions, \emph{Quantum} \textbf{9}, 1752 (2025), \url{https://doi.org/10.22331/q-2025-05-21-1752}.
+\bibitem{preskill} J. Preskill, Quantum computation lecture notes, Chapter 5, \url{https://www.preskill.caltech.edu/ph219/chap5_15.pdf}.
+\end{thebibliography}
+\medskip\noindent\texttt{tony.newton79@gmail.com}
+\end{document}
