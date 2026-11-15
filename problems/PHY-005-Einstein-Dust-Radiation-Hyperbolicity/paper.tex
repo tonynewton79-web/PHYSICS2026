@@ -48,12 +48,22 @@ subsidiary system jointly propagating the six
 \emph{radiation-sourced} Weyl-divergence constraints and
 all radiation-jet constraints, with an explicit
 frequency-independent Sobolev energy bound.
-The separately conserved material dust produces
-an additional Schouten source; we identify its
-exact first derivatives in terms of the material
-density label and first metric derivatives,
-without claiming that the two sources already
-form a closed nonlinear Einstein reduction. The vacuum constrained Weyl
+The separate dust Schouten gradient
+adds a further, explicitly derived source
+to the frozen Weyl constraints.
+Promoting the dust density gradient
+extends the radiation-only
+thirty-component subsidiary
+to a thirty-six-component
+two-fluid symmetric-hyperbolic
+constraint system with a
+frequency-independent energy bound.
+A separate nonlinear
+gradient-prolongation result
+holds on prescribed smooth
+geometry, but the total
+Einstein tetrad and connection
+evolution remains open. The vacuum constrained Weyl
 subspace contains only the standard light-speed
 polarizations.
 We also derive the complete nonlinear ADM stress sources,
@@ -1946,6 +1956,274 @@ variables and their constraints;
 the algebraic source identity
 alone supplies no common
 hyperbolic principal symmetrizer.
+
+
+\section{A two-fluid thirty-six-field Weyl subsidiary in the frozen model}
+\label{sec:twofluid36}
+The radiation-sourced Weyl subsidiary of
+Theorem~\ref{thm:30} holds the independent
+material-dust Schouten perturbation fixed.
+We now include its \emph{spatial density
+gradient} in a different, explicitly
+frozen, comoving source model.
+No flat spacetime with nonzero constant
+matter stress is being asserted to be
+an exact Einstein background: these
+are local constant-coefficient source
+identities, not a full linearization
+about such a nonexistent solution.
+
+Retain the comoving radiation equations,
+radiation gradient variables
+$W_i=(S_i,V_{ij})$ and radiation Weyl
+evolution \eqref{eq:sourceful-weyl}.
+Add a static dust density perturbation
+$d$ and three independent spatial
+density gradients $P_i$ obeying
+$\partial_t d=\partial_tP_i=0$.
+At the frozen level
+\[
+\delta L^{\mathrm d}_{00}=\kappa d/3,\qquad
+\delta L^{\mathrm d}_{0i}=0,\qquad
+\delta L^{\mathrm d}_{ij}
+=\kappa d\delta_{ij}/6.
+\]
+The total radiation--dust Schouten
+source produces the \emph{modified}
+Weyl divergence constraints
+\begin{equation}\label{eq:twofluidCE}
+\begin{aligned}
+\mathcal D^E_i&=
+\partial^jE_{ij}-2bc_sS_i-\frac\kappa3P_i,\\
+\mathcal D^H_i&=
+\partial^jH_{ij}-b\epsilon_{ijk}V_{jk}.
+\end{aligned}
+\end{equation}
+Unlike a false vacuum constraint,
+these expressions retain both stress
+sources. If $P_i$ is promoted
+independently, introduce the
+dust defining and curl constraints
+\begin{equation}\label{eq:dustZ}
+Z_i^{\mathrm d}=P_i-\partial_i d,
+\qquad F^{\mathrm d}_{ij}
+=\partial_iP_j-\partial_jP_i.
+\end{equation}
+Their temporal derivatives vanish
+for the declared frozen dust evolution.
+
+\begin{theorem}[Exact two-fluid sourced
+Weyl subsidiary and uniform estimate]
+\label{thm:36}
+Let all coefficients in the
+comoving local model be constant,
+with radiation sound speed
+$c_s=1/\sqrt3$ and
+$b=2\kappa\bar\rho_{\mathrm r}/3$.
+The six variables
+$(\mathcal D^E,\mathcal D^H)$,
+the twelve radiation defining
+constraints $Z_i$ of
+Proposition~\ref{prop:W-sub},
+the twelve radiation curl constraints
+$F_{ij}$ of that proposition,
+and the six dust constraints
+$(Z_i^{\mathrm d},F_{ij}^{\mathrm d})$
+form a thirty-six-component
+homogeneous symmetric-hyperbolic
+subsidiary system:
+\begin{equation}\label{eq:36subs}
+\begin{aligned}
+\partial_t\mathcal D^E_i
++\tfrac12(\operatorname{curl}\mathcal D^H)_i
+&=\frac b3\sum_j(F_{ij})_{v_j},\\
+\partial_t\mathcal D^H_i
+-\tfrac12(\operatorname{curl}\mathcal D^E)_i
+&=\frac\kappa6(\operatorname{curl}P)_i
+=\frac\kappa{12}\epsilon_{ijk}F^{\mathrm d}_{jk},\\
+\partial_tZ_i+R^k\partial_kZ_i&=0,\\
+\partial_tF_{ij}+R^k\partial_kF_{ij}&=0,\\
+\partial_tZ_i^{\mathrm d}
+=\partial_tF_{ij}^{\mathrm d}&=0 .
+\end{aligned}
+\end{equation}
+With $\mathcal E_s=\tfrac12$
+times the sum of squared $H^s$
+norms of all thirty-six
+constraints, one has
+\begin{equation}\label{eq:36energy}
+\mathcal E_s(t)\le
+\exp\!\left(
+\max\left\{
+\frac{\sqrt2|b|}{3},
+\frac{|\kappa|}{6}
+\right\}|t|\right)
+\mathcal E_s(0)
+\end{equation}
+for every $s\in\mathbb R$ on
+a flat periodic three-torus
+or with sufficiently decaying
+data on $\mathbb R^3$.
+In particular vanishing initial
+two-fluid Weyl and material
+jet constraints remain zero
+in the frozen model.
+The complete nonlinear
+Einstein tetrad and connection
+constraints are not included.
+\end{theorem}
+\begin{proof}
+The electric equation follows
+as in Theorem~\ref{thm:30}:
+$P_t=0$ contributes no new
+electric time term. For the
+magnetic equation, replacing
+$\mathcal C^E$ by
+$\mathcal D^E=\mathcal C^E-\kappa
+P/3$ adds exactly
+$\kappa\operatorname{curl}P/6$
+to the right-hand side.
+The latter expression is
+\emph{algebraic in the
+independent dust curl
+constraint}, not a spatial
+derivative of that constraint.
+The radiation constraint
+propagation is unchanged;
+the dust defining and curl
+constraints are stationary.
+
+Each vector-curl Weyl
+principal block is the
+negative transpose of its
+off-diagonal partner.
+Every four-component radiation
+block $R^k$ is symmetric;
+all six dust subsidiary
+spatial blocks vanish.
+The resulting
+$36\times36$ matrices are
+symmetric with identity
+time matrix.
+Let $G_{\mathrm r}$ map the
+twelve radiation curl variables
+to the three electric source
+components; the exact identity
+$G_{\mathrm r}G_{\mathrm r}^{T}
+=2I_3$ was established in
+Theorem~\ref{thm:30}.
+In the ordered independent
+dust curl components
+$(F^{\mathrm d}_{12},
+F^{\mathrm d}_{13},
+F^{\mathrm d}_{23})$,
+the map to $\operatorname{curl}P$
+is the signed permutation
+$(F_{23}^{\mathrm d},
+-F_{13}^{\mathrm d},
+F_{12}^{\mathrm d})$,
+and has norm one.
+The energy derivative consists
+of two algebraic pairings,
+with coefficients $b/3$
+and $\kappa/6$ respectively.
+Cauchy--Schwarz and
+$2xy\le x^2+y^2$ bound its
+absolute value by
+$\max\{\sqrt2|b|/3,|\kappa|/6\}
+\mathcal E_s$.
+Gronwall's inequality proves
+\eqref{eq:36energy}.
+Finally, substituting the
+combined dust--radiation
+Schouten gradients in
+\eqref{eq:sourced-bianchi}
+reduces all 24 contracted
+Bianchi residuals to zero
+or algebraic multiples of
+\eqref{eq:twofluidCE};
+two independent exact
+symbolic/rational verifiers
+reproduce this contraction.
+\end{proof}
+
+\begin{proposition}[Nonlinear first-gradient
+prolongation on a prescribed metric]
+\label{prop:nonlin-prolong}
+Suppose a smooth prescribed
+Lorentzian metric and a positive
+strictly subluminal radiation
+state admit a symmetric
+first-order Euler system
+$A^\mu(U,x)\partial_\mu U
+=F(U,x)$, with
+$A^\mu=(A^\mu)^T$ and
+$A^0\ge\delta I>0$.
+Promote $W_i=\partial_iU$
+to independent unknowns.
+Differentiating the Euler
+system, substituting the
+original equations for the
+temporal derivatives of $U$,
+and expressing every coefficient
+derivative through $W_i$
+gives equations
+\[
+A^\mu\partial_\mu W_i
+=\mathcal Q_i(U,W,x),
+\]
+whose sources contain no
+derivative of $W$ but may
+depend on prescribed second
+metric derivatives.
+The resulting prolonged
+matter system has a positive
+block-diagonal symmetric
+principal part. Its defining
+constraints $Z_i=W_i-\partial_iU$
+satisfy a homogeneous system
+of the form
+\[
+A^\mu\partial_\mu Z_i
+=\sum_j B_i{}^j(U,W,\partial U,x)Z_j,
+\]
+and hence propagate from
+zero smooth initial data.
+This is a given-metric
+result and does not establish
+any dynamical Einstein
+metric regularity estimate.
+\end{proposition}
+\begin{proof}
+Apply $\partial_i$ to the
+symmetric radiation Euler
+system and use the chain rule
+$\partial_iA^\mu=
+(D_UA^\mu)\partial_iU+
+(\partial_iA^\mu)_{U\ {\rm fixed}}$.
+The differentiated equation
+has the same $A^\mu$ acting
+on $\partial_\mu W_i$.
+Replace each occurrence
+of $\partial_jU$ on its right
+by $W_j$ and eliminate
+$\partial_tU$ by
+$(A^0)^{-1}(F-A^jW_j)$.
+All resulting source terms
+are algebraic in the stated
+fields and prescribed geometry.
+Subtract the genuinely
+differentiated original equation;
+the difference of every
+substituted factor is
+a multiple of some
+$Z_j=W_j-\partial_jU$,
+giving the homogeneous
+defining-constraint equation.
+A positive symmetric time
+matrix and standard uniqueness
+give propagation of $Z=0$.
+\end{proof}
 
 \section{What the generalized-harmonic constraints do and do not repair}
 The principal-symbol no-go is \emph{not} a claim that
