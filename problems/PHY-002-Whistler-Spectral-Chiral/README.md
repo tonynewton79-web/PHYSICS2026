@@ -10,7 +10,7 @@
 2. Chiral variables `w± = beta ± sqrt(-Delta) psi` diagonalize the linear system, but the nonlinear system generically leaks between them.
 3. For two Fourier modes `p,q` in one chiral sector, the coefficient generated at `p+q` is `A C (p×q)(|p|-|q|)(|p|+|q|-|p+q|)`. For nonzero amplitudes it vanishes exactly for collinear or equal-length modes.
 4. Equal-radius Fourier shells admit exact, potentially noncollinear, arbitrary finite-amplitude Beltrami-whistler solutions. This belongs to known whistler/Beltrami physics and serves as a positive control.
-5. For a 2+1 flat matrix connection with potentials depending *pointwise only* on `(psi,beta,Delta psi)`, arbitrary matrix size and spectator spectral parameter, flatness at all spatial solution jets forces constant commuting matrices. This result is a **declared-grammar** gate, not a general matrix Lax obstruction.
+5. A restricted point-potential flatness calculation is retained only as a brief example of standard zero-curvature jet reasoning. In line with Professor Morozov's criticism, **it is no longer asserted as an independent theorem**; the general context is attributed to Marvan (1993, 2002). It does not obstruct derivative-dependent or nonlocal Lax representations.
 
 ## Reproducible source and checks
 
@@ -34,9 +34,15 @@ GitHub Actions runs the exact main verifier and compiles the manuscript; the ind
 
 - [Qirui Peng, arXiv:2605.20845](https://arxiv.org/abs/2605.20845) — 2.5D EMHD reduction with dissipation.
 - [Maxim Lyutikov, Phys. Rev. E 88, 053103 (2013)](https://doi.org/10.1103/PhysRevE.88.053103) — nonlinear harmonic whistlers and interactions.
-- [O. I. Morozov, Analysis and Mathematical Physics 15, 120 (2025)](https://doi.org/10.1007/s13324-025-01119-w) — Lax representations of ideal MHD, **not** the same equations as ideal electron MHD.
+- [O. I. Morozov, Analysis and Mathematical Physics 15, 120 (2025)](https://doi.org/10.1007/s13324-025-01119-w) — Lax representations and Poisson structures for reduced and ideal MHD; related techniques, but not an explicit construction for the EMHD system of this paper.
+- M. Marvan, *On zero-curvature representations of partial differential equations*, in *Differential Geometry and Its Applications* (Opava conference, 1992), Silesian University (1993), pp. 103–122 — foundational jet-space, gauge and ZCR framework.
+- [M. Marvan, *On the horizontal gauge cohomology and nonremovability of the spectral parameter*, Acta Appl. Math. 72, 51–65 (2002)](https://doi.org/10.1023/A:1015218422059) — spectral-parameter removability and gauge cohomology.
 - [D. Shaikh, J. Plasma Phys. 75, 117–132 (2009)](https://doi.org/10.1017/S0022377808007198) — whistler propagation theory.
+
+## Expert-feedback revision (15 November 2026)
+
+Professor Oleg Morozov identified the original Section 5 result as a straightforward corollary of prior zero-curvature work by M. Marvan and indicated that Lax representations with non-removable parameters for the EMHD equations could be constructed using methods akin to his own. The manuscript now removes the independent-theorem treatment of Section 5, cites bibliographically verified Marvan works, and makes clear that our rational Fourier diagonalization barrier is **not** a nonlinear Lax obstruction. The precise Marvan paper described in correspondence as written in 1991 has not yet been identified conclusively; the verifiable Opava paper appeared in 1993 (conference 1992). No explicit Morozov-style EMHD Lax pair or proof of non-removability is included here.
 
 ## Outstanding work
 
-A real derivative-dependent matrix or pseudodifferential spectral construction for **both complete nonlinear EMHD equations**, with explicit gauge handling and an independent compatibility certificate. This investigation is not a proof of its existence or absence.
+Construct and verify an explicit derivative-dependent or nonlocal Lax representation for **both complete nonlinear EMHD equations**, including a full admissible gauge/covering-equivalence analysis and an independent compatibility certificate. Determine what it implies beyond known EMHD conservation and energy-transfer identities. This manuscript neither proves nor excludes such representations.
