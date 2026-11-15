@@ -89,7 +89,7 @@ certificate grammar, even if some are perfectly correct.
 
 ### Verification and provenance
 
-- [verify_proof_compiler.py](verify_proof_compiler.py) runs 108
+- [verify_proof_compiler.py](verify_proof_compiler.py) runs 112
   deterministic family/randomized instances, 1,712 independent exact
   H/CCZ amplitude-basis executions and 12 checksum-recomputed mutations,
   including missing borrowed compensation, altered gates, incorrect
