@@ -42,7 +42,10 @@ jobs:
           for folder in problems/PHY-*; do
             [ -f "$folder/paper.tex" ] || continue
             (cd "$folder" && pdflatex -interaction=nonstopmode -halt-on-error paper.tex && pdflatex -interaction=nonstopmode -halt-on-error paper.tex)
-            cp "$folder/paper.pdf" "build/$(basename "$folder").pdf"
+            test -f "$folder/PDF_FILENAME.txt"
+            pdf_name="$(cat "$folder/PDF_FILENAME.txt")"
+            [[ "$pdf_name" =~ ^[A-Za-z0-9][A-Za-z0-9_.-]*$ ]] || { echo "Invalid PDF filename: $pdf_name"; exit 1; }
+            cp "$folder/paper.pdf" "build/${pdf_name}.pdf"
           done
       - uses: actions/upload-artifact@v4
         with:
