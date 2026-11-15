@@ -57,4 +57,22 @@ With two active slabs, equality at \(4+4+1+1=10\) forces adjacent slabs with ide
 If two different cube pairs produced the same ten-face surface, their difference as mod-two three-chains would be a nonzero closed three-chain supported on at most four cubes. This contradicts the eight-cell lower bound for three-cycles in Lemma~\ref{lem:min}. Conversely two distinct elementary cubes sharing one face have a closed symmetric-difference boundary with \(6+6-2=10\) faces.
 \end{proof}
 
+
+\section{Exact four-dimensional surface counts}
+\begin{theorem}\label{thm:counts}
+In \(\mathbb Z^4\), a fixed plaquette belongs to exactly \(N_6=4\) closed surfaces of area six and \(N_{10}=60\) closed surfaces of area ten. Among the ten-face surfaces, twenty arise from pairs of three-cubes with the same coordinate three-axis orientation (coplanar type) and forty from pairs with different orientations (mixed type). Per unit lattice site the respective unrooted counts are
+\[
+M_6=4,\qquad M_{10}^{\rm same}=12,\qquad M_{10}^{\rm mixed}=24.
+\]
+\end{theorem}
+\begin{proof}
+A plaquette in four dimensions has two transverse coordinate directions; each permits a three-cube on either side, giving four cubes through the plaquette and \(N_6=4\). There are six plaquette orientations and four three-cube orientations per lattice site. The four incident cubes at any plaquette give \(\binom42=6\) unordered face-sharing cube pairs. Exactly two pairs use opposite sides of the same transverse direction and four use different transverse directions. By Theorem~\ref{thm:small}, each pair uniquely determines a ten-face surface. Multiplying by six plaquettes per site gives \(12\) same-orientation and \(24\) mixed-orientation surfaces per site. A ten-face surface has ten possible root plaquettes. Counting all rooted incidences and dividing by the six plaquettes per lattice site yields
+\[
+N_{10}^{\rm same}=\frac{10(12)}6=20,\qquad
+N_{10}^{\rm mixed}=\frac{10(24)}6=40.
+\]
+The four cubes per lattice site similarly give \(M_6=4\).
+\end{proof}
+The mixed type uses all four coordinate directions, unlike the coplanar type. This geometric distinction does not constitute an observable continuum gauge signature by itself.
+
 % MORE_CONTENT_HERE
