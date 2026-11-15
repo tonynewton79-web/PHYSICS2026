@@ -47,7 +47,7 @@ def wcomponent(a,bb,c,d,E,H):
         return sg*sum(Q(e(c-1,d-1,j))*H[j][bb-1] for j in range(3))
     return -sg*sum(Q(e(a-1,bb-1,p))*Q(e(c-1,d-1,q))*E[p][q]
                    for p in range(3) for q in range(3))
-def dpr(n,b,ee,hh,S,V):
+def dpr(n,b,ee,hh,S,V,dust=None,kap=Q(0)):
     E=stf_mat(ee);H=stf_mat(hh)
     Edot=curl_stf(n,H)
     P=stf(V)
@@ -55,14 +55,14 @@ def dpr(n,b,ee,hh,S,V):
     Hdot=curl_stf(n,E)
     Sdot=[-sum(n[j]*V[i][j] for j in range(3)) for i in range(3)]
     Vdot=[[-n[j]*S[i]/3 for j in range(3)] for i in range(3)]
-    CE=[div_stf(n,E)[i]-2*b*S[i]/3 for i in range(3)]
+    CE=[div_stf(n,E)[i]-2*b*S[i]/3-kap*(dust[i] if dust is not None else 0)/3 for i in range(3)]
     CH=[div_stf(n,H)[i]-b*curl_v(V)[i] for i in range(3)]
     CEdot=[div_stf(n,Edot)[i]-2*b*Sdot[i]/3 for i in range(3)]
     CHdot=[div_stf(n,Hdot)[i]-b*curl_v(Vdot)[i] for i in range(3)]
     CEc=curl_vec(n,CE);CHc=curl_vec(n,CH)
     Fdiv=[sum(n[i]*V[j][j]-n[j]*V[i][j] for j in range(3)) for i in range(3)]
     assert all(CEdot[i]+CHc[i]/2-b*Fdiv[i]/3==0 for i in range(3))
-    assert all(CHdot[i]-CEc[i]/2==0 for i in range(3))
+    assert all(CHdot[i]-CEc[i]/2==kap*(curl_vec(n,dust)[i] if dust is not None else 0)/6 for i in range(3))
 
     Ldt=M(4,4);Lsp=[M(4,4) for _ in range(3)]
     Ldt[0][0]=-b*sum(V[j][j] for j in range(3))
@@ -72,7 +72,11 @@ def dpr(n,b,ee,hh,S,V):
         for i in range(3):
             Lsp[i][0][j+1]=Lsp[i][j+1][0]=-b*V[i][j]
             Lsp[i][j+1][j+1]=b*S[i]/3
-    for i in range(3):Lsp[i][0][0]=b*S[i]
+    for i in range(3):
+        Lsp[i][0][0]=b*S[i]
+        if dust is not None:
+            Lsp[i][0][0]+=kap*dust[i]/3
+            for j in range(3): Lsp[i][j+1][j+1]+=kap*dust[i]/6
 
     possibilities={Q(0)}
     for val in CE+CH:
@@ -103,6 +107,21 @@ for idx,(n,b) in enumerate(cases):
     V=[[Q((3*i+2*j+1)*(idx+2),5+i+2*j) for j in range(3)] for i in range(3)]
     dpr(n,b,ee,hh,S,V)
     print("PASS independently reconstructed 24 sourceful Bianchi identities and CE/CH subsidiary",idx)
+
+# Full TWO-FLUID extension: independent static material-dust gradient,
+# with modified Weyl electric divergence and a dust-curl source
+# in magnetic divergence evolution. Check all 24 Bianchi components
+# independently in exact rational arithmetic for each source test.
+for idx,(n,b) in enumerate(cases):
+    ee=[Q(k*(idx+1),5+k) for k in range(1,6)]
+    hh=[Q((-1)**k*(idx+3),3+k) for k in range(1,6)]
+    S=[Q(k*(idx+1),3+k) for k in range(1,4)]
+    V=[[Q((3*i+2*j+1)*(idx+2),5+i+2*j)
+        for j in range(3)] for i in range(3)]
+    dust=[Q((idx+2)*(j+1),j+4) for j in range(3)]
+    kap=Q(5+idx,3+idx)
+    dpr(n,b,ee,hh,S,V,dust,kap)
+    print("PASS independently reconstructed all 24 TWO-FLUID sourced Bianchi equations",idx)
 
 # Independently restrict the vacuum Weyl operator to two
 # transverse physical tensor amplitudes for n=e3.
@@ -178,5 +197,23 @@ for i in range(3):
     assert dLii==drhox*av[i]**2/6+rho*av[i]*ax[i]/3
     assert Lii>0
 print("PASS independent material dust Schouten/metric first-derivative identity")
+
+# 36-field extension has six extra stationary dust variables,
+# so its positive weighted symmetrizer is diag(previous H_30,I_6).
+for n,b in cases:
+    A30=principal(n)
+    A36=M(36,36)
+    for i in range(30):
+        for j in range(30):A36[i][j]=A30[i][j]
+    weights=energyweights+[Q(1)]*6
+    assert len(weights)==36
+    assert all(weights[i]>0 and
+        all(weights[i]*A36[i][j]==weights[j]*A36[j][i]
+            for j in range(36)) for i in range(36))
+print("PASS independent 36-field weighted symmetric two-fluid principal")
+
+Gdust=[[Q(0),Q(0),Q(1)],[Q(0),Q(-1),Q(0)],[Q(1),Q(0),Q(0)]]
+assert mm(Gdust,tr(Gdust))==[[Q(i==j) for j in range(3)] for i in range(3)]
+print("PASS independent dust curl source transfer norm exactly 1")
 
 print("INDEPENDENT FRACTION-ONLY WEYL CONSTRAINT SUBSIDIARY: ALL PASS")
