@@ -77,6 +77,29 @@ Spacetime signature (-,+,+,+), c_light=1. Exact equations are Einstein with sepa
 
 **Release gate:** Coupled Weyl--radiation PRINCIPAL-SKELETON SYMMETRIZER CERTIFIED; HOMOGENEOUS RADIATION-GRADIENT SUBSIDIARY CERTIFIED; FULL EINSTEIN–DUST–RADIATION FIRST-ORDER REDUCTION AND ALL GEOMETRIC SUBSIDIARY CONSTRAINTS: HOLD / OPEN. No full nonlinear existence, constraint-convergent evolution, physically transported radiation, or novel gravity breakthrough asserted.
 
+## Attack 04 — sourced Weyl geometry and closed 30-field constraint subsidiary
+
+**The missing geometric tier targeted:** The previous 26-field positive principal system propagated the 12 W-gradient/curl defining constraints but did NOT establish the sourced Weyl divergence constraints. This attack derives them and provides a complete positive subsidiary **for this frozen system**. The full nonlinear tetrad/connection and Einstein system remains open.
+
+**Sourceful Weyl derivation:** Work at a frozen comoving orthonormal event, with constant b=2κ rho_r/3, cs²=1/3, E,H real STF 3×3 tensors, U=(sigma,v), and W_i=(S_i,V_ij). Reconstruct the algebraic Weyl tensor by C_{0i0j}=E_ij, C_{0ijk}=epsilon_jkl H_li, C_{ijkl}=−epsilon_ijm epsilon_kln E_mn. Insert its partial divergence into ∂^a C_{abcd}=∂c L_db−∂d L_cb with the earlier exact radiation Schouten jet. Its ten independent evolution equations reduce to E_t+curl_STF H=−b STF(V), H_t−curl_STF E=0. The six independent divergence constraints are CE_i=∂^j E_ij−2b cs S_i and CH_i=∂^j H_ij−b epsilon_ijk V_jk. Every one of the 24 b,c,d contracted-Bianchi components, after evolution substitution, is zero or one of ±CE_i,±CH_i,±CE_i/2,±CH_i/2, verified symbolically. Radiation sources cannot be discarded by imposing vacuum div E=div H=0.
+
+**Key exact identity:** div(curl_STF X)=1/2 curl(div X) for STF X. The radiation jet obeys S_i,t=−cs ∂^j V_ij, V_ij,t=−cs∂j S_i. Hence
+CE_t+1/2 curl CH=(b/3) G F,
+CH_t−1/2 curl CE=0,
+where F_ij=∂i W_j−∂j W_i and [GF]_i=Σ_j (F_ij)_{velocity j}. **GF is algebraic in F; there is no ∂F term.** This is the important derivative-counting check. The jet defining constraints Z_i=W_i−∂i U and F_ij each satisfy their separate symmetric radiation equations. Consequently (CE3,CH3,Z12,F12) is an actual **30-dimensional symmetric-hyperbolic homogeneous subsidiary system** with a positive identity time symmetrizer.
+
+**Frequency-uniform energy estimate:** For E_s=1/2(||CE||²_Hs+||CH||²_Hs+Σ_i||Z_i||²_Hs+Σ_{i<j}||F_ij||²_Hs), the exact energy identity on a periodic torus (or decaying R³ data) is E_s'=(b/3)<CE,GF>_Hs. In the F12,F13,F23 canonical four-component order, GG^T=2 I3; thus ||G||=sqrt(2). Cauchy–Schwarz, 2xy<=x²+y² and Gronwall give E_s(t)<=exp[sqrt(2)|b||t|/3] E_s(0), uniform in spatial frequency and domain volume. Zero initial CE,CH,Z,F remain zero for every time of existence in the declared frozen system. This is not an energy estimate for the fully nonlinear Einstein solution.
+
+**Constrained physical Weyl controls:** For vacuum b=0 and fixed nonzero Fourier wavevector, div E=div H=0 reduces the ten-dimensional STF Weyl fiber to dimension four, with exact characteristic polynomial (z²−|n|²)^2: only the standard two light-speed gravitational-wave polarizations survive. The apparent zero and ±half-light-speed modes of the 10-field unconstrained Weyl symbol are excluded by the divergence constraints. This phenomenon is classical (van Elst–Ellis, Phys. Rev. D 59 024013, 1999), not a novel gravitational wave.
+
+**Two independent verifiers added:**
+- verify_weyl_subsidiary.py (SymPy): independent 4-index Weyl reconstruction, exact 24-component sourceful Bianchi reconstruction, all sourced propagation identities, 30×30 symmetric spatial matrices in multiple directions, and GG^T=2I. This is a stronger test than simply inserting a desired constraint equality against itself.
+- verify_weyl_subsidiary_independent.py (Python standard-library Fraction only): changes density coordinate to chi=sigma/cs, computes all 24 Bianchi components in six independent rational Fourier directions and rational stress backgrounds, checks the two subsidiary identities, reconstructs the appropriate weighted 30×30 positive symmetrizer with acoustic H_R=diag(1/3,1,1,1), and recovers GG^T=2I. This verifier does not share SymPy or its matrix reconstruction routines.
+
+**Still unclosed:** At finite background curvature/tilt with changing material frames, covariant commutators, frame acceleration/rotation, Bianchi source gradient transport and Einstein connection constraints must all be included. The present subsidiary applies only to the sourced **linear constant-coefficient comoving** model. It does NOT close nonlinear Weyl divergence, torsion, frame, Einstein, gauge or dust-coordinate constraints for the full coupled dynamical spacetime. Local existence and conservation of all physical constraints remain OPEN.
+
+**Prior art:** Friedrich (1998), Normann–Valiente Kroon (2020), van Elst–Ellis (Phys. Rev. D 59 024013, 1999) and gravitoelectromagnetic 1+3 Einstein–Bianchi literature predate the general tools and physical mode constraints. Treat this as exact mathematical benchmark/proof progress, not a claimed original gravity breakthrough.
+
 ## Prior art and publication verdict
 
 Bouchut–Jin–Li, SIAM J Numer Anal 41, 135–158 (2003) establishes pressureless weak hyperbolicity. Friedrich, Phys Rev D 57, 2317–2322 (1998), constructs Lagrangian symmetric-hyperbolic Einstein-fluid equations, including pressure-free matter. Normann–Valiente Kroon, Gen Rel Grav 52, 103 (2020), covers first-order Einstein–matter evolutions and constraint propagation. Hadzic–Speck, J Hyperbolic Differ Equat 12, 87–188 (2015), overcomes an exact derivative-loss obstacle in nonlinear Einstein–dust stability. Originality and specialist review remain unverified.
