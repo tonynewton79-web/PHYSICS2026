@@ -32,6 +32,9 @@ jobs:
             if [ -f "$folder/verify_proof_compiler.py" ]; then
               python "$folder/verify_proof_compiler.py"
             fi
+            if [ -f "$folder/verify_shared_prefix_suite.py" ]; then
+              python "$folder/verify_shared_prefix_suite.py"
+            fi
             if [ -f "$folder/verify_material.py" ]; then
               python "$folder/verify_material.py"
             fi
