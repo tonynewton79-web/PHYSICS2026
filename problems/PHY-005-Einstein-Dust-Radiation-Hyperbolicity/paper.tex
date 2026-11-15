@@ -1479,6 +1479,338 @@ and should not be advertised
 as an unprecedented new
 general-relativistic method.
 
+
+\section{Sourceful Weyl-divergence constraints and their closed subsidiary system}
+\label{sec:weyl-subsidiary}
+The previous section proves propagation of the
+\emph{radiation-gradient} defining constraints,
+but does not by itself control the differential
+constraints imposed on the Weyl curvature.
+For the same comoving, constant-coefficient
+sourceful model we now derive an explicit
+positive symmetric-hyperbolic subsidiary
+system for \emph{both} constraint families.
+This is a further local linearized result;
+the fully nonlinear frame and torsion
+constraints are not included.
+
+\subsection{Reconstruction from the sourced Bianchi identity}
+In the frozen orthonormal rest frame
+let $(E_{ij},H_{ij})$ be symmetric
+trace-free tensors and retain the
+radiation variables $U=(\sigma,v_i)$,
+$W_i=(S_i,V_{ij})$ of
+\eqref{eq:Rlinear}--\eqref{eq:jet}.
+Write $c_s=1/\sqrt3$ and
+$b=2\kappa\bar\rho_{\mathrm r}/3>0$,
+as in \eqref{eq:linear-schouten}.
+For spatial vector fields
+$\operatorname{curl} q$ is
+the standard Euclidean curl, and
+$\operatorname{curl}_{\mathrm{STF}}X$
+is the symmetric trace-free tensor
+curl used in \eqref{eq:C-mats}.
+Set
+\[
+\operatorname{STF}V_{ij}
+=\tfrac12(V_{ij}+V_{ji})
+-\tfrac13\delta_{ij}V^k{}_k.
+\]
+The sourced principal Weyl evolution
+equations are
+\begin{equation}\label{eq:sourceful-weyl}
+\begin{aligned}
+\partial_tE+\operatorname{curl}_{\rm STF}H
+&=-b\,\operatorname{STF}V,\\
+\partial_tH-\operatorname{curl}_{\rm STF}E&=0.
+\end{aligned}
+\end{equation}
+The tensor reconstruction
+\begin{equation}\label{eq:weyl-reconstruction}
+\begin{aligned}
+C_{0i0j}&=E_{ij},\\
+C_{0ijk}&=\epsilon_{jk\ell}H_{\ell i},\\
+C_{ijkl}&=-\epsilon_{ijm}\epsilon_{kln}E_{mn}
+\end{aligned}
+\end{equation}
+respects every algebraic Weyl symmetry.
+Substitution into
+\begin{equation}\label{eq:sourced-bianchi}
+\partial^a C_{abcd}
+=\partial_cL^{\rm r}_{db}
+-\partial_dL^{\rm r}_{cb}
+\end{equation}
+with the stress jet \eqref{eq:schouten-jet}
+gives \eqref{eq:sourceful-weyl}
+from the symmetric trace-free
+evolution components. The six
+remaining independent differential
+constraints are
+\begin{equation}\label{eq:CECH}
+\boxed{\quad
+\begin{aligned}
+\mathcal C^E_i
+&:=\partial^jE_{ij}-2bc_sS_i,\\
+\mathcal C^H_i
+&:=\partial^jH_{ij}
+-b\,\epsilon_{ijk}V_{jk}.
+\end{aligned}
+\quad}
+\end{equation}
+In particular the radiation momentum
+gradient appears explicitly in
+$\mathcal C^H$, and the density
+gradient appears in $\mathcal C^E$.
+Neither may be replaced by
+a vacuum divergence-free condition.
+The exact algebraic reconstruction
+shows that, modulo the ten
+evolution equations,
+all twenty-four components of
+\eqref{eq:sourced-bianchi}
+are zero or equal to one of
+$\pm\mathcal C^E_i$,
+$\pm\mathcal C^H_i$,
+$\pm\mathcal C^E_i/2$,
+$\pm\mathcal C^H_i/2$.
+The first independent verifier
+reconstructs the four-index
+Weyl tensor and checks every
+such component symbolically.
+
+\begin{theorem}[Thirty-component
+homogeneous sourceful Bianchi--jet
+subsidiary system]
+\label{thm:30}
+Consider the frozen, constant-coefficient,
+comoving radiation--Weyl system
+\eqref{eq:Rlinear},
+\eqref{eq:prolong} and
+\eqref{eq:sourceful-weyl},
+on $\mathbb T^3$ or $\mathbb R^3$.
+Let $Z_i=W_i-\partial_iU$ and
+$F_{ij}=\partial_iW_j-\partial_jW_i$
+for $i<j$; extend $F_{ij}$
+antisymmetrically to all $i,j$.
+Write $(F_{ij})_{v_k}$ for the
+$k$th \emph{velocity component}
+of that four-vector, not a derivative
+or a contraction of its form indices.
+Then the thirty quantities
+$(\mathcal C^E_i,\mathcal C^H_i,Z_i,F_{ij})$
+satisfy
+\begin{equation}\label{eq:30-subsidiary}
+\boxed{\quad
+\begin{aligned}
+\partial_t\mathcal C^E_i
++\tfrac12(\operatorname{curl}\mathcal C^H)_i
+&=\frac b3\sum_j (F_{ij})_{v_j},\\
+\partial_t\mathcal C^H_i
+-\tfrac12(\operatorname{curl}\mathcal C^E)_i
+&=0,\\
+\partial_t Z_i+R^k\partial_k Z_i&=0,\\
+\partial_t F_{ij}+R^k\partial_k F_{ij}&=0.
+\end{aligned}
+\quad}
+\end{equation}
+This is a \emph{homogeneous linear
+symmetric-hyperbolic} system: the
+$F$-to-$\mathcal C^E$ term
+contains no differentiation and
+the positive time symmetrizer
+is the identity in these
+variables. Define, for any
+real $s$ and data with finite
+Sobolev norms,
+\[
+\mathcal E_s(t):=\frac12\left(
+\|\mathcal C^E\|_{H^s}^2+
+\|\mathcal C^H\|_{H^s}^2+
+\sum_i\|Z_i\|_{H^s}^2+
+\sum_{i<j}\|F_{ij}\|_{H^s}^2
+\right).
+\]
+For fixed $b$ the exact energy
+identity and a quantitative
+volume/frequency-independent
+bound are
+\begin{equation}\label{eq:30-energy}
+\begin{aligned}
+\frac{d}{dt}\mathcal E_s
+&=\frac b3\left\langle
+\mathcal C^E,\,
+\bigl(\sum_j(F_{ij})_{v_j}\bigr)_{i=1}^3
+\right\rangle_{H^s},\\
+\mathcal E_s(t)
+&\le \exp\!\left(
+\frac{\sqrt2|b|}{3}|t|
+\right)\mathcal E_s(0).
+\end{aligned}
+\end{equation}
+Consequently the complete
+sourceful Weyl-divergence and
+radiation-gradient constraint
+set propagates from zero initial
+data in this constant-coefficient
+model. This statement does
+\emph{not} include the frame,
+connection, torsion, nonlinear
+Einstein, or radiation-tilt
+constraints in a dynamically
+evolving spacetime.
+\end{theorem}
+\begin{proof}
+For every symmetric trace-free
+tensor $X$ one has
+\[
+\operatorname{div}
+(\operatorname{curl}_{\mathrm{STF}}X)
+=\frac12\operatorname{curl}
+(\operatorname{div}X).
+\]
+The radiation jet
+\eqref{eq:prolong} gives
+\[
+\partial_tS_i=-c_s\partial^jV_{ij},
+\qquad
+\partial_tV_{ij}=-c_s\partial_jS_i.
+\]
+Take the divergence of
+\eqref{eq:sourceful-weyl}.
+Substitute these identities and
+\eqref{eq:CECH}; using
+$c_s^2=1/3$ leaves exactly
+\[
+\partial_t\mathcal C^E_i+
+\tfrac12(\operatorname{curl}\mathcal C^H)_i
+=\frac b3\sum_j
+(\partial_iV_{jj}-\partial_jV_{ij})
+=\frac b3\sum_j(F_{ij})_{v_j}.
+\]
+Similarly
+$\partial_t\mathcal C^H
+-\tfrac12\operatorname{curl}\mathcal C^E=0$.
+The last two equations of
+\eqref{eq:30-subsidiary}
+follow by differentiation
+and antisymmetrization of
+the constant-coefficient
+radiation equations, as proved
+in Proposition~\ref{prop:W-sub}.
+
+The vector curl matrix is
+skew-symmetric in its spatial
+indices. Its two off-diagonal
+blocks in the $(\mathcal C^E,
+\mathcal C^H)$ principal
+system have opposite signs,
+so the whole $6\times6$
+spatial matrix is symmetric.
+The other six four-component
+blocks are copies of the
+symmetric radiation matrices
+$R^k$. Hence the
+$30\times30$ principal system
+has identity symmetrizer.
+The coupling on its right
+is algebraic in $F$ and
+does not change this conclusion.
+
+Integration by parts in the
+$H^s$ inner product makes
+the vector curl terms cancel,
+while every homogeneous
+radiation-gradient subsidiary
+block conserves its $H^s$
+energy. This gives the first
+identity in \eqref{eq:30-energy}.
+The linear map
+$G:\{F_{ij}\}\mapsto
+\{\sum_j(F_{ij})_{v_j}\}$
+has the exact Euclidean identity
+$GG^{\mathsf T}=2I_3$,
+hence $\|G\|=\sqrt2$.
+Cauchy--Schwarz and
+$2ab\le a^2+b^2$ yield
+$\mathcal E_s'(t)
+\le |b|\sqrt2\,\mathcal E_s(t)/3$.
+Gronwall's inequality, in
+positive or negative time,
+proves \eqref{eq:30-energy};
+uniqueness yields persistence
+of all thirty zero quantities.
+\end{proof}
+
+\begin{proposition}[The physical
+light-speed subspace of vacuum
+Weyl data]\label{prop:weyl-physical}
+For a nonzero spatial Fourier
+covector $n$, impose
+$\operatorname{div}E=
+\operatorname{div}H=0$
+and set the matter source $b=0$
+in the ten-component Weyl
+principal system
+\eqref{eq:weyl-principal}.
+The constrained real fiber
+has dimension four and
+its characteristic polynomial
+is
+\begin{equation}\label{eq:weyl-light}
+\boxed{\quad
+(z^2-|n|^2)^2.
+\quad}
+\end{equation}
+Thus the zero and
+half-light-speed Weyl
+characteristics in
+\eqref{eq:weyl-poly}
+are excluded from the
+constraint-satisfying vacuum
+principal fiber. This is the
+standard physical light-speed
+polarization count, not a
+new gravitational-wave mode.
+\end{proposition}
+\begin{proof}
+By rotational covariance take
+$n=|n|e_3$. The divergence
+conditions force
+$E_{13}=E_{23}=E_{33}=0$
+and the same for $H$.
+Trace-freeness leaves only
+$(E_{11}-E_{22},E_{12})$
+and
+$(H_{11}-H_{22},H_{12})$.
+The Weyl curl acts on this
+four-dimensional space as
+two decoupled light-speed
+Maxwell-like polarization
+pairs, whose characteristic
+polynomial is
+\eqref{eq:weyl-light}.
+Rotational covariance extends
+the result to every $n\ne0$.
+\end{proof}
+
+The present theorem fills one
+specific geometric constraint
+gap in the earlier analysis.
+It does not supply the
+\emph{nonlinear} frame
+and connection evolution or
+their torsion and Einstein
+subsidiary equations. General
+relativistic 1+3 Bianchi
+propagation and the removal
+of constrained Weyl
+characteristics have important
+prior art, notably
+van Elst--Ellis
+\cite{vanelst}, in addition to
+Friedrich's hyperbolic frame
+reductions \cite{friedrich}.
+
 \section{What the generalized-harmonic constraints do and do not repair}
 The principal-symbol no-go is \emph{not} a claim that
 the Einstein constraints themselves fail to propagate.
