@@ -1,0 +1,329 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=24mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools,mathrsfs}
+\usepackage{booktabs,enumitem}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage{xcolor}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{remark}[theorem]{Remark}
+\DeclareMathOperator{\divg}{div}
+\DeclareMathOperator{\curl}{curl}
+\DeclareMathOperator{\STF}{STF}
+\newcommand{\R}{\mathbb R}
+\newcommand{\T}{\mathbb T}
+\newcommand{\D}{\mathrm D}
+\newcommand{\cE}{\mathcal C^{E}}
+\newcommand{\cH}{\mathcal C^{H}}
+\newcommand{\kgr}{\kappa}
+\title{\bfseries Constraint Propagation in Two-Fluid Weyl Systems\\[4pt]
+\large and Nonlinear Radiation Prolongation in Dust-Adapted Coordinates}
+\author{Tony Newton}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+We examine an Einstein--matter Cauchy problem containing pressureless dust and an independently moving barotropic radiation fluid. In irrotational dust material coordinates, the exact nonlinear mass density is determined by a conserved Lagrangian mass form. On any prescribed smooth spacetime metric, the tilted radiation Euler equations possess a positive symmetric time symbol; their spatially differentiated equations admit a symmetric-hyperbolic prolongation with a homogeneous defining-constraint equation. At a separate, constant-coefficient level we derive a sourced electric--magnetic Weyl system incorporating both radiation and static material-dust density perturbations. Its six Weyl-divergence constraints, twelve radiation-gradient defining constraints, twelve radiation-gradient curl constraints, and six dust-gradient constraints form a homogeneous thirty-six-component symmetric-hyperbolic subsidiary system. An explicit Sobolev estimate is uniform in spatial frequency, and the full contracted Bianchi tensor identities are independently checked by symbolic and rational calculations. The two-fluid subsidiary result is restricted to a frozen local model; it does not yield an autonomous evolution for the Einstein tetrad, connection, or dynamical metric. The nonlinear coupled Einstein--dust--radiation Cauchy theorem, its full geometric constraint propagation, and any physical photon-transport application remain outside the established results.
+\end{abstract}
+
+\section{Introduction}
+Pressureless matter is a useful idealization for cold cosmological components, but the choice of evolution variables matters. Its standard Eulerian density--velocity symbol contains a Jordan block, whereas a material description can retain a conserved mass label. Radiation introduces a different issue: it has genuine acoustic characteristics and, when tilted relative to dust, carries a nonzero momentum density. A proof for dust alone cannot be combined with a radiation symmetrizer merely by appending a second fluid to the Einstein source.
+
+This work addresses two separable questions. First, how far can one prolong the relativistic radiation equations without losing symmetric hyperbolicity when the geometry is prescribed? Second, in a local frozen curvature system, do the \emph{dust and radiation} contributions to the Weyl divergence constraints admit a combined homogeneous subsidiary evolution? We answer both questions while specifying what is still required to prove a coupled Einstein existence theorem.
+
+The analytic framework has important precedent. Friedrich constructed symmetric-hyperbolic fluid-adapted gravitational reductions including a pressure-free case \cite{Friedrich}. The frame formulation of Normann and Valiente Kroon develops auxiliary derivatives and geometric zero quantities under particular matter-stress hypotheses \cite{NormannVK}. Van Elst and Ellis studied the characteristic and constrained structure of electric--magnetic Weyl systems \cite{vanElstEllis}. Symmetric relativistic Euler formulations are classical \cite{Walton}, and two-fluid tilted Einstein--Euler systems with strictly positive sound speeds have been treated in a different parameter range \cite{FMO}. In particular, none of these results authorizes omitting the heat flux of tilted radiation or declaring a complete pressureless two-fluid tetrad formulation without further proof.
+
+The results below should be read as exact restricted mathematical statements, not as a claim of an original solution of a general-relativistic Cauchy problem. Their purpose is to make the derivative structure and remaining geometric obligations explicit.
+
+\section{Two conserved fluids and material dust}
+Take signature $(-,+,+,+)$ and put $\kgr=8\pi G$. We consider
+\begin{equation}\label{eq:einstein}
+G_{\mu\nu}+\Lambda g_{\mu\nu}=\kgr(T^{\rm d}_{\mu\nu}+T^{\rm r}_{\mu\nu}),\qquad
+\nabla^\mu T^{\rm d}_{\mu\nu}=\nabla^\mu T^{\rm r}_{\mu\nu}=0,
+\end{equation}
+with pressureless dust and barotropic radiation stress
+\begin{equation}\label{eq:stress}
+T^{\rm d}_{\mu\nu}=\rho_{\rm d}u^{\rm d}_\mu u^{\rm d}_\nu,
+\qquad T^{\rm r}_{\mu\nu}=\frac43\rho_{\rm r}u^{\rm r}_\mu u^{\rm r}_\nu
++\frac13\rho_{\rm r}g_{\mu\nu}.
+\end{equation}
+Each four-velocity is future-directed and unit timelike. The radiation in this paper is a perfect fluid, not a kinetic photon distribution with anisotropic stress or Thomson scattering.
+
+Assume the dust congruence is geodesic, hypersurface orthogonal, and has no intersecting worldlines on the interval considered. Proper time along the dust curves and material labels $X^i$ then give
+\begin{equation}\label{eq:metric}
+g=-d\tau^2+h_{ij}(\tau,X)dX^i dX^j,\qquad u_{\rm d}=\partial_\tau,
+\qquad h_{ij}>0.
+\end{equation}
+This is a local assumption, not a gauge available globally for arbitrary vortical dust.
+
+\begin{proposition}[Conserved material mass]\label{prop:material}
+On a metric of the form \eqref{eq:metric}, the dust conservation equations are equivalent, at strictly positive density, to
+\begin{equation}\label{eq:material}
+\partial_\tau m(X)=0,\qquad m(X)=\rho_{\rm d}\sqrt{\det h},\qquad
+\rho_{\rm d}(\tau,X)=\frac{m(X)}{\sqrt{\det h(\tau,X)}}.
+\end{equation}
+With $K_{ij}=-\frac12\partial_\tau h_{ij}$ and $K=h^{ij}K_{ij}$, one also has
+\begin{equation}\label{eq:massjet}
+\partial_\tau\rho_{\rm d}=\rho_{\rm d}K,
+\qquad \partial_i\rho_{\rm d}=
+\frac{\partial_i m}{\sqrt{\det h}}-\frac{\rho_{\rm d}}2h^{jk}\partial_i h_{jk}.
+\end{equation}
+\end{proposition}
+\begin{proof}
+In these coordinates, $\Gamma^\mu_{\tau\tau}=0$ and $\sqrt{-g}=\sqrt{\det h}$. The component of $\nabla_\mu(\rho_{\rm d}u_{\rm d}^\mu u_{\rm d}^\nu)=0$ parallel to $u_{\rm d}$ is $\partial_\tau(\rho_{\rm d}\sqrt{\det h})=0$, while the orthogonal component is the geodesic identity. Jacobi's determinant formula yields \eqref{eq:massjet}.
+\end{proof}
+
+Relative to $n=\partial_\tau$, let radiation have velocity $u_{\rm r}=\gamma(n+v)$, where $v$ is spatial, $|v|_h<1$ and $\gamma=(1-|v|_h^2)^{-1/2}$. The ADM matter sources are
+\begin{align}\label{eq:admsources}
+E&=\rho_{\rm d}+\tfrac43\rho_{\rm r}\gamma^2-\tfrac13\rho_{\rm r},\\
+J_i&=\tfrac43\rho_{\rm r}\gamma^2v_i,\qquad
+S_{ij}=\tfrac43\rho_{\rm r}\gamma^2v_i v_j+\tfrac13\rho_{\rm r}h_{ij}.
+\end{align}
+Thus $J_i$ cannot generally be set to zero in a dust-adapted gravitational reduction.
+
+\section{Nonlinear radiation equations and derivative prolongation}
+Put $c_s^2=1/3$ and choose $\rho_*>0$. For radiation density $\rho_{\rm r}>0$ define
+\begin{equation}\label{eq:sigma}
+\sigma=\frac{c_s}{1+c_s^2}\log\frac{\rho_{\rm r}}{\rho_*},\qquad
+P_{\mu\nu}=g_{\mu\nu}+u^{\rm r}_\mu u^{\rm r}_\nu.
+\end{equation}
+The relativistic Euler equations are equivalent to
+\begin{align}\label{eq:euler}
+u_{\rm r}^\mu\nabla_\mu\sigma+c_s\nabla_\mu u_{\rm r}^\mu&=0,\\
+u_{\rm r}^\mu\nabla_\mu u^{\rm r}_\nu+c_sP_\nu{}^\mu\nabla_\mu\sigma&=0.
+\end{align}
+At a radiation-orthonormal tetrad $(u_{\rm r},e_1,e_2,e_3)$, variations tangent to the unit-velocity hyperboloid and the density variable $\sigma$ have the symmetric principal form
+\begin{equation}\label{eq:radA}
+A(\xi)=\begin{pmatrix}u_{\rm r}\!\cdot\xi&c_s(e_b\!\cdot\xi)\\
+c_s(e_a\!\cdot\xi)&(u_{\rm r}\!\cdot\xi)\delta_{ab}\end{pmatrix}.
+\end{equation}
+For future time covector $\theta=-n^\flat$, its eigenvalues are
+\begin{equation}\label{eq:rada0}
+\gamma,\quad\gamma,\quad\gamma(1-c_s|v|_h),\quad\gamma(1+c_s|v|_h).
+\end{equation}
+All are strictly positive whenever $|v|_h<1$. On a compact subluminal state domain they have a positive uniform lower bound, establishing the usual fixed-metric symmetric-hyperbolic matter formulation.
+
+The next lemma makes precise which derivative variables may be promoted without generating derivatives of the promoted fields in source terms. It applies beyond the radiation equation itself.
+
+\begin{theorem}[Prolongation on a prescribed smooth geometry]\label{thm:prolong}
+Let $g$ be a prescribed smooth Lorentzian metric on $[0,T]\times\T^3$, let $U$ be smooth state coordinates for positive-density strictly subluminal radiation, and suppose its symmetric form in the chosen chart is
+\begin{equation}\label{eq:general}
+A^0(U,x)\partial_t U+A^j(U,x)\partial_jU=F(U,x),
+\quad (A^\mu)^T=A^\mu,\quad A^0\ge\delta I>0.
+\end{equation}
+Here the explicit $x$-dependence includes the prescribed geometry and its first derivatives. Set $W_i=\partial_iU$. There is a first-order prolonged system on $(U,W_1,W_2,W_3)$ of the form
+\begin{align}\label{eq:prolong}
+A^0\partial_tU+A^j\partial_j U&=F,\\
+A^0\partial_tW_i+A^j\partial_jW_i&=\mathcal Q_i(U,W,x),
+\end{align}
+where $\mathcal Q_i$ depends algebraically on $W$ and on prescribed geometric derivatives through order two, but not on derivatives of $W$. Its principal matrices are four copies of $A^\mu$ and hence are symmetric with positive time part. The defining constraints $Z_i=W_i-\partial_iU$ propagate homogeneously: smooth initial data satisfying $Z_i(0)=0$ satisfy $Z_i(t)=0$ throughout the smooth existence interval. In particular, the spatial gradient curl identities are preserved on the same constraint surface.
+\end{theorem}
+\begin{proof}
+Differentiate \eqref{eq:general} with respect to $x^i$ without yet replacing any derivative:
+\begin{equation}\label{eq:diffeuler}
+A^\mu\partial_\mu(\partial_iU)=
+\partial_iF-(\partial_iA^\mu)\partial_\mu U,
+\end{equation}
+where summation over $\mu=0,1,2,3$ is understood. Every coefficient derivative is expanded by the chain rule, for example
+\[
+\partial_iA^\mu=(D_UA^\mu)\partial_iU+(\partial_iA^\mu)_{U\,\mathrm{fixed}}.
+\]
+The last term depends on the prescribed geometric jet, but not on derivatives of $U$. In the right side of \eqref{eq:diffeuler}, replace $\partial_iU$ by $W_i$, replace spatial $\partial_jU$ by $W_j$, and replace the time derivative by $(A^0)^{-1}(F-A^jW_j)$. This defines a smooth algebraic function $\mathcal Q_i(U,W,x)$ and gives \eqref{eq:prolong}. Its principal part contains only the diagonal copies of $A^\mu$; all products involving $W$ occur on the right-hand side. The first-order system is therefore symmetric hyperbolic wherever $A^0\ge\delta I$.
+
+Subtract the original differentiated equation \eqref{eq:diffeuler} from the equation for $W_i$. Each difference introduced by substituting $W_j$ for $\partial_jU$ is proportional to one or more of the $Z_j$. Consequently
+\begin{equation}\label{eq:Zhomog}
+A^0\partial_tZ_i+A^j\partial_jZ_i
+=\sum_j B_i{}^j(U,W,\partial U,x)Z_j
+\end{equation}
+for smooth matrix-valued coefficients along a smooth solution. The left principal matrices are symmetric and uniformly positive in time. Standard symmetric-hyperbolic uniqueness proves $Z_i\equiv0$ when the initial defining constraints vanish. Then $W_i=\partial_iU$ and $\partial_iW_j-\partial_jW_i=0$ follows identically. The source contains prescribed second geometric derivatives, which is precisely why this theorem does not by itself close the evolving Einstein equations.
+\end{proof}
+
+\begin{remark}
+The second geometric derivatives in $\mathcal Q_i$ are harmless data for a prescribed smooth $g$, but they cannot be classified as lower order when $g$ is another \emph{unknown}. A coupled Einstein reduction requires a specified frame/connection/curvature variable system or an appropriate higher-regularity energy hierarchy. This derivative-counting distinction is central to the remaining problem.
+\end{remark}
+
+\section{A frozen two-fluid Weyl source model}\label{sec:frozen}
+We now work in a \emph{separate local constant-coefficient model}. Its coordinates carry the Minkowski principal metric and all background parameters are frozen. This is a tangent principal/source system: nonzero constant matter densities together with a flat background are not asserted to solve the nonlinear Einstein equations. The dust velocity is the material time direction, its density perturbation is $d$, and the material time equation is $\partial_t d=0$. The radiation state is $U=(\sigma,v_1,v_2,v_3)$ with
+\begin{equation}\label{eq:acoustic}
+\partial_t\sigma+c_s\partial^i v_i=0,\qquad
+\partial_t v_i+c_s\partial_i\sigma=0.
+\end{equation}
+Introduce independent radiation gradients $W_i=(S_i,V_{ij})$ and independent dust-density gradient $P_i$, with
+\begin{equation}\label{eq:jets}
+S_i=\partial_i\sigma,\quad V_{ij}=\partial_i v_j,
+\quad P_i=\partial_i d
+\end{equation}
+when defining constraints vanish. Their constant-coefficient prolonged equations are
+\begin{equation}\label{eq:radjet}
+\partial_t S_i=-c_s\partial^jV_{ij},\qquad
+\partial_tV_{ij}=-c_s\partial_jS_i,\qquad
+\partial_tP_i=0.
+\end{equation}
+The radiation gradient system is a direct sum of three symmetric acoustic blocks.
+
+Let $E_{ij},H_{ij}$ be the symmetric trace-free electric and magnetic parts of the Weyl tensor. Use
+\[
+(\curl_{\rm STF}X)_{ij}=
+\tfrac12(\epsilon_{k\ell i}\partial^kX_{j\ell}
++\epsilon_{k\ell j}\partial^kX_{i\ell}),
+\quad \STF(V)_{ij}=\tfrac12(V_{ij}+V_{ji})-\tfrac13\delta_{ij}V^k{}_k.
+\]
+Set $b=2\kgr\bar\rho_{\rm r}/3$. The sourced Weyl evolution equations in this model are
+\begin{equation}\label{eq:weyl}
+\partial_tE+\curl_{\rm STF}H=-b\,\STF(V),
+\qquad \partial_tH-\curl_{\rm STF}E=0.
+\end{equation}
+There is no direct $d$ term on the right: the static dust Schouten perturbation contributes spatial density gradients to the \emph{constraints}, rather than to the symmetric-tracefree evolution of $E$ or $H$ at this frozen level.
+
+To see the coefficients, use the four-dimensional Schouten tensor
+\begin{equation}\label{eq:schouten}
+L_{\mu\nu}=\frac{\kgr}{2}\left(T_{\mu\nu}-\frac13Tg_{\mu\nu}\right)+\frac\Lambda6 g_{\mu\nu}.
+\end{equation}
+In the radiation rest frame its first-order perturbation is
+\begin{equation}\label{eq:rads}
+\delta L^{\rm r}_{00}=\frac b{c_s}\sigma,\quad
+\delta L^{\rm r}_{0i}=-bv_i,\quad
+\delta L^{\rm r}_{ij}=\frac b{3c_s}\sigma\delta_{ij},
+\end{equation}
+while the static material-dust perturbation has
+\begin{equation}\label{eq:dusts}
+\delta L^{\rm d}_{00}=\frac{\kgr}3d,\quad
+\delta L^{\rm d}_{0i}=0,\quad
+\delta L^{\rm d}_{ij}=\frac{\kgr}6d\,\delta_{ij}.
+\end{equation}
+Use \eqref{eq:acoustic} and $d_t=0$ to replace time derivatives of these tensors by spatial jet variables. Substitution into the contracted Bianchi identity
+\begin{equation}\label{eq:bianchi}
+\partial^\mu C_{\mu\nu\alpha\beta}=
+\partial_\alpha L_{\beta\nu}-\partial_\beta L_{\alpha\nu}
+\end{equation}
+yields the ten Weyl evolution equations \eqref{eq:weyl}, together with six sourced divergence constraints written below. This can also be checked without fixing the ten Weyl amplitudes by reconstructing
+\begin{equation}\label{eq:reconstruct}
+C_{0i0j}=E_{ij},\quad
+C_{0ijk}=\epsilon_{jk\ell}H_{\ell i},\quad
+C_{ijkl}=-\epsilon_{ijm}\epsilon_{k\ell n}E_{mn}.
+\end{equation}
+The tensor reconstruction will be used for the independent verification of all 24 contracted components of \eqref{eq:bianchi}.
+
+\section{The thirty-six-component two-fluid subsidiary system}
+The sourced Weyl constraints are
+\begin{align}\label{eq:weylconstraints}
+\cE_i&=\partial^jE_{ij}-2bc_s S_i-\frac{\kgr}{3}P_i,\\
+\cH_i&=\partial^jH_{ij}-b\epsilon_{ijk}V_{jk}.
+\end{align}
+We also introduce the radiation defining and curl constraints
+\begin{equation}\label{eq:radconstraints}
+Z^{\rm r}_i=W_i-\partial_iU,\qquad
+F^{\rm r}_{ij}=\partial_i W_j-\partial_j W_i,
+\end{equation}
+and their dust counterparts
+\begin{equation}\label{eq:dustconstraints}
+Z^{\rm d}_i=P_i-\partial_i d,\qquad
+F^{\rm d}_{ij}=\partial_iP_j-\partial_jP_i.
+\end{equation}
+Here $W_i$ and $F^{\rm r}_{ij}$ are four-vectors, $Z^{\rm d}_i,F^{\rm d}_{ij}$ are scalars, and $F_{ji}=-F_{ij}$. There are $6+12+12+3+3=36$ scalar constraint components.
+
+\begin{theorem}[Homogeneous two-fluid Weyl subsidiary]\label{thm:subsidiary}
+For the smooth constant-coefficient system \eqref{eq:acoustic}, \eqref{eq:radjet}, \eqref{eq:weyl} and $d_t=0$, the 36 constraints \eqref{eq:weylconstraints}--\eqref{eq:dustconstraints} satisfy
+\begin{align}\label{eq:36}
+\partial_t\cE_i+\tfrac12(\curl\cH)_i
+&=\frac b3\sum_j(F^{\rm r}_{ij})_{v_j},\\
+\partial_t\cH_i-\tfrac12(\curl\cE)_i
+&=\frac{\kgr}{6}(\curl P)_i
+=\frac{\kgr}{12}\epsilon_{ijk}F^{\rm d}_{jk},\\
+\partial_t Z^{\rm r}_i+R^k\partial_kZ^{\rm r}_i&=0,
+\quad\partial_tF^{\rm r}_{ij}+R^k\partial_kF^{\rm r}_{ij}=0,\\
+\partial_tZ^{\rm d}_i&=0,\quad\partial_tF^{\rm d}_{ij}=0,
+\end{align}
+where $R^k=c_s\begin{psmallmatrix}0&e_k^T\\e_k&0_{3\times3}\end{psmallmatrix}$ acts on the radiation four-vectors. The subsidiary system is linear homogeneous and symmetric hyperbolic with positive identity time symmetrizer. For any Sobolev order $s\in\R$ on $\T^3$, set
+\begin{equation}\label{eq:energy}
+\mathcal E_s=\frac12\Big(\|\cE\|_{H^s}^2+\|\cH\|_{H^s}^2
++\sum_i\|Z^{\rm r}_i\|_{H^s}^2
++\sum_{i<j}\|F^{\rm r}_{ij}\|_{H^s}^2
++\sum_i\|Z^{\rm d}_i\|_{H^s}^2
++\sum_{i<j}\|F^{\rm d}_{ij}\|_{H^s}^2\Big).
+\end{equation}
+Then, with $K_*=\max\{\sqrt2\,|b|/3,|\kgr|/6\}$,
+\begin{equation}\label{eq:estimate}
+\mathcal E_s(t)\le e^{K_*|t|}\mathcal E_s(0).
+\end{equation}
+In particular all six Weyl constraints and all thirty material-jet constraints propagate from zero initial data. This is a theorem for the \emph{frozen model}, not for the full nonlinear two-fluid Einstein geometry.
+\end{theorem}
+\begin{proof}
+For symmetric trace-free $X$, the elementary identity
+\begin{equation}\label{eq:curlidentity}
+\divg(\curl_{\rm STF}X)=\tfrac12\curl(\divg X)
+\end{equation}
+follows from the Levi-Civita contraction. Differentiate \eqref{eq:weylconstraints} in time and insert \eqref{eq:weyl}, \eqref{eq:radjet} and $P_t=0$. The cancellation using $c_s^2=1/3$ gives
+\[
+\partial_t\cE_i+\tfrac12(\curl\cH)_i
+=\tfrac b3\sum_j(\partial_iV_{jj}-\partial_jV_{ij}).
+\]
+The right-hand side is exactly the velocity-component contraction of $F^{\rm r}_{ij}$. The magnetic calculation gives
+\[
+\partial_t\cH_i-\tfrac12(\curl\cE)_i
+=\frac{\kgr}{6}\epsilon_{ijk}\partial_jP_k.
+\]
+The last expression is $\kgr\epsilon_{ijk}F^{\rm d}_{jk}/12$. In particular, this dust term \emph{does not vanish identically for an unconstrained independent gradient field}. It vanishes on the defining-gradient constraint surface. Differentiating the radiation equations and antisymmetrizing their spatial derivatives proves the two homogeneous radiation-jet equations; $d_t=P_t=0$ proves the two dust-jet equations.
+
+The $6\times6$ Weyl-divergence principal blocks are opposite vector curls with coefficient $1/2$. Since the vector curl symbol is skew in spatial indices, their off-diagonal combination is symmetric. The radiation $R^k$ are symmetric, and the dust blocks have zero spatial principal matrix. Hence the $36\times36$ full spatial matrices are symmetric and the time matrix is the identity.
+
+Write $G_{\rm r}F^{\rm r}$ for the three-vector $\sum_j(F^{\rm r}_{ij})_{v_j}$, and $G_{\rm d}F^{\rm d}=\curl P$ in the ordered independent dust curl components. Elementary matrix multiplication gives
+\begin{equation}\label{eq:mapnorm}
+G_{\rm r}G_{\rm r}^{T}=2I_3,
+\qquad G_{\rm d}G_{\rm d}^{T}=I_3.
+\end{equation}
+Taking the $H^s$ energy of the subsidiary system, all principal terms cancel by integration by parts, giving
+\[
+\mathcal E_s'(t)=\frac b3\langle\cE,G_{\rm r}F^{\rm r}\rangle_{H^s}
++\frac{\kgr}{6}\langle\cH,G_{\rm d}F^{\rm d}\rangle_{H^s}.
+\]
+The two couplings act on disjoint pairs of variables. Cauchy--Schwarz, \eqref{eq:mapnorm} and $2xy\le x^2+y^2$ imply $|\mathcal E_s'|\le K_*\mathcal E_s$. Gronwall's inequality proves \eqref{eq:estimate} in either time direction. The estimate is independent of Fourier frequency and spatial volume.
+\end{proof}
+
+\begin{proposition}[Bianchi equivalence within the frozen model]\label{prop:bianchi}
+After substituting the ten evolution equations \eqref{eq:weyl} and the radiation and dust matter equations, every component of \eqref{eq:bianchi} is either identically zero or an algebraic multiple (with coefficient $\pm1$ or $\pm\frac12$) of a component of \eqref{eq:weylconstraints}. Thus no additional independent contracted-Bianchi constraint is hidden in this frozen model.
+\end{proposition}
+\begin{proof}
+Insert \eqref{eq:reconstruct} into the $4\binom42=24$ components of \eqref{eq:bianchi}. Replace time derivatives of $E,H$ by \eqref{eq:weyl}, time derivatives of radiation by \eqref{eq:acoustic}, and time derivatives of $d$ by zero. With \eqref{eq:rads}--\eqref{eq:dusts}, direct Levi-Civita contraction produces precisely the stated alternatives. Appendix~\ref{app:verification} describes two algebraically independent reproductions of the contraction using exact arithmetic. The result uses no numerical approximation.
+\end{proof}
+
+\section{Characteristic meaning and the remaining Einstein coupling}
+The unconstrained electric--magnetic Weyl evolution symbol has ten real characteristic eigenvalues: two at zero speed, four at speeds $\pm|n|/2$, and four at speeds $\pm|n|$ (counting algebraic multiplicity). The nonzero half-speed and zero branches are not additional physical gravitational-wave polarizations. On vacuum data satisfying $n^jE_{ij}=n^jH_{ij}=0$, each trace-free tensor has two transverse polarizations; the resulting four-dimensional principal subsystem has characteristic polynomial $(z^2-|n|^2)^2$. This is a familiar constraint restriction of the Weyl equations \cite{vanElstEllis}.
+
+The nonlinear Einstein equations involve much more than this curvature block. A dust-adapted metric satisfies $\partial_\tau h_{ij}=-2K_{ij}$, but ordinary synchronous ADM evolution is not automatically strongly hyperbolic. For instance, in its vacuum linearization about flat spacetime, the pure-gauge family
+\begin{equation}\label{eq:gauge}
+h_{11}(t,x)=-2t\cos(Nx^1),\qquad K_{11}(t,x)=\cos(Nx^1)
+\end{equation}
+with all other components zero solves the linearized spatial ADM equations and constraints. Nevertheless, its gradient-to-curvature norm ratio obeys
+\[
+\frac{\|\partial_1h_{11}(t)\|_{L^2}}{\|K_{11}(0)\|_{L^2}}=2|t|N.
+\] The absence of a frequency-uniform estimate rules out simply appending the matter blocks to the \emph{raw} synchronous ADM variables. It does not rule out a different constraint-augmented dust-adapted frame reduction.
+
+There is also an exact source-derivative obstacle. For the total Schouten tensor \eqref{eq:schouten}, the contracted Bianchi source involves $\nabla_{[\alpha}L_{\beta]\nu}$. Radiation gradients were promoted in Theorem~\ref{thm:subsidiary}; dust first derivatives can be written using \eqref{eq:massjet}. Nevertheless, in a \emph{dynamical} geometry the differentiated radiation source brings derivatives of frame/connection coefficients, and the dust gradient contains spatial metric derivatives. A complete gravitational reduction must choose these geometric variables, derive their evolution, control their couplings to both matter jets, and prove homogeneous propagation of torsion, frame, gauge, Einstein, and Weyl constraints on the same nonlinear solution.
+
+Theorem~\ref{thm:prolong} is a rigorous step on a prescribed smooth geometry, and Theorem~\ref{thm:subsidiary} is a rigorous constant-coefficient sourceful constraint theorem. They are \emph{not two halves of an automatically valid fully coupled theorem}: the second-geometry-derivative issue and the dynamical frame subsidiary system remain unclosed. Nor does the present radiation fluid describe the photon Boltzmann hierarchy or polarimetric transfer.
+
+\section{Conclusion}
+The material density law permits an exact nonlinear description of irrotational pressureless dust before caustic formation. Separately, radiation Euler admits a positive symmetric time symbol for arbitrary subluminal tilt and a symmetric-hyperbolic first-gradient prolongation on a prescribed smooth metric. In a frozen comoving two-fluid Weyl system, adding both independent radiation and dust gradient variables yields a homogeneous thirty-six-component constraint subsidiary with an explicit frequency-independent Sobolev estimate. The dust curl source in the magnetic constraint equation is essential to that closure. The precise remaining question is to construct a fully nonlinear, dust-adapted Einstein frame and connection reduction whose evolution and all geometric and matter subsidiary equations share a closed positive energy. No such complete reduction or local Einstein--dust--radiation existence theorem is established here.
+
+\appendix
+\section{Reproducibility of the tensor identities}\label{app:verification}
+The tensor statements in Proposition~\ref{prop:bianchi} and Theorem~\ref{thm:subsidiary} admit two separate exact arithmetic realizations. The symbolic calculation constructs a five-element symmetric trace-free basis, a general electric and magnetic Weyl tensor, three independent radiation density gradients, nine independent radiation velocity gradients, and three dust gradients. After reconstructing $C_{abcd}$ by \eqref{eq:reconstruct}, it checks all twenty-four contracted Bianchi identities and the two sourced divergence evolution formulas by exact simplification. It then constructs the constraint source maps and their Gram matrices in \eqref{eq:mapnorm}.
+
+The independent calculation does not import symbolic algebra. It uses rational Fourier directions, a distinct radiation density normalization $\chi=\sigma/c_s$, a separately implemented Levi-Civita tensor reconstruction, and exact rational Gaussian matrix arithmetic. Both implementations verify the three-vector source equations, every contracted Bianchi residual, and a positive weighted representation of the thirty-six-dimensional subsidiary principal matrices. These checks are computational corroboration of the written tensor algebra, not a substitute for the continuum derivation or a claim of external specialist review.
+
+\begin{thebibliography}{9}
+\bibitem{Friedrich} H. Friedrich, Evolution equations for gravitating ideal fluid bodies in general relativity, \emph{Physical Review D} \textbf{57} (1998), 2317--2322, \href{https://doi.org/10.1103/PhysRevD.57.2317}{doi:10.1103/PhysRevD.57.2317}.
+\bibitem{NormannVK} M. Normann and J. A. Valiente Kroon, Evolution equations for a wide range of Einstein--matter systems, \emph{General Relativity and Gravitation} \textbf{52} (2020), article 103, \href{https://doi.org/10.1007/s10714-020-02759-y}{doi:10.1007/s10714-020-02759-y}.
+\bibitem{vanElstEllis} H. van Elst and G. F. R. Ellis, Causal propagation of geometrical fields in relativistic cosmology, \emph{Physical Review D} \textbf{59} (1999), 024013, \href{https://doi.org/10.1103/PhysRevD.59.024013}{doi:10.1103/PhysRevD.59.024013}.
+\bibitem{Walton} R. A. Walton, Symmetric hyperbolic Euler equations for relativistic perfect fluids, arXiv:astro-ph/0502233 (2005), \url{https://arxiv.org/abs/astro-ph/0502233}.
+\bibitem{FMO} G. Fournodavlos, E. Marshall, and T. A. Oliynyk, Future stability of tilted two-fluid Bianchi I spacetimes, \emph{Annales Henri Poincar\'e} (2026), \href{https://doi.org/10.1007/s00023-026-01727-7}{doi:10.1007/s00023-026-01727-7}.
+\bibitem{HadzicSpeck} M. Had\v{z}i\'c and J. Speck, The global future stability of the FLRW solutions to the dust--Einstein system with a positive cosmological constant, \emph{Journal of Hyperbolic Differential Equations} \textbf{12} (2015), 87--188, \href{https://doi.org/10.1142/S0219891615500046}{doi:10.1142/S0219891615500046}.
+\end{thebibliography}
+\vspace{1em}
+\noindent\texttt{tony.newton79@gmail.com}
+\end{document}
