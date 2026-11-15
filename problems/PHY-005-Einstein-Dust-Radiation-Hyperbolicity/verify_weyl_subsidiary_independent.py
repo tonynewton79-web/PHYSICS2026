@@ -157,4 +157,26 @@ for p,(i,j) in enumerate(((0,1),(0,2),(1,2))):
     G[j][p*4+i+1]=Q(-1)
 assert mm(G,tr(G))==[[Q(2)*Q(i==j) for j in range(3)] for i in range(3)]
 print("PASS exact algebraic source bound ||G||=sqrt(2)")
+# Additional independent material-dust regression:
+# at a nontrivial anisotropic inhomogeneous material metric point,
+# the exact coordinate quotient derivative uses only m, dm and
+# first derivatives of metric scales.
+av=(Q(2),Q(3),Q(5))
+at=(Q(1,4),Q(-2,5),Q(3,2))
+ax=(Q(7,3),Q(-1,2),Q(4,7))
+m=Q(11,7);dm=Q(13,17)
+vol=av[0]*av[1]*av[2]
+rho=m/vol
+K=-sum(at[i]/av[i] for i in range(3))
+drhot=-rho*sum(at[i]/av[i] for i in range(3))
+drhox=dm/vol-rho*sum(ax[i]/av[i] for i in range(3))
+assert drhot==rho*K
+assert drhox==dm/vol-rho*sum((Q(2)*av[i]*ax[i])/(Q(2)*av[i]**2) for i in range(3))
+for i in range(3):
+    Lii=rho*av[i]**2/6
+    dLii=(drhox*av[i]**2+2*rho*av[i]*ax[i])/6
+    assert dLii==drhox*av[i]**2/6+rho*av[i]*ax[i]/3
+    assert Lii>0
+print("PASS independent material dust Schouten/metric first-derivative identity")
+
 print("INDEPENDENT FRACTION-ONLY WEYL CONSTRAINT SUBSIDIARY: ALL PASS")
