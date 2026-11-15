@@ -34,4 +34,4 @@ Give a complete human-readable mathematical argument. Separate analytically deri
 Record counterexample searches, failed pathways, revised claims, unresolved limitations, and citation/priority audit.
 
 ## Release
-Maintain README.md, paper.tex, verify.py, requirements.txt, AUDIT.md and CI in this problem folder. Publish only the evidence tier supported by the completed audit.
+Maintain README.md, paper.tex, verify.py, requirements.txt, AUDIT.md, PDF_FILENAME.txt and CI in this problem folder. `PDF_FILENAME.txt` contains an ASCII-safe, underscore-separated rendering of the full manuscript title (without `.pdf`); automated builds use this to give the PDF a descriptive title-based filename. Publish only the evidence tier supported by the completed audit.
