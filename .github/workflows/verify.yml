@@ -35,6 +35,12 @@ jobs:
             if [ -f "$folder/verify_material_independent.py" ]; then
               python "$folder/verify_material_independent.py"
             fi
+            if [ -f "$folder/verify_curvature_radiation.py" ]; then
+              python "$folder/verify_curvature_radiation.py"
+            fi
+            if [ -f "$folder/verify_curvature_radiation_independent.py" ]; then
+              python "$folder/verify_curvature_radiation_independent.py"
+            fi
             if [ -f "$folder/verify_su2_coefficients.py" ]; then
               python "$folder/verify_su2_coefficients.py"
             fi
