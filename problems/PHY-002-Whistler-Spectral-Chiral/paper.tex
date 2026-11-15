@@ -12,7 +12,7 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-We obtain a restricted spectral obstruction, an exact nonlinear chiral-mode coupling formula and a family of positive controls for ideal two-and-a-half-dimensional electron magnetohydrodynamics (EMHD). Its linearized Fourier generator has irreducible quadratic characteristic polynomial over \(\mathbb C(k_x,k_y)\); rational-symbol scalar diagonalization is therefore impossible, and a square-root nonlocal Fourier multiplier is necessary and sufficient. An exact quadratic coefficient measures instantaneous nonlinear leakage between chiral whistler families: a pair of noncollinear planar modes leaks precisely when their wavenumber magnitudes differ. Modes of equal magnitude, by contrast, generate finite-amplitude exact Beltrami-shell solutions. Finally, for any matrix size, a flat connection with potentials depending pointwise only on \((\psi,\beta,\Delta\psi)\) is trivial. These are limited algebraic results and known-type positive controls; we neither construct a full Lax pair nor claim general EMHD nonintegrability. Priority of the present formulations has not been established.
+We obtain a restricted spectral obstruction, an exact nonlinear chiral-mode coupling formula and a family of positive controls for ideal two-and-a-half-dimensional electron magnetohydrodynamics (EMHD). Its linearized Fourier generator has irreducible quadratic characteristic polynomial over \(\mathbb C(k_x,k_y)\); rational-symbol scalar diagonalization is therefore impossible, and a square-root nonlocal Fourier multiplier is necessary and sufficient. An exact quadratic coefficient measures instantaneous nonlinear leakage between chiral whistler families: a pair of noncollinear planar modes leaks precisely when their wavenumber magnitudes differ. Modes of equal magnitude, by contrast, generate finite-amplitude exact Beltrami-shell solutions. The spectral and interaction statements are restricted to their indicated algebraic classes; they do not address nonlinear Lax integrability. The elementary point-potential flatness calculation is a special case of established zero-curvature theory, not a separate contribution. We neither construct nor exclude non-removable-parameter Lax representations for nonlinear EMHD. Priority of the narrower spectral and convolution formulas remains unresolved.
 \end{abstract}
 
 \section{Model and assumptions}
@@ -28,8 +28,12 @@ Let \(a=B_0y+\psi\), \(b=\beta\), where \(B_0\ne0\), and let the perturbations b
 \end{equation}
 Let \(\Lambda=\sqrt{-\Delta}\) be the periodic multiplier \(\widehat{\Lambda f}(k)=|k|\widehat f(k)\).
 The 2.5D reduction and nonlinear whistlers are established subjects
-\cite{peng,lyutikov,shaikh}. Morozov's ideal-MHD Lax representations
-\cite{morozov} concern a different physical system.
+\cite{peng,lyutikov,shaikh}. Morozov's representations for reduced and two-dimensional ideal MHD
+\cite{morozov} concern equations distinct from \eqref{eq:emhd}, but his
+covering and spectral methods demonstrate why a point-potential restriction
+cannot settle the existence of more general nonlinear EMHD Lax representations.
+Marvan's foundational zero-curvature theory \cite{marvan1993,marvan2002}
+provides the relevant setting for gauge and parameter equivalence.
 
 \section{Minimal spectral algebraic extension}
 The linearized Fourier generator at \(k=(k_x,k_y)\) is
@@ -134,35 +138,47 @@ Let \(q=\Delta\psi\). The derivative is
 The background terms are a total derivative; the Jacobian terms cancel by cyclic integration. The final formula follows from Parseval.
 \end{proof}
 
-\section{Matrix point-potential second-jet gate}
-\begin{theorem}[Triviality of a declared flat-connection grammar]
-For any \(N\ge1\) and spectator spectral parameter \(\lambda\), let \(U,V,W\in\mathrm{Mat}_N(\mathbb C)\) depend smoothly only on the pointwise variables \((\psi,\beta,q;\lambda)\), where \(q=\Delta\psi\). If the linear auxiliary system
+\section{Relation to zero-curvature representations}
+The irreducibility result in Section~2 concerns scalar rational diagonalization
+of the \emph{linearized} Fourier generator. It is not an obstruction
+to a spectral parameter in a nonlinear Lax representation. The relevant
+notions of zero-curvature representation, gauge equivalence and parameter
+removability are developed in the general framework of Marvan
+\cite{marvan1993,marvan2002}; the differential-covering methods used by
+Morozov \cite{morozov} lie outside our rational-symbol calculation.
+
+For completeness, consider the elementary restriction to a matrix
+connection
 \[
- \Phi_x=U\Phi,\quad\Phi_y=V\Phi,\quad\Phi_t=W\Phi
+ \Phi_x=U\Phi,\qquad \Phi_y=V\Phi,\qquad \Phi_t=W\Phi,
 \]
-is flat on every freely specified spatial solution jet of \eqref{eq:pert}, then all three matrices are independent of \(\psi,\beta,q\) and commute pairwise. The flat connection carries no EMHD dynamics.
-\end{theorem}
-\begin{proof}
-The spatial curvature is
-\[
- U_\psi\psi_y+U_\beta\beta_y+U_qq_y-
- V_\psi\psi_x-V_\beta\beta_x-V_qq_x+[U,V]=0.
-\]
-The six displayed first derivatives can be specified independently as smooth jets; in particular \(q_x,q_y\) are set by independent third derivatives of \(\psi\). Thus all six matrix coefficients vanish and \([U,V]=0\). In the temporal \(xt\) curvature, \(U\) is now state-independent and the equation becomes
-\(-W_\psi\psi_x-W_\beta\beta_x-W_qq_x+[U,W]=0\).
-Coefficient matching forces \(W\) state-independent and \([U,W]=0\). The \(yt\) curvature then yields \([V,W]=0\).
-\end{proof}
-This is a generic jet-counting gate and is not an obstruction for genuine derivative-dependent matrix Lax connections, higher-order spectral differential operators, or nonlocal coverings.
+where the potentials depend pointwise only on
+\((\psi,\beta,q)\), \(q=\Delta\psi\), and possibly an auxiliary
+parameter. If the connection is flat for every freely specified
+spatial solution jet, comparison of the independent spatial derivatives
+in the \(xy\)-curvature forces \(U\) and \(V\) to be independent of
+\(\psi,\beta,q\), with \([U,V]=0\). The \(xt\)- and \(yt\)-curvatures
+then force \(W\) to be field-independent and all three matrices to
+commute. This is immediate jet coefficient matching in a restrictive
+class, rather than an independent integrability theorem.
+
+Derivative-dependent matrix connections, differential and
+pseudodifferential Lax operators, and nonlocal coverings are not
+subject to this conclusion. In particular, the present calculation
+neither constructs nor rules out non-removable-parameter Lax
+representations for the full nonlinear EMHD system \eqref{eq:emhd}.
 
 \section{Verification, limits and next question}
 The bundled exact SymPy verifier checks the characteristic polynomial, algebraic diagonalization, two-mode coupling coefficient, real leakage witness and both helicities of a noncollinear equal-radius wave. A separate standard-library-only verifier independently checks integer mode-pair geometry and the strict positivity of the real leakage coefficient. Their coverage is explicitly stated in the accompanying audit. These checks support, but do not replace, the proofs above.
 
-The square-root diagonalization has familiar wave-physics antecedents; whistler interactions and exact Beltrami waves are known \cite{lyutikov}. Morozov's MHD Lax representation concerns a different model \cite{morozov}. We did not certify priority of the present precise spectral and convolution statements. No complete nonlinear EMHD Lax pair, matrix integrability theorem, general no-go theorem, or new plasma observation is established. The next target is to test a genuine derivative-dependent matrix or pseudodifferential spectral grammar against the \emph{full nonlinear} system.
+The square-root diagonalization has familiar wave-physics antecedents; whistler interactions and exact Beltrami waves are known \cite{lyutikov}. Morozov's representations \cite{morozov} concern related but distinct MHD equations, while the jet-space and gauge-equivalence methods of Marvan \cite{marvan1993,marvan2002} place the restricted point-potential calculation in established prior art. We have not established priority of the particular spectral or convolution identities. No nonlinear EMHD Lax classification, proof of spectral-parameter non-removability, general nonintegrability theorem, or new plasma observation follows from the present results.
 
 \begin{thebibliography}{9}
 \bibitem{peng} Q. Peng, \emph{Local well-posedness for the two-and-a-half-dimensional EMHD system with split fractional dissipation}, arXiv:2605.20845 (2026), \url{https://arxiv.org/abs/2605.20845}.
 \bibitem{lyutikov} M. Lyutikov, \emph{Electron magnetohydrodynamics: Dynamics and turbulence}, Phys. Rev. E \textbf{88}, 053103 (2013), \url{https://doi.org/10.1103/PhysRevE.88.053103}.
 \bibitem{morozov} O. I. Morozov, \emph{Lax representations and variational Poisson structures for magnetohydrodynamics equations}, Analysis and Mathematical Physics \textbf{15}, 120 (2025), \url{https://doi.org/10.1007/s13324-025-01119-w}.
+\bibitem{marvan1993} M. Marvan, \emph{On zero-curvature representations of partial differential equations}, in \emph{Differential Geometry and Its Applications}, Proceedings of the Opava Conference (1992), Mathematical Publications \textbf{1}, Silesian University, Opava (1993), pp.~103--122.
+\bibitem{marvan2002} M. Marvan, \emph{On the horizontal gauge cohomology and nonremovability of the spectral parameter}, Acta Applicandae Mathematicae \textbf{72}, 51--65 (2002), \url{https://doi.org/10.1023/A:1015218422059}.
 \bibitem{shaikh} D. Shaikh, \emph{Theory and simulations of whistler wave propagation}, J. Plasma Phys. \textbf{75}, 117--132 (2009), \url{https://doi.org/10.1017/S0022377808007198}.
 \end{thebibliography}
 \end{document}
