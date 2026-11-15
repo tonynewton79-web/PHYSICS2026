@@ -29,6 +29,9 @@ jobs:
             if [ -f "$folder/verify_independent.py" ]; then
               python "$folder/verify_independent.py"
             fi
+            if [ -f "$folder/verify_proof_compiler.py" ]; then
+              python "$folder/verify_proof_compiler.py"
+            fi
             if [ -f "$folder/verify_material.py" ]; then
               python "$folder/verify_material.py"
             fi
