@@ -17,24 +17,67 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-We give an exact principal-symbol audit of a comoving pressureless-dust plus perfect-radiation model used in first-order Einstein--matter Cauchy reductions. For the conventional Eulerian density and velocity variables, the three-dimensional frozen matter symbol contains a size-two nilpotent dust Jordan block in every nonzero spatial direction, notwithstanding the radiation sound waves at speed $1/\sqrt3$. An algebraic, pointwise invertible change of unknowns cannot remove this block. The pressureless density equation admits an exact $H^s$ bound when the initial dust velocity is in $H^{s+1}$, and this one-derivative loss is optimal. Giving the dust a sound speed $c>0$ produces a symmetrizable block with an optimal positive-symmetrizer condition number $c^{-2}$ for $0<c\le1$; the propagator recovers the dust Jordan shear as $c\to0$. We spell out the conditional generalized-harmonic constraint subsidiary equation and distinguish a frozen-coefficient obstruction from well-posed Lagrangian Einstein--dust reductions. All claims are proved for the specified principal grammar; the weak hyperbolicity of pressureless Euler and techniques overcoming Einstein--dust derivative loss are established prior art. This is not a full coupled Einstein--dust--radiation existence theorem.
+A well-posed Einstein--matter model with both pressureless dust and
+independently moving radiation must evolve the spacetime geometry
+without introducing artificial dust pressure or discarding the
+radiation momentum flux. We study the precise Cauchy-theory
+obstacles and repairs in a conventional Eulerian reduction and
+a dust-adapted material frame. The frozen Eulerian dust symbol
+has a nontrivial Jordan block and loses exactly one spatial
+derivative; positive dust sound speed restores diagonalizability
+but has optimal symmetrizer condition number $c^{-2}$.
+For irrotational geodesic dust before shell crossing, the fully
+nonlinear material density satisfies
+$\partial_\tau(\rho_{\mathrm d}\sqrt{\det h})=0$.
+An independently tilted perfect radiation fluid is
+symmetrizable hyperbolic on a prescribed smooth metric.
 
-As a nonlinear continuation, we give an exact irrotational-dust
-material conservation law and a positive symmetric principal
-matrix for independently tilted perfect radiation, at every
-strictly subluminal relative velocity. We compute the full
-two-fluid ADM source and prove conditional propagation of the
-Hamiltonian and momentum constraints; a homogeneous FLRW
-solution provides a complete nonlinear consistency control.
-A high-frequency synchronous-ADM gauge test and the
-stress-derivative term in the curvature Bianchi equation
-identify why these components do not yet constitute a
-strongly hyperbolic \emph{coupled} Einstein--matter reduction.
-The full nonlinear two-velocity Einstein Cauchy theorem
-therefore remains open here.
+We then investigate the principal derivative coupling of
+the radiation stress to Weyl curvature. Promoting the
+three spatial derivatives of the four radiation variables
+to independent fields turns the Cotton stress source
+into an algebraic term. For the local frozen
+curvature--radiation principal skeleton this gives an
+explicit symmetric-hyperbolic $26$-field system,
+a positive symmetrizer at every strictly subluminal
+tilt, and homogeneous propagation equations for the
+radiation-gradient and curl defining constraints.
+We also derive the complete nonlinear ADM stress sources,
+conditional Hamiltonian/momentum constraint propagation,
+and an exact synchronous-gauge warning.
+
+These statements do not close the full nonlinear
+tetrad/connection evolution, its geometric subsidiary
+constraints, or a local-existence theorem for general
+inhomogeneous Einstein--dust--radiation data.
+Friedrich's dust reductions, relativistic Euler
+symmetrizers and auxiliary-curvature constructions
+are substantial prior art; no independent priority
+or complete new gravitational Cauchy theorem is claimed.
 \end{abstract}
 
 \section{Physical setup, reductions and exact claim limits}
+A reliable Einstein--matter Cauchy formulation is necessary for
+computing evolving inhomogeneous cosmologies without mistaking
+coordinate growth or constraint violation for a physical
+instability. Dust is useful because it models cold, pressureless
+matter, while a separate radiation fluid retains acoustic
+propagation and possibly nonzero momentum relative to dust.
+The difficulty is that the straightforward Eulerian dust
+variables lose derivatives, and a dust-material change of
+coordinates does not itself fix the gravitational gauge or
+the curvature derivatives of tilted radiation stress.
+
+This paper pursues a sequence of explicit, auditable proof
+gates rather than assuming the complete Einstein problem is
+solved: identify the sharp Eulerian obstruction; repair the
+nonlinear matter subsystem; certify the curvature--radiation
+principal block with auxiliary gradients; and then isolate
+the remaining dynamical frame and constraint equations.
+Every positive claim is tied to its declared variables and
+background assumptions. The full coupled strongly
+hyperbolic Einstein--matter Cauchy theorem remains open.
+
 Use signature $(-,+,+,+)$ and units in which the speed of light is one. Consider smooth Einstein equations with two separately conserved perfect-fluid components:
 \begin{equation}\label{eq:Einstein}
 G_{\mu\nu}+\Lambda g_{\mu\nu}=8\pi(T^{\mathrm d}_{\mu\nu}+T^{\mathrm r}_{\mu\nu}),
@@ -1500,8 +1543,8 @@ to construct the smooth reduced
 solution to which it would apply.
 
 \section{Independent exact audit and research boundary}
-Two independent verifiers accompany
-this paper. The primary SymPy program
+Six complementary exact verifiers accompany
+this cumulative paper. The primary SymPy program
 constructs the full $8\times8$ three-dimensional
 symbol for four exactly rational unit
 directions, checks the full characteristic
@@ -1530,6 +1573,38 @@ universal written proofs; they
 do not replace the quantifiers in
 Theorems~\ref{thm:jordan}--\ref{thm:limit}.
 
+The third and fourth scripts check
+the nonlinear dust material identity,
+the positive radiation-frame time
+matrix at several nonzero rational
+tilts, homogeneous FLRW constraint
+conservation, and a constraint-satisfying
+synchronous ADM gauge counterexample.
+The fifth verifier uses exact STF
+matrix algebra to audit
+the twenty-six-field symmetrizer
+and its positive time matrix,
+Schouten stress derivatives, and
+the Fourier forms of the
+homogeneous auxiliary constraints.
+The sixth, genuinely independent
+Fraction-only script reconstructs
+the Weyl curl matrices from the
+Levi-Civita symbol, checks a
+minimal annihilating polynomial
+and Gram symmetry, and tests the
+Schouten identities in rational
+variables without SymPy.
+
+The exact tests establish
+finite-dimensional identities and
+linear constant-coefficient
+constraint propagation; they do
+not certify a complete nonlinear
+Einstein tetrad/connection
+evolution or its geometric
+subsidiary equations.
+
 Historically, pressureless Euler weak
 hyperbolicity is well known
 \cite{bouchut}. Friedrich's
@@ -1549,14 +1624,17 @@ dust Jordan structure nor the
 general derivative-loss problem
 is claimed to be new.
 
-What this note adds operationally is
-a compact, independently reproducible,
-\emph{sharp frozen-symbol failure gate}
-for a specified two-component
-dust--radiation formulation,
-together with a minimal mixed
-regularity repair and a
-singular-pressure benchmark.
+The result is an independently
+reproducible sequence of
+\emph{restricted} principal-symbol
+certificates: the sharp Eulerian
+failure, a nonlinear
+material-frame matter repair,
+and an explicit twenty-six-field
+curvature--radiation prolongation
+with a positive frozen symmetrizer
+and propagated radiation-gradient
+constraints.
 It does not solve a new Einstein
 existence problem, prove a theorem
 for all gauge choices, describe
@@ -1565,7 +1643,7 @@ address photon Boltzmann hierarchy
 and Thomson scattering.
 
 \appendix
-\section{Precise mathematical formulation of the main result}
+\section{Precise scope of the Eulerian obstruction}
 \label{app:formulation}
 Let $s\in\R$, $t\in\R$, and work
 either on the flat three-torus with
