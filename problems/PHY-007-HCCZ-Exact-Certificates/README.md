@@ -13,6 +13,60 @@ For CCZ-only diagonal circuits the Boolean phase has a **unique cubic algebraic 
 The verifier explicitly rejects omitted borrowed-ancilla compensation, treating an unknown scratch qubit as clean, missing uncomputation, false shared-wire H/CCZ commutation and invalid/unsupported S/T/CZ gates.
 
 
+## Shared-prefix synthesis with temporary DATA borrowing
+
+For a family of m>=2 distinct three-variable suffixes having the same
+prefix of k>=3 data controls, the new circuit computes the prefix
+conjunction just once. During each compensated four-body phase it borrows
+an **existing prefix data qubit**, restoring that data qubit immediately.
+Finally the common conjunction is uncomputed. **No additional dirty
+physical qubit is needed.**
+
+| Resource | Previous independent clean ladders | Shared prefix |
+|---|---:|---:|
+| CCZ | m(2k+1) | 2(k-1)+4m |
+| H | 4km | 4(k-1)+4m |
+| Clean ancillas | k | k-1 |
+| Additional borrowed qubits | 0 | 0 |
+| Total physical qubits | n+k | n+k-1 |
+
+The exact gate savings are m(2k-3)-2(k-1) CCZ and
+4(k-1)(m-1) H, strictly positive for all k>=3,m>=2.
+This is a **strict Pareto improvement over PHY-007's previous
+independent clean-ladder compiler**, NOT a general best-known
+ancilla/gate bound. Khattar--Gidney (2025), Dutta et al. (2025),
+SPARE (2025), Lee--Kang (2026) and Jung et al. (2026) are relevant
+prior art and preclude a blanket novelty claim.
+
+New independently reproducible files:
+
+- [shared_prefix_compiler.py](shared_prefix_compiler.py): untrusted compiler.
+- [verify_shared_prefix.py](verify_shared_prefix.py): independent GF2 ANF
+  semantic checker; does not import compiler code.
+- [verify_shared_prefix_suite.py](verify_shared_prefix_suite.py): 266
+  certified circuit cases, 1,408 exact H/CCZ basis-amplitude checks
+  using the earlier separate simulator, 14 rehashed/invalid-digest
+  adversarial mutations rejected, and a 256-data-wire symbolic stress case.
+
+Example input JSON:
+
+    {"data_wires":11,"prefix":[0,1,2,3],
+     "tails":[[4,5,6],[4,7,8],[5,9,10]],"clean_capacity":3}
+
+Reproduce with these commands:
+
+    python shared_prefix_compiler.py --task /tmp/phy007-shared-input.json --out /tmp/phy007-shared-certificate.json
+    python verify_shared_prefix.py /tmp/phy007-shared-certificate.json
+    python verify_shared_prefix_suite.py
+
+The checker replays the ACTUAL emitted H/CCZ gates, including complete
+data and scratch restoration, rather than trusting synthesis templates.
+Its proof uses exact gate semantics, not finite basis sampling.
+It is tested independent Python code, not formally certified Lean/Coq.
+The detailed mathematical proof is added to [paper.tex](paper.tex).
+For k=4,m=3, counts improve from 27 CCZ/48 H/4 clean to
+18 CCZ/24 H/3 clean, with no added borrowed qubits.
+
 ## Uniform proof-carrying compiler (restricted phase-polynomial language)
 
 The new [proof_compiler.py](proof_compiler.py) emits H/CCZ circuits and
