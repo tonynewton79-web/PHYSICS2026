@@ -163,4 +163,239 @@ block. This is a statement about that declared
 Eulerian first-order reduction and not every
 possible Einstein--matter gauge or variable
 choice.
+
+\section{Sharp mixed-Sobolev repair of the frozen dust subsystem}
+We work on $\T^3=(\R/2\pi\Z)^3$; identical
+Fourier proofs hold on $\R^3$ with suitable
+Schwartz data. Write
+$\|f\|_{H^s}^2=\sum_{k\in\Z^3}
+(1+|k|^2)^s|\widehat f(k)|^2$
+and let $s\in\R$.
+
+\begin{theorem}[Exact propagator and optimal derivative loss]
+\label{thm:loss}
+For the dust equations in \eqref{eq:model},
+\begin{equation}\label{eq:exact-dust}
+v_{\mathrm d}(t)=v_{\mathrm d}(0),\qquad
+\delta_{\mathrm d}(t)=\delta_{\mathrm d}(0)
+-t\,\nabla\cdot v_{\mathrm d}(0).
+\end{equation}
+Consequently, for every $s\in\R$,
+\begin{equation}\label{eq:mixed-est}
+\begin{aligned}
+\|\delta_{\mathrm d}(t)\|_{H^s}
+&\le \|\delta_{\mathrm d}(0)\|_{H^s}
++|t|\|v_{\mathrm d}(0)\|_{H^{s+1}},\\
+\|v_{\mathrm d}(t)\|_{H^{s+1}}
+&=\|v_{\mathrm d}(0)\|_{H^{s+1}}.
+\end{aligned}
+\end{equation}
+For each fixed $t\ne0$, the map on the dust
+variables is unbounded from
+$H^s\times(H^{s+\alpha})^3$
+to $H^s\times(H^s)^3$ whenever
+$\alpha<1$. Thus one additional derivative
+on the initial dust velocity is \emph{necessary
+and sufficient} for the direct estimate.
+\end{theorem}
+\begin{proof}
+The velocity equation integrates to
+$v_{\mathrm d}(t)=v_{\mathrm d}(0)$,
+and the continuity equation then integrates
+to \eqref{eq:exact-dust}. The elementary
+Fourier multiplier estimate
+$\|\nabla\cdot v\|_{H^s}\le\|v\|_{H^{s+1}}$
+gives \eqref{eq:mixed-est}.
+
+For sharpness, set
+$\delta_{\mathrm d}(0)=0$, take the
+velocity pointing in the first coordinate,
+and let its only nonzero Fourier coefficient
+be at frequency $k_N=(N,0,0)$:
+\[
+\widehat{v_{\mathrm d}}(k_N,0)
+=(1+N^2)^{-(s+\alpha)/2}e_1.
+\]
+The initial $H^{s+\alpha}$ velocity norm
+equals one, while
+\begin{equation}\label{eq:sharp}
+\|\delta_{\mathrm d}(t)\|_{H^s}
+=|t|N(1+N^2)^{-\alpha/2}
+\longrightarrow\infty\quad (N\to\infty)
+\end{equation}
+for every $\alpha<1$.
+Real initial data follow by adding the complex
+conjugate at $-k_N$ with an inessential
+constant normalization. This is an exact
+counterexample to any common-$H^s$ estimate
+for the constant-coefficient Eulerian symbol.
+\end{proof}
+
+\begin{proposition}[Radiation energy and combined estimate]
+\label{prop:r-energy}
+For any smooth periodic radiation data, the
+linearized radiation energy
+\begin{equation}\label{eq:Er}
+E_{\mathrm r,s}(t)=
+\frac13\|\delta_{\mathrm r}(t)\|_{H^s}^2+
+\|v_{\mathrm r}(t)\|_{H^s}^2
+\end{equation}
+is conserved for every $s\in\R$.
+The full frozen matter Cauchy map is therefore
+bounded for finite $t$ from
+\[
+\mathcal X_s=
+H^s_{\delta_{\mathrm d}}\times
+(H^{s+1})^3_{v_{\mathrm d}}\times
+H^s_{\delta_{\mathrm r}}\times
+(H^s)^3_{v_{\mathrm r}}
+\]
+to the same space, with a bound at most
+linear in $1+|t|$ in its natural sum norm.
+No corresponding bound holds on the
+same-index space $(H^s)^8$.
+\end{proposition}
+\begin{proof}
+Apply $(1-\Delta)^{s/2}$ to the radiation
+equations. Multiply the density equation by
+$\delta_{\mathrm r}/3$ and the velocity
+equation by $v_{\mathrm r}$ and integrate.
+The two integration-by-parts terms cancel:
+\[
+\frac12\frac{d}{dt}E_{\mathrm r,s}
+=-\frac13\langle
+\delta_{\mathrm r},\nabla\cdot v_{\mathrm r}
+\rangle_{H^s}
+-\frac13\langle
+v_{\mathrm r},\nabla\delta_{\mathrm r}
+\rangle_{H^s}=0.
+\]
+The dust estimates follow from
+Theorem~\ref{thm:loss}.
+The radiation and dust blocks are a direct
+sum, so combining their bounds proves
+the claim. The high-frequency dust
+counterexample \eqref{eq:sharp} rules
+out any $(H^s)^8$-bounded Cauchy
+map at nonzero time.
+\end{proof}
+
+\section{Pressure regularization and the singular sound-speed limit}
+Replace the dust equation of state by
+$p_{\mathrm d}=c^2\rho_{\mathrm d}$
+with $0<c\le1$, and normalize its
+density perturbation by the fluid enthalpy,
+as in the radiation sector. The
+\emph{longitudinal} dust pressure-regularized
+principal system becomes
+\begin{equation}\label{eq:ac}
+\partial_t
+\begin{pmatrix}d\\u\end{pmatrix}
++
+A_c\partial_x
+\begin{pmatrix}d\\u\end{pmatrix}=0,\qquad
+A_c=\begin{pmatrix}0&1\\c^2&0\end{pmatrix}.
+\end{equation}
+Here $d$ differs from the dust normalization
+in \eqref{eq:model} at positive $c$
+by a constant factor $1+c^2$;
+this tends to one as $c\to0$.
+
+\begin{theorem}[Best-conditioned positive symmetrizer]
+\label{thm:sym}
+For each $0<c\le1$ the positive
+matrix
+\begin{equation}\label{eq:Hc}
+H_c=\operatorname{diag}(c^2,1)
+\end{equation}
+symmetrizes $A_c$, so the regularized
+longitudinal system is symmetric hyperbolic.
+Among \emph{all} positive definite
+$2\times2$ Hermitian symmetrizers of
+$A_c$, its Euclidean spectral condition
+number is optimally small:
+\begin{equation}\label{eq:cond}
+\boxed{\quad
+\inf_{\substack{H=H^\ast>0\\HA_c=A_c^\ast H}}
+\kappa_2(H)=c^{-2}.
+\quad}
+\end{equation}
+There is no positive definite symmetrizer
+at $c=0$ in these Eulerian variables.
+\end{theorem}
+\begin{proof}
+The eigenvalues of $A_c$ are $\pm c$.
+Direct multiplication verifies
+$H_cA_c=(H_cA_c)^\ast$, and
+$\kappa_2(H_c)=c^{-2}$ for $c\le1$.
+
+For an arbitrary positive definite
+Hermitian matrix
+$H=\left(\begin{smallmatrix}
+a&b\\\overline b&d\end{smallmatrix}\right)$,
+the equality $HA_c=A_c^\ast H$
+forces $b\in\R$ and $a=c^2d$.
+Both coordinate vectors are
+unit Euclidean vectors, so
+\[
+\lambda_{\max}(H)\ge d,\qquad
+\lambda_{\min}(H)\le a=c^2d,
+\qquad\kappa_2(H)\ge c^{-2}.
+\]
+The diagonal choice attains the lower bound.
+At $c=0$, the symmetry relation forces
+$a=0$, contradicting strict positivity.
+\end{proof}
+
+\begin{theorem}[Exact singular propagator]
+\label{thm:limit}
+For spatial Fourier frequency $k\in\R$,
+the positive-$c$ propagator is
+\begin{equation}\label{eq:prop}
+\boxed{\quad
+e^{-iktA_c}=\cos(ckt)I
+-i\frac{\sin(ckt)}{c}A_c.
+\quad}
+\end{equation}
+For fixed $k,t$, it tends to
+\[
+e^{-iktA_0}=
+\begin{pmatrix}1&-ikt\\0&1\end{pmatrix}
+\quad\text{as }c\downarrow0.
+\]
+For any fixed $t\ne0$, the operator
+norm of the propagator on the common
+$H^s$ density/velocity norm
+diverges at least as $c^{-1}$
+in the small-$c$ limit:
+\begin{equation}\label{eq:diverge}
+\sup_{N\in\Z}\|e^{-iNtA_c}\|_2
+\ge\frac{\cos(c|t|/2)}{c}
+\qquad\text{whenever }c|t|<\pi.
+\end{equation}
+Thus pressure regularization restores
+strong hyperbolicity at every fixed
+$c>0$, but \emph{not uniformly}
+as the sound speed tends to zero.
+\end{theorem}
+\begin{proof}
+Since $A_c^2=c^2I$, separating even
+and odd terms of the matrix exponential
+gives \eqref{eq:prop}. Taking
+the elementary limits of sine and cosine
+gives the Jordan shear.
+For the lower bound choose an integer
+$N$ nearest $\pi/(2c|t|)$.
+Then
+$|cN|t|-\pi/2|\le c|t|/2$,
+so $|\sin(cNt)|\ge\cos(c|t|/2)$.
+The upper-right entry of
+$e^{-iNtA_c}$ has modulus
+$|\sin(cNt)|/c$. An operator
+norm is at least the magnitude
+of any matrix entry, proving
+\eqref{eq:diverge}.
+\end{proof}
+% PHY005_APPEND
+
 % PHY005_APPEND
