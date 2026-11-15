@@ -75,7 +75,38 @@ Run both after the four previous verifiers. GitHub Actions automatically execute
 3. Prove a homogeneous well-posed subsidiary system for **all** torsion, Weyl-divergence, Einstein, frame, gauge, stress-jet and material constraints, without tacit special initial constraints.
 4. Close an inhomogeneous nonlinear energy estimate and local existence theorem, plus eventually a constraint-convergent numerical evolution.
 
-**STATUS:** proved restricted combined principal skeleton + radiation-jet subsidiary propagation; complete Einstein–dust–radiation theorem remains OPEN.
+**STATUS:** proved restricted combined principal skeleton + 30-field sourceful Weyl-divergence/radiation-jet subsidiary; complete Einstein–dust–radiation theorem remains OPEN.
+
+## Attack 04: sourced Weyl divergence and 30-component homogeneous subsidiary
+
+The previous curvature–radiation principal system alone only propagated the defining gradient constraints. This continuation now closes an additional **six genuine Weyl-divergence constraints** in the comoving, constant-coefficient *sourceful* model, without imposing a false vacuum divergence-free condition on radiation-sourced curvature.
+
+Let E,H be the STF Weyl electric and magnetic fields, U=(sigma,v), and W_i=(S_i,V_ij) with S_i=∂i sigma and V_ij=∂i v_j. Let cs=1/sqrt(3), b=2κ rho_r/3 and define
+
+    C_E,i = ∂^j E_ij − 2b cs S_i
+    C_H,i = ∂^j H_ij − b epsilon_ijk V_jk
+
+and the existing radiation-jet curl constraints F_ij=∂i W_j−∂j W_i and defining constraints Z_i=W_i−∂i U. With E_t+curl_STF H=−b STF(V), H_t−curl_STF E=0, and the prolonged acoustic system, the **exact subsidiary equations** are
+
+    (C_E)_t + (1/2) curl C_H = (b/3) G(F)
+    (C_H)_t − (1/2) curl C_E = 0
+    (Z_i)_t + R^k ∂k Z_i = 0
+    (F_ij)_t + R^k ∂k F_ij = 0
+
+where [G(F)]_i=Σ_j (F_ij)_(velocity j). Importantly, the source G(F) is algebraic and **contains no derivative** of F. The full 30-variable principal is symmetric hyperbolic with identity symmetrizer; the exact algebraic map GG^T=2I gives, for each Sobolev index s,
+
+    E_s(t) <= exp[sqrt(2)*|b|*|t|/3] E_s(0),
+
+with E_s one half of the sum of squared H^s norms of C_E,C_H,Z_i,F_ij. Thus zero sourceful Weyl divergence and radiation-jet constraints propagate in this frozen model.
+
+The theorem reconstructs all 24 components of the contracted Weyl Bianchi identity from the ten Weyl evolution equations plus six constraints, not just a selected projection. In vacuum, imposing divergence-free E,H on a nonzero Fourier mode removes the Weyl zero and half-light-speed branches, leaving exactly two physical light-speed polarizations (four real first-order field variables).
+
+### New exact independent tests
+
+- [verify_weyl_subsidiary.py](verify_weyl_subsidiary.py): independently reconstructs the 4-index Weyl tensor, checks all 24 sourced contracted-Bianchi residuals, both sourceful subsidiary identities, 30×30 spatial matrix symmetries and exact GG^T=2I.
+- [verify_weyl_subsidiary_independent.py](verify_weyl_subsidiary_independent.py): implements the entire calculation again using only standard-library rational Fraction arithmetic, with a different density coordinate chi=sigma/cs, independently rebuilt Weyl tensors and a weighted 30×30 symmetrizer.
+
+**Scope:** A new *restricted fixed-coefficient Weyl geometric-subsidiary certificate*, not a full nonlinear geometric constraint closure or complete Einstein Cauchy theorem. Nonlinear moving-frame, torsion, connection, gauge, dust and Einstein constraints remain open. The gravitoelectromagnetic constraint machinery and Weyl light-speed physical polarization restriction have major prior art, including van Elst–Ellis (1999), so this is a transparent exact reproducibility/extension benchmark, not an originality claim.
 
 ## Files and reproduction
 
@@ -97,8 +128,10 @@ Reproduce:
     python verify_material_independent.py
     python verify_curvature_radiation.py
     python verify_curvature_radiation_independent.py
+    python verify_weyl_subsidiary.py
+    python verify_weyl_subsidiary_independent.py
 
-GitHub Actions runs all six verifiers for every commit, then compiles the cumulative PDF.
+GitHub Actions runs all eight verifiers for every commit, then compiles the cumulative PDF.
 
 ## Prior art and scientific classification
 
