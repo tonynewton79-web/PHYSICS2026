@@ -29,6 +29,13 @@ jobs:
             if [ -f "$folder/verify_independent.py" ]; then
               python "$folder/verify_independent.py"
             fi
+            if [ -f "$folder/verify_su2_coefficients.py" ]; then
+              python "$folder/verify_su2_coefficients.py"
+            fi
+            if [ -f "$folder/verify_su2_gluing_s3.cpp" ]; then
+              g++ -std=c++17 -O2 -Wall -Wextra "$folder/verify_su2_gluing_s3.cpp" -o /tmp/phy_su2_s3
+              /tmp/phy_su2_s3
+            fi
             count=$((count + 1))
           done
           test "$count" -gt 0
