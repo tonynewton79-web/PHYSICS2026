@@ -1,6 +1,7 @@
 \documentclass[11pt,a4paper]{article}
 \usepackage[margin=22mm]{geometry}
 \usepackage{amsmath,amssymb,amsthm,microtype}
+\usepackage{tikz}
 \usepackage[colorlinks=true,citecolor=blue,urlcolor=blue]{hyperref}
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
@@ -13,8 +14,67 @@
 \begin{abstract}
 We classify the first two nonempty mod-two closed plaquette-surface strata of the four-dimensional cubic lattice. Every finite closed surface with fewer than twelve faces is the six-face boundary of an elementary cube or the ten-face symmetric difference of two distinct elementary cubes sharing a face. The second presentation is unique. Rooted multiplicities are four at area six and sixty at area ten, with the latter split into twenty same-orientation and forty mixed-orientation cases. We derive the first two coefficients of the reduced finite-volume abelian lattice-gauge partition function, and explain the corresponding necessary parity rule in SU(2) character expansions. These are known-type strong-coupling results with independently reproduced exact counts, not a new continuum Yang--Mills mass-gap theorem.
 \end{abstract}
+
+\begin{center}
+\fbox{\begin{minipage}{0.94\linewidth}
+\textbf{Finite-volume lattice-gauge headline results.}
+Set $V=L^4$, $L\ge4$, $t=\tanh\beta$,
+$c_0(\beta)=2I_1(\beta)/\beta$, and
+$u(\beta)=I_2(\beta)/I_1(\beta)$, with modified Bessel functions $I_n$.
+The two distinct gauge theories have the following \emph{different} normalized expansions:
+\[
+\begin{aligned}
+\mathbb Z_2:\quad&
+\frac{Z_{L,\mathbb Z_2}(\beta)}
+{2^{4V}(\cosh\beta)^{6V}}
+=1+4Vt^6+36Vt^{10}+O_L(t^{12}),\\[2pt]
+SU(2):\quad&
+\frac{Z_{L,SU(2)}(\beta)}{c_0(\beta)^{6V}}
+=1+16Vu^6+144Vu^{10}+O_L(\beta^{12}).
+\end{aligned}
+\]
+The $SU(2)$ result uses actual Haar character integrals, not merely center-parity counting. Both remainders are at fixed finite volume; neither is a continuum mass-gap estimate.
+\end{minipage}}
+\end{center}
+
 \section{Definitions and prior results}
 Let \(C_k(\mathbb Z^d;\mathbb F_2)\) denote finitely supported cubical chains. A two-chain \(S\) of unit plaquettes is closed when \(\partial S=0\), equivalently each lattice edge has even incidence. The area \(|S|\) counts distinct unoriented plaquettes. The closed-surface strong-coupling expansion is classical \cite{wegner,kogut,drouffe}; related rigorous four-dimensional small-surface results appear in \cite{forsstrom}. We do not claim novelty of the initial cube terms.
+
+
+\begin{figure}[t]
+\centering
+\begin{minipage}{0.44\linewidth}\centering
+\begin{tikzpicture}[scale=0.87,line join=round]
+  \filldraw[fill=gray!16,draw=black,thick] (0,1.25)--(1.6,1.25)--(2.15,1.75)--(0.55,1.75)--cycle;
+  \filldraw[fill=gray!30,draw=black,thick] (1.6,0)--(2.15,0.5)--(2.15,1.75)--(1.6,1.25)--cycle;
+  \filldraw[fill=gray!7,draw=black,thick] (0,0)--(1.6,0)--(1.6,1.25)--(0,1.25)--cycle;
+  \draw[dashed,gray] (0,0)--(0.55,0.5)--(2.15,0.5);
+  \draw[dashed,gray] (0.55,0.5)--(0.55,1.75);
+  \node[below,font=\small] at (1.1,-0.15) {six boundary plaquettes};
+\end{tikzpicture}
+\end{minipage}\hfill
+\begin{minipage}{0.54\linewidth}\centering
+\begin{tikzpicture}[scale=0.87,line join=round]
+  \filldraw[fill=gray!16,draw=black,thick] (0,1.25)--(3.2,1.25)--(3.75,1.75)--(0.55,1.75)--cycle;
+  \filldraw[fill=gray!30,draw=black,thick] (3.2,0)--(3.75,0.5)--(3.75,1.75)--(3.2,1.25)--cycle;
+  \filldraw[fill=gray!7,draw=black,thick] (0,0)--(3.2,0)--(3.2,1.25)--(0,1.25)--cycle;
+  \draw[dashed,gray] (0,0)--(0.55,0.5)--(3.75,0.5);
+  \draw[dashed,gray] (0.55,0.5)--(0.55,1.75);
+  \draw[dashed,black,thick] (1.6,0)--(1.6,1.25)--(2.15,1.75);
+  \draw[dashed,black,thick] (1.6,0)--(2.15,0.5)--(2.15,1.75);
+  \node[above,font=\scriptsize] at (2.15,1.9) {shared face cancelled};
+  \node[below,font=\small] at (1.85,-0.15) {ten boundary plaquettes};
+\end{tikzpicture}
+\end{minipage}
+\caption{The two finite mod-two closed plaquette surfaces below area twelve.
+Left: the complete boundary of one elementary three-cube.
+Right: two face-sharing three-cubes with the shared plaquette deleted
+(mod-two cancellation), here drawn in the same three-coordinate plane.
+The mixed-orientation type in four dimensions has the same ten-face count,
+but requires four coordinate directions and is not representable by a
+single three-dimensional cuboid.}
+\label{fig:low-surfaces}
+\end{figure}
 
 \section{Minimum cubical-cycle weight and parity}
 \begin{lemma}\label{lem:min}
