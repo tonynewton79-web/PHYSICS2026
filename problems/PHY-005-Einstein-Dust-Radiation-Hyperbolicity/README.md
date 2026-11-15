@@ -110,6 +110,34 @@ The theorem reconstructs all 24 components of the contracted Weyl Bianchi identi
 
 **Scope:** A new *restricted fixed-coefficient radiation-sourced Weyl geometric-subsidiary certificate*, not a full two-fluid Bianchi closure, nonlinear geometric constraint closure or complete Einstein Cauchy theorem. Nonlinear moving-frame, torsion, connection, gauge, dust and Einstein constraints remain open. The gravitoelectromagnetic constraint machinery and Weyl light-speed physical polarization restriction have major prior art, including van Elst–Ellis (1999), so this is a transparent exact reproducibility/extension benchmark, not an originality claim.
 
+## Journal-style final paper and two-fluid extension
+
+A separate, concise final-paper source is included as **[final_paper.tex](final_paper.tex)**:
+
+**Constraint Propagation in Two-Fluid Weyl Systems and Nonlinear Radiation Prolongation in Dust-Adapted Coordinates** — Tony Newton. GitHub Actions now compiles this seven-page research paper alongside the historical cumulative paper; look for the PDF named **PHY005_Constraint_Propagation_in_Two-Fluid_Weyl_Systems_Final_Paper.pdf** in its PDF-manuscripts artifact.
+
+The newly verified restricted theorem includes the static material-dust perturbation **as well as** radiation in the **frozen** Weyl source. With radiation gradient components S_i,V_ij, dust density gradient P_i, b=2κ*rho_r/3 and c_s=1/sqrt(3), the total Weyl constraints are
+
+    D_E,i = div(E)_i - 2*b*c_s*S_i - (κ/3)*P_i
+    D_H,i = div(H)_i - b*epsilon_ijk*V_jk.
+
+In addition to 24 radiation gradient defining/curl components, introduce 3 dust defining and 3 dust curl components. The resulting **36-dimensional symmetric-hyperbolic subsidiary** has exact equations
+
+    D_E,t + (1/2) curl D_H = (b/3)*G_r*F_r
+    D_H,t - (1/2) curl D_E = (κ/6)*G_d*F_d
+    Z_r,t + R^k*∂k Z_r = F_r,t + R^k*∂k F_r = 0
+    Z_d,t = F_d,t = 0.
+
+Here G_r G_r^T=2I and G_d G_d^T=I. Its frequency-uniform energy obeys
+
+    E_s(t) <= exp(max(sqrt(2)*|b|/3, |κ|/6)*|t|) E_s(0).
+
+The new magnetic dust-curl term is necessary; it is not lawful to discard it when P_i is an independent auxiliary variable. Both SymPy and independent Fraction-only exact verifiers reproduce all 24 contracted Bianchi components and the positive 36x36 subsidiary principal.
+
+A second theorem, proved in the new paper, treats **nonlinear first-gradient prolongation of symmetric relativistic Euler on a prescribed smooth metric**. The defining constraints propagate homogeneously, but the prolonged sources contain second prescribed geometric derivatives. Thus it is **not** automatically a combined Einstein–matter existence theorem.
+
+**Scientific boundary:** The frozen two-fluid source model does not assert a flat Einstein background with nonzero constant matter density. Full nonlinear dynamical tetrad/connection, torsion/gauge/Einstein constraints, a common nonlinear symmetrizer and inhomogeneous Cauchy existence are NOT proved. These are specialist mathematical control results with substantial earlier hyperbolic-reduction and Weyl-constraint prior art.
+
 ## Files and reproduction
 
 - [paper.tex](paper.tex): manuscript, full proofs, conditional Einstein harmonic constraints, and **Appendix A: Precise Mathematical Formulation of the Main Result**
