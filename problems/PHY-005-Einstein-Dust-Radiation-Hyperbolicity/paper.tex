@@ -640,6 +640,322 @@ state-space patch of any prescribed
 smooth metric \cite{walton,friedrich}.
 \end{proof}
 
+
+\section{The coupled Einstein source, constraint propagation,
+and the remaining gravitational principal gate}
+\label{sec:closure}
+Theorem~\ref{thm:tilted} makes the
+\emph{matter} principal operator symmetric,
+not the complete Einstein operator.
+The difference is visible without any
+linearization of the stress tensor.
+Put $\kappa=8\pi G$ and
+write $K_{ij}=-\tfrac12\partial_\tau h_{ij}$.
+Relative to $n=\partial_\tau$, the
+energy, momentum and spatial stress are
+\begin{equation}\label{eq:tiltstress}
+\begin{aligned}
+E&=\rho_{\mathrm d}
++\frac43\rho_{\mathrm r}\gamma^2
+-\frac13\rho_{\mathrm r},\\
+J_i&=\frac43\rho_{\mathrm r}\gamma^2v_i,\\
+S_{ij}&=\frac43\rho_{\mathrm r}\gamma^2v_i v_j
++\frac13\rho_{\mathrm r}h_{ij}.
+\end{aligned}
+\end{equation}
+In particular $J_i$ is generally
+\emph{nonzero}, even though the dust
+itself is comoving. Replacing the two
+stress tensors by one fluid comoving
+with dust would erase this physical
+momentum density.
+
+For smooth solutions the synchronous
+spatial Einstein equations have the
+exact ADM form
+\begin{equation}\label{eq:material-ADM}
+\begin{aligned}
+\partial_\tau h_{ij}&=-2K_{ij},\\
+\partial_\tau K_{ij}
+&=R^{(3)}_{ij}+K K_{ij}
+-2K_i{}^kK_{kj}\\
+&\quad-\kappa\bigl[S_{ij}
+-\tfrac12 h_{ij}(S-E)\bigr]
+-\Lambda h_{ij},
+\end{aligned}
+\end{equation}
+where $K=h^{ij}K_{ij}$ and
+$S=h^{ij}S_{ij}$. The Hamiltonian
+and momentum constraint quantities are
+\begin{equation}\label{eq:material-constraints}
+\begin{aligned}
+\mathcal H&=R^{(3)}+K^2-K_{ij}K^{ij}
+-2\Lambda-2\kappa E,\\
+\mathcal M_i&=D_j(K^j{}_i-\delta^j_iK)
+-\kappa J_i .
+\end{aligned}
+\end{equation}
+
+\begin{proposition}[Conditional nonlinear ADM constraint propagation]
+\label{prop:mat-constraint}
+Assume that
+\eqref{eq:materialmass}, \eqref{eq:covrad},
+and \eqref{eq:material-ADM} hold for a
+sufficiently smooth spacetime metric
+and positive two-fluid variables.
+Then the ADM constraint quantities
+\eqref{eq:material-constraints} satisfy a
+\emph{homogeneous} first-order linear
+subsidiary system whose frozen
+highest-derivative part is
+\begin{equation}\label{eq:ADMsubsidiary}
+\partial_\tau\mathcal H
+\simeq-2D^i\mathcal M_i,\qquad
+\partial_\tau\mathcal M_i
+\simeq-\tfrac12D_i\mathcal H.
+\end{equation}
+Here $\simeq$ means equality modulo
+terms algebraic and homogeneous in
+$(\mathcal H,\mathcal M)$, with
+coefficients depending on the
+smooth evolving geometry.
+This principal system is symmetric
+hyperbolic in
+$(\mathcal H,2\mathcal M_i)$.
+Consequently vanishing initial
+Hamiltonian and momentum constraints
+propagate \emph{for any existing
+smooth solution} of the stated
+spatial evolution and matter equations.
+The proposition does not establish
+existence or strong hyperbolicity
+of the evolution system itself.
+\end{proposition}
+\begin{proof}
+Theorem~\ref{thm:material} establishes
+$\nabla_\mu T_{\mathrm d}^{\mu\nu}=0$.
+The radiation Euler system
+\eqref{eq:covrad} is equivalent to
+$\nabla_\mu T_{\mathrm r}^{\mu\nu}=0$.
+Hence the total stress tensor is
+divergence free.
+Apply the contracted Bianchi identity
+to $\mathcal E_{\mu\nu}
+:=G_{\mu\nu}+\Lambda g_{\mu\nu}
+-\kappa T_{\mu\nu}$:
+\[
+\nabla^\mu\mathcal E_{\mu\nu}=0.
+\]
+The spatial Einstein evolution equations
+set the purely spatial components
+of the Einstein residual to zero after
+the standard ADM splitting. The four
+remaining normal projections are
+equivalent, up to positive algebraic
+factors, to $(\mathcal H,\mathcal M_i)$.
+Separating the time and spatial
+derivatives in the divergence identity
+yields the well-known homogeneous
+constraint subsidiary equations.
+At principal order with synchronous
+lapse one and shift zero, their
+coefficients are precisely
+\eqref{eq:ADMsubsidiary}.
+With the change $\mathcal P_i=2\mathcal M_i$,
+the principal blocks become
+$\partial_\tau\mathcal H+D^i\mathcal P_i$
+and
+$\partial_\tau\mathcal P_i+D_i\mathcal H$,
+which have identity time matrix
+and symmetric spatial matrices.
+Uniqueness of the resulting linear
+symmetric-hyperbolic subsidiary
+problem gives the stated conditional
+propagation from zero initial data.
+\end{proof}
+
+\begin{proposition}[Full nonlinear homogeneous consistency control]
+\label{prop:FLRW}
+Let $\kappa=8\pi G$, and take the flat
+FLRW special case
+$h_{ij}=a(\tau)^2\delta_{ij}$ with
+comoving radiation $v=0$.
+For positive initial densities and
+initial scale factor $a>0$,
+the coupled Einstein--dust--radiation
+equations reduce to
+\begin{equation}\label{eq:FLRW}
+\begin{aligned}
+\dot a&=aH,&
+\dot\rho_{\mathrm d}&=-3H\rho_{\mathrm d},\\
+\dot\rho_{\mathrm r}&=-4H\rho_{\mathrm r},&
+\dot H&=-\frac{\kappa}{2}
+\left(\rho_{\mathrm d}
++\frac43\rho_{\mathrm r}\right),
+\end{aligned}
+\end{equation}
+with initial Hamiltonian condition
+\begin{equation}\label{eq:FLRW-C}
+\mathcal C=
+3H^2-\kappa(\rho_{\mathrm d}
++\rho_{\mathrm r})-\Lambda=0.
+\end{equation}
+For every local smooth solution of
+these ordinary differential equations,
+$\dot{\mathcal C}=0$ exactly.
+This is a complete \emph{homogeneous
+nonlinear positive control}, not the
+requested inhomogeneous PDE theorem.
+\end{proposition}
+\begin{proof}
+The matter identities follow from
+the two separate continuity equations
+on $h_{ij}=a^2\delta_{ij}$.
+The displayed $\dot H$ is the
+flat FLRW Raychaudhuri equation.
+Direct differentiation gives
+\[
+\dot{\mathcal C}
+=6H\dot H-\kappa
+(-3H\rho_{\mathrm d}
+-4H\rho_{\mathrm r})=0
+\]
+upon substituting \eqref{eq:FLRW}.
+The matter pressure and ADM spatial
+Einstein equation agree with the
+same relation. Local ordinary
+differential equation existence
+holds wherever $a>0$.
+\end{proof}
+
+\begin{proposition}[A gravitational warning:
+raw synchronous ADM is not a ready-made
+strongly hyperbolic first-order closure]
+\label{prop:gaussian}
+For the independent \emph{vacuum} metric
+subsystem obtained by linearizing
+\eqref{eq:material-ADM} around Minkowski
+space in synchronous gauge,
+there are smooth Fourier solutions
+satisfying the linearized vacuum ADM
+constraints whose first-order metric
+gradient grows without a
+frequency-uniform bound relative to
+the initial $(h,K,Dh)$ norm.
+Specifically, with $N\in\mathbb N$,
+\begin{equation}\label{eq:gaugemode}
+h_{11}(\tau,X)=-2\tau\cos(NX^1),\qquad
+K_{11}(\tau,X)=\cos(NX^1),
+\end{equation}
+and all other components zero,
+gives for every $\tau\ne0$
+a ratio of gradient amplitude to
+initial extrinsic-curvature amplitude
+equal to $2|\tau|N$. Thus one
+cannot simply append
+Theorem~\ref{thm:tilted} to \emph{raw}
+synchronous ADM and declare the
+result strongly hyperbolic.
+This vacuum gauge-mode test does not
+exclude a more sophisticated
+dust-adapted, constraint-augmented
+Einstein tetrad or gauge system.
+\end{proposition}
+\begin{proof}
+Write $\phi_N=N^{-2}\cos(NX^1)$.
+The metric perturbation
+$h_{ij}=2\tau\partial_i\partial_j\phi_N$
+is a pure spatial Hessian at each
+fixed time; its linearized spatial
+Ricci tensor and Ricci scalar vanish.
+With $K_{ij}=-\partial_i\partial_j\phi_N$,
+the vacuum linearized equations
+$\dot h_{ij}=-2K_{ij}$,
+$\dot K_{ij}=R^{(3,1)}_{ij}$
+are satisfied.
+The Hamiltonian constraint is
+$R^{(3,1)}=0$ and the momentum
+constraint is
+$\partial^jK_{ij}-\partial_iK=0$,
+both identically.
+At initial time, $h=Dh=0$
+but $K_{11}=\cos(NX^1)$.
+At nonzero time,
+$\partial_1h_{11}=2\tau N\sin(NX^1)$.
+Their equal $L^2$ trigonometric
+norm factors give the ratio
+$2|\tau|N\to\infty$.
+This test concerns the \emph{raw
+vacuum ADM subsystem} as a potential
+gravitational evolution choice;
+the material dust restriction may
+remove some of its residual gauges.
+It is not a no-go for all
+dust-material Einstein reductions.
+\end{proof}
+
+The remaining first-order Einstein
+principal coupling must be addressed
+explicitly. In a Weyl/Schouten frame
+reduction the Schouten tensor obeys
+\[
+L_{\mu\nu}=
+\frac{\kappa}{2}
+\left(T_{\mu\nu}
+-\frac13Tg_{\mu\nu}\right)
++\frac{\Lambda}{6}g_{\mu\nu}.
+\]
+Its antisymmetrized derivative includes
+\begin{equation}\label{eq:cotton}
+\nabla_{[\alpha}L_{\beta]\nu}
+=\frac{\kappa}{2}\nabla_{[\alpha}
+\left(T_{\beta]\nu}
+-\frac13Tg_{\beta]\nu}\right).
+\end{equation}
+For independently tilted radiation,
+the right-hand side contains
+derivatives of $(\rho_{\mathrm r},v)$.
+The radiation momentum flux $J_i$
+in \eqref{eq:tiltstress} also prevents
+the total stress from being treated
+as a single fluid comoving with dust.
+Therefore it is insufficient merely
+to take a direct sum of a
+single-dust gravitational symmetrizer
+and the radiation block
+\eqref{eq:Axi}. The missing
+\emph{proof obligation} is to choose
+and write an auxiliary
+curvature--stress-derivative
+first-order reduction, establish
+one positive time symmetrizer for
+\emph{all} its characteristic blocks,
+propagate the torsion/frame/gauge
+and Einstein constraints, and close
+the Sobolev estimates in the same
+nonlinear material gauge.
+
+Such a construction is not delivered
+by the present paper.
+Friedrich's Lagrangian construction
+\cite{friedrich}, the frame and
+zero-quantity analysis of
+Normann--Valiente Kroon
+\cite{normann}, and the
+two-fluid symmetric-hyperbolic
+methods of Fournodavlos--Marshall--Oliynyk
+\cite{fournodavlos} are important
+prior art. In particular, the latter
+treats two strictly positive
+sound-speed parameters
+$1/3<K_a<5/7$, not the
+pressureless-dust plus
+exact-radiation endpoint considered
+here. The local nonlinear
+Einstein--dust--radiation Cauchy
+theorem remains unproved in
+this work.
+
 \section{What the generalized-harmonic constraints do and do not repair}
 The principal-symbol no-go is \emph{not} a claim that
 the Einstein constraints themselves fail to propagate.
