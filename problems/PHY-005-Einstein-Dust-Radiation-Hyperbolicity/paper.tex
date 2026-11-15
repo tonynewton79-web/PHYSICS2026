@@ -1512,6 +1512,16 @@ $W_i=(S_i,V_{ij})$ of
 Write $c_s=1/\sqrt3$ and
 $b=2\kappa\bar\rho_{\mathrm r}/3>0$,
 as in \eqref{eq:linear-schouten}.
+In this \emph{radiation-source test} we
+hold the independent dust Schouten
+perturbation fixed; its nonzero
+material-density gradients must be
+restored in the genuine coupled
+Einstein--dust--radiation problem.
+The theorem below consequently
+propagates the radiation-sourced
+Weyl constraints, not the entire
+two-fluid Bianchi constraint system.
 For spatial vector fields
 $\operatorname{curl} q$ is
 the standard Euclidean curl, and
@@ -1818,6 +1828,118 @@ van Elst--Ellis
 \cite{vanelst}, in addition to
 Friedrich's hyperbolic frame
 reductions \cite{friedrich}.
+
+
+\subsection{The missing dust Schouten source is first-order in material variables}
+\begin{proposition}[Exact dust material
+stress-derivative identities]
+\label{prop:dust-schouten}
+For the same fully nonlinear
+synchronous material metric
+\eqref{eq:materialmetric}, put
+$h=\det h_{ij}$,
+$m(X)=\rho_{\mathrm d}\sqrt h$,
+and $K_{ij}=-\tfrac12\partial_\tau h_{ij}$.
+The dust contribution to the
+Schouten tensor is
+\begin{equation}\label{eq:dust-L}
+L^{\mathrm d}_{\mu\nu}
+=\frac{\kappa}{2}\rho_{\mathrm d}
+\left(n_\mu n_\nu
++\frac13 g_{\mu\nu}\right),
+\end{equation}
+so
+\[
+L^{\mathrm d}_{00}=\frac{\kappa}{3}\rho_{\mathrm d},
+\quad L^{\mathrm d}_{0i}=0,
+\quad L^{\mathrm d}_{ij}=\frac{\kappa}{6}
+\rho_{\mathrm d}h_{ij}.
+\]
+Its exact density derivatives are
+\begin{equation}\label{eq:dust-grad}
+\boxed{\quad
+\partial_\tau\rho_{\mathrm d}
+=\rho_{\mathrm d}K,\qquad
+\partial_i\rho_{\mathrm d}
+=\frac{\partial_i m}{\sqrt h}
+-\frac{\rho_{\mathrm d}}2
+h^{jk}\partial_i h_{jk}.
+\quad}
+\end{equation}
+Consequently, once the spatial
+first derivatives of $h_{ij}$
+and the connection coefficients
+are included as independent
+geometric variables, every
+covariant \emph{first derivative}
+of $L^{\mathrm d}_{\mu\nu}$
+is algebraic in those variables,
+$(h,K,\rho_{\mathrm d})$,
+and the fixed material density
+profile $(m,\partial_i m)$.
+No dust \emph{second metric}
+derivative is forced solely by
+this Schouten source. This is
+a structural source identity,
+not a complete frame-system
+hyperbolicity or constraint theorem.
+\end{proposition}
+\begin{proof}
+The trace of pressureless dust
+stress is $T^{\mathrm d}
+=-\rho_{\mathrm d}$.
+The definition
+$L_{\mu\nu}=\frac{\kappa}{2}
+(T_{\mu\nu}-Tg_{\mu\nu}/3)$
+then gives \eqref{eq:dust-L},
+and substitution of
+$g_{00}=-1$, $g_{0i}=0$
+gives the displayed components.
+Jacobi's determinant formula
+states
+$\partial_\alpha\sqrt h
+=(\sqrt h/2)h^{jk}
+\partial_\alpha h_{jk}$.
+Using the conservation law
+$\partial_\tau m=0$ gives
+\[
+\partial_\tau\rho_{\mathrm d}
+=-\frac{\rho_{\mathrm d}}2
+h^{jk}\partial_\tau h_{jk}
+=\rho_{\mathrm d}K.
+\]
+Spatial differentiation of
+$\rho_{\mathrm d}=m/\sqrt h$
+gives the second identity
+in \eqref{eq:dust-grad}.
+Differentiating the displayed
+coordinate components of
+$L^{\mathrm d}$ uses only
+these expressions and first
+metric derivatives.
+Conversion to covariant
+derivatives adds Christoffel
+terms, which are algebraic
+in the connection and $L$.
+\end{proof}
+
+The full coupled Bianchi equation
+contains
+$\nabla_{[\alpha}(L^{\mathrm d}
++L^{\mathrm r})_{\beta]\nu}$.
+Theorem~\ref{thm:30} covers the
+radiation part of that source
+at frozen coefficients, while
+Proposition~\ref{prop:dust-schouten}
+identifies the additional
+dust source in material variables.
+To combine the two one must
+specify and propagate the actual
+first-order metric/frame
+variables and their constraints;
+the algebraic source identity
+alone supplies no common
+hyperbolic principal symmetrizer.
 
 \section{What the generalized-harmonic constraints do and do not repair}
 The principal-symbol no-go is \emph{not} a claim that
