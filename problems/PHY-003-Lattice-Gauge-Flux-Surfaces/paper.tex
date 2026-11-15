@@ -40,4 +40,21 @@ On every coordinate plaquette with axes \(i<j\), \(\delta\eta=1\): the \(j\)-edg
 \]
 \end{proof}
 
+
+\section{Complete classification below area twelve}
+\begin{theorem}\label{thm:small}
+For \(d\ge3\), every nonempty finite mod-two closed plaquette surface in \(\mathbb Z^d\) with fewer than twelve plaquettes is either (i) the six-face boundary of an elementary three-cube, or (ii) the ten-face symmetric difference of boundaries of two distinct elementary three-cubes sharing one face. The unordered pair in (ii) is unique.
+\end{theorem}
+\begin{proof}
+Choose a coordinate direction \(j\) used by the surface. As in Lemma~\ref{lem:min}, the active \(j\)-slabs carry transverse finite one-cycles \(C_n\) with even length at least four, and the horizontal chains satisfy \(\partial H_n=C_{n-1}+C_n\). If \(m\) slabs are active, their combined faces plus the two end caps give at least \(4m+2\) plaquettes. Hence area at most ten permits only one or two active slabs.
+
+For one slab with \(|C_n|=4\), its loop bounds a unique unit square \(Q\). Each cap \(H\) having \(\partial H=\partial Q\) equals \(Q\), of area one, or has area at least five: otherwise the nonzero two-cycle \(H\triangle Q\) would have fewer than six faces, contradicting Lemma~\ref{lem:min}. The only totals at most ten are \(4+1+1=6\), the boundary of one cube extruding \(Q\), or \(4+1+5=10\). In the latter case the larger cap differs from \(Q\) by a six-face closed cycle, necessarily another cube boundary, with its face \(Q\) cancelled.
+
+For one slab with \(|C_n|=6\), the caps need at least two squares each. Equality at ten faces requires two two-square fillings of the loop. Such a filling consists of two unit squares sharing one edge. The two fillings coincide, because their symmetric difference would otherwise be a nonempty closed two-cycle with at most four faces. Extruding these squares along \(j\) gives two elementary cubes sharing the edge-times-interval plaquette. If \(|C_n|\ge8\), the two caps each require at least two faces, giving total area at least twelve.
+
+With two active slabs, equality at \(4+4+1+1=10\) forces adjacent slabs with identical elementary square loops, single-square exterior caps, and no intermediate faces. This is a pair of consecutive cubes with their common face cancelled. Separated active slabs would require additional intermediate caps. The three-slab lower bound is fourteen. Lemma~\ref{lem:even} excludes eleven plaquettes.
+
+If two different cube pairs produced the same ten-face surface, their difference as mod-two three-chains would be a nonzero closed three-chain supported on at most four cubes. This contradicts the eight-cell lower bound for three-cycles in Lemma~\ref{lem:min}. Conversely two distinct elementary cubes sharing one face have a closed symmetric-difference boundary with \(6+6-2=10\) faces.
+\end{proof}
+
 % MORE_CONTENT_HERE
