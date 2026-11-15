@@ -27,6 +27,13 @@ jobs:
           python verify_independent.py
       - name: Independently checked proof-carrying compiler
         run: python verify_proof_compiler.py
+      - name: Independent shared-prefix data-borrowing tradeoff checks
+        run: python verify_shared_prefix_suite.py
+      - name: Verify one shared-prefix certificate end-to-end
+        run: |
+          printf '%s\n' '{"data_wires":11,"prefix":[0,1,2,3],"tails":[[4,5,6],[4,7,8],[5,9,10]],"clean_capacity":3}' > /tmp/phy007-shared-input.json
+          python shared_prefix_compiler.py --task /tmp/phy007-shared-input.json --out /tmp/phy007-shared-certificate.json
+          python verify_shared_prefix.py /tmp/phy007-shared-certificate.json
       - name: Produce and verify a self-contained certificate
         run: |
           python proof_compiler.py --n 4 --term 0,1,2,3 --clean 0 --borrowed 1 --policy prefer_borrowed --out /tmp/phy007-borrowed.json
@@ -40,3 +47,4 @@ jobs:
           path: |
             /tmp/phy007-borrowed.json
             /tmp/phy007-clean.json
+            /tmp/phy007-shared-certificate.json
