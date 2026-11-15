@@ -173,6 +173,166 @@ For any fixed link \(e\), Haar measure is invariant under \(U_e\mapsto-U_e\). Th
 \end{proof}
 This \(SU(2)\) condition is necessary but not sufficient. Representation and intertwiner multiplicities remain, so the abelian partition coefficients \(4,36\) must not be presented as actual \(SU(2)\) Wilson-series coefficients.
 
+
+\section{Exact low-order $SU(2)$ Wilson coefficients}
+The center-parity rule is only a necessary condition. We now also
+perform the \emph{nonabelian link integrations}, using the standard
+Wilson normalization
+\[
+Z_{L,SU(2)}(\beta)=\int\prod_e dU_e\,
+\exp\!\left[\frac{\beta}{2}\sum_p\mathrm{Tr}\,U_p\right].
+\]
+All Haar measures are probability measures. Write $I_n$ for the modified
+Bessel functions. The one-plaquette character expansion is
+\begin{equation}\label{eq:char}
+e^{(\beta/2)\mathrm{Tr}U}
+=c_0(\beta)\left[1+\sum_{j\ge1/2}
+(2j+1)u_j(\beta)\chi_j(U)\right],\quad
+c_0=\frac{2I_1(\beta)}{\beta},\quad
+u_j=\frac{I_{2j+1}(\beta)}{I_1(\beta)} .
+\end{equation}
+In particular $u=u_{1/2}=I_2/I_1=\beta/4+O(\beta^3)$
+and $u_j(\beta)=O(\beta^{2j})$.
+
+\begin{lemma}[No dangling-edge support]\label{lem:nofree}
+On the infinite cubical lattice, a nonempty set of fewer than six
+distinct plaquettes has an edge incident to exactly one selected
+plaquette. The same holds on the periodic $L^4$ lattice for $L\ge4$.
+\end{lemma}
+\begin{proof}
+Suppose every edge incident to selected plaquettes has incidence at
+least two. Select a coordinate direction $j$ occurring in a plaquette.
+In a slab crossed by $j$-containing plaquettes, the transverse
+projected one-dimensional graph has minimum vertex degree at least
+two: the degree at a vertex is the number of faces meeting the
+corresponding $j$-edge. A nonempty finite graph in the
+nearest-neighbor square/cubic lattice with minimum degree two
+contains at least four edges, so every active slab contains at least
+four faces. At the two extreme occupied slabs, horizontal faces must
+also be present: otherwise a bottom or top horizontal edge of a
+$j$-containing face would have incidence one. These two caps are
+distinct, giving at least six faces. On the periodic lattice, either
+an unoccupied slab permits exactly the same cut argument, or all $L$
+slabs are occupied, giving at least $4L\ge16$ faces.
+\end{proof}
+
+\begin{theorem}[Actual $SU(2)$ Wilson coefficients through order ten]
+\label{thm:su2}
+Let $L\ge4$, $V=L^4$, with periodic boundary conditions and the
+standard Wilson action specified above. Define $c_0$ and $u$ by
+\eqref{eq:char}. At fixed finite $L$, the exact Taylor expansion is
+\begin{equation}\label{eq:su2partition}
+\boxed{\;
+\frac{Z_{L,SU(2)}(\beta)}{c_0(\beta)^{6V}}
+ =1+16Vu^6+144Vu^{10}+O_L(\beta^{12}).
+\;}
+\end{equation}
+Consequently,
+\begin{equation}\label{eq:su2pressure}
+\frac1V\log Z_{L,SU(2)}(\beta)
+=6\log c_0(\beta)+16u^6+144u^{10}
++O_L(\beta^{12}).
+\end{equation}
+Every single fundamental six-face cube has exact normalized character
+weight $4u^6$. Every ten-face pair of face-sharing cubes has exact
+weight $4u^{10}$, \emph{including mixed four-dimensional orientations}.
+These equations are finite-volume strong-coupling identities, not
+thermodynamic-uniform or continuum estimates.
+\end{theorem}
+\begin{proof}
+First, the Weyl integration formula and the recurrence
+$I_{n-1}-I_{n+1}=2nI_n/\beta$ give
+\[
+\int_{SU(2)}e^{(\beta/2)\mathrm{Tr}U}\chi_j(U)\,dU
+ =I_{2j}(\beta)-I_{2j+2}(\beta)
+ =\frac{2(2j+1)}{\beta}I_{2j+1}(\beta),
+\]
+establishing \eqref{eq:char}. Each nontrivial spin $j_p$ on a
+plaquette contributes at least order $\beta^{2j_p}$.
+For a character term, put $D=\sum_{p:j_p>0}2j_p$.
+
+We classify all nonzero terms with $D\le11$. The set $S_h$ of
+half-integer-spin plaquettes is a closed mod-two two-chain by
+Proposition~\ref{prop:center}; if nonempty it has at least six faces.
+Theorem~\ref{thm:small}, including the periodic small-support
+argument in Proposition~\ref{prop:z}, implies that when $D\le11$,
+$|S_h|$ can only be $6$ or $10$.
+
+If $S_h$ is empty, the set of integer-spin plaquettes has no singly
+incident edge: the product of just one nontrivial representation at a
+link has no invariant vector. Lemma~\ref{lem:nofree} gives at least six
+integer-spin plaquettes, so $D\ge12$, a contradiction.
+
+If $|S_h|=6$, these six faces form one cube boundary. There can be at
+most two additional integer-spin plaquettes when $D\le11$. No unit
+square outside an elementary cube boundary shares more than one of
+its edges with the cube's edge skeleton: two shared adjacent or
+opposite edges would make it one of the cube's original faces.
+Also, two distinct unit squares share at most one edge. Thus one or
+two additional integer-spin faces leave an edge outside the cube
+singly occupied by an integer representation, whose Haar integral
+vanishes. There are no such faces. At each cube edge exactly two
+nontrivial spins remain; they must be equal for their tensor product
+to contain the trivial representation. Face adjacency makes the
+spin label uniform across the cube. With $D\le11$ it must be
+$j=1/2$ on all six faces (the next half-integer choice is $3/2$ and
+costs $D=18$).
+
+If $|S_h|=10$, the degree bound forces exactly ten fundamental
+$j=1/2$ faces and no other nontrivial labels. These ten faces form
+the boundary symmetric difference of two face-sharing cubes by
+Theorem~\ref{thm:small}. No other character terms can contribute
+through $\beta^{11}$.
+
+It remains to compute their \emph{exact} group weights, rather than
+infer them from parity. For any compact group irrep $r$ of dimension
+$d_r$ the standard character convolution identity is
+\[
+\int_G\chi_r(AU)\chi_r(U^{-1}B)\,dU
+=\frac1{d_r}\chi_r(AB).
+\]
+Peeling the non-shared edges of the five-face disk obtained from
+an elementary cube boundary by removing one face gives a
+\emph{conditional} disk amplitude $d_r^{-4}\chi_r(g)$,
+where $g$ is the holonomy around the missing face.
+For $r=1/2$ in $SU(2)$, $d_r=2$ and
+$\int\chi_{1/2}(g)\chi_{1/2}(g^{-1})\,dg=1$. Closing one
+cube therefore gives the bare character integral $2^{-4}$.
+For two cubes with one shared face deleted, their remaining
+non-shared edges are disjoint, irrespective of their
+three-coordinate orientations. Conditional integration of each
+five-face disk and then of the shared four links yields
+\begin{equation}\label{eq:groupweights}
+I_6=2^{-4}=\frac1{16},\qquad
+I_{10}^{\mathrm{same}}=I_{10}^{\mathrm{mixed}}
+ =2^{-8}=\frac1{256}.
+\end{equation}
+The four-plaquette meeting at a shared-face edge in the mixed
+case is therefore accounted for by the same Haar gluing
+calculation; it cannot be assigned an independent ad hoc weight.
+
+The fundamental coefficient per plaquette is $2u$ in
+\eqref{eq:char}. A cube therefore has weight
+$(2u)^6I_6=4u^6$; a face-sharing pair has
+$(2u)^{10}I_{10}=4u^{10}$. There are $4V$ cubes
+and $36V$ two-cube surfaces by Theorem~\ref{thm:counts},
+giving \eqref{eq:su2partition}. The first nontrivial
+disconnected cumulant starts at order twelve, so the
+logarithmic expression \eqref{eq:su2pressure} follows.
+\end{proof}
+
+As a useful normalization check, the explicit small-$\beta$ series
+of the intensive logarithm is
+\begin{equation}\label{eq:beta-pressure}
+\frac1V\log Z_{L,SU(2)}(\beta)
+=\frac{3\beta^2}{4}-\frac{\beta^4}{64}
++\frac{7\beta^6}{1536}-\frac{31\beta^8}{30720}
++\frac{4451\beta^{10}}{14745600}+O_L(\beta^{12}).
+\end{equation}
+This is a low-order recovery of classical lattice-gauge
+strong-coupling technology \cite{drouffe,kogut}; it is not
+a newly discovered continuum result.
+
 \section{A twelve-face example and limits of surface-entropy bounds}
 Four elementary three-dimensional hypercube facets incident to a vertex of one four-dimensional hypercube have pairwise distinct shared square faces. Their mod-two boundary contains \(4\cdot6-2\binom42=12\) plaquettes and is closed because \(\partial^2=0\). Thus one cannot extrapolate the six--ten classification automatically to the next stratum.
 
