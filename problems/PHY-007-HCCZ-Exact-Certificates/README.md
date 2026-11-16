@@ -163,6 +163,74 @@ small H--CCZ phase-polynomial construction, not the first
 proof-carrying quantum compiler, a verified general optimizer,
 a Lean/Coq development or an optimal resource bound.
 
+
+## Identical-workload matched-native-gate benchmark (16 November 2026)
+
+The [five-page literature audit](PHY007_Matched_Workload_Literature_Audit.tex),
+[reproducibility script](benchmark_matched.py), and
+[methods/caveats](BENCHMARK_README.md) now compare seven **concrete native
+H–CCZ circuit constructions** on the exact same phase polynomial:
+a shared k-control prefix XORed across m distinct three-control tails.
+All tested tails are disjoint from the prefix, and the canonical example
+also has pairwise disjoint tails to remove hidden shared-subexpression
+advantages. Every generated circuit is verified against the same
+Boolean phase and each auxiliary-wire restoration contract.
+A separate signed-integer-amplitude implementation checks actual
+H and CCZ gates, not merely effective Toffolis.
+
+### Canonical 13-data-qubit workload: k=4, m=3
+
+| Native circuit | CCZ | H | Active clean scratch | Physical wires |
+|---|---:|---:|---:|---:|
+| Independent no-prefix-sharing, borrowed suffix | 30 | 48 | 3 | 16 |
+| **Shared prefix with prefix-data borrowing** | **18** | **24** | **3** | **16** |
+| Recycling a prefix intermediate | 19 | 32 | 3 | 16 |
+| Barenco et al. (1995) Lemma 7.2 dirty cascade | 48 | 102 | 0 | <=16 |
+| Independent full clean ladders | 27 | 48 | 4 | 17 |
+| Shared prefix with additional clean suffix bit | **15** | **24** | 4 | 17 |
+| Data-borrowing with idle fourth clean bit | 18 | 24 | 3 | 17 |
+
+The published Barenco circuit was reconstructed as a native H–CCZ
+implementation of Lemma 7.2's borrowed-work multi-controlled NOT
+cascade. Its borrowed scratch wires are tested as **arbitrary unknown
+inputs** and shown to be restored. It consumes no initialized
+work qubits, unlike the three-clean-qubit data-borrowing scheme;
+therefore this published comparator does **not** prove strict
+fixed-precondition dominance. The classic-independent and no-sharing
+rows are familiar elementary constructions, not attributed to
+a newly published optimization algorithm.
+
+With a shared k-prefix, exactly m distinct three-bit tails, and
+k-1 initialized scratch wires, the resource formulas are:
+
+- Data-borrowed shared prefix: CCZ=2(k-1)+4m; H=4(k-1)+4m.
+- Recycled intermediate: CCZ=4k-6+3m; H=8k-12+4m.
+
+The recycled construction uses fewer CCZ when m>2k-4 but
+always uses 4k-8 more H (for k>=3). The two are a
+**nontrivial Pareto tradeoff within the tested constructions**.
+At one extra clean scratch bit, the shared-extra-clean
+construction uses CCZ=2(k-1)+3m, H=4(k-1)+4m:
+it consumes m fewer CCZ than the padded data-borrower
+at the same *total* physical-wire allocation.
+
+The completed [dedicated CI run](https://github.com/tonynewton79-web/PHYSICS2026/actions/runs/43783279201)
+passed **14 workload instances × 7 circuits = 98**, including all
+ancilla/restoration symbolic checks, **16,128 separate exact-amplitude
+basis cases**, and a reproduced published Barenco dirty-ancilla
+circuit. [Repository-wide PDF verification](https://github.com/tonynewton79-web/PHYSICS2026/actions/runs/43783279276)
+also passed.
+
+**Unresolved modern source-level comparison:** Khattar–Gidney
+(Quantum, 2025), SPARE (PLDI 2025), and Lee–Kang (2026) do not yet
+have independently obtained native H–CCZ circuits for these same
+instances under matched allocation/restoration conditions.
+Their reported Toffoli/relative-phase/Clifford+T or
+conditional-ancilla costs cannot simply be equated to native
+CCZ/H counts. A complete state-of-the-art comparison and a
+priority/novelty theorem remain **OPEN**. No general optimality,
+published-best claim, or universal Pareto dominance is implied.
+
 ## Reproduce
 
 Run Python 3.11+ with no third-party dependencies:
