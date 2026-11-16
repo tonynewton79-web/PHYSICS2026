@@ -42,7 +42,7 @@ jobs:
         run: |
           set -euo pipefail
           python problems/PHY-007-HCCZ-Exact-Certificates/attack013_spare_input.py ci-results/DOT
-          mkdir -p /tmp/authentic-SPARE/dot_files/benches_hand/phy007_attack013 /tmp/authentic-SPARE/temp_files
+          mkdir -p /tmp/authentic-SPARE/dot_files/benches_hand/phy007_attack013 /tmp/authentic-SPARE/temp_files "$GITHUB_WORKSPACE/temp_files"
           cp ci-results/DOT/*_graph.dot /tmp/authentic-SPARE/dot_files/benches_hand/phy007_attack013/
       - name: Execute original unmodified SPARE on all five identical workloads
         shell: bash
