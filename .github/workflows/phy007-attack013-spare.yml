@@ -49,7 +49,8 @@ jobs:
         run: |
           set +e
           set -uo pipefail
-          export PYTHONPATH=/tmp/authentic-SPARE
+          export PYTHONPATH=/tmp/authentic-SPARE/Spare:/tmp/authentic-SPARE
+          python -c "import rewriter; print('SPARE_PKG',rewriter.__file__)"
           export DOT_PATH=/tmp/authentic-SPARE/dot_files
           export LOG_PATH=/tmp/authentic-SPARE/log_files
           export RIPL_HOME=/tmp/authentic-SPARE
