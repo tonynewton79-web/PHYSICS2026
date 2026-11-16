@@ -49,19 +49,19 @@ jobs:
         run: |
           set +e
           set -uo pipefail
-          export PYTHONPATH=/tmp/authentic-SPARE/Spare:/tmp/authentic-SPARE
+          export PYTHONPATH=/tmp/authentic-SPARE/Spare:/tmp/authentic-SPARE/Spare/rewriter:/tmp/authentic-SPARE
           python -c "import rewriter; print('SPARE_PKG',rewriter.__file__)"
           export DOT_PATH=/tmp/authentic-SPARE/dot_files
           export LOG_PATH=/tmp/authentic-SPARE/log_files
           export RIPL_HOME=/tmp/authentic-SPARE
           mkdir -p ci-results/SPARE_JSON ci-results/SPARE_LOGS /tmp/authentic-SPARE/log_files
-          cd /tmp/authentic-SPARE
-          for f in dot_files/benches_hand/phy007_attack013/*_graph.dot; do
+          cd "$GITHUB_WORKSPACE"
+          for f in /tmp/authentic-SPARE/dot_files/benches_hand/phy007_attack013/*_graph.dot; do
             b=$(basename "$f" .dot)
             base=$(dirname "$f")/"$b"
             echo "SPARE_EXECUTE $b"
             for mode in bench_qubit optimized_qubit; do
-              python Spare/rewriter/compile_rewrite_graphs.py \
+              python -m rewriter.compile_rewrite_graphs \
                 --test-name="$base" --dimension=2 --compile-mode="$mode" --runs=1 \
                 --json-name="$GITHUB_WORKSPACE/ci-results/SPARE_JSON/$b-$mode.json" \
                 > "$GITHUB_WORKSPACE/ci-results/SPARE_LOGS/$b-$mode.log" 2>&1
