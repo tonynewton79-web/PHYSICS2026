@@ -157,3 +157,69 @@ No claim is made that this particular borrowing
 trick is historically new, a globally optimal
 resource frontier, or a formally verified
 Lean/Coq development.
+
+
+## Matched-workload native-gate literature benchmark
+
+The [five-page report](PHY007_Matched_Workload_Literature_Audit.tex)
+and [standalone executable](benchmark_matched.py) were developed as
+a direct challenge to PHY-007's conditional advantage. The unit of
+comparison is *the exact same diagonal phase target* with a
+k-control shared prefix and m distinct three-control suffixes.
+All implementations use only native H and CCZ gates and are
+checked for exact phase and every scratch-wire restoration.
+
+**Reproduced published algorithm:** Barenco et al. (1995),
+Lemma 7.2, provides a multi-controlled NOT using 4(c−2) Toffolis
+and c−2 dirty work wires. We independently reconstructed its
+four-pass alternating cascade, sandwiched the target with H
+to realize controlled phase, then compiled each Toffoli to
+H–CCZ–H. All *borrowed* work bits are represented by
+independent Boolean variables, rather than assumed initialized.
+The independent actual-amplitude H–CCZ simulator confirms
+the operator on accessible small benchmark instances.
+
+**Seven exact serial circuits:** no-prefix-sharing borrowed-suffix,
+PHY-007 shared-prefix data borrowing, same-width recycling a
+prefix intermediate, published Barenco dirty cascade,
+traditional independent clean ladder, extra-clean shared-prefix
+suffix, and zero-padded data-borrowing.
+
+**Concrete canonical 13-data-qubit test (k=4,m=3):**
+at 16 physical qubits, 3 active clean: shared data-borrowing
+18 CCZ/24 H vs no-prefix-sharing 30 CCZ/48 H vs
+recycled 19 CCZ/32 H. Published Barenco dirty method
+48 CCZ/102 H but **zero initialized clean**; it therefore
+does not match active-ancilla preconditions, although the
+physical qubit allocation may be padded to match.
+At 17 physical qubits, a four-clean shared suffix
+needs only 15 CCZ/24 H, beating the padded data-borrowing
+circuit's 18 CCZ/24 H, while using one additional initialized
+scratch bit. Thus there is **no unconditional dominance**.
+
+**Exact conditional trade-off for k>=3:** Recycled-prefix
+CCZ=4k−6+3m vs PHY-007 borrow CCZ=2k−2+4m, so
+recycling wins on CCZ for m>2k−4, loses on H
+by 4k−8 for every k>=3. Data-borrowing and recycling
+are distinct Pareto construction points. At a fixed
+additional clean ancilla, 2k−2+3m CCZ shared-clean
+phase synthesis beats the PHY-007 2k−2+4m count.
+
+**Verification gate:** The [passing dedicated run](https://github.com/tonynewton79-web/PHYSICS2026/actions/runs/43783279201)
+checked 14 source instances, seven circuits each (98
+distinct circuits), all symbolic phase and ancilla-restoration
+contracts, **16,128 independent exact H/CCZ amplitude
+basis executions**, exact gate/wire counts and the published
+Barenco source. Full repo CI [passed](https://github.com/tonynewton79-web/PHYSICS2026/actions/runs/43783279276).
+The individual 98 gate/cost records and JSON metrics are
+artifacts of the dedicated workflow.
+
+**Unresolved/priority-sensitive:** Khattar–Gidney (2025),
+SPARE (2025), and Lee–Kang (2026) have not been
+faithfully instantiated as executable native H/CCZ
+circuits for this identical workload under matching ancilla
+rules. Their Toffoli-equivalent/relative-phase and
+Clifford+T quantities cannot be translated by fiat.
+Published prior art already treats controlled operations,
+conditional ancillas and reuse. No full modern-state-of-the-art,
+optimal lower bound or originality claim can be released.
