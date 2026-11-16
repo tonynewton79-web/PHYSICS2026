@@ -1,0 +1,93 @@
+name: PHY007 Attack013 authentic SPARE 2025
+on:
+  push:
+    branches: [phy007-attack013-spare-execution]
+    paths:
+      - 'problems/PHY-007-HCCZ-Exact-Certificates/attack013_spare_input.py'
+      - '.github/workflows/phy007-attack013-spare.yml'
+  workflow_dispatch:
+jobs:
+  spare:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 35
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Obtain authenticated published SPARE
+        shell: bash
+        run: |
+          set -euo pipefail
+          git clone https://github.com/Ritvik1sharma/SPARE.git /tmp/authentic-SPARE
+          git -C /tmp/authentic-SPARE checkout 9cbe0b09d6c99d7c6e423eeb53dd4cb4c9b81fc4
+          test "$(git -C /tmp/authentic-SPARE rev-parse HEAD)" = "9cbe0b09d6c99d7c6e423eeb53dd4cb4c9b81fc4"
+          mkdir -p ci-results
+          git -C /tmp/authentic-SPARE rev-parse HEAD | tee ci-results/SPARE_COMMIT.txt
+          python --version
+      - name: Install published SPARE requirements
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq graphviz libgraphviz-dev libopenblas-dev liblapack-dev libatlas-base-dev
+          python -m pip install --upgrade pip
+          python -m pip install -r /tmp/authentic-SPARE/requirements.txt
+          python -m pip install pygraphviz
+          python -c "import cirq, rustworkx, networkx, pydot; print('SPARE_IMPORT_DEPENDENCIES_PASS')"
+      - name: Generate and independently validate frozen input DOT
+        shell: bash
+        run: |
+          set -euo pipefail
+          python problems/PHY-007-HCCZ-Exact-Certificates/attack013_spare_input.py ci-results/DOT
+          mkdir -p /tmp/authentic-SPARE/dot_files/benches_hand/phy007_attack013 /tmp/authentic-SPARE/temp_files
+          cp ci-results/DOT/*_graph.dot /tmp/authentic-SPARE/dot_files/benches_hand/phy007_attack013/
+      - name: Execute original unmodified SPARE on all five identical workloads
+        shell: bash
+        run: |
+          set -uo pipefail
+          export PYTHONPATH=/tmp/authentic-SPARE
+          export DOT_PATH=/tmp/authentic-SPARE/dot_files
+          export LOG_PATH=/tmp/authentic-SPARE/log_files
+          export RIPL_HOME=/tmp/authentic-SPARE
+          mkdir -p ci-results/SPARE_JSON ci-results/SPARE_LOGS /tmp/authentic-SPARE/log_files
+          cd /tmp/authentic-SPARE
+          for f in dot_files/benches_hand/phy007_attack013/*_graph.dot; do
+            b=$(basename "$f" .dot)
+            base=$(dirname "$f")/"$b"
+            echo "SPARE_EXECUTE $b"
+            for mode in bench_qubit optimized_qubit; do
+              python Spare/rewriter/compile_rewrite_graphs.py \
+                --test-name="$base" --dimension=2 --compile-mode="$mode" --runs=1 \
+                --json-name="$GITHUB_WORKSPACE/ci-results/SPARE_JSON/$b-$mode.json" \
+                > "$GITHUB_WORKSPACE/ci-results/SPARE_LOGS/$b-$mode.log" 2>&1
+              ret=$?
+              echo "$b $mode exit=$ret" | tee -a "$GITHUB_WORKSPACE/ci-results/SPARE_EXIT_STATUS.txt"
+              tail -n 12 "$GITHUB_WORKSPACE/ci-results/SPARE_LOGS/$b-$mode.log"
+            done
+          done
+          echo "UNMODIFIED_SPARE_RUN_FINISHED"
+      - name: Record source evidence boundary
+        if: always()
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          d=Path("ci-results")
+          summaries={}
+          if (d/"SPARE_JSON").exists():
+              for p in (d/"SPARE_JSON").glob("*.json"):
+                  try:summaries[p.name]=json.loads(p.read_text())
+                  except Exception as e:summaries[p.name]={"error":str(e)}
+          (d/"SPARE_RESULT_SUMMARY.json").write_text(json.dumps(summaries,indent=2))
+          print("SPARE_RESULT_COUNT",len(summaries))
+          print("NATIVE_H_CCZ_COMPARISON_REQUIRES_EMITTED_CIRCUIT_AND_INDEPENDENT_CHECK")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: PHY007-Attack013-authentic-SPARE
+          path: ci-results/
