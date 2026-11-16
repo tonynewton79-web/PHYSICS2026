@@ -1,0 +1,128 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[margin=23mm]{geometry}
+\usepackage{lmodern,amsmath,amssymb,amsthm,booktabs,microtype,graphicx}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\setlist{nosep,topsep=4pt}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\title{An Identical-Workload Audit of Shared-Prefix Phase Synthesis: \\ Exact $H$--CCZ Comparisons and Their Limits}
+\author{Tony Newton}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+We compare exact implementations of a family of multi-term Boolean phase operators under fixed data registers, a native Hadamard--CCZ gate language and explicit ancillary-state restoration. An independently checked implementation of the dirty-ancilla controlled-NOT cascade of Barenco \emph{et al.} (1995) supplies a genuine published, same-language comparator. At the restricted budget of $k-1$ clean ancillas, shared-prefix synthesis with data borrowing saves gates over independently reconstructing the common prefix. Yet a circuit with one additional clean ancilla uses fewer CCZ gates, and reusing a cleared intermediate ancilla introduces a second, crossing resource trade-off even at fixed width. We provide exact gate formulas, concrete equal-allocation comparisons, independently checked circuit semantics and a separation between direct benchmarks and analytical source comparisons with newer conditionally-clean and compute--uncompute methods. These findings do not establish superiority to the contemporary state of the art or historical novelty.
+\end{abstract}
+
+\section{Workload and comparability contracts}
+Consider $n$ data qubits, a fixed set $P$ of $k\ge3$ controls, and $m\ge2$ distinct sets $T_j$ of three data qubits, disjoint from $P$. Suffixes may overlap, but the strict control-prefix benchmark uses no data qubit common to every suffix. We require the diagonal unitary
+\begin{equation}\label{eq:phase}
+ U_F|x\rangle=(-1)^{F(x)}|x\rangle,\qquad
+ F(x)=\bigg(\prod_{p\in P}x_p\bigg)
+ \cdot\bigg(\bigoplus_{j=1}^{m}\prod_{t\in T_j}x_t\bigg),
+\end{equation}
+with the multiplication understood to distribute over the Boolean XOR. Every result below refers to the \emph{same} $U_F$ and ideal native gates $\{H,\mathrm{CCZ}\}$. A clean scratch starts in $|0\rangle$ and must end there. A borrowed data wire has arbitrary input state, possibly entangled with an external reference, and must be restored as part of the exact operator, not merely as a classical bit on sampled inputs. We compare both the physical-wire budget $B=n+k-1$ and $B+1=n+k$, keeping unused wires present as identity factors. Depth always means the deliberately serial gate count $N_H+N_{\rm CCZ}$, not parallel circuit depth or hardware cost.
+
+Our principal canonical test has $k=4$, $m=3$, and three disjoint suffix triples. Thus $n=13$, with sixteen physical wires at budget $B$ and seventeen at budget $B+1$. Unlike a benchmark with suffixes $\{u,v,w_j\}$ sharing $u,v$, this instance has \emph{no hidden longer common prefix}. In the latter instance, the correct reusable prefix would be $P\cup\{u,v\}$, changing the available sharing opportunity.
+
+\section{Exactly comparable native constructions}
+We use $\mathrm{CCX}_{ab\to t}=H_t\mathrm{CCZ}_{abt}H_t$ throughout. A reversible compute--use--uncompute ladder with $r$ controlled-X computations contributes $2r$ CCZ and $4r$ H; its scratch is returned exactly. The shared-prefix construction of the companion PHY-007 note computes the product of the $k$ prefix bits into $k-1$ clean wires, then implements each suffix by a compensated four-body phase using a temporarily borrowed \emph{prefix data} bit. It uncomputes the prefix only once. A suffix block uses four CCZ and four H and restores the borrowed data bit.
+
+Two natural alternatives test whether this circuit is the preferred choice \emph{at the same physical size}. First, we can rebuild and uncompute the prefix separately for every suffix, using the same $k-1$ clean wires. Second, after computing the prefix once, we may reverse all but the final conjunction computation to free a clean intermediate. That intermediate can be used to compute two suffix bits, apply one CCZ with the retained prefix conjunction and the third suffix bit, and then uncompute. Recompute the cleared prefix intermediates at the end and finally uncompute the original prefix conjunction. This never uses more than $k-1$ clean wires. With one \emph{additional} initially clean wire, a more direct shared-prefix construction can use that extra scratch for each suffix pair without clearing the original prefix intermediates.
+
+\begin{theorem}[Construction resource trade-offs]\label{thm:bounds}
+All five circuits in Table~\ref{tab:formulas} implement \eqref{eq:phase} exactly and restore every initially clean ancillary register. Every temporary borrowed data wire also returns to its original arbitrary state. The resource counts are exact for the explicitly defined serial implementations, not universally minimal values.
+\end{theorem}
+\begin{table}[ht]
+\centering\small
+\caption{Exact counts for constructive native $H$--CCZ circuits. ``Clean'' denotes the number of actively used initially clean wires; data borrowed temporarily are restored and require no additional physical wires.}
+\label{tab:formulas}
+\begin{tabular}{@{}lccc@{}}\toprule
+Circuit construction & CCZ & H & Clean\\\midrule
+Independent full clean ladders & $m(2k+1)$ & $4km$ & $k$\\
+Unshared prefix plus borrowed suffix & $m(2k+2)$ & $4km$ & $k-1$\\
+Shared prefix plus data borrowing & $2(k-1)+4m$ & $4(k-1)+4m$ & $k-1$\\
+Recycled prefix intermediate & $4k-6+3m$ & $8k-12+4m$ & $k-1$\\
+Shared prefix with extra clean suffix & $2(k-1)+3m$ & $4(k-1)+4m$ & $k$\\\bottomrule
+\end{tabular}
+\end{table}
+\begin{proof}
+An independently implemented degree-$(k+3)$ monomial requires $k$ clean conjunction wires, $k$ Toffolis on each side and a final CCZ, giving the first line. Under the $k-1$-clean constraint, independently computing the full $k$-bit prefix requires $k-1$ Toffolis, while a compensated borrowed suffix contributes four CCZ and four H. Repeating gives the second line. Keeping the prefix during all $m$ suffixes gives the third.
+
+For the recycled-intermediate circuit, the initial prefix computation takes $k-1$ Toffolis. Temporarily reversing its first $k-2$ Toffolis clears an intermediate while retaining the final conjunction output; after all $m$ suffixes, those $k-2$ Toffolis are replayed to recreate the intermediate values and the whole $k-1$-Toffoli computation is undone. This gives $2(2k-3)=4k-6$ Toffolis outside the suffixes. Each suffix uses one Toffoli, one CCZ and another Toffoli, adding $3m$ CCZ and $4m$ H. An extra permanently clean suffix scratch instead removes those two extra sequences of $k-2$ Toffolis and produces the final line. All transformations are reversible and exactly restore their scratch. The complete operator identity follows from the Toffoli and compensated borrowed four-body identities on computational basis vectors, then by linearity for arbitrary input states.
+\end{proof}
+
+The difference between an unshared $k-1$-clean construction and the shared data-borrowing circuit is
+\begin{equation}\label{eq:sharing}
+ \Delta N_{\mathrm{CCZ}}=2(k-1)(m-1),\qquad
+ \Delta N_H=4(k-1)(m-1).
+\end{equation}
+Thus sharing dominates this \emph{specified equal-budget baseline} for $k\ge3,m\ge2$. It does not dominate the recycled alternative for every $m$: at the same $k-1$ clean wires,
+\begin{equation}\label{eq:crossover}
+ N_{\mathrm{CCZ}}^{\mathrm{recycled}}-N_{\mathrm{CCZ}}^{\mathrm{borrow}}=2k-4-m,
+\qquad N_H^{\mathrm{recycled}}-N_H^{\mathrm{borrow}}=4k-8.
+\end{equation}
+Consequently for $m>2k-4$ the recycled construction uses \emph{fewer CCZ but more H}. At budget $B+1$, the extra-clean construction saves precisely $m$ CCZ with the same number of H; it occupies the same \emph{allocated} number of physical wires as the shared data-borrowing circuit padded with an idle clean wire, but consumes one more \emph{active} clean ancillary qubit.
+
+\section{A published native-gate comparator}
+For a published method with the same gate semantics, we reproduce the dirty-ancilla $c$-controlled NOT network from Barenco \emph{et al.}\ \cite[Lemma 7.2]{barenco}. It uses $c-2$ arbitrary borrowed work wires, restores them, and consists of $4(c-2)$ exact three-qubit Toffoli gates. Placing Hadamards around the target turns this circuit into a $(c+1)$-body phase. In the present workload each monomial has degree $k+3$, so $c=k+2$ and the \emph{independent-term} Barenco implementation costs
+\begin{equation}\label{eq:barenco}
+ N_{\mathrm{CCZ}}^{\mathrm{Barenco}}=4km,\qquad
+ N_H^{\mathrm{Barenco}}=(8k+2)m,
+\end{equation}
+when each exact Toffoli is expressed as $H\,\mathrm{CCZ}\,H$. For each term we first borrow unused data wires and, if needed, use some allocated clean scratch as borrowed work bits; the latter are also restored. The comparison needs no newly allocated dirty qubit. The formal dirty-network contract is in fact stronger than the clean initialization we otherwise require: the borrowed values are arbitrary.
+
+The implemented schedule is the alternating cascade of the $c-1$ Toffoli links $G_0,\ldots,G_{c-2}$, in the order
+\[
+ G_0\cdots G_{c-2}\;G_{c-3}\cdots G_0\;
+ G_1\cdots G_{c-2}\;G_{c-3}\cdots G_1.
+\]
+The first link computes a two-control toggle into the first borrowed wire, later links propagate conditional toggles along the work register to the target, and the two complementary chains cancel all initial arbitrary borrowed values. Exact symbolic replay checked both the target toggle and every restored work wire \emph{without assigning zero to the borrowed bits}. A separate signed-integer Hadamard simulator checked the expanded circuit's full phase on sampled or exhaustive basis inputs. This is a direct same-language verification of a published construction, unlike a comparison based only on a paper's reported Toffoli count.
+
+\section{Identical-target experimental results}
+Table~\ref{tab:example} records the complete gate ledger for the disjoint-tail $k=4,m=3,n=13$ problem. Every row is an actual circuit checked against the same source polynomial. The two wire budgets are intentionally displayed separately: an algorithm is not credited with a smaller physical footprint merely because its competitor has been evaluated under a different available-qubit limit.
+\begin{table}[ht]
+\centering\small
+\caption{Exact native-gate counts for the identical $n=13$ source workload. All active borrowed wires are returned exactly.}
+\label{tab:example}
+\begin{tabular}{@{}llrrrr@{}}\toprule
+Wire budget & Construction & CCZ & H & Active clean & Total wires\\\midrule
+$B=16$ & No prefix sharing & 30 & 48 & 3 & 16\\
+& Shared data borrowing & 18 & 24 & 3 & 16\\
+& Recycled prefix intermediate & 19 & 32 & 3 & 16\\
+& Published Barenco dirty cascade & 48 & 102 & 0 & 16\\\midrule
+$B+1=17$ & Shared data borrowing, padded & 18 & 24 & 3 & 17\\
+& Independent clean ladders & 27 & 48 & 4 & 17\\
+& Shared prefix, extra clean & 15 & 24 & 4 & 17\\\bottomrule
+\end{tabular}
+\end{table}
+
+The $B=16$ shared data-borrowing construction is the least expensive in both CCZ and H among the executable circuits listed for that budget. Yet the published Barenco alternative uses no initialized work qubits, and under the $B+1$ budget the extra-clean construction is strictly better in CCZ count than padded data borrowing. No single configuration minimizes every resource. Figure~\ref{fig:curves} shows the second crossover at fixed $k=4$: with a constant $k-1$-clean allocation, sufficiently many suffixes make the recycled-intermediate alternative CCZ-cheaper, at the cost of extra Hadamards.
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.88\linewidth]{resource_tradeoff.pdf}
+\caption{Exact CCZ counts for $k=4$ and $m$ surviving suffix terms, from the formulas in Table~\ref{tab:formulas}. The dashed recycled-prefix series crosses the solid data-borrowing series above $m=4$. The additional-clean series has a different active-ancilla requirement.}
+\label{fig:curves}
+\end{figure}
+
+We tested fourteen workload configurations (disjoint or partially overlapping suffix triples with no common suffix-wide bit) and seven constructed circuit presentations per configuration. The 98 emitted circuits all passed exact symbolic phase and restoration checks. A separate sparse integer Hadamard-amplitude implementation performed 16,128 exact basis-state executions on the smaller instances with no mismatches. These finite tests independently corroborate, but do not replace, the uniform algebraic derivations. The complete raw gate ledger, source generator and source-pinned bibliography accompany this report.
+
+\section{Limits of comparison with more recent methods}
+Khattar and Gidney's conditionally clean construction \cite{khattar} provides a $c$-controlled NOT with $2c-3$ Toffoli-equivalent gates using one clean ancillary qubit. Their paper and contemporary implementations make use of conditional $X$ operations and, at the physical decomposition level, relative-phase Toffolis; a Toffoli-equivalent count is not by itself an emitted circuit in the strict $\{H,\mathrm{CCZ}\}$ language. In particular, composing the $c=k+2$ control version independently for every suffix would have a nominal count $m(2k+1)$ Toffoli primitives, but assigning it an $H$--CCZ cost while silently ignoring its other gates would not be an identical-gate-set benchmark. We have \emph{not} made that invalid conversion or run a verified strict-gate-set version of the Khattar--Gidney source.
+
+The 2026 Lee--Kang method \cite{lee} addresses depth and clean-ancilla trade-offs for multi-controlled NOT in a different primitive resource model. SPARE \cite{spare} proves and implements general compute--uncompute rewrites, including elimination and reorganization of scratch storage. Its released artifact is described as lacking the high-level Tower/Unqomp front ends \cite{spareartifact}; we did not produce an authenticated same-source $H$--CCZ output from SPARE, and cannot compare this workload to the paper's published aggregate percentages. Consequently we have no basis to claim gate-count superiority over SPARE, Khattar--Gidney or Lee--Kang. Indeed, shared intermediates, conditionally clean storage and data-bit borrowing are established techniques, and the strict comparisons in the present audit are either directly executed \emph{specific} source-derived circuits or analytic descriptions with their different resource contracts clearly marked.
+
+\section{Conclusion}
+The same-target audit confirms that the data-borrowing circuit saves resources over a conventional independent-ladder baseline and over an executable published Barenco cascade when a $k-1$ clean budget is available. It simultaneously identifies two competing constructions: an extra-clean shared-prefix circuit with lower CCZ cost at the same \emph{padded} physical allocation, and a fixed-width recycled-intermediate circuit whose CCZ advantage appears for many suffix terms. The first is not a novelty claim; the second is an additional construction-level trade-off requiring comprehensive priority review. A state-of-the-art claim would require executable same-workload outputs from modern synthesis systems in the exact requested gate language, a specified qubit and initialization budget, and verified restoration and gate-cost equivalence. Those external comparisons remain open.
+
+\begin{thebibliography}{9}\small
+\bibitem{barenco} A. Barenco \emph{et al.}, Elementary gates for quantum computation, \emph{Phys. Rev. A} \textbf{52}, 3457--3467 (1995), Lemma 7.2. \href{https://doi.org/10.1103/PhysRevA.52.3457}{doi:10.1103/PhysRevA.52.3457}.
+\bibitem{khattar} T. Khattar and C. Gidney, Rise of conditionally clean ancillae for efficient quantum circuit constructions, \emph{Quantum} \textbf{9}, 1752 (2025), Sections 5.2--5.5. \href{https://doi.org/10.22331/q-2025-05-21-1752}{doi:10.22331/q-2025-05-21-1752}.
+\bibitem{lee} J. Lee and Y. Kang, Logarithmic-depth MCT gate implementation method on a given arbitrary number of clean ancillae, \emph{Quantum Inf. Process.} \textbf{25}, 33 (2026). \href{https://doi.org/10.1007/s11128-026-05056-w}{doi:10.1007/s11128-026-05056-w}.
+\bibitem{spare} R. Sharma and S. Achour, Optimizing ancilla-based quantum circuits with SPARE, \emph{Proc. ACM Program. Lang.} \textbf{9} (PLDI), 176--200 (2025). \href{https://doi.org/10.1145/3729253}{doi:10.1145/3729253}.
+\bibitem{spareartifact} R. Sharma and S. Achour, \emph{Optimizing Ancilla-based Quantum Circuits with SPARE}, software artifact, Zenodo (2025). \href{https://doi.org/10.5281/zenodo.15307149}{doi:10.5281/zenodo.15307149}.
+\end{thebibliography}
+\medskip\noindent\texttt{tony.newton79@gmail.com}
+\end{document}
