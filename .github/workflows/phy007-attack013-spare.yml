@@ -47,6 +47,7 @@ jobs:
       - name: Execute original unmodified SPARE on all five identical workloads
         shell: bash
         run: |
+          set +e
           set -uo pipefail
           export PYTHONPATH=/tmp/authentic-SPARE
           export DOT_PATH=/tmp/authentic-SPARE/dot_files
