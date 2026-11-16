@@ -62,7 +62,7 @@ jobs:
             echo "SPARE_EXECUTE $b"
             for mode in bench_qubit optimized_qubit; do
               python -m rewriter.compile_rewrite_graphs \
-                --test-name="$base" --dimension=2 --compile-mode="$mode" --runs=1 \
+                --test-name="$base" --compile-mode="$mode" --runs=1 \
                 --json-name="$GITHUB_WORKSPACE/ci-results/SPARE_JSON/$b-$mode.json" \
                 > "$GITHUB_WORKSPACE/ci-results/SPARE_LOGS/$b-$mode.log" 2>&1
               ret=$?
@@ -71,6 +71,27 @@ jobs:
             done
           done
           echo "UNMODIFIED_SPARE_RUN_FINISHED"
+      - name: Extract emitted optimized qubit gate matrices without source edits
+        shell: bash
+        run: |
+          set +e
+          export PYTHONPATH=/tmp/authentic-SPARE/Spare:/tmp/authentic-SPARE/Spare/rewriter:/tmp/authentic-SPARE
+          export DOT_PATH=/tmp/authentic-SPARE/dot_files
+          export LOG_PATH=/tmp/authentic-SPARE/log_files
+          export RIPL_HOME=/tmp/authentic-SPARE
+          mkdir -p ci-results/SPARE_EMITTED ci-results/SPARE_LOGS ci-results/SPARE_JSON
+          cd "$GITHUB_WORKSPACE"
+          for b in PHY007_shared_4clean_17w_graph PHY007_shared_3clean_16w_graph PHY007_one_clean_14w_graph; do
+            base="/tmp/authentic-SPARE/dot_files/benches_hand/phy007_attack013/$b"
+            python problems/PHY-007-HCCZ-Exact-Certificates/attack013_spare_extract.py \
+              --test-name="$base" --compile-mode=optimized_qubit --runs=1 \
+              --capture="$GITHUB_WORKSPACE/ci-results/SPARE_EMITTED/$b-matrices.json" \
+              --json-name="$GITHUB_WORKSPACE/ci-results/SPARE_JSON/$b-captured.json" \
+              > "$GITHUB_WORKSPACE/ci-results/SPARE_LOGS/$b-captured.log" 2>&1
+            ret=$?
+            echo "$b instrumented_exit=$ret" | tee -a "$GITHUB_WORKSPACE/ci-results/SPARE_CAPTURE_STATUS.txt"
+            tail -n 15 "$GITHUB_WORKSPACE/ci-results/SPARE_LOGS/$b-captured.log"
+          done
       - name: Record source evidence boundary
         if: always()
         shell: bash
