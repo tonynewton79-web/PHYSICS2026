@@ -29,6 +29,8 @@ jobs:
         run: python verify_proof_compiler.py
       - name: Independent shared-prefix data-borrowing tradeoff checks
         run: python verify_shared_prefix_suite.py
+      - name: Exact matched native H-CCZ workload and Barenco comparison
+        run: python benchmark_matched.py
       - name: Verify one shared-prefix certificate end-to-end
         run: |
           printf '%s\n' '{"data_wires":11,"prefix":[0,1,2,3],"tails":[[4,5,6],[4,7,8],[5,9,10]],"clean_capacity":3}' > /tmp/phy007-shared-input.json
@@ -48,3 +50,5 @@ jobs:
             /tmp/phy007-borrowed.json
             /tmp/phy007-clean.json
             /tmp/phy007-shared-certificate.json
+            problems/PHY-007-HCCZ-Exact-Certificates/matched_gate_results.csv
+            problems/PHY-007-HCCZ-Exact-Certificates/matched_gate_summary.json
