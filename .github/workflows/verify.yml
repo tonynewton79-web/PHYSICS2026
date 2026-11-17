@@ -96,6 +96,11 @@ jobs:
               (cd "$folder" && pdflatex -interaction=nonstopmode -halt-on-error final_paper.tex && pdflatex -interaction=nonstopmode -halt-on-error final_paper.tex)
               cp "$folder/final_paper.pdf" "build/PHY005_Constraint_Propagation_in_Two-Fluid_Weyl_Systems_Final_Paper.pdf"
             fi
+            if [ -f "$folder/Constraint_Propagation_and_First_Jet_Hyperbolicity_in_Einstein_Dust_Radiation_Reductions.tex" ]; then
+              cumulative="Constraint_Propagation_and_First_Jet_Hyperbolicity_in_Einstein_Dust_Radiation_Reductions"
+              (cd "$folder" && pdflatex -interaction=nonstopmode -halt-on-error "$cumulative.tex" && pdflatex -interaction=nonstopmode -halt-on-error "$cumulative.tex")
+              cp "$folder/$cumulative.pdf" "build/$cumulative.pdf"
+            fi
           done
       - uses: actions/upload-artifact@v4
         with:
