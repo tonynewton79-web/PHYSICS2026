@@ -1,0 +1,1036 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,margin=1.04in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{graphicx,booktabs,array}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\definecolor{ink}{HTML}{202A33}
+\definecolor{linkblue}{HTML}{315B76}
+\hypersetup{colorlinks=true,linkcolor=linkblue,citecolor=linkblue,urlcolor=linkblue,pdfauthor={Tony Newton},pdftitle={Four-Mode Reduction and Exact Scattering for Einstein-Scalar Cauchy Data}}
+\usepackage{caption}
+\captionsetup{font=small,labelfont=bf,skip=6pt}
+\setlength{\parindent}{1.25em}
+\setlength{\parskip}{0.15em}
+\setlength{\textfloatsep}{11pt plus 2pt minus 2pt}
+\setlength{\floatsep}{10pt plus 2pt minus 2pt}
+\linespread{1.045}
+\allowdisplaybreaks[1]
+\pagestyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\T}{\mathbb T}
+\newcommand{\A}{\mathcal A_{\log 2}}
+\newcommand{\G}{\mathcal G}
+\newcommand{\pbar}{\overline P}
+\newcommand{\op}{\mathrm{op}}
+\newcommand{\row}{\mathrm{row}}
+\newcommand{\TF}{\mathrm{TF}}
+\newcommand{\Ric}{\mathrm{Ric}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\ve}{\varepsilon}
+\title{Four-Mode Reduction and Exact Scattering for Einstein--Scalar Cauchy Data\\[3pt]\large Symmetry, Lapse Memory and Certified Surrogate Geometry}
+\author{Tony Newton}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+We study explicit constraint-compatible three-cosine Einstein--massless-scalar data on the three-torus. Discrete isometries forbid twelve of forty-four candidate cubic scalar Fourier frequencies, while the exact initial momentum occupies all thirty-two permitted frequencies. We derive Bessel first variations, a closed homogeneous quadratic lapse memory, and rational cubic-acceleration and higher-order initial estimates. For a proposed fixed-amplitude nonlinear error bound, symmetry reduces a sufficient test to four matrix Fourier observables. An exact-rational functional of the recorded numerical interpolant exceeds the proposed $1/3600$ ceiling. Separately verified Fourier bounds certify positivity and elliptic coercivity of the reconstructed metric surrogate over a nine-unit logarithmic-time interval. Constraint-adjusted principal energies, frame-defect identities and orthogonal sensitivity estimates yield explicit a posteriori comparison criteria. The available data do not satisfy a validated continuum residual-and-stability certificate, so the numerical threshold crossing is not a proved property of the Einstein evolution.
+\end{abstract}
+\vspace{1em}
+\noindent\textbf{Keywords.} Einstein--scalar equations; Kasner spacetime; Fourier symmetry; constant-mean-curvature gauge; scattering; rigorous numerics; a posteriori bounds.\\
+\noindent\textbf{MSC 2020.} 83C05, 35Q76, 65G20.
+
+
+\section{Introduction}
+A central question in mathematical general relativity is whether a singularity predicted by a symmetric model persists under inhomogeneous perturbations. The stability of singularities in the subcritical Einstein--scalar Kasner regime has already been established for sufficiently small data by Fournodavlos, Rodnianski and Speck \cite{FRS}. Here the narrower problem is to understand one explicit nonsymmetric family and to test a particular proposed numerical error bound at fixed amplitude.
+
+\paragraph{Main result.} Four explicitly chosen Fourier orbits provide a reference-free lower-bound functional for the proposed error estimate, and a rational certificate evaluates that functional on the saved numerical interpolant strictly above the proposed ceiling. The reduction is exact; the positive value for the interpolant is an exact finite-arithmetic statement. The connection between the interpolant and a regular continuum Einstein solution has not been certified. The other principal contributions are exact Fourier selection, explicit scattering and lapse memory, initial nonlinear coefficients, and certified inverse-metric bounds for the finite surrogate. We derive an explicit lapse-to-observable comparison and include the full gravitational frame-residual diagnostics to state precisely what a continuum certificate would require.
+
+For a spatially periodic normalized mixed second fundamental form $P$, a lapse $n$, and a quadratic perturbative reference $A_{\rm quad}$, the auxiliary inequality under investigation is
+\begin{equation}\label{eq:global}
+I_\infty:=\int_0^\infty e^{-\rho/5}
+\|nP-A_{\rm quad}\|_{\A;\op}\,d\rho\le\frac1{3600}.
+\end{equation}
+This was a proposed sufficient estimate in a fixed-amplitude proof strategy, not an established theorem or a general physical principle. Its possible failure would leave the known subcritical singularity theorem unchanged. We distinguish throughout between exact identities for the initial family, certified properties of a particular finite Fourier surrogate, numerical diagnostics, and bounds on a true continuum solution.
+\section{An exact three-cosine Cauchy family}
+Let $\T^3=(\mathbb R/2\pi\mathbb Z)^3$ and put
+\[
+X=\cos x,\qquad Y=\cos y,\qquad Z=\cos z,\qquad
+\pbar=\operatorname{diag}\bigl(\tfrac34,\tfrac18,\tfrac18\bigr).
+\]
+On $t=1$, take the spatial metric to be Euclidean, the scalar field $\psi$ to be spatially constant, and the normalized mixed second fundamental form to be
+\begin{equation}\label{eq:data}
+P(0,d)=\pbar+dT,\qquad
+T=\operatorname{diag}(Y+Z,X-Z,-X-Y).
+\end{equation}
+The scalar normal momentum is chosen on its positive branch,
+\begin{equation}\label{eq:scalarA}
+u(0,d)=b(d)=\sqrt{A(d)},\qquad
+A(d)=A_0+dA_1+d^2A_2,
+\end{equation}
+where
+\begin{equation}\label{eq:Adata}
+A_0=\frac{13}{32},\qquad
+A_1=-\frac54(Y+Z),\qquad
+A_2=-\bigl[(Y+Z)^2+(X-Z)^2+(X+Y)^2\bigr].
+\end{equation}
+The perturbation $T$ is traceless and has zero Euclidean divergence: $\operatorname{tr}T=\partial_iT^i{}_j=0$. Consequently the Hamiltonian and momentum constraints are satisfied exactly, not merely order by order. Moreover $|A_1|\leq5/2$ and $|A_2|\leq12$ give
+\[
+A(1/128)\geq\frac{1581}{4096}>0.
+\]
+The initial scalar momentum is therefore real and smooth at the prescribed amplitude; its exact square root is not a finite Fourier polynomial.
+
+Use logarithmic time $\rho=-\log t$, vanishing shift, $P=-tk$, $u=t\partial_n\psi$, and $\operatorname{tr}_h k=-t^{-1}$. The CMC lapse and evolution equations under consideration are
+\begin{align}\label{eq:CMCevol}
+\bigl[-e^{-2\rho}\Delta_h+\operatorname{tr}(P^2)+u^2\bigr]n&=1,\\
+h'=-2nhP,\qquad \psi'&=-nu,\nonumber\\
+P'&=(n-1)(P-I/3)-\mathcal Q,\nonumber\\
+u'&=(n-1)u-e^{-2\rho}\bigl(n\Delta_h\psi+\nabla_hn\cdot\nabla_h\psi\bigr),\nonumber
+\end{align}
+where
+\begin{equation}\label{eq:Q}
+\mathcal Q=e^{-2\rho}
+\left[h^{-1}\bigl(\nabla^2n-n\Ric[h]+n\,d\psi\otimes d\psi\bigr)\right]^{\TF}.
+\end{equation}
+Here the trace-free operation is taken on the mixed endomorphism. The corresponding constraints, used in the numerical diagnostics, are
+\begin{equation}\label{eq:constraints}
+1-\operatorname{tr}(P^2)-u^2+e^{-2\rho}(R[h]-|d\psi|_h^2)=0,
+\qquad \nabla_iP^i{}_j-u\nabla_j\psi=0.
+\end{equation}
+Throughout, matrix Fourier coefficients are those of the coordinate-mixed $P$ in this transported coordinate system. An estimate in a different orthonormal frame need not have the same numerical norm.
+
+\section{Discrete symmetries and finite Fourier selection}
+The data possess independent coordinate reflections and the free involution
+\begin{equation}\label{eq:glide}
+\gamma(x,y,z)=(x+\pi,z,y)\pmod{2\pi}.
+\end{equation}
+Their isometries persist on any common interval on which the CMC development is regular and unique in the covariant gauge. Consequently a covariantly defined scalar observable $U$ obeys
+\begin{equation}\label{eq:gliderule}
+\widehat U(k_x,k_y,k_z)=(-1)^{k_x}\widehat U(k_x,k_z,k_y),
+\qquad
+\widehat U(k)=0\quad\text{if $k_x$ is odd and $|k_y|=|k_z|$}.
+\end{equation}
+The half-period translation $\tau(x,y,z)=(x+\pi,y+\pi,z+\pi)$ interchanges $d$ and $-d$. Thus, whenever the amplitude derivatives exist,
+\begin{equation}\label{eq:parity}
+U_m(\tau x)=(-1)^m U_m(x),\quad
+U_m=[d^m]U(d),
+\end{equation}
+so the $m$th coefficient has Fourier wavevectors with $k_x+k_y+k_z\equiv m\pmod2$. This parity relation also applies to coordinate-mixed tensor components under the translation, which has identity differential.
+
+Let $K_1=\{\pm e_x,\pm e_y,\pm e_z\}$ and $K_m=K_1+\cdots+K_1$ (Minkowski sum). Elementary finite enumeration gives
+\begin{equation}\label{eq:supportsizes}
+|K_1|=6,\quad |K_2|=19,\quad |K_3|=44,\qquad
+K_3=\{k\in\mathbb Z^3:|k|_1\in\{1,3\}\}.
+\end{equation}
+The glide rule forbids twelve scalar cubic candidates,
+\[
+\{(\pm1,0,0),(\pm3,0,0)\}\cup\{(\pm1,\pm1,\pm1)\},
+\]
+where independent signs are understood. The exact initial scalar cubic coefficient saturates the other thirty-two frequencies. To see this, write $B=-A_2$ and expand \eqref{eq:scalarA}:
+\begin{equation}\label{eq:b3}
+b_3=-\frac1{\sqrt{26}}\left[\frac{80}{13}(Y+Z)B
++\frac{1000}{169}(Y+Z)^3\right].
+\end{equation}
+Expansion into Laurent Fourier monomials has nonzero rational multiples of $1/\sqrt{26}$ at all thirty-two permitted cubic wavevectors and zero at the twelve forbidden ones. Its exact weighted norm is
+\begin{equation}\label{eq:b3norm}
+\|b_3\|_{\A}=\frac{130600}{169\sqrt{26}}.
+\end{equation}
+At $d=1/128$ the initial scalar Taylor tail beyond third order also admits the exact estimate
+\begin{equation}\label{eq:btail}
+\left\|b(d)-\sum_{m=0}^3d^mb_m\right\|_{\A}
+\leq\frac{227710976837511}{18047753569100103680}<\frac1{48000}.
+\end{equation}
+These are initial-data statements; the thirty-two scalar cubic modes do not form an invariant nonlinear truncation.
+
+\begin{table}[tbp]
+\centering
+\caption{Exact representatives of the nonzero cubic scalar-momentum Fourier coefficients. The middle column records $\sqrt{26}\,\widehat b_3(k)$; reflections supply the indicated sign-orbit multiplicities.}
+\begin{tabular}{@{}lrc@{}}
+\toprule
+$k$ & $\sqrt{26}\,\widehat b_3(k)$ & Orbit size\\
+\midrule
+$(0,0,1)$ & $-3465/169$ & 2\\
+$(0,1,0)$ & $-3465/169$ & 2\\
+$(0,0,3)$ & $-385/169$ & 2\\
+$(0,3,0)$ & $-385/169$ & 2\\
+$(0,1,2)$ & $-895/169$ & 4\\
+$(0,2,1)$ & $-895/169$ & 4\\
+$(1,0,2)$ & $20/13$ & 4\\
+$(1,2,0)$ & $-20/13$ & 4\\
+$(2,0,1)$ & $-20/13$ & 4\\
+$(2,1,0)$ & $-20/13$ & 4\\
+\bottomrule
+\end{tabular}
+\label{tab:scalarcubic}
+\end{table}
+
+\begin{figure}[tbp]
+\centering\includegraphics[width=.94\linewidth]{figures/fig_fourier_support.pdf}
+\caption{The exact cubic-frequency geometry. The left panel marks the 36 nonzero wavevectors of the initial \emph{matrix-valued} cubic generator acceleration, in contrast with eight vanishing three-axis triples; this set is not identical to the 32-mode scalar cubic support. The right panel shows the counts of formal first-, second- and third-order Fourier supports.}
+\label{fig:support}
+\end{figure}
+
+\section{Linear scattering and homogeneous quadratic lapse memory}
+For the first variation of the shape, define the diagonal polarizations
+\[
+T_x=\operatorname{diag}(0,1,-1),\quad
+T_y=\operatorname{diag}(1,0,-1),\quad
+T_z=\operatorname{diag}(1,-1,0).
+\]
+Writing $\alpha_x=1/4$ and $\alpha_y=\alpha_z=7/8$, each first-order shear profile is determined by
+\begin{equation}\label{eq:F}
+F_\alpha''+e^{-2\alpha\rho}F_\alpha=0,
+\qquad F_\alpha(0)=0,\quad F_\alpha'(0)=-1.
+\end{equation}
+The normalized linear shape response is $-F_\alpha'(\rho)T_i\cos x_i$. The first-order lapse vanishes, while the scalar-field companion is
+\[
+\psi_1=-\frac5{\sqrt{26}}F_{7/8}(\rho)(\cos y+\cos z).
+\]
+The standard Bessel formula
+\begin{equation}\label{eq:bessel}
+F_\alpha(\rho)=\frac{\pi}{2\alpha}
+\left[J_0(1/\alpha)Y_0\!\left(\frac{e^{-\alpha\rho}}\alpha\right)-
+Y_0(1/\alpha)J_0\!\left(\frac{e^{-\alpha\rho}}\alpha\right)\right]
+\end{equation}
+implies $-F_\alpha'(\rho)\to J_0(1/\alpha)$ as $\rho\to\infty$. These are exact first variations, not nonlinear scattering assertions at fixed $d$.
+
+\begin{theorem}[Quadratic lapse memory]\label{thm:memory}
+For the formal coefficient $n=1+d^2n_2+O(d^3)$, its spatial mean is nonnegative and satisfies
+\begin{equation}\label{eq:n2mean}
+\langle n_2(\rho)\rangle=e^{-\rho/2}F_{1/4}(\rho)^2+
+\frac{77}{26}e^{-7\rho/4}F_{7/8}(\rho)^2\geq0,
+\end{equation}
+with the exact integral
+\begin{equation}\label{eq:memory}
+\int_0^\infty\langle n_2(\rho)\rangle\,d\rho
+=2\bigl[1-J_0(4)^2\bigr]+\frac{22}{13}\bigl[1-J_0(8/7)^2\bigr]
+=2.549568920507\ldots.
+\end{equation}
+\end{theorem}
+\begin{proof}
+The averaged second variation of the Hamiltonian constraint and the CMC lapse equation cancels the undetermined second-order scalar-curvature term, giving \eqref{eq:n2mean}. For $E_\alpha=(F_\alpha')^2+e^{-2\alpha\rho}F_\alpha^2$, equation \eqref{eq:F} yields $E_\alpha'=-2\alpha e^{-2\alpha\rho}F_\alpha^2$. Since $E_\alpha(0)=1$ and the Bessel asymptotics give $E_\alpha(\infty)=J_0(1/\alpha)^2$, integration proves \eqref{eq:memory}.
+\end{proof}
+The energy identity also gives an exact finite-endpoint tail formula. Setting $M(R)=\int_R^\infty\langle n_2\rangle\,d\rho$,
+\begin{equation}\label{eq:mean-tail}
+M(R)=2\bigl[E_{1/4}(R)-J_0(4)^2\bigr]+
+\frac{22}{13}\bigl[E_{7/8}(R)-J_0(8/7)^2\bigr],
+\end{equation}
+and elementary exponential majorants imply
+\begin{equation}\label{eq:mean-tail16}
+0\leq d^2 M(16)<\frac1{65536}<\frac1{48000},
+\qquad d=\frac1{128}.
+\end{equation}
+This controls a homogeneous quadratic coefficient, not the all-time nonlinear error in \eqref{eq:global}.
+
+\begin{figure}[tbp]
+\centering\includegraphics[width=.92\linewidth]{figures/fig_bessel_memory.pdf}
+\caption{Exact first-order Bessel shear profiles and the nonnegative homogeneous quadratic lapse coefficient. Dashed levels in the left panel are the Bessel scattering limits. These curves are computed from exact coefficient formulas, not from the finite-amplitude evolution.}
+\label{fig:bessel}
+\end{figure}
+
+The second variation otherwise occupies the nineteen wavevectors $K_2$. Its lapse inversion has modewise multiplier
+\begin{equation}\label{eq:ellmult}
+\left[1+k_x^2e^{-\rho/2}+(k_y^2+k_z^2)e^{-7\rho/4}\right]^{-1}.
+\end{equation}
+The full nineteen-mode system contains second-order spatial curvature, inverse-metric--Ricci and scalar-gradient terms. Numerical integration of this coefficient system is a useful diagnostic but is not an enclosure of the nonlinear solution. Representative reported coefficients are collected in Table~\ref{tab:quadratic}; the mean values agree with the exact formula~\eqref{eq:n2mean}.
+
+\begin{table}[tbp]
+\centering
+\caption{Selected floating-point second-order coefficient data (per unit $d^2$), reproduced from the nineteen-mode calculation. These are formal perturbative coefficients, not the fixed-amplitude solution.}
+\begin{tabular}{@{}rccc@{}}
+\toprule
+$\rho$ & $\langle n_2\rangle$ & $(P_2)_{xy}(1,1,0)$ & $(P_2)_{yz}(0,1,1)$\\
+\midrule
+0.5 & 0.472854 & 0.024530 & 0.020787\\
+1 & 0.905715 & 0.144374 & 0.084277\\
+2 & 0.850748 & 0.584213 & 0.201498\\
+4 & 0.128388 & 1.143118 & 0.269686\\
+6 & 0.002060 & 0.992516 & 0.275435\\
+\bottomrule
+\end{tabular}
+\label{tab:quadratic}
+\end{table}
+
+\section{Exact cubic acceleration and the initial fifth-order tail}
+The initial lapse is $n(0,d)=1$ for the entire admissible amplitude family. Equations \eqref{eq:CMCevol} and the flat initial slice give
+\[
+n'(0,d)=0,\qquad P'(0,d)=0,\qquad P''(0,d)=d\Delta T.
+\]
+Put $G=nP$ and $N(d)=\partial_\rho^2n(0,d)$. Differentiating the lapse equation twice at the initial slice gives
+\begin{equation}\label{eq:lapse-acc}
+(1-\Delta)N(d)=2d^2W+
+\frac{|d\nabla A_1+d^2\nabla A_2|^2}{2(A_0+dA_1+d^2A_2)},
+\qquad W=2(\sin^2x+\sin^2y+\sin^2z).
+\end{equation}
+Consequently $G''(0,d)=d\Delta T+N(d)(\pbar+dT)$. Expanding $N=d^2N_2+d^3N_3+\cdots$, introduce
+\[
+B_2=|\nabla A_1|^2,\quad B_3=2\nabla A_1\cdot\nabla A_2,
+\quad B_4=|\nabla A_2|^2.
+\]
+The coefficient equations are
+\begin{equation}\label{eq:N23}
+(1-\Delta)N_2=2W+\frac{B_2}{2A_0},\quad
+(1-\Delta)N_3=\frac{B_3}{2A_0}-\frac{A_1B_2}{2A_0^2},
+\end{equation}
+where
+\begin{equation}\label{eq:N2}
+N_2=\frac{103}{13}-\frac25\cos2x-\frac{77}{130}(\cos2y+\cos2z).
+\end{equation}
+An equivalent explicit expression for the cubic source is
+\begin{align}\label{eq:N3source}
+(1-\Delta)N_3={}&\frac{80}{13}\bigl[\sin^2y(X+2Y+Z)
++\sin^2z(-X+Y+2Z)\bigr]\\
+&+\frac{1000}{169}(Y+Z)(\sin^2y+\sin^2z).\nonumber
+\end{align}
+It has twenty-four occupied wavevectors and $\|N_3\|_{\A}=26756/507$.
+
+\begin{proposition}[Cubic generator acceleration]\label{prop:cubic}
+The third amplitude coefficient of the mixed CMC generator satisfies
+\begin{equation}\label{eq:G3pp}
+G_3''(0)=N_3\pbar+N_2T.
+\end{equation}
+Its Fourier support comprises thirty-six wavevectors, all of $|k|_1=1$ or $3$. In particular,
+\begin{equation}\label{eq:mode120}
+\widehat{G_3''}(0;1,2,0)=
+\operatorname{diag}\left(-\frac5{52},-\frac{32}{195},\frac{103}{780}\right),
+\end{equation}
+and
+\begin{equation}\label{eq:exactnorm}
+\|G_3''(0)\|_{\A;\op}=\frac{284168}{2535},\qquad
+\|G_3''(0)\|_{\A;\row}=\frac{76644}{845}.
+\end{equation}
+\end{proposition}
+\begin{proof}
+Equation \eqref{eq:G3pp} follows by taking the cubic coefficient of $G''(0,d)=d\Delta T+N(d)(\pbar+dT)$. Applying the exact Fourier multiplier $(1+|k|_2^2)^{-1}$ to \eqref{eq:N23}, then multiplying the resulting finite Laurent polynomials, yields \eqref{eq:mode120} and \eqref{eq:exactnorm}. Every coefficient is rational. An independent direct polynomial rederivation, using $\partial_xf(X,Y,Z)=-\sin x\,\partial_Xf$, reproduces these identities.
+\end{proof}
+
+We now retain all fifth-and-higher \emph{odd-amplitude} contributions at the initial time. The weighted Wiener norms of the source polynomials are exactly
+\begin{equation}\label{eq:poly-norms}
+\|A_1\|_{\A}=5,\quad \|A_2\|_{\A}=39,\quad
+\bigl(\|B_2\|_{\A},\|B_3\|_{\A},\|B_4\|_{\A}\bigr)=\left(\frac{125}{16},140,828\right).
+\end{equation}
+Put $a=160/13$, $b=96$, and introduce the rational majorant
+\begin{equation}\label{eq:majorant}
+H(z)=\frac{(125/16)z^2+140z^3+828z^4}{(13/16)(1-az-bz^2)},
+\quad d=\frac1{128},\quad ad+bd^2=0.1020132211\ldots<1.
+\end{equation}
+Let $h_2=(125/16)/(2A_0)$, $h_3=(140+a(125/16))/(2A_0)$, and
+\begin{equation}\label{eq:tails}
+E_{\mathrm{odd}}=\frac{H(d)-H(-d)}2-h_3d^3,
+\qquad E_{\mathrm{even}}=\frac{H(d)+H(-d)}2-h_2d^2.
+\end{equation}
+Because $H$ has nonnegative power-series coefficients and the Fourier norm is submultiplicative, these numbers majorize precisely the omitted odd orders $5,7,\ldots$ and even orders $4,6,\ldots$ of the nonlinear part of $N(d)$. The separate $2d^2W$ term is accounted for exactly.
+
+\begin{theorem}[Initial finite-amplitude remainder]\label{thm:local}
+In the coordinate-mixed Fourier spectral-operator norm, the entire fifth-and-higher odd-amplitude remainder in the second logarithmic-time derivative obeys
+\begin{align}\label{eq:localtail}
+\Big\|\Pi_{\rm odd}\bigl[G''(0,d)-d\Delta T-d^3G_3''(0)\bigr]\Big\|_{\A;\op}
+&\leq\frac34E_{\mathrm{odd}}+6dE_{\mathrm{even}}\\
+&=3.1153022967636344\ldots\times10^{-6}.\nonumber
+\end{align}
+Consequently, for $R=nP-A_{\mathrm{quad}}$,
+\begin{equation}\label{eq:nonzero}
+\big\|\Pi_{\rm odd}\partial_\rho^2R(0,1/128)\big\|_{\A;\op}
+>5.03\times10^{-5}.
+\end{equation}
+In the row-sum norm the corresponding lower bound exceeds $4.04\times10^{-5}$.
+\end{theorem}
+\begin{proof}
+The exact series for the rational denominator in \eqref{eq:lapse-acc} converges in $\A$ since $ad+bd^2<1$. Its coefficientwise norm majorant is $H$. Odd spatial Fourier parity removes the even amplitude orders from $\Pi_{\rm odd}$; multiplication by $\pbar$ and $dT$ is bounded by $\|\pbar\|_{\op}=3/4$ and $\|T\|_{\A;\op}=6$. This proves \eqref{eq:localtail}. The quadratic reference has odd-frequency second acceleration $d\Delta T$ exactly. Reverse triangle inequality and \eqref{eq:exactnorm} yield
+\[
+\|\Pi_{\rm odd}R''(0,d)\|_{\A;\op}
+\geq d^3\frac{284168}{2535}-\left(\frac34E_{\mathrm{odd}}+6dE_{\mathrm{even}}\right)
+=5.033710857986975\ldots\times10^{-5}.
+\]
+The row-sum bound follows from $\|T\|_{\A;\row}=4$ and the second identity in \eqref{eq:exactnorm}.
+\end{proof}
+
+\begin{corollary}[Strictly nonzero finite-time discrepancy]\label{cor:positive}
+For a sufficiently smooth local CMC development, there is $\epsilon_0>0$ such that $\int_0^\epsilon e^{-\rho/5}\|\Pi_{\rm odd}R(\rho,1/128)\|_{\A;\op}\,d\rho>0$ whenever $0<\epsilon<\epsilon_0$. More precisely,
+\begin{equation}\label{eq:smalltime}
+\lim_{\epsilon\downarrow0}\frac6{\epsilon^3}
+\int_0^\epsilon e^{-\rho/5}\|\Pi_{\rm odd}R(\rho,1/128)\|_{\A;\op}\,d\rho
+=\|\Pi_{\rm odd}R''(0,1/128)\|_{\A;\op}>5.03\times10^{-5}.
+\end{equation}
+\end{corollary}
+\begin{proof}
+The initial values of $R$ and $R'$ vanish, so the finite-dimensional odd-mode projection satisfies $\Pi_{\rm odd}R(\rho)=\tfrac12\rho^2\Pi_{\rm odd}R''(0)+o(\rho^2)$. Norm continuity and integration prove the limit.
+\end{proof}
+
+\begin{figure}[tbp]
+\centering\includegraphics[width=.94\linewidth]{figures/fig_initial_spectrum.pdf}
+\caption{Weighted Fourier contribution of the thirty-six nonzero cubic generator-acceleration wavevectors, calculated using exact rational coefficients. Their sum is $284168/2535$ in the spectral-operator Wiener norm. The plotted heights represent initial-time \emph{second derivatives}, not evolved third-order modes.}
+\label{fig:initial}
+\end{figure}
+
+\section{The finite third-order variation}
+Since the background is spatially homogeneous, its linearized operators commute with spatial translations. The background inverse CMC lapse on wavevector $k$ is precisely \eqref{eq:ellmult}. Nonlinear sources at each formal amplitude order are convolutions of lower-order Fourier supports. It follows inductively that the first three variations have support in $K_1,K_2,K_3$ from \eqref{eq:supportsizes}.
+
+\begin{proposition}[Finite cubic Fourier system]\label{prop:44}
+The third-order amplitude variation of \eqref{eq:CMCevol}, including metric, shape, scalar and lapse coefficients, closes on exactly the forty-four \emph{candidate} wavevectors $K_3$. In particular, a coefficient ODE retaining these modes and using the exact background elliptic multipliers has no spatial Fourier truncation error at order three. The result does not provide a bound on fifth-and-higher nonperturbative feedback.
+\end{proposition}
+\begin{proof}
+At order $m$ the variation equations consist of a linear background operator acting on the order-$m$ unknowns and terms formed from products of coefficients of total amplitude order $m$. Each lower coefficient has support in $K_j$ by induction, so a product has support in the corresponding Minkowski sum contained in $K_m$. The elliptic operator at order zero has constant spatial coefficients and acts diagonally on each Fourier wavevector. The exact initial scalar Taylor coefficients likewise have support in $K_m$. Thus no wavevector outside $K_m$ is generated at order $m$, and $|K_3|=44$.
+\end{proof}
+
+The coefficient equations can be integrated directly without extracting Taylor coefficients from three finite-amplitude solutions. A separate implementation used third-order Taylor jets of the complete CMC system, with the inverse metric, Christoffel symbols, Ricci tensor, lapse inversion and scalar terms expanded by Cauchy products. At spatial resolution $8^3$, every order-three wavevector is represented without aliasing of its formal polynomial products. A floating-point DOP853 integration through $\rho=7$ yields
+\begin{equation}\label{eq:C3diagnostic}
+C_3^{\op}\equiv\int_0^7e^{-\rho/5}
+\|\Pi_{\rm odd}G_3(\rho)\|_{\A;\op}\,d\rho
+\simeq 620.6306353,
+\end{equation}
+where the integral uses 0.125-spaced output and Simpson quadrature. The corresponding row-norm diagnostic is $606.8407869$. Independently, signed amplitude extrapolations on a $12^3$ grid gave $620.654280$ for RK4 step $0.05$ and $620.639683$ for step $0.025$. The agreement is a consistency check, not an interval bound on \eqref{eq:C3diagnostic}.
+
+The estimated fifth Taylor coefficient is less stable: its numerical weighted operator norm integral changes from approximately $99{,}730$ to $30{,}829$ between these two RK4 steps. This sensitivity also shows why a coefficient estimate alone cannot be used as a bound on the entire remainder $G_5+d^2G_7+\cdots$.
+
+\begin{figure}[tbp]
+\centering\includegraphics[width=.92\linewidth]{figures/fig_cubic_fifth.pdf}
+\caption{Unvalidated finite-time diagnostics. Left: direct cubic Taylor-jet integration compared with signed amplitude extrapolation. Right: the fifth-order divided-difference estimate is substantially more sensitive to time stepping. Only the former has the exact finite-dimensional support property; neither curve is a rigorous interval enclosure.}
+\label{fig:variations}
+\end{figure}
+
+\section{Finite-time numerical test and the odd-mode reduction}
+For a matrix Fourier series, define
+\begin{equation}\label{eq:norms}
+\|F\|_{\A;\op}=\sum_{k\in\mathbb Z^3}2^{|k|_1}
+\|\widehat F(k)\|_{2\to2},\qquad
+\|F\|_{\A;\row}=\max_i\sum_{k,j}2^{|k|_1}|\widehat F^i{}_j(k)|.
+\end{equation}
+Let $I_{R,L}$ denote the integral restricted to $0\leq\rho\leq R$ and $|k|_1\leq L$. The original full-amplitude Fourier-pseudospectral comparison with the independently evolved quadratic reference reported at $R=7$
+\begin{equation}\label{eq:originaltest}
+I_{7,3}^{\op}\simeq3.0216816\times10^{-4},\quad
+I_{7,3}^{\row}\simeq2.9428973\times10^{-4},\quad
+I_{7,6}^{\row}\simeq3.2603761\times10^{-4}.
+\end{equation}
+A row-sum calculation at $12^3$ grid points changed from $0.000326037601$ to $0.000326023013$ on halving the RK4 step from $0.05$ to $0.025$; at $16^3$ with step $0.05$ it gave $0.000326037611$. The finite-grid constraints were small on the sampled interval, but the scheme did not interval-enclose spatial truncation, time discretization, lapse inversion or constraint drift. For the $12^3$ run with step $0.025$, the reported maximum sampled Hamiltonian and momentum residuals were $7.65\times10^{-10}$ and $7.65\times10^{-9}$ respectively. The sampled largest eigenvalue of $P$ at $\rho=7$ was about $0.761$, still below $13/16$; this is neither a global continuation bound nor a continuum interval enclosure. The cutoff study gave $I_{7,2}^{\row}\simeq1.8640\times10^{-5}$, indicating that much of the observed excess first appears upon including the cubic Fourier shell. Halving the amplitude from $1/128$ to $1/256$ changed the full $L=6$ row-sum diagnostic by a factor of about $8.4992$, whereas the isolated odd-shell experiments approached the cleaner cubic ratio eight.
+
+There is an exact way to avoid reliance on the separate quadratic coefficient solver. Let $\Pi_{\rm odd}$ retain precisely $|k|_1=1$ or $3$. Since the quadratic Taylor coefficient has even wavevector parity, and the linear coefficient only first-shell support,
+\begin{equation}\label{eq:oddref}
+\widehat{A_{\rm quad}}(\rho,k)=
+\begin{cases}
+d\widehat{G_1}(\rho,k),&|k|_1=1,\\
+0,&|k|_1=3.
+\end{cases}
+\end{equation}
+Consequently, the odd-shell integrand depends only on the full numerical $nP$ and the explicit Bessel first variation. The third shell alone provides a reference-free lower bound independent of even the Bessel subtraction, but its numerical excess is nearly marginal. The combined first and third shells retain a larger margin.
+
+\begin{table}[tbp]
+\centering
+\caption{Finite-time \emph{numerical} odd-shell integrals through $\rho=7$ (Simpson quadrature; output spacing $0.125$). No row is a validated continuum-PDE lower bound.}
+\begin{tabular}{@{}llcc@{}}
+\toprule
+Grid & RK4 step & Spectral-operator & Row-sum\\
+\midrule
+$12^3$&$0.050$&$0.00029636258645$&$0.00028980095581$\\
+$12^3$&$0.025$&$0.00029636116122$&$0.00028979938466$\\
+$16^3$&$0.050$&$0.00029636258645$&$0.00028980095581$\\
+\midrule
+Proposed global ceiling & & $0.00027777777778$ & $0.00027777777778$\\
+\bottomrule
+\end{tabular}
+\label{tab:odd}
+\end{table}
+
+The sampled third shell alone gives about $0.0002779216$ at the refined $12^3$ step, an excess of only $1.4\times10^{-7}$. The odd-shell operator test instead exceeds the ceiling by approximately $1.86\times10^{-5}$. The amplitude-halving ratios of its recorded integrals, approximately $8.0086$ and $8.0023$, agree with an odd cubic leading order. None of these tests controls the continuum error.
+
+\begin{figure}[tbp]
+\centering\includegraphics[width=.93\linewidth]{figures/fig_odd_excess.pdf}
+\caption{Cumulative finite-grid odd-shell comparisons for the $12^3$, $0.025$ RK4 run. Their crossing of the proposed all-time bound is a numerical observation, not a validated solution of the CMC Einstein--scalar equations.}
+\label{fig:excess}
+\end{figure}
+
+\section{A rational dual observable and sufficient certification criteria}
+For any complex $3\times3$ matrix $M$ and any $H$ with nuclear norm $\|H\|_*\leq1$, the trace pairing obeys $\operatorname{Re}\tr(H^*M)\leq\|M\|_{2\to2}$. This permits a time-dependent \emph{linear} observable to replace the nonsmooth operator norm.
+
+\begin{proposition}[Fourier dual lower bound]\label{prop:dual}
+For any measurable family $H_k(\rho)$ satisfying $\|H_k(\rho)\|_*\leq1$ for $|k|_1\in\{1,3\}$ and $0\leq\rho\leq7$, one has
+\begin{equation}\label{eq:dual}
+I_\infty\geq
+\int_0^7 e^{-\rho/5}\sum_{|k|_1\in\{1,3\}}2^{|k|_1}
+\operatorname{Re}\tr\left(H_k(\rho)^*\widehat R(\rho,k)\right)d\rho,
+\qquad R=nP-A_{\rm quad}.
+\end{equation}
+In particular, each $H_k$ may be chosen piecewise linearly in time between nuclear-unit-ball matrices specified at finitely many nodes.
+\end{proposition}
+\begin{proof}
+The pointwise trace inequality is the duality between matrix operator and nuclear norms. Sum it over the selected Fourier wavevectors, multiply by the positive time weight and integrate. Convexity of the nuclear-norm unit ball ensures that piecewise-linear interpolation of admissible nodes remains admissible at all intermediate times.
+\end{proof}
+
+An explicit family was constructed on $57$ time nodes and $44$ wavevectors. Each nodal matrix has the rational rank-one form
+\begin{equation}\label{eq:rankone}
+H_{j,k}=\frac{1000}{1001}\,\frac{a_{j,k}b_{j,k}^{\mathsf T}}{4096^2},
+\qquad a_{j,k},b_{j,k}\in(\mathbb Z+i\mathbb Z)^3.
+\end{equation}
+For every one of its $57\cdot44=2508$ pairs $(j,k)$, exact integer arithmetic verifies
+\begin{equation}\label{eq:integer}
+1000^2\left(\sum_{i=1}^3|a_{j,k,i}|^2\right)
+\left(\sum_{i=1}^3|b_{j,k,i}|^2\right)
+\leq 1001^2\,4096^4.
+\end{equation}
+This is an exact certificate that every nodal $H_{j,k}$ has $\|H_{j,k}\|_*\leq1$. The matrices were selected numerically from a coarse cubic approximation and subsequently rounded to Gaussian integers; their admissibility no longer depends on the accuracy of that approximation.
+
+Applying the fixed rational witness to an independently refined $12^3$ finite-grid trajectory gives the unvalidated Simpson estimate
+\begin{equation}\label{eq:dual-num}
+I_{\rm dual}^{\rm numerical}\simeq0.00029605677545,
+\end{equation}
+about $99.9\%$ of the simultaneously computed odd-shell operator norm. Exact rational integration of the \emph{piecewise-linear scalar interpolant} through the reported decimal observations, using alternating Taylor bounds for $e^{-\rho/5}$, yields
+\begin{equation}\label{eq:interpolant}
+I_{\rm PL}>0.00029616185>\frac1{3600}.
+\end{equation}
+Equation \eqref{eq:interpolant} certifies only arithmetic on the displayed sample interpolant. It does not control the difference between that interpolant and the true dual observable of the continuum PDE. A sufficient missing condition is
+\begin{equation}\label{eq:interp-error}
+\sup_{0\leq\rho\leq7}
+\left|f_{\rm continuum}(\rho)-f_{\rm PL}(\rho)\right|
+<4.8\times10^{-6},
+\end{equation}
+where $f$ is the time-unweighted scalar integrand in \eqref{eq:dual}. Indeed $\int_0^7e^{-\rho/5}d\rho<3.768$, so \eqref{eq:interpolant} and \eqref{eq:interp-error} would imply the strict violation of \eqref{eq:global}. No such continuum error bound has been established.
+
+A complementary approach uses amplitude parity. On any common regular interval with five controlled amplitude derivatives,
+\begin{equation}\label{eq:remainder}
+\Pi_{\rm odd}R(\rho,d)=d^3\Pi_{\rm odd}G_3(\rho)+d^5\Pi_{\rm odd}R_5(\rho,d).
+\end{equation}
+Define the time-integrated spectral-operator norms
+\begin{equation}\label{eq:C35}
+C_3=\int_0^7e^{-\rho/5}\|\Pi_{\rm odd}G_3\|_{\A;\op}\,d\rho,
+\quad C_5=\int_0^7e^{-\rho/5}\|\Pi_{\rm odd}R_5(d)\|_{\A;\op}\,d\rho.
+\end{equation}
+Then
+\begin{equation}\label{eq:reverse}
+I_\infty\geq d^3C_3-d^5C_5.
+\end{equation}
+In particular the still unproved pair of bounds $C_3\geq610$, $C_5(1/128)\leq250000$ would yield the strict rational implication
+\begin{equation}\label{eq:conditional}
+I_\infty\geq\frac{610}{128^3}-\frac{250000}{128^5}
+=\frac{609015}{2147483648}
+=0.0002835947088897\ldots>\frac1{3600}.
+\end{equation}
+A verified interval integration of the finite cubic system might establish the first inequality. The second inequality requires a separate continuum estimate, since a 44-mode cubic truncation does not bound the omitted nonlinear high-frequency feedback.
+
+
+\section{Four Fourier modes suffice for a conditional lower bound}
+The third-order Fourier shell has a particularly useful property: $A_{\rm quad}$ has no Fourier coefficients with $|k|_1=3$. Its background, linear and quadratic parts contain frequencies of lengths zero, one, and zero or two, respectively. Reflections and the glide symmetry act on the tensor $G=nP$ by orthogonal conjugations, so Fourier operator norms are constant within their induced orbits.
+
+\begin{proposition}[Four-orbit reduction]\label{prop:four}
+Assume a regular CMC Einstein--scalar development through $\rho=9$ in the stated coordinate and frame conventions. For
+\[
+k_1=(1,1,1),\quad k_2=(1,2,0),\quad
+k_3=(2,1,0),\quad k_4=(0,2,1),
+\]
+the four corresponding symmetry orbits are disjoint and each contains eight wavevectors. Therefore
+\begin{equation}\label{eq:fourbound}
+I_\infty\ge64\int_0^9e^{-\rho/5}
+\sum_{j=1}^4\|\widehat{nP}(\rho,k_j)\|_{2\to2}\,d\rho.
+\end{equation}
+\end{proposition}
+\begin{proof}
+The quadratic reference vanishes on the third shell. Each of the four representatives carries analytic weight $2^{|k|_1}=8$, and each has eight distinct wavevectors in its spatial symmetry orbit. The symmetry transformations preserve the matrix operator norm. Summing these thirty-two nonnegative terms and discarding all others yields \eqref{eq:fourbound}.
+\end{proof}
+
+For each interval $(m/8,(m+1)/8)$, $m=0,\ldots,71$, the research packet specifies four fixed matrices $H_j^{(m)}$ obtained by averaging rational rank-one matrices at adjacent endpoints. The integer certificates verify that the endpoint matrices have nuclear norm at most one; convexity gives $\|H_j^{(m)}\|_*\le1$. Define the signed functional
+\begin{equation}\label{eq:signed}
+J(G)=64\int_0^9 e^{-\rho/5}\operatorname{Re}
+\sum_{j=1}^4\operatorname{tr}\big((H_j^{(m)})^*
+\widehat G(\rho,k_j)\big)\,d\rho
+\quad (\rho\in(m/8,(m+1)/8)).
+\end{equation}
+Matrix nuclear--operator norm duality proves $I_\infty\ge J(G)$ for the true regular solution. The matrix admissibility is an exact statement about the frozen rational data, independent of the numerical trajectory used to select them.
+
+Regard the saved binary64 Fourier samples as exact dyadic rational numbers and interpolate them linearly in time. Rational integration, including a rigorous bound for the exponential weight, gives
+\begin{equation}\label{eq:dual-value}
+0.00043782187963620927<J_{\rm PL}
+<0.00043782187963625147.
+\end{equation}
+This certifies the \emph{number produced by the numerical interpolant}, not the integral of a continuum solution. Nevertheless, it provides a precise sufficient proof target:
+\begin{equation}\label{eq:margin}
+|J(G_{\rm Einstein})-J_{\rm PL}|
+< D_*=1.60044101858\times10^{-4}
+\ \Longrightarrow\ I_\infty>1/3600.
+\end{equation}
+The right implication is rigorous once regular continuum existence and the error hypothesis are established; the hypothesis has not been proved. The four-orbit test does not need a numerical solution of the second-order nineteen-mode reference.
+
+\section{Higher odd orders at the initial slice}
+The exact Fourier recurrence for the inverse initial scalar-energy factor also gives the fifth- and seventh-amplitude coefficients of the \emph{initial generator acceleration} $G''(0,d)$. With $G_j=[d^j]G$, exact rational Fourier summation yields
+\begin{equation}\label{eq:57}
+\|G_5''(0)\|_{\A;\op}
+=\frac{14366907006064}{4374202833},\qquad
+\|G_7''(0)\|_{\A;\op}
+=\frac{1757521220817553985792}{7795288739703465}.
+\end{equation}
+The fifth- and seventh-order coefficients occupy 146 and 344 Fourier wavevectors, respectively. A positive-coefficient rational majorant for the exact initial lapse expansion, with these explicit orders subtracted, bounds the ninth-and-higher odd acceleration tail at $d=1/128$ by $1.144\times10^{-9}$. The resulting sharpened local estimate is
+\begin{equation}\label{eq:localnew}
+\left\|\Pi_{\rm odd}
+\partial_\rho^2(G-A_{\rm quad})(0,1/128)
+\right\|_{\A;\op}>5.3355\times10^{-5}.
+\end{equation}
+All these bounds are at $\rho=0$. They do not control fifth-and-higher amplitudes over the nine-unit evolution interval. In particular, the exact wavevector counts and the initial acceleration cannot be promoted to an all-time nonlinear error estimate without a continuum argument.
+
+\section{Exact continuum lapse coercivity and a four-block error criterion}
+On any regular constant-mean-curvature development with positive-definite $h$, $h$-self-adjoint shape $P$, real scalar momentum $u$ and $\operatorname{tr}P=1$, write
+\[
+L_h=-e^{-2\rho}\Delta_h+V,
+\qquad V=\operatorname{tr}(P^2)+u^2.
+\]
+Since the eigenvalues of $P$ are real and sum to one,
+\begin{equation}\label{eq:lapse-third}
+V\ge\tfrac13,
+\qquad 0<n=L_h^{-1}1\le3,
+\qquad \|L_h^{-1}r\|_\infty\le3\|r\|_\infty.
+\end{equation}
+These are continuum maximum-principle statements conditional only on an existing regular solution; they do not prove such a solution exists through $\rho=9$.
+
+Let $B(\rho)$ be the block of four Fourier matrices $\widehat{G}(\rho,k_j)$ and let $B_m^{\rm num}$ be the 73 saved values. With $B_{\rm PL}$ their piecewise-linear interpolation, suppose independently certified bounds give
+\[
+\max_m\|B(\rho_m)-B_m^{\rm num}\|_F\le a,
+\qquad\sup_{0\le\rho\le9}\|B''(\rho)\|_F\le M.
+\]
+The interpolation error is bounded by $a+M/512$, and the four-matrix dual observable has Lipschitz constant at most 128 in the combined Frobenius norm. It follows that
+\begin{equation}\label{eq:nodecriterion}
+|J(G)-J_{\rm PL}|
+\le128\,5(1-e^{-9/5})\,(a+M/512).
+\end{equation}
+For example, the \emph{unproved} pair $a\le2.5\times10^{-7}$ and $M\le2\times10^{-5}$ would certify a strict excess. The existing numerical data do not independently enclose either bound for the continuum evolution. The initial node $B(0)=0$ and a sharp bound on $B''(0)$ are known exactly, but this does not control the other nodes or slabs.
+
+\section{Verified metric and lapse properties of the numerical surrogate}
+The full-field numerical trajectory was recorded at 73 logarithmic-time nodes on a $12^3$ grid, then represented as a spatial trigonometric polynomial and a piecewise cubic Hermite interpolant in time. The Kasner-rescaled metric is
+\[
+\widetilde{\mathcal H}=D^{-1}\widetilde hD^{-1},
+\qquad D=\operatorname{diag}(e^{-3\rho/4},e^{-\rho/8},e^{-\rho/8}).
+\]
+The saved binary64 control values are treated as \emph{exact dyadic inputs}. Integer arithmetic in the number field $\mathbb Q(\sqrt3,i)$ evaluates their twelve-point Fourier transforms. Rigorous bounds on all 288 Bernstein controls prove
+\begin{equation}\label{eq:two-radius}
+\sup_{0\le\rho\le9}
+\|\widetilde{\mathcal H}-I\|_{\mathcal A_2}<0.962,
+\qquad
+\sup_{0\le\rho\le9}
+\|\widetilde{\mathcal H}-I\|_{\mathcal A_{5/4}}<0.528,
+\end{equation}
+where $\|F\|_{\mathcal A_b}=\sum_k b^{|k|_1}\|\widehat F(k)\|_{2\to2}$.
+The second bound implies, for all space-time points of this finite polynomial,
+\begin{equation}\label{eq:sur-inverse}
+\widetilde{\mathcal H}\succeq\frac{59}{125}I,
+\qquad\|\widetilde{\mathcal H}^{-1}\|_{\mathcal A_{5/4}}<\frac{125}{59}<2.119.
+\end{equation}
+Using the larger radius to pay for spatial derivatives gives
+\begin{align}\label{eq:sur-derivative}
+\|\partial_j\widetilde{\mathcal H}\|_{\mathcal A_{5/4}}&<0.751563, &
+\|\partial_i\partial_j\widetilde{\mathcal H}\|_{\mathcal A_{5/4}}&<2.348633,\\
+\|\partial_j\widetilde{\mathcal H}^{-1}\|_{\mathcal A_{5/4}}&<3.374, &
+\|\partial_i\partial_j\widetilde{\mathcal H}^{-1}\|_{\mathcal A_{5/4}}&<21.286.
+\end{align}
+The certified shape estimate $\|\widetilde P-\overline P\|_{\mathcal A_2}<0.047$ implies $\widetilde V>0.493123$ and hence a \emph{surrogate-coefficient} lapse inverse bound
+\begin{equation}\label{eq:sur-lapse}
+\|\widetilde L^{-1}r\|_{\infty}
+<\frac{10^6}{493123}\|r\|_\infty<2.028\|r\|_\infty.
+\end{equation}
+These results prove positivity and elliptic coercivity of the \emph{constructed surrogate}. They do not establish a full continuum Einstein residual enclosure, a regular exact solution through $\rho=9$, or a continuum error bound. Rechecking all 288 metric and 73 shape/potential certificate inputs gave the same exact results.
+
+For comparison, the observed de-aliased spacetime residuals at 216 interior time samples were of order $10^{-6}$ in componentwise norms. These observations were not outward-rounded supremum bounds and are not interchangeable with the high-regularity norm required for Einstein evolution stability. Likewise, exact Fourier certification of the initial scalar momentum controls its unresolved initial tail (below $2.938143\times10^{-10}$ in the specified norm), but not its later amplification. Numerical agreement on finitely many grids cannot eliminate high-frequency aliasing. Indeed, the explicitly symmetry-compatible function
+\[
+\Phi(x,y,z)=(\cos49x-\cos x)(\cos2y-\cos2z)
+\]
+vanishes at every grid node of both the $12^3$ and $16^3$ grids, while $\widehat\Phi(1,2,0)=-1/4$. The trace-free tensor $\Phi\operatorname{diag}(2,-1,-1)$ respects the same coordinate reflections and glide. This is an obstruction to inference from grid agreement alone, not a solution of the Einstein equations.
+
+An independent exact initial-slice Fourier-tail calculation, extending the scalar square-root series through amplitude order eight, gives the following certified errors for the saved initial data (all in the specified weighted Fourier norm):
+\begin{center}
+\begin{tabular}{@{}p{.61\linewidth}r@{}}\toprule
+Unresolved scalar-momentum tail & $<2.938143\times10^{-10}$\\
+Total scalar-momentum projection and rounding error & $<9.789176\times10^{-10}$\\
+Initial normalized-shape approximation error & $<7.300767\times10^{-11}$\\
+Combined initial shape and scalar-momentum error & $<1.051926\times10^{-9}$\\
+Initial surrogate-coefficient elliptic-lapse correction & $<3.487067\times10^{-9}$\\\bottomrule
+\end{tabular}
+\end{center}
+These initial errors are not full-state $H^4$ errors and cannot be inserted unaltered into the stability theorem below. The exact lapse equation may be differentiated on a regular solution: $Ln'=-L'n$ and $Ln''=-2L'n'-L''n$. This provides a route to time-curvature bounds but not their numerical certification.
+
+\section{Model energies and an abstract error estimate}
+\subsection{An exact cancellation in the anisotropic Kasner wave block}
+The scalar wave principal model suggested by the Bessel first-variation equations is
+\begin{equation}\label{eq:kasner-wave}
+q''-\sum_{j=1}^3c_j(\rho)^2\partial_j^2q=f,
+\quad c_j(\rho)=e^{-\beta_j\rho},
+\quad(\beta_1,\beta_2,\beta_3)=(1/4,7/8,7/8).
+\end{equation}
+This is a wave \emph{principal model}; it is not asserted to be the complete coupled Einstein--scalar system. Put $v=q'$ and $w_j=c_j\partial_jq$. Then
+\begin{equation}\label{eq:wave-first}
+v'=\sum_jc_j\partial_jw_j+f,\qquad
+w_j'=c_j\partial_jv-\beta_jw_j.
+\end{equation}
+\begin{proposition}[Principal-block energy identity]\label{prop:waveenergy}
+For smooth periodic data the energy $E=\frac12(\|v\|_2^2+\sum_j\|w_j\|_2^2)$ satisfies
+\begin{equation}\label{eq:wave-energy}
+E'=-\sum_j\beta_j\|w_j\|_2^2+
+\operatorname{Re}\langle v,f\rangle.
+\end{equation}
+In particular, in the unforced case it is nonincreasing. If $r_v,r_{w_j}$ are added to the equations in \eqref{eq:wave-first}, then
+\begin{equation}\label{eq:wave-residual}
+\|(v,w)(\rho)\|_2\le\|(v,w)(0)\|_2
++\int_0^\rho\|(r_v,r_w)(s)\|_2\,ds.
+\end{equation}
+\end{proposition}
+\begin{proof}
+Pair the first equation with $v$ and each second equation with $w_j$, integrate over the torus, and use periodic integration by parts. The two principal derivative terms cancel exactly. The remaining $-\beta_j\|w_j\|_2^2$ terms have the stated sign. The sourced norm estimate follows from Cauchy--Schwarz and a regularization at zero energy.
+\end{proof}
+The scaled-gradient compatibility constraints $C_j=w_j-c_j\partial_jq$ obey $C_j'=-\beta_j C_j$ for the homogeneous formulation with $q'=v$. For a sourced $q'=v+r_q$, the right-hand side becomes $-\beta_jC_j+r_{w_j}-c_j\partial_jr_q$. Thus the model also has an explicit constraint-propagation identity.
+
+\subsection{An explicit fourth-derivative energy template}
+Consider a \emph{given} $m$-component symmetric-hyperbolic error system on $\mathbb T^3$,
+\begin{equation}\label{eq:symhyp}
+e'+\sum_{j=1}^3A^j(\rho,x)\partial_je+B(\rho,x)e=r,
+\qquad (A^j)^*=A^j,
+\end{equation}
+with sufficiently smooth bounded coefficients. Write $y=\|e\|_{H^4}$ and define
+\[
+\begin{split}
+D_+(\rho)&=\max\left\{0,\operatorname*{ess\,sup}_x\lambda_{\max}\left(\sum_j\partial_jA^j-(B+B^*)\right)\right\},\\
+M_A(\rho)&=\max_{j,\,1\le|\gamma|\le4}\|\partial^\gamma A^j\|_{\infty;\op},\\
+M_B(\rho)&=\max_{1\le|\gamma|\le4}\|\partial^\gamma B\|_{\infty;\op}.
+\end{split}
+\]
+\begin{theorem}[Symmetric-hyperbolic residual bound]\label{thm:FT09}
+For any sufficiently regular solution of \eqref{eq:symhyp},
+\begin{equation}\label{eq:H4}
+y'(\rho)\le\kappa_4(\rho)y(\rho)+\|r(\rho)\|_{H^4},
+\quad\kappa_4=\tfrac12D_++948M_A+316M_B.
+\end{equation}
+The numerical factors are explicit combinatorial majorants, not optimized CMC Einstein constants. If a nonlinear error equation has an additional term bounded in $H^4$ by $Q(\rho)y^2$, the right side gains $Q(\rho)y^2$.
+\end{theorem}
+\begin{proof}
+For each multi-index $|\alpha|\le4$, differentiate \eqref{eq:symhyp} and pair it with $\partial^\alpha e$. The uncommuted first-order terms produce $\frac12(\sum_j\partial_jA^j-(B+B^*))$ after periodic integration by parts. The derivatives falling on $A^j$ contribute at most
+$\sum_{0<\gamma\le\alpha}\binom{\alpha}{\gamma}M_Ay^2$ per spatial direction; the same sum with $M_B$ bounds the nonconstant $B$ commutator. In three dimensions,
+\[
+\sum_{|\alpha|\le4}\ \sum_{0<\gamma\le\alpha}\binom{\alpha}{\gamma}
+=\sum_{m=1}^4\binom{m+2}{2}(2^m-1)=316.
+\]
+There are three spatial principal matrices, giving $3\cdot316=948$. Summing the differentiated energy identities, applying Cauchy--Schwarz to the residual and dividing by $y$ proves \eqref{eq:H4}. The quadratic-error variant follows from the same argument.
+\end{proof}
+
+A variable positive symmetrizer can sometimes be reduced to \eqref{eq:symhyp} by a square-root transformation, but that transformation contributes additional coefficient derivatives. \emph{No assertion is made that the saved coordinate-mixed CMC variables already satisfy \eqref{eq:symhyp}.} A genuine Einstein--scalar application must construct the full first-order CMC/Fermi--Walker metric, connection, shape, scalar, lapse and constraint-error system, verify its symmetrizer, and certify all coefficient and commutator bounds. There is also a concrete derivative-loss obstruction to using just one unaugmented metric Wiener norm. At the flat initial metric and the equal $y,z$ Kasner exponents, take
+\[
+q_N=\varepsilon2^{-N}\cos(Nx)\operatorname{diag}(0,1,-1).
+\]
+It is transverse-tracefree and tangent to the linearized constraints, yet
+\[
+\|q_N\|_{\mathcal A_2}=\varepsilon,
+\qquad\|\delta\operatorname{Ric}(q_N)\|_{\mathcal A_2}
+=\tfrac12N^2\varepsilon.
+\]
+This rules out a frequency-independent Ricci Lipschitz estimate in that metric-only norm. It motivates the augmented first-order variables in the energy method and does not contradict the established Einstein--scalar stability theory.
+
+\subsection{The quantitative output gate}
+Using normalized spatial $L^2$ and Parseval, the four-frequency dual observable obeys the exact inequality
+\begin{equation}\label{eq:out-L2}
+|f_G(\rho)-f_{\widetilde G}(\rho)|
+\le128\|G(\rho)-\widetilde G(\rho)\|_{L^2(\mathbb T^3)}.
+\end{equation}
+This estimate uses only the nuclear-norm constraints and four-term Cauchy--Schwarz; it is independent of spatial resolution. A successful CMC error theorem must combine it with a \emph{proved} output operator bound $\|G-\widetilde G\|_2\le C_{\rm out}y+C_{\rm ell}\|r_{\rm lapse}\|$ and a solution of the differential comparison inequality \eqref{eq:H4}, including the actual elliptic-lapse dependence.
+
+For scale, in the \emph{optimistic idealisation} $\kappa_4=0$, $C_{\rm out}=1$, zero initial error and no separate lapse error, a uniform energy-compatible residual $\|r\|_{H^4}\le r_*$ gives
+\begin{equation}\label{eq:gate0}
+|J(G)-J(\widetilde G)|
+\le128r_*\int_0^9\rho e^{-\rho/5}\,d\rho
+=128r_*\,25\big(1-\tfrac{14}{5}e^{-9/5}\big).
+\end{equation}
+To close the original witness margin, one would need
+\begin{equation}\label{eq:optimistic}
+r_*<9.311\times10^{-8}.
+\end{equation}
+This is a \emph{conditional benchmark}, not a certified residual. The sampled componentwise defects of the numerical surrogate, around $10^{-6}$, are not measured in the $H^4$ error norm and cannot be compared directly. They nevertheless demonstrate why a sharper numerical surrogate, a structural energy cancellation, or a goal-oriented signed adjoint estimate is needed before the continuum gate can close.
+
+
+\section{A constraint-adjusted first-order gravitational energy}
+\label{sec:constraint-adjusted}
+The coordinate-mixed evolution system is not directly an appropriate setting for a derivative-free error estimate: the Ricci tensor contains two derivatives of the spatial metric. The CMC/Fermi--Walker formulation of \cite{FRS} instead uses an orthonormal spatial frame, the second fundamental form and the spatial connection. The following calculation isolates the gravitational principal operator needed for a quantitative comparison. Its purpose is to specify a valid principal energy; it is not a nonlinear Einstein stability theorem.
+
+Write $e_0=n^{-1}\partial_t$, $e_I=F_I{}^a\partial_a$, $k_{IJ}=k_{JI}$ and $\gamma_{IJB}=-\gamma_{IBJ}$. In a frozen orthonormal frame, denote the gravitational perturbation variables by $K_{IJ}=K_{JI}$ and $\Gamma_{IJB}=-\Gamma_{IBJ}$. Their principal equations are
+\begin{align}
+\partial_t K_{IJ}&=\operatorname{Sym}_{IJ}\bigl(\partial_C\Gamma_{IJC}-\partial_I\Gamma_{CJC}\bigr)-\partial_I\partial_J\nu,\label{eq:newK}\\
+\partial_t\Gamma_{IJB}&=\partial_BK_{IJ}-\partial_JK_{BI},\label{eq:newGam}
+\end{align}
+where $\nu$ is the lapse perturbation. The principal momentum constraint is $M_J=\partial_C K_{CJ}$. Add the antisymmetric constraint term
+\begin{equation}\label{eq:newadjust}
+\mathsf A[M]_{IJB}=\delta_{IJ}M_B-\delta_{IB}M_J
+\end{equation}
+to the right side of \eqref{eq:newGam}. This changes the operator away from the constraint manifold but vanishes for solutions satisfying the momentum constraint.
+
+\begin{theorem}[Symmetrization of the frozen gravitational block]\label{thm:newprincipal}
+Order the 15 independent variables as
+\[
+(K_{11},K_{12},K_{13},K_{22},K_{23},K_{33},
+\Gamma_{112},\Gamma_{113},\Gamma_{123},\Gamma_{212},\Gamma_{213},\Gamma_{223},\Gamma_{312},\Gamma_{313},\Gamma_{323}).
+\]
+For the principal matrices $A^j$ of \eqref{eq:newK}--\eqref{eq:newGam} with adjustment \eqref{eq:newadjust},
+\[
+H A^j=(A^j)^\top H,\qquad
+H=\operatorname{diag}(1,2,2,1,2,1,1,1,1,1,1,1,1,1,1)>0.
+\]
+For a nonzero frozen covector $\xi$ their characteristic polynomial is
+\begin{equation}\label{eq:newspectrum}
+\det(\lambda I-\xi_jA^j)=
+\lambda^5(\lambda^2-3|\xi|^2)(\lambda^2-|\xi|^2)^2
+\bigl(\lambda^2-\tfrac12|\xi|^2\bigr)^2.
+\end{equation}
+Thus the constraint-adjusted \emph{frozen gravitational principal subsystem} is symmetric hyperbolic.
+\end{theorem}
+\begin{proof}
+Represent the symmetric $K$ array by its six independent components and the last-two-index-antisymmetric connection by its nine independent components. Expanding \eqref{eq:newK} and \eqref{eq:newGam} gives rational $15\times15$ matrices. The defect in the unadjusted symmetry identity is the pairing between the contraction $\Gamma^\sharp_J=\Gamma_{CJC}$ and $M_J$. The correction \eqref{eq:newadjust} cancels this defect. Direct exact-rational multiplication therefore gives $HA^j-(A^j)^\top H=0$ for $j=1,2,3$. The determinant of the exact symbol in direction $(1,0,0)$ is \eqref{eq:newspectrum} with $|\xi|=1$. Orthogonal covariance of the frozen orthonormal-frame symbol gives the expression in arbitrary direction; checks for $(1,1,0),(1,1,1)$ and $(1,2,3)$ independently reproduce it. The source archive contains the rational matrices and a stand-alone symbolic verifier.
+\end{proof}
+
+The associated quadratic energy is
+\[
+\mathcal E_{g}=\frac12\sum_{I,J}|K_{IJ}|^2+
+\frac14\sum_{I,J,B}|\Gamma_{IJB}|^2.
+\]
+For arbitrary $M\in\mathbb R^3$, the constraint correction obeys the dimension-specific \emph{exact} norm identity
+\begin{equation}\label{eq:adjustnorm}
+\sum_{I,J,B}|\mathsf A[M]_{IJB}|^2=4\sum_J|M_J|^2.
+\end{equation}
+Indeed, expanding the square gives $3|M|^2+3|M|^2-2|M|^2$. Hence a numerical momentum-constraint defect contributes exactly twice its Euclidean norm to the Frobenius norm of the connection-equation correction.
+
+The unadjusted symbol is not diagonalizable on the full 15-variable array: for $\xi=(1,0,0)$ its zero eigenvalue has algebraic multiplicity nine but geometric multiplicity five. The adjustment repairs that \emph{principal} defect. It does not establish a symmetrizer for the complete variable-coefficient Einstein--scalar--lapse system, nor homogeneous propagation of all gravitational constraints. The general use of constraint terms and CMC/Fermi--Walker energies belongs to the established framework of \cite{FRS}.
+
+\section{Frame compatibility and scalar constraints}
+\label{sec:frame-compatibility}
+An orthonormal frame reconstructed independently on every spatial slice need not satisfy Fermi--Walker transport. There is, however, a geometric identity that reduces its transport error to the metric-evolution error. Let $h$ be a differentiable positive-definite matrix field and $P,n$ differentiable fields. Define the symmetric metric residual
+\begin{equation}\label{eq:newRh}
+\mathcal R_h=h'+n(P^\top h+hP).
+\end{equation}
+Writing $h=LL^\top$ with $L$ lower triangular, set $B=L^{-1}$ and seek a frame $F=QB$, where $Q$ is orthogonal. Let $Z=Bh'B^\top$ and let $X$ be the lower-triangular matrix satisfying $X+X^\top=Z$. With $S=-X-nBP^\top L$, solve $Q'=-Q\operatorname{skew}S$, $Q(0)=I$. This is a skew-generated rotation.
+
+\begin{proposition}[Exact frame-defect identity]\label{prop:newframe}
+The resulting frame is orthonormal for every time on which $h$ is positive definite, and
+\begin{equation}\label{eq:newFres}
+FhF^\top=I,\qquad F'-nFP^\top=-\tfrac12F\mathcal R_hh^{-1}.
+\end{equation}
+In particular, exact metric compatibility is necessary and sufficient for this orthonormal frame to obey the prescribed transport equation.
+\end{proposition}
+\begin{proof}
+Differentiating $LL^\top=h$ yields $B'=-XB$. The symmetric part of $S$ equals $-\tfrac12B\mathcal R_hB^\top$. Orthogonality of $Q$ follows from its skew generator. Substituting $F=QB$ gives
+$F'-nFP^\top=Q(S-\operatorname{skew}S)B
+=-\tfrac12QB\mathcal R_hB^\top B
+=-\tfrac12F\mathcal R_hh^{-1}$, as required.
+\end{proof}
+
+For the Kasner-rescaled metric $\mathcal H=D^{-1}hD^{-1}$ with $D=\operatorname{diag}(e^{-3\rho/4},e^{-\rho/8},e^{-\rho/8})$, let $\mathcal R=D^{-1}\mathcal R_hD^{-1}$. The surrogate positivity certificate \eqref{eq:sur-inverse} implies the \emph{surrogate-only} bound
+\begin{equation}\label{eq:newRtransfer}
+\| (F'-nFP^\top)D\|_{\op}
+\le\frac12\left(\frac{125}{59}\right)^{3/2}\|\mathcal R\|_{\op}
+<1.542\|\mathcal R\|_{\op}.
+\end{equation}
+The exact identity is independent of the surrogate; the numerical coefficient uses its certified metric lower bound. It must not be transferred to an unknown exact continuum metric without a separate comparison.
+
+The first-order scalar frame variables are $q=e_0\psi$ and $z_I=e_I\psi$. Their principal equations have the symmetric form $e_0q=e_Cz_C+\cdots$ and $e_0z_I=e_Iq+\cdots$. Let $C_I=z_I-e_I\psi$ and define equation defects $R_\psi=e_0\psi-q$, $R_I^z$ and the frame-vector defect $R_I^F=e_0F_I-k_{IC}F_C$. A direct commutator calculation gives
+\begin{equation}\label{eq:newscalarC}
+e_0 C_I=k_{IC}C_C+R_I^z-e_I R_\psi
+-n^{-1}(e_In)R_\psi-R_I^{F,a}\partial_a\psi.
+\end{equation}
+Thus the exact scalar-gradient constraint propagates homogeneously when these defects vanish. This identity is not a substitute for the separate Hamiltonian and momentum subsidiary equations of the full nonlinear system.
+
+\section{Orthogonal spatial sensitivities without artificial exponential growth}
+\label{sec:rotation}
+The frame rotation must be differentiated in space to reconstruct the connection. Let $Q(\rho,x)\in SO(3)$ satisfy
+\begin{equation}\label{eq:newrot}
+Q'=-Q\Omega,\quad Q(0,x)=I,\quad \Omega^\top=-\Omega.
+\end{equation}
+Set $Q_a=\partial_aQ$, $Q_{ab}=\partial_{ab}Q$ and define the pointwise time-integrated generator bounds
+\[
+A_a(T,x)=\int_0^T\|\partial_a\Omega\|_{\op}\,d\rho,\quad
+A_{ab}(T,x)=\int_0^T\|\partial_{ab}\Omega\|_{\op}\,d\rho.
+\]
+\begin{theorem}[Orthogonal sensitivity and a posteriori error transfer]\label{thm:newrotation}
+For the exact smooth rotation,
+\begin{equation}\label{eq:newrotbounds}
+\|Q_a(T,x)\|_{\op}\le A_a(T,x),\qquad
+\|Q_{ab}(T,x)\|_{\op}\le A_{ab}(T,x)+A_a(T,x)A_b(T,x).
+\end{equation}
+For smooth approximate jets $\widetilde Q,\widetilde Q_a,\widetilde Q_{ab}$ with exact initial jets, define the defects
+\begin{align*}
+r_0&=\widetilde Q'+\widetilde Q\Omega,\\
+r_a&=\widetilde Q_a'+\widetilde Q_a\Omega+\widetilde Q\Omega_a,\\
+r_{ab}&=\widetilde Q_{ab}'+\widetilde Q_{ab}\Omega+
+\widetilde Q_a\Omega_b+\widetilde Q_b\Omega_a+\widetilde Q\Omega_{ab},
+\end{align*}
+and put $R_I(T)=\int_0^T\|r_I\|_{\op}\,d\rho$. Their errors satisfy
+\begin{align}\label{eq:newroterror}
+E_0&\le R_0,\nonumber\\
+E_a&\le R_a+R_0A_a,\\
+E_{ab}&\le R_{ab}+R_0A_{ab}+R_aA_b+R_bA_a+R_0A_aA_b.\nonumber
+\end{align}
+No exponential factor $\exp(\int\|\Omega\|)$ is needed.
+\end{theorem}
+\begin{proof}
+Differentiation of \eqref{eq:newrot} gives $Q_a'=-Q_a\Omega-Q\Omega_a$ and
+$Q_{ab}'=-Q_{ab}\Omega-Q_a\Omega_b-Q_b\Omega_a-Q\Omega_{ab}$. Right multiplication by the homogeneous propagator is norm-preserving because the generator is skew-symmetric. Duhamel's formula bounds the first derivative by $A_a$. In the second derivative, the mixed terms integrate to
+$\int_0^T(A_a\,dA_b+A_b\,dA_a)=A_a(T)A_b(T)$. Repeating this triangular argument for the approximate-minus-exact equations, inserting the defects $r_I$ and using monotonicity of their accumulated norms yields \eqref{eq:newroterror}.
+\end{proof}
+
+For practical reconstruction, the Cholesky derivatives can be obtained analytically. With $h=LL^\top$, $B=L^{-1}$ and $\mathcal T(S)$ denoting the strict lower triangle plus half the diagonal of symmetric $S$,
+\begin{align}\label{eq:newchol}
+L_a&=L\mathcal T(Bh_aB^\top),\nonumber\\
+L_{ab}&=L\mathcal T\!\left[B(h_{ab}-L_aL_b^\top-L_bL_a^\top)B^\top\right],\\
+B_a&=-BL_aB,\qquad
+B_{ab}=BL_aBL_bB+BL_bBL_aB-BL_{ab}B.\nonumber
+\end{align}
+The spatial derivatives of $F=QB$ then follow from the product rule. Equations \eqref{eq:newroterror} and \eqref{eq:newchol} remove the need to FFT-differentiate a reconstructed non-polynomial rotation, but their use in a numerical theorem still requires interval enclosures of $\Omega$ and its spatial derivatives over every space--time cell.
+
+\begin{figure}[tbp]
+\centering\includegraphics[width=.91\linewidth]{figures/fig_rotation_sensitivity.png}
+\caption{Spatial sensitivities of the reconstructed orthogonal frame rotation across the numerical time interval. The dashed curve records the sampled second spatial derivative $\max_{a,b,x}\|\partial_{ab}Q\|_{\op}$; the solid curve shows the first derivative. At $\rho=9$ they are approximately $0.0231216$ and $0.0231584$, respectively. These are grid diagnostics, not certified continuum suprema.}
+\label{fig:newrotation}
+\end{figure}
+
+\section{A complete equation-by-equation residual audit}
+\label{sec:complete-residual}
+The reconstructed Fermi-frame variables are
+$K=F(hP)F^\top$, $k=-t^{-1}K$, $q=t^{-1}u$, $z_I=F_I{}^a\partial_a\psi$ and $e_I=F_I{}^a\partial_a$, with $t=e^{-\rho}$. In the notation of \cite{FRS}, the right sides of the gravitational evolution equations are
+\begin{align}
+\mathsf F^k_{IJ}={}&-n^{-1}e_Ie_Jn+e_C\gamma_{IJC}-e_I\gamma_{CJC}-t^{-1}k_{IJ}
++n^{-1}\gamma_{IJC}e_Cn\notag\\
+&-\gamma_{DIC}\gamma_{CJD}-\gamma_{DDC}\gamma_{IJC}-z_Iz_J,\label{eq:newFk}\\
+\mathsf F^\gamma_{IJB}={}&e_Bk_{IJ}-e_Jk_{BI}-k_{IC}\gamma_{BJC}-k_{CJ}\gamma_{BIC}
++k_{IC}\gamma_{JBC}\notag\\
+&+k_{BC}\gamma_{JIC}+k_{IC}\gamma_{CJB}
++n^{-1}(e_Bn)k_{IJ}-n^{-1}(e_Jn)k_{BI}.\label{eq:newFg}
+\end{align}
+The full momentum-constraint defect (not merely its principal part) is
+\[
+M_J=e_Ck_{CJ}-\gamma_{CCD}k_{DJ}-\gamma_{CJD}k_{CD}+qz_J.
+\]
+The adjusted connection right side is $\mathsf F^{\gamma,\mathrm{adj}}_{IJB}=\mathsf F^\gamma_{IJB}+\mathsf A[M]_{IJB}$. With $e_0=n^{-1}\partial_t$, define
+\begin{align}\label{eq:newresiduals}
+R^k_{IJ}&=e_0k_{IJ}-\mathsf F^k_{IJ},\nonumber\\
+R^\gamma_{IJB}&=e_0\gamma_{IJB}-\mathsf F^{\gamma,\mathrm{adj}}_{IJB},\\
+R^q&=e_0q-\bigl(e_Cz_C-t^{-1}q+n^{-1}(e_Cn)z_C-\gamma_{CCD}z_D\bigr),\nonumber\\
+R^z_I&=e_0z_I-\bigl(e_Iq+k_{IC}z_C+n^{-1}(e_In)q\bigr).\nonumber
+\end{align}
+The scalar and lapse defects $R^\psi=e_0\psi-q$ and $r_n=L_{\widetilde h}\widetilde n-1$ are included separately. The same evaluator also records symmetry, frame, scalar-gradient, Hamiltonian and momentum-constraint defects. This makes the numerical residual test an equation-by-equation diagnostic rather than a check of the principal symbol alone.
+
+The surrogate inverse metric admits a finite Neumann representation with a \emph{rigorously certified} error. If $A=I-\widetilde{\mathcal H}$ and $S_{48}=\sum_{m=0}^{48}A^m$, the two-radius bounds in \eqref{eq:two-radius}, together with exact derivative majorants, yield
+\begin{equation}\label{eq:newtail}
+\begin{aligned}
+\|\widetilde{\mathcal H}^{-1}-S_{48}\|_{\mathcal A_{5/4}}&<5.435\times10^{-14},\\
+\|\partial_j(\widetilde{\mathcal H}^{-1}-S_{48})\|_{\mathcal A_{5/4}}&<3.877\times10^{-12},\\
+\|\partial_i\partial_j(\widetilde{\mathcal H}^{-1}-S_{48})\|_{\mathcal A_{5/4}}&<2.835\times10^{-10}.
+\end{aligned}
+\end{equation}
+This follows from the exact identity $\widetilde{\mathcal H}^{-1}-S_{48}=A^{49}\widetilde{\mathcal H}^{-1}$ and repeated product rules. The corresponding rational inequalities were independently replayed.
+
+The numerical CMC surrogate consists of 73 saved time slices and 72 Hermite time slabs. The complete gravitational/scalar residual evaluator was run at all 73 nodes and at three interior times in each slab. The resulting largest sampled componentwise defects are summarized in Table~\ref{tab:newres}. These numbers are not norm bounds on a continuum residual.
+\begin{table}[tbp]
+\centering\small
+\begin{tabular}{@{}lrr@{}}\toprule
+Quantity & Saved time nodes & 216 interior samples\\\midrule
+$t^2\|R^k\|_{\max}$ & $3.43\cdot10^{-9}$ & $1.94\cdot10^{-6}$\\
+$t^2\|R^\gamma\|_{\max}$ & $2.68\cdot10^{-9}$ & $4.09\cdot10^{-7}$\\
+$t^2\|R^q\|_{\max}$ & $2.02\cdot10^{-13}$ & $1.97\cdot10^{-6}$\\
+$t^2\|R^z\|_{\max}$ & $1.30\cdot10^{-13}$ & $3.90\cdot10^{-7}$\\
+$\|r_n\|_{\max}$ & $1.64\cdot10^{-10}$ & $2.13\cdot10^{-7}$\\
+$t\|M\|_{\max}$ & $1.99\cdot10^{-7}$ & $1.97\cdot10^{-7}$\\\bottomrule
+\end{tabular}
+\caption{Floating-point componentwise defects at sampled space--time points. The smaller nodal defects partly reflect that Hermite slopes were assembled from the numerical right-hand sides; they are not independent validation. The factors $t$ and $t^2$ must be retained in any energy comparison.}
+\label{tab:newres}
+\end{table}
+\begin{figure}[tbp]
+\centering\includegraphics[width=.82\linewidth]{figures/fig_kr_residual.pdf}
+\caption{Scaled second-fundamental-form residuals at the saved nodes and interior times. The larger interior defects demonstrate why nodal comparisons do not suffice for rigorous time-slab validation.}
+\label{fig:newres}
+\end{figure}
+
+The observed unscaled maxima of $R^k$ and $R^\gamma$ reach approximately $0.873$ and $0.175$, respectively. A small $t^2$-weighted sampled residual cannot be substituted for a small unweighted $H^4$ residual. A fully validated calculation must also enclose the rotation sensitivities, nonlinear spatial coefficient compositions and off-grid Fourier tails on all space--time cells.
+
+\section{A posteriori continuum comparison: an exact conditional criterion}
+\label{sec:continuum-comparison}
+The last step can be stated without choosing a numerical discretization. Let $G=nP$ for a \emph{regular continuum} CMC Einstein--scalar solution through $\rho=9$, let $\widetilde G=\widetilde n\widetilde P$ for a smooth surrogate, and let $J$ denote the fixed four-orbit dual functional used in \eqref{eq:dual-value}. Define the surrogate-observation discrepancy
+\[
+\epsilon_{\rm obs}:=|J(\widetilde G)-J_{\rm PL}|.
+\]
+It is a separate source of error: the Fourier time interpolation used in the saved witness need not agree exactly with the product $\widetilde n\widetilde P$ of the reconstructed full-field surrogate. Its value has not been rigorously enclosed.
+
+\begin{theorem}[Exact output and lapse comparison criterion]\label{thm:newcontinuum}
+Suppose the exact CMC solution is regular on $[0,9]$, the specified coordinate-gauge Fourier observables are well defined, and the surrogate has a positive-definite metric. Put
+$P_*(\rho)=\|P(\rho)\|_{L^\infty;\op}$,
+$N_*(\rho)=\|\widetilde n(\rho)\|_{L^\infty}$,
+$\delta_P(\rho)=\|P-\widetilde P\|_{L^2;\mathrm F}$, and
+$\delta_n(\rho)=\|n-\widetilde n\|_{L^\infty}$.
+If
+\begin{equation}\label{eq:newgategen}
+\epsilon_{\rm obs}+
+128\int_0^9e^{-\rho/5}
+\bigl[P_*(\rho)\delta_n(\rho)+N_*(\rho)\delta_P(\rho)\bigr]\,d\rho
+<D_*,\qquad D_*=J_{\rm PL}^{\rm lower}-\frac1{3600},
+\end{equation}
+where $J_{\rm PL}^{\rm lower}=0.000437821879636209272$, then the proposed continuum upper bound $I_\infty\le1/3600$ is false for this solution.
+
+Moreover let $\widetilde L=-e^{-2\rho}\Delta_{\widetilde h}+\widetilde V$, $\widetilde V=\tr(\widetilde P^2)+\widetilde u^2$, and $r_n=\widetilde L\widetilde n-1$. On each time slice define
+\begin{align*}
+a&=\max_{i,j}\|h^{ij}-\widetilde h^{ij}\|_\infty,\quad
+c=\max_k\|h^{ij}\Gamma^k_{ij}(h)-\widetilde h^{ij}\Gamma^k_{ij}(\widetilde h)\|_\infty,\\
+N_0&=\|\widetilde n\|_\infty,\qquad
+N_1=\max_k\|\partial_k\widetilde n\|_\infty,\qquad
+N_2=\max_{i,j}\|\partial_{ij}\widetilde n\|_\infty,\qquad
+v=\|V-\widetilde V\|_\infty.
+\end{align*}
+Then the exact CMC lapse obeys the quantitative comparison bound
+\begin{equation}\label{eq:newlapsegate}
+\delta_n\le3\Bigl[\|r_n\|_\infty+
+ e^{-2\rho}(9aN_2+3cN_1)+vN_0\Bigr].
+\end{equation}
+These conclusions are conditional on the existence of the regular continuum solution and on the stated error bounds; they do not assert that those bounds hold for the archived surrogate.
+\end{theorem}
+\begin{proof}
+The four-orbit dual functional has Lipschitz constant at most 128 with respect to normalized spatial $L^2$ of the matrix-valued Fourier field, by operator--nuclear duality and Parseval. Since
+$G-\widetilde G=(n-\widetilde n)P+\widetilde n(P-\widetilde P)$,
+\[
+|J(G)-J_{\rm PL}|\le\epsilon_{\rm obs}+
+128\int_0^9e^{-\rho/5}\bigl[P_*\delta_n+N_*\delta_P\bigr]\,d\rho.
+\]
+Together with the rigorous lower bound on $J_{\rm PL}$, condition \eqref{eq:newgategen} implies $J(G)>1/3600$, whereas the norm integral $I_\infty$ dominates this dual functional.
+
+For the lapse, the exact difference identity
+$L_h(n-\widetilde n)=-r_n+(\widetilde L-L_h)\widetilde n$
+holds algebraically. On a regular CMC solution, $V=\tr(P^2)+u^2\ge1/3$ by self-adjointness and $\tr P=1$. The compact maximum principle therefore gives $\|L_h^{-1}f\|_\infty\le3\|f\|_\infty$. In coordinates,
+$\Delta_h f=h^{ij}\partial_{ij}f-h^{ij}\Gamma^k_{ij}(h)\partial_kf$.
+The triangle inequality applied to $(\widetilde L-L_h)\widetilde n$ yields $9aN_2+3cN_1$ after summing the nine pairs $(i,j)$ and three gradient components, while its potential term is bounded by $vN_0$. Combining these estimates proves \eqref{eq:newlapsegate}.
+\end{proof}
+
+The numerical gap in \eqref{eq:newgategen} is exact rational arithmetic:
+\begin{equation}\label{eq:newmargin}
+D_*=\frac{180049614590735431}{1125000000000000000000}
+=0.00016004410185843149422\ldots.
+\end{equation}
+If $\epsilon_{\rm obs}=0$ and the $L^2$ generator error were uniform in time, the sufficient upper bound would be
+\begin{equation}\label{eq:newuniform}
+\sup_{0\le\rho\le9}\|G-\widetilde G\|_{L^2;\mathrm F}
+<\frac{D_*}{128\cdot5(1-e^{-9/5})}
+\simeq2.99591\times10^{-7}.
+\end{equation}
+This is a sharp \emph{sufficient design tolerance for the chosen dual functional}, not an established trajectory error. The available $\sim10^{-6}$ sampled first-order residuals cannot be inserted into \eqref{eq:newuniform} or \eqref{eq:newlapsegate} without a validated derivative-controlled evolution estimate and uniform coefficient bounds.
+
+A complete PDE certificate would have to propagate the initial errors through a first-order constraint-compatible energy, use \eqref{eq:newlapsegate} to control the elliptic lapse response, enclose the full residuals \eqref{eq:newresiduals} and every subsidiary constraint over continuous space and time, and bound $\epsilon_{\rm obs}$. The frozen gravitational symmetrizer and orthogonal sensitivity theorem identify structural ingredients of this task, but they do not establish the required nonlinear coupled inequality. Accordingly the original continuum $1/3600$ bound is neither proved nor refuted here.
+
+
+\section{Conclusion and limitations}
+An explicit nonsymmetric Einstein--scalar Cauchy family permits exact Fourier selection, first-order scattering and homogeneous quadratic lapse memory calculations. Exact-rational perturbative calculations distinguish the genuinely nonzero local cubic response from higher-order remainders at the initial slice. For the proposed fixed-amplitude auxiliary error estimate, the four-frequency reduction and rational dual construction remove the quadratic reference from the decisive numerical observable. They yield a clear continuum target, not a counterexample theorem.
+
+Finite arithmetic certifies the positivity, inverse-metric bounds and lapse coercivity of a constructed smooth surrogate. Separately, the modified frozen gravitational principal block is symmetrizable, the exact frame defect is determined by metric compatibility, and rotation derivatives satisfy nonexponential transport estimates. These analytical identities locate the appropriate error variables and describe how lapse, momentum and frame residuals enter a possible comparison. They do not establish the complete variable-coefficient nonlinear subsidiary system, a uniform outward-rounded residual, or a numerical stability constant for an exact Einstein solution through $\rho=9$.
+
+The available computational evidence is consistent with failure of one proposed $1/3600$ auxiliary inequality, but it is insufficient to assert that failure rigorously. A validated first-order Einstein--scalar evolution error, including constraint propagation and the surrogate-observation mismatch in Theorem~\ref{thm:newcontinuum}, is the remaining condition. Neither the established subcritical Kasner singularity theorem \cite{FRS} nor any general chronology-protection conjecture is challenged by the present exact results.
+
+\section*{Data and reproducibility}
+The accompanying source archive contains the manuscript, figure data, the four-orbit dual certificate, integer Fourier-control programs, symbolic principal-system verification, inverse-series remainder checker, frame-rotation checks, and sampled first-order residual records. Recorded binary64 numbers are exact rational inputs \emph{to the finite surrogate verification only}; they are not outward-rounded enclosures of an unknown continuum trajectory. All numerical residual tables are clearly distinguished from certified Fourier and algebraic inequalities. The precise Fourier and frame conventions are fixed in the text. Independent expert assessment of priority and full PDE verification remains necessary.
+
+\begin{thebibliography}{9}
+\bibitem{FRS} G.~Fournodavlos, I.~Rodnianski and J.~Speck, \emph{Stable Big Bang formation for Einstein's equations: The complete sub-critical regime}, J. Amer. Math. Soc. \textbf{36} (2023), 827--916. \href{https://doi.org/10.1090/jams/1015}{doi:10.1090/jams/1015}.
+\bibitem{AR} L.~Andersson and A.~D.~Rendall, \emph{Quiescent cosmological singularities}, Comm. Math. Phys. \textbf{218} (2001), 479--511. \href{https://doi.org/10.1007/s002200100406}{doi:10.1007/s002200100406}.
+\bibitem{AM} L.~Andersson and V.~Moncrief, \emph{Elliptic--hyperbolic systems and the Einstein equations}, Ann. Henri Poincar\'e \textbf{4} (2003), 1--34. \href{https://doi.org/10.1007/s00023-003-0120-1}{doi:10.1007/s00023-003-0120-1}.
+\bibitem{RS} I.~Rodnianski and J.~Speck, \emph{A regime of linear stability for the Einstein--scalar field system with applications to nonlinear Big Bang formation}, Ann. of Math. \textbf{187} (2018), 65--156. \href{https://doi.org/10.4007/annals.2018.187.1.2}{doi:10.4007/annals.2018.187.1.2}.
+\bibitem{RS2} I.~Rodnianski and J.~Speck, \emph{Stable Big Bang formation in near-FLRW solutions to the Einstein--scalar field and Einstein--stiff fluid systems}, Selecta Math. \textbf{24} (2018), 4293--4459. \href{https://doi.org/10.1007/s00029-018-0437-8}{doi:10.1007/s00029-018-0437-8}.
+\bibitem{Neher} M.~Neher, K.~R.~Jackson and N.~S.~Nedialkov, \emph{On Taylor model based integration of ODEs}, SIAM J. Numer. Anal. (2007). \href{https://doi.org/10.1137/050638448}{doi:10.1137/050638448}.
+\end{thebibliography}
+\end{document}
