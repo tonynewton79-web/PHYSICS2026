@@ -1,0 +1,603 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools,bm}
+\usepackage{geometry,booktabs,array,longtable,enumitem,xcolor}
+\usepackage[hidelinks]{hyperref}
+\geometry{left=27mm,right=27mm,top=28mm,bottom=28mm}
+\hypersetup{pdftitle={Constraint Propagation and First-Jet Hyperbolicity in Einstein--Dust--Radiation Reductions},pdfauthor={Tony Newton}}
+\pagestyle{plain}
+\setlength{\parskip}{4pt}
+\setlength{\parindent}{0pt}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\RR}{\mathbb R}
+\newcommand{\TT}{\mathbb T}
+\newcommand{\cC}{\mathcal C}
+\newcommand{\cB}{\mathcal B}
+\newcommand{\cD}{\mathcal D}
+\newcommand{\cF}{\mathcal F}
+\newcommand{\STF}{\operatorname{STF}}
+\newcommand{\diver}{\operatorname{div}}
+\newcommand{\curl}{\operatorname{curl}}
+\newcommand{\Id}{\mathrm{Id}}
+\newcommand{\kap}{\kappa}
+\newcommand{\wt}{\widetilde}
+\title{\bfseries Constraint Propagation and First-Jet Hyperbolicity\\[4pt]
+\large in Einstein--Dust--Radiation Reductions}
+\author{Tony Newton\\\small Independent mathematical-physics research, United Kingdom}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+We analyze first-order reductions of the Einstein equations coupled to pressureless dust and an independently tilted perfect radiation fluid. Conserved dust material mass, a prescribed-metric radiation prolongation, and homogeneous frozen Weyl--matter subsidiaries provide exact restricted controls; a fully coupled Einstein-equivalent reduction is not established. We show that several seemingly natural partial gradient completions are non-symmetrizable. In particular, differentiating the radiation-sourced Weyl evolution while leaving radiation-stress gradients unprolonged yields a concrete $22\times22$ principal symbol with zero eigenvalue of algebraic multiplicity eight and geometric multiplicity seven. This off-shell Jordan defect persists for nonzero radiation coupling even though each diagonal sector is symmetric hyperbolic. A complete first-jet prolongation of any already closed symmetric-hyperbolic system instead inherits a positive block symmetrizer; a $132$-field restricted model illustrates this standard principle. We also derive covariant curvature- and torsion-defect identities and exact dust-gradient compatibility relations. These results delimit a proposed $58$-variable frame construction without asserting a nonlinear Einstein existence theorem: its complete off-shell sources and geometric constraint subsystem remain to be derived.
+\end{abstract}
+
+\section{Introduction and relation to existing work}
+The Cauchy problem for the Einstein equations with relativistic matter is known to admit several hyperbolic reductions. The relevant issue here is not whether pressureless dust or a single radiation fluid can be evolved individually; both admit substantial existing analyses. Rather, it is whether a \emph{specified} common first-order reduction can treat a geodesic dust material frame, an independently moving radiation fluid, the full gravitational field, and all geometric and matter constraints with a positive symmetrizer.
+
+Friedrich's Lagrangian Einstein--fluid reduction includes pressure-free dust \cite{Friedrich}. Normann and Valiente Kroon \cite{NormannVK} construct a broad orthonormal-frame Einstein--matter reduction with constraint propagation, but use a purely spatial auxiliary matter stress in the chosen flow frame to eliminate derivative couplings. In a dust frame, generically tilted radiation carries nonzero momentum flux, so applying that particular construction unchanged requires additional justification. Fournodavlos, Marshall and Oliynyk's 2026 two-fluid analysis \cite{FMO} addresses a distinct positive-sound-speed regime; it cannot be quoted as the desired pressureless-dust/radiation theorem. These works strongly motivate, rather than settle, the present reduction-specific question.
+
+The preceding short manuscript established the prescribed-metric material construction and a frozen 36-component Weyl subsidiary. We derive the 40-field time-jet extension, examine a proposed 58-variable principal skeleton, audit curved Bianchi compatibility, identify dust-gradient and anisotropic shear obstructions, and test the remaining differentiated Weyl-to-radiation coupling. The dust regularity issue has independent established treatments, including the CMC--spatial-harmonic dust estimates of Fajman, Ofner and Wyatt \cite{FOW}; the present auxiliary-jet calculations do not displace that prior art. No priority or original-gravity theorem is asserted.
+
+\section{Exact Einstein and two-fluid setting}
+Use signature $(-,+,+,+)$, $\kap=8\pi G$ and
+\begin{align}
+G_{ab}+\Lambda g_{ab}&=\kap(T^d_{ab}+T^r_{ab}),\label{eq:einstein}\\
+T^d_{ab}&=\rho_d u^d_a u^d_b,\qquad
+T^r_{ab}=\tfrac43\rho_r u^r_a u^r_b+\tfrac13\rho_r g_{ab},\label{eq:stress}\\
+\nabla^aT^d_{ab}&=0,\qquad\nabla^aT^r_{ab}=0,\quad
+\rho_d,\rho_r>0,\quad g(u^d,u^d)=g(u^r,u^r)=-1.\nonumber
+\end{align}
+The radiation component is a barotropic perfect fluid, not a kinetic photon Boltzmann or Thomson scattering system. Each species is separately conserved, with gravity as their interaction. The discussion of material coordinates assumes irrotational geodesic dust before intersecting dust trajectories; it is not a global assertion for vortical or caustic-forming flows.
+
+\subsection{Pressureless Euler defect and material repair}
+Linearize the longitudinal one-dimensional pressureless Euler subsystem around a comoving background with density contrast $\delta_d$ and velocity $v_d$. The principal equations are
+\[\partial_t\delta_d+\partial_xv_d=0,\qquad\partial_tv_d=0.\]
+The directional matrix $J_0=\left(\begin{smallmatrix}0&1\\0&0\end{smallmatrix}\right)$ has one eigenvector for its double eigenvalue zero. If $H=\left(\begin{smallmatrix}a&b\\b&c\end{smallmatrix}\right)>0$ and $HJ_0=(HJ_0)^T$, then symmetry forces $a=0$, a contradiction. Hence the standard Eulerian dust block is not symmetrizable. Introducing a positive squared sound speed $q$ yields $J_q=\left(\begin{smallmatrix}0&1\\q&0\end{smallmatrix}\right)$ and $H_q=\operatorname{diag}(q,1)$; its condition number grows as $q^{-1}$ when $q\downarrow0$. This is a failure of those variables, not a no-go theorem for dust in every gauge.
+
+\begin{proposition}[Exact material mass conservation]\label{prop:mass}
+If $u_d=\partial_\tau$ and the metric on a pre-caustic irrotational dust patch is
+\[g=-d\tau^2+h_{ij}(\tau,X)dX^idX^j,\]
+then
+\[m(X)=\rho_d\sqrt{\det h},\qquad \partial_\tau m=0,
+\qquad\rho_d=\frac{m(X)}{\sqrt{\det h}}.\]
+With $K_{ij}=-\tfrac12\partial_\tau h_{ij}$ and $K=h^{ij}K_{ij}$,
+\[\partial_\tau\rho_d=K\rho_d,\qquad
+\partial_i\rho_d=\frac{\partial_i m}{\sqrt{\det h}}-\frac{\rho_d}{2}h^{jk}\partial_i h_{jk}.\]
+\end{proposition}
+\begin{proof}The dust continuity equation reads $\partial_\tau\rho_d+\rho_d\partial_\tau\log\sqrt{\det h}=0$; the remaining identities follow by differentiation of the determinant.\end{proof}
+
+\subsection{Radiation first-order positivity}
+Put $c_s=1/\sqrt3$ and $\sigma=(\sqrt3/4)\log\rho_r$. Relativistic Euler takes the covariant form
+\begin{align}
+u_r^a\nabla_a\sigma+c_s\nabla_a u_r^a&=0,\\
+u_r^a\nabla_a u_r^b+c_s(g^{ba}+u_r^bu_r^a)\nabla_a\sigma&=0.\label{eq:euler}
+\end{align}
+In a radiation-orthonormal tangent frame for the four physical state components, the symmetric rest-frame principal matrices are $A^0=I_4$ and
+\[A^i=c_sS_i,\qquad S_i=\begin{pmatrix}0&e_i^T\\e_i&0_{3\times3}\end{pmatrix}.\]
+For dust-frame tilt $u_r=\gamma(e_0+v^ie_i)$, $\gamma=(1-|v|^2)^{-1/2}$, a symmetric coefficient representation is
+\begin{align}
+R^0&=\gamma\Big(I_4+c_s\sum_iv_iS_i\Big),\label{eq:R0}\\
+R^j&=\gamma v^j I_4+c_s\sum_i\Big(\delta_i{}^j+\frac{\gamma-1}{|v|^2}v_i v^j\Big)S_i,\label{eq:Rj}
+\end{align}
+with the smooth limit at $v=0$. Its time eigenvalues are $\gamma,\gamma,\gamma(1\pm c_s|v|)$, and
+\begin{equation}\lambda_{\min}(R^0)=\frac{1-c_s|v|}{\sqrt{1-|v|^2}}
+\ge\sqrt{1-c_s^2}=\sqrt{\frac23},\label{eq:acousticbound}\end{equation}
+because $(1-c_st)^2-(1-c_s^2)(1-t^2)=(t-c_s)^2$. This is a lower coercivity estimate; upper uniform bounds on the coefficient matrices require a compact subluminal state region.
+
+\section{Prescribed-metric radiation-gradient prolongation}
+\begin{proposition}[Symmetric prolonged matter system]\label{prop:prolong}
+Let $g$ be a prescribed smooth Lorentzian metric, let $Q$ be smooth positive-density radiation state coordinates with $|v|<1$, and suppose relativistic Euler is written
+\[A^0(Q,x)\partial_t Q+A^j(Q,x)\partial_jQ=f(Q,x),\quad
+(A^a)^T=A^a,\quad A^0\ge\delta I.\]
+For spatial gradient variables $W_i=\partial_iQ$, the differentiated equations can be written with principal part
+\[A^0\partial_tW_i+A^j\partial_jW_i=F_i(Q,W,g,\partial g,\partial^2g),\]
+where $F_i$ contains no derivatives of $W$. The $W_i$ principal is three copies of the Euler principal. The defining constraints $Z_i=W_i-\partial_iQ$ propagate by a homogeneous linear symmetric-hyperbolic system about a smooth solution.
+\end{proposition}
+\begin{proof}Differentiate Euler in $x^i$ and replace each first state derivative by $W$. Products of $\partial_iA^a$ with $\partial_aQ$ are algebraic in $(Q,W)$; given smooth $g$, derivatives of prescribed coefficients are known sources. The difference between the differentiated Euler equation and the declared $W_i$ equation is a linear homogeneous equation for $Z_i$. Positive-definite $A^0$ and uniqueness imply preservation of $Z_i=0$.\end{proof}
+\begin{remark}The $\partial^2g$ terms are harmless only because $g$ is prescribed. If $g$ is dynamical, classifying these as lower order without new geometric variables or a derivative-counting argument would be circular.\end{remark}
+
+\section{Frozen sourceful two-fluid Weyl subsidiary}
+Here only, work in a constant-coefficient tangent model with Minkowski principal metric; constant dust/radiation source parameters are \emph{not} asserted to be a flat nonlinear Einstein solution. Take $U=(\sigma,v_1,v_2,v_3)$, $c_s^2=1/3$, and
+\begin{equation}
+\partial_t\sigma+c_s\partial^iv_i=0,\qquad
+\partial_tv_i+c_s\partial_i\sigma=0.\label{eq:acoustic}
+\end{equation}
+Introduce independent radiation spatial jets $W_i=(S_i,V_{ij})$ and dust gradient $P_i$:
+\begin{equation}\partial_tS_i=-c_s\partial^jV_{ij},\quad
+\partial_tV_{ij}=-c_s\partial_jS_i,\quad \partial_t P_i=0,\quad\partial_t d=0.\label{eq:jets}\end{equation}
+For symmetric tracefree (STF) tensors $E,H$, put
+\[(\curl_{\rm STF}X)_{ij}=\tfrac12(\epsilon_{k\ell i}\partial^kX_{j\ell}+\epsilon_{k\ell j}\partial^k X_{i\ell}),\]
+and take the sourced ten-equation electric--magnetic Weyl evolution
+\begin{equation}
+\partial_tE+\curl_{\rm STF}H=-b\,\STF(V),\qquad
+\partial_tH-\curl_{\rm STF}E=0,\quad b=\frac{2\kap\bar\rho_r}{3}.\label{eq:weyl}
+\end{equation}
+The constraints are
+\begin{align}
+\cC_i^E&=\partial^jE_{ij}-2bc_sS_i-\frac\kap3P_i,\\
+\cC_i^H&=\partial^jH_{ij}-b\epsilon_{ijk}V_{jk},\label{eq:constraints}\end{align}
+with $Z_i^r=W_i-\partial_iU$, $F_{ij}^r=\partial_iW_j-\partial_jW_i$, $Z_i^d=P_i-\partial_id$, $F_{ij}^d=\partial_iP_j-\partial_jP_i$. The component counts are $6+12+12+3+3=36$.
+
+\begin{theorem}[Frozen 36-component homogeneous subsidiary]\label{thm:36}
+On $\TT^3$ (or rapidly decreasing data on $\RR^3$), these 36 constraints satisfy
+\begin{align}
+\partial_t\cC_i^E+\tfrac12(\curl\cC^H)_i&=\tfrac b3\sum_j(F_{ij}^r)_{v_j},\label{eq:ce}\\
+\partial_t\cC_i^H-\tfrac12(\curl\cC^E)_i&=\tfrac\kap{12}\epsilon_{ijk}F_{jk}^d,\label{eq:ch}\\
+\partial_t Z_i^r+R^k\partial_kZ_i^r&=0,\quad
+\partial_tF_{ij}^r+R^k\partial_kF_{ij}^r=0,\nonumber\\
+\partial_t Z_i^d&=0,\quad \partial_tF_{ij}^d=0,\nonumber
+\end{align}
+where $R^k=c_sS_k$. There is a constant positive symmetrizer and, with
+\[\mathcal E_s=\tfrac12(\|\cC^E\|_{H^s}^2+\|\cC^H\|_{H^s}^2+
+\sum_i\|Z_i^r\|_{H^s}^2+\sum_{i<j}\|F_{ij}^r\|_{H^s}^2+
+\sum_i\|Z_i^d\|_{H^s}^2+\sum_{i<j}\|F_{ij}^d\|_{H^s}^2),\]
+we have
+\begin{equation}
+\mathcal E_s(t)\le e^{K_*|t|}\mathcal E_s(0),\qquad
+K_*=\max\left\{\frac{\sqrt2|b|}{3},\frac{|\kap|}{6}\right\}.\label{eq:E36}
+\end{equation}
+\end{theorem}
+\begin{proof}
+For STF $X$, $\diver(\curl_{\rm STF}X)=\tfrac12\curl(\diver X)$. Differentiate \eqref{eq:constraints} and use \eqref{eq:jets}--\eqref{eq:weyl}; $c_s^2=1/3$ cancels the would-be second derivatives. The surviving radiation term is $b(\partial_iV_{jj}-\partial_jV_{ij})/3$, a contraction of $F^r$. The remaining magnetic source is $\kap\epsilon_{ijk}F_{jk}^d/12$ and must not be omitted for independent dust jets. The curl and defining constraints commute with the constant acoustic operator. The opposite-curl Weyl blocks are symmetric. With the canonical three-index curl-source maps $G_rG_r^T=2I_3$ and $G_dG_d^T=I_3$, integrate by parts and apply $2xy\le x^2+y^2$ to obtain $|\mathcal E_s'|\le K_*\mathcal E_s$.\end{proof}
+
+The 24 contracted Weyl Bianchi components of this frozen model were also independently reconstructed by tensor algebra. This does not establish all nonlinear frame, gauge, Einstein, torsion or connection constraint equations.
+
+\section{Radiation time jets and the 40-component extension}
+In the frozen comoving system, evolve the independent fourth radiation jet $W_0$ by the same acoustic operator as each $W_i$, and define the time-jet residual
+\[J=W_0+\sum_j R^jW_j.\]
+\begin{proposition}[Exact frozen time-jet curl closure]\label{prop:40}
+Let $B^j$ be \emph{constant} matrices, with $\partial_tW_a+B^j\partial_jW_a=0$ for $a=0,1,2,3$. Set $J=W_0+B^jW_j$, $F_{ij}=\partial_iW_j-\partial_jW_i$. Then
+\begin{equation}\label{eq:timejet}
+(\partial_t+B^k\partial_k)J
+=\sum_{i<j}[B^i,B^j]F_{ij}.
+\end{equation}
+For the comoving radiation matrices $B^j=c_s S_j$ this is an algebraic coupling to the earlier radiation curl constraints. Together with Theorem~\ref{thm:36}, it yields a 40-component constant-coefficient symmetric-hyperbolic homogeneous subsidiary. The same closure mechanism applies to any frozen tilted symmetric-hyperbolic Euler matrices $A^0>0$, $A^j=(A^j)^T$ using $B^j=(A^0)^{-1}A^j$ and symmetrizer $A^0$.
+\end{proposition}
+\begin{proof}Apply $\partial_t+B^k\partial_k$ to $J$. The noncommutation of $B^k$ and $B^j$ gives $\sum_{k,j}[B^k,B^j]\partial_kW_j$, which antisymmetrizes to the right-hand side of \eqref{eq:timejet}. This is lower order in the enlarged constraint system because $F$ is already a constraint variable.\end{proof}
+For the specified comoving normalization, an energy estimate is available with $K_{40}=\max\{(\sqrt2/3)\sqrt{b^2+1},|\kap|/6\}$, as reproduced by the 40-variable exact verification. This numerical coefficient should not be reused under a different scaling of the time-jet constraint without transforming the energy accordingly. Neither this result nor the full time-jet count is a nonlinear, curved Einstein constraint theorem.
+
+\section{Conditional Einstein Hamiltonian--momentum subsidiary}
+For comparison with the geometric reduction, define the physical ADM constraint residuals
+\[\mathcal H={}^{(3)}R+K^2-K_{ij}K^{ij}-2\kap\rho_{\rm total}-2\Lambda,
+\qquad\mathcal M_i=D_j(K^j{}_i-\delta^j_iK)-\kap j_i.\]
+Given the complete spatial Einstein evolution equations, unit lapse, zero shift and separate conservation of both matter stresses, the standard frozen-principal constraint subsidiary has the form
+\[\partial_t\mathcal H+2\partial^i\mathcal M_i\simeq0,
+\qquad\partial_t\mathcal M_i+\tfrac12\partial_i\mathcal H\simeq0.\]
+The four-variable spatial matrices are symmetrized by $\operatorname{diag}(1,4,4,4)>0$; in a unit direction the speeds are $\pm1,0,0$. This is a \emph{conditional established} consequence of the Einstein/Bianchi equations, not the missing off-shell tetrad/connection subsidiary for the 58 variables. In particular it cannot be appended to the 40-field frozen system without checking the geometric cross-derivative terms.
+
+\section{A 58-variable candidate frame and radiation principal skeleton}
+Fix a geodesic, irrotational dust frame $e_0=u_d=\partial_t$, Fermi propagate the spatial frame, and impose $\Gamma_{0ab}=0$. The proposed auxiliary state is
+\begin{equation}
+V=(e_i{}^j\;[9],\ \Gamma_{iab}\;[18],\ \rho_d\;[1],\ E,H\;[10],\ Q\;[4],\ W_a\;[16]),\qquad \dim V=58.\label{eq:58}
+\end{equation}
+The first 28 variables are intended to evolve through the dust-frame and temporal Ricci identities. The Weyl equations have the standard symmetric STF curl principal, while radiation and its four covariant first jets use five acoustic blocks. At a dust-frame point, introduce STF basis matrices
+\[\begin{aligned}
+B_1&=\operatorname{diag}(1,-1,0), & B_2&=\operatorname{diag}(1,1,-2),\\
+B_3&=e_1e_2^T+e_2e_1^T, & B_4&=e_1e_3^T+e_3e_1^T,\\
+B_5&=e_2e_3^T+e_3e_2^T.
+\end{aligned}\]
+with Gram $D=\operatorname{diag}(2,6,2,2,2)$ and STF curl matrices $C_j$ satisfying $DC_j=-C_j^TD$. In weighted variables define
+\[H_W=\operatorname{diag}(D,D),\qquad
+\mathbb W_j=\begin{pmatrix}0&DC_j\\-DC_j&0\end{pmatrix}=\mathbb W_j^T.\]
+The proposed principal coefficients are
+\begin{equation}\label{eq:58A}
+\boxed{\begin{aligned}
+\mathbb A^0_{\rm cand}&=\operatorname{diag}(I_{28},H_W,R^0,R^0,R^0,R^0,R^0),\\
+\mathbb A^j_{\rm cand}&=\operatorname{diag}(0_{28},\mathbb W_j,R^j,R^j,R^j,R^j,R^j).
+\end{aligned}}
+\end{equation}
+Every displayed $\mathbb A^j_{\rm cand}$ is symmetric, with $\mathbb A^0_{\rm cand}\ge\sqrt{2/3}\,I_{58}$. With frame coefficients $e_i{}^k$, each coordinate spatial symbol is the symmetric linear combination $\sum_i e_i{}^k\mathbb A^i_{\rm cand}$. This verifies the algebra of a \emph{candidate principal skeleton} and does not provide a complete source list or prove that the proposed equations coincide off shell with a specified Einstein reduction.
+
+Covariant radiation first jets $W_b=\cD_bQ$ are attractive because the commutator $[\cD_a,\cD_b]Q$ can be represented through algebraic curvature plus a curvature defect, instead of leaving bare connection derivatives. However, an off-shell auxiliary system must also evolve the defining, curvature and torsion defects consistently. Block positivity for \eqref{eq:58A} cannot substitute for this verification. In particular, the pre-caustic mass formula does not imply that every spatial derivative of dust density can be expressed algebraically in the 58 variables; Proposition~\ref{prop:gradientgap} below gives a torsion-free counterexample.
+
+\section{Curved geometric and matter zero quantities}
+Let $\theta^a$ be the coframe and $\omega^a{}_b$ a metric-compatible connection. Introduce an algebraic Riemann curvature model $\mathfrak R^a{}_b$ built from $(E,H,T^d,T^r)$ and obeying the usual algebraic Riemann symmetries. Set
+\begin{equation}\label{eq:zero}
+\Sigma^a=d\theta^a+\omega^a{}_b\wedge\theta^b,\qquad
+\Delta^a{}_b=R(\omega)^a{}_b-\mathfrak R^a{}_b,\qquad
+\cB^a{}_b=D\mathfrak R^a{}_b.
+\end{equation}
+The last expression is the \emph{full matrix-valued differential Bianchi residual}; it should not be confused, without an explicit algebraic projection, with the six sourced Weyl divergence constraints $\cC^E,\cC^H$ from the frozen model.
+
+\begin{proposition}[Cartan transport identities]\label{prop:cartan}
+The exact exterior identities are
+\begin{equation}\label{eq:cartan}
+D\Sigma^a=\Delta^a{}_b\wedge\theta^b
++\mathfrak R^a{}_b\wedge\theta^b,\qquad
+D\Delta^a{}_b=-\cB^a{}_b.
+\end{equation}
+When the algebraic first Bianchi identity $\mathfrak R^a{}_b\wedge\theta^b=0$ holds, the first equation reduces to $D\Sigma=\Delta\wedge\theta$. If the reduced equations impose $\Sigma_{0i}=\Delta_{0i}=0$ exactly, their spatial components have conditional transport principal parts, sourced by spatial zero quantities and $\cB$.
+\end{proposition}
+\begin{proof}Apply $D$ to $D\theta=\Sigma$, use $D^2\theta=R(\omega)\wedge\theta$, and insert $R(\omega)=\mathfrak R+\Delta$. The second identity follows from $DR(\omega)=0$.\end{proof}
+
+\begin{proposition}[Off-shell curvature- and torsion-adjusted radiation curl]\label{prop:jetcurl}
+For a vector radiation state $u^a$, independent jets $W_b{}^a$, and defining constraint $Z_b{}^a=W_b{}^a-\nabla_bu^a$, put
+\[\cF_{cb}{}^a=\nabla_cW_b{}^a-\nabla_bW_c{}^a-
+\mathfrak R^a{}_{dcb}u^d.\]
+If $\Sigma^e{}_{cb}$ denotes the torsion of the independent connection, the exact identity is
+\begin{equation}\label{eq:torsioncurl}
+\boxed{\cF_{cb}{}^a=
+\nabla_cZ_b{}^a-\nabla_bZ_c{}^a+
+\Delta^a{}_{dcb}u^d-\Sigma^e{}_{cb}\nabla_eu^a.}
+\end{equation}
+\end{proposition}
+\begin{proof}Subtract the two covariant second derivatives of $u$ and use the Ricci commutator with torsion,
+$[\nabla_c,\nabla_b]u^a=R(\omega)^a{}_{dcb}u^d-\Sigma^e{}_{cb}\nabla_eu^a$.\end{proof}
+The same construction applies to the state bundle of $Q=(\sigma,u)$, with its induced tangent connection and algebraic fiber-curvature terms. The geometric defect cannot in general be deleted by demanding an ordinary curl $\nabla_{[c}W_{b]}=0$. A curved expanding FLRW dust--radiation control provides a nonzero commutator witness (Appendix~\ref{app:flrw}).
+
+\section{Attack 009: full Bianchi identity and its off-diagonal principal term}
+\begin{theorem}[Exact full-Bianchi defect coupling]\label{thm:fullB}
+For any matrix-valued curvature two-form model $\mathfrak R$ and any connection one-form $\omega$, define $\Delta=R(\omega)-\mathfrak R$ and $\cB=D\mathfrak R$. Then
+\begin{equation}\label{eq:DB}
+\boxed{D\cB=[\Delta,\mathfrak R],}
+\end{equation}
+where the graded commutator of two two-forms is $[X,Y]=X\wedge Y-Y\wedge X$. In particular the source is algebraic in the curvature-definition defect and the curvature model. This is a standard identity in connection theory, not a priority or novelty claim.
+\end{theorem}
+\begin{proof}For any endomorphism-valued form, $D^2\mathfrak R=[R(\omega),\mathfrak R]$. Using $R(\omega)=\mathfrak R+\Delta$ and the identity $[\mathfrak R,\mathfrak R]=0$ gives \eqref{eq:DB}. No field equations are needed.\end{proof}
+
+\begin{corollary}[Exact dependence on temporal Bianchi residuals]\label{cor:spatialB}
+In a local dust-adapted coordinate frame, modulo connection-coefficient terms with no derivatives of $\cB$, the $0123$ component of \eqref{eq:DB} reads
+\begin{equation}\label{eq:spatialB}
+\boxed{\partial_t\cB_{123}
+-\partial_1\cB_{023}+\partial_2\cB_{013}-\partial_3\cB_{012}
+\simeq0.}
+\end{equation}
+Suppose a \emph{specified} reduced evolution yields $\cB_{0ij}=L_{ij}{}^{\alpha}(V)\cC_\alpha$ modulo terms with no derivatives of $\cC$. Then the spatial Bianchi row of its constraint principal matrices contains the exact off-diagonal coefficients
+\begin{equation}\label{eq:offdiag}
+(B^1_{\rm full})_{\cB_{123},\alpha}=-L_{23}{}^{\alpha},\quad
+(B^2_{\rm full})_{\cB_{123},\alpha}=+L_{13}{}^{\alpha},\quad
+(B^3_{\rm full})_{\cB_{123},\alpha}=-L_{12}{}^{\alpha},
+\end{equation}
+up to the common normalization of the $\cB$ row and its time coefficient.
+\end{corollary}
+\begin{proof}For a three-form, $(D\cB)_{0123}=D_0\cB_{123}-D_1\cB_{023}+D_2\cB_{013}-D_3\cB_{012}$. Inserting the declared temporal expressions and collecting the first derivatives of constraints proves the displayed coefficients.\end{proof}
+
+\textbf{Interpretation.} The conditional transport picture for $\Sigma$ and $\Delta$ does not establish that the Bianchi residual has a zero spatial principal block. Such a claim would be valid only after independently proving $\cB_{0ij}=0$ as an \emph{identity of the selected reduced off-shell equations}, not merely after restricting to physical solutions. The 58-field candidate has not supplied the complete $L_{ij}{}^{\alpha}$, so \eqref{eq:offdiag} is an explicit set of \emph{requirements}, not a fabricated numerical matrix.
+
+\section{Constraint-adjustment nonuniqueness and characteristic resonance}
+The full off-shell subsidiary depends on constraint additions to the reduced evolution. This is familiar in hyperbolic Einstein reductions, but it is especially important when characteristic speeds coincide.
+
+\begin{proposition}[Same constrained dynamics, different off-shell hyperbolicity]\label{prop:underdet}
+Fix real $a$ and $\alpha\ne0$ and consider auxiliary variables $(g,q,w)$ with
+\begin{equation}\label{eq:toy}
+q_t+a q_x=0,\qquad w_t+a w_x=0,\qquad
+g_t=\alpha(w-q_x).
+\end{equation}
+The constraint $Z=w-q_x$ obeys $Z_t+aZ_x=0$. For every initially constrained solution, $Z=0$ and $g_t=0$. Therefore the $\alpha\ne0$ and $\alpha=0$ systems induce the same constrained dynamics. Nevertheless, at $a=0$ the off-shell principal matrix for $\alpha\ne0$ is
+\[B(0)=\begin{pmatrix}0&\alpha&0\\0&0&0\\0&0&0\end{pmatrix},\]
+which has a nontrivial Jordan block and admits no positive symmetrizer, whereas the $\alpha=0$ principal matrix is identically zero and symmetrizable.
+\end{proposition}
+\begin{proof}Differentiate the equation for $q$ and subtract from the $w$ equation to get the homogeneous equation for $Z$. The principal matrix follows by writing $g_t+\alpha q_x=\alpha w$. For $\alpha\ne0$, $B^2=0$ and $\operatorname{rank}B=1$, so it is not diagonalizable. A real matrix self-adjoint for a positive inner product is diagonalizable, giving the claimed impossibility.\end{proof}
+
+For the collinear radiation sound characteristic in dust-frame coordinates,
+\begin{equation}\label{eq:acousticSpeed}
+\lambda_\pm(v)=\frac{v\pm c_s}{1\pm vc_s},
+\end{equation}
+one branch has $\lambda_-(c_s)=0$, exactly the speed of some dust-frame transport zero quantities. The adversarial example \eqref{eq:toy} illustrates what a nonzero projected derivative coupling \emph{would} do at this crossing. It is not a computed nonzero coupling in the physical Einstein reduction.
+
+\begin{lemma}[Projected triangular resonance obstruction]\label{lem:res}
+Let $A,D$ be real diagonalizable matrices and $\mathcal B=\left(\begin{smallmatrix}A&C\\0&D\end{smallmatrix}\right)$. At any common eigenvalue $\lambda$, if $P_A(\lambda)C P_D(\lambda)\ne0$, then $\mathcal B$ cannot be diagonalizable and consequently cannot admit a positive symmetrizer. Here $P_A,P_D$ are spectral projectors onto the $\lambda$ eigenspaces.
+\end{lemma}
+\begin{proof}The projected forcing of the $D$-eigenvectors into the $A$-eigenspace is resonant with the same eigenvalue and creates a nontrivial Jordan chain. Equivalently the equation $(A-\lambda I)x=-Cy$ has no solution for some $y\in\ker(D-\lambda I)$ when $P_ACy\ne0$.\end{proof}
+For one-dimensional collinear tilt, the sound branches cross the unconstrained Weyl half-speed values at $|v|=(3\sqrt3-4)/11$ and $(3\sqrt3+4)/11$, approximately $0.108741$ and $0.836014$. Convective acoustic modes also cross zero and half-speed characteristics at their corresponding advective velocities. These are spectral \emph{test locations}, not measured physical obstructions. Across all wave directions and all physical state values, one simultaneous smooth $H_{\rm full}(V)$ is stronger than solving the symmetrizer equation separately for each direction.
+
+
+\section{Sourceful contracted Bianchi projections and dust-gradient completion}\label{sec:a10}
+This section distinguishes the contracted Weyl--Bianchi residual from the full matrix-valued curvature three-form of Theorem~\ref{thm:fullB}. Fix signature $(-,+,+,+)$ and an oriented orthonormal frame at a point; all principal statements are evaluated in its normal-frame approximation. Write
+\begin{equation}\label{eq:Bcontracted}
+\mathfrak B_{bcd}=\nabla^aC_{abcd}-\nabla_cL_{db}+\nabla_dL_{cb},\qquad
+j_d=\nabla^a(T^d_{ad}+T^r_{ad}),
+\end{equation}
+where $L_{ab}=\kap(T_{ab}-Tg_{ab}/3)/2+\Lambda g_{ab}/6$ is the Schouten tensor. The index $d$ in $j_d$ is a spacetime index, not a dust-species label.
+
+\begin{theorem}[Algebraic sourceful Bianchi reconstruction]\label{thm:B24}
+Let $\epsilon_{123}=1$, and define
+\begin{align*}
+p_i&=\mathfrak B_{00i},&q_i&=\tfrac12\epsilon_{ijk}\mathfrak B_{0jk},\\
+X_{ij}&=\mathfrak B_{i0j},&Y_{i\ell}&=\tfrac12\epsilon_{\ell jk}\mathfrak B_{ijk},\\
+S^E&=\STF(X),&S^H&=\STF(Y).
+\end{align*}
+Then the exact identities
+\begin{equation}\label{eq:Bcyctrace}
+\mathfrak B_{bcd}=-\mathfrak B_{bdc},\qquad
+\mathfrak B_{bcd}+\mathfrak B_{cdb}+\mathfrak B_{dbc}=0,\qquad
+g^{bc}\mathfrak B_{bcd}=-\frac\kap2 j_d
+\end{equation}
+are equivalent to the reconstruction
+\begin{equation}\label{eq:Breconstruct}
+\boxed{\begin{aligned}
+\mathfrak B_{00i}&=p_i,&\mathfrak B_{0ij}&=\epsilon_{ijk}q_k,\\
+\mathfrak B_{i0j}&=S^E_{ij}+\frac{\kap}{6}j_0\delta_{ij}
+ +\frac12\epsilon_{ijk}q_k,\\
+\frac12\epsilon_{\ell jk}\mathfrak B_{ijk}
+&=S^H_{i\ell}+\epsilon_{i\ell k}\left(\frac\kap4j_k-\frac12p_k\right).
+\end{aligned}}\end{equation}
+Thus ten symmetric-tracefree evolution components, six divergence constraints and four matter-conservation residuals reconstruct all 24 contracted components subject to four cyclic relations. In the flat-principal approximation, they obey the exact differential compatibility equations
+\begin{equation}\label{eq:Bprincipal}
+\boxed{\begin{aligned}
+\partial_t p+\tfrac12\curl q&=\frac\kap2\partial_t j_{\mathrm{sp}}
+ -\frac\kap3\nabla j_0+\diver S^E,\\
+\partial_t q-\tfrac12\curl p&=\frac\kap4\curl j_{\mathrm{sp}}
+ +\diver S^H.
+\end{aligned}}
+\end{equation}
+For a reduced solution satisfying $S^E=S^H=0$ and exact separate matter conservation $j=0$, the six-component frozen principal subsidiary in $(p,q)$ is symmetric hyperbolic, with the identity symmetrizer. Equation~\eqref{eq:Bprincipal} alone does not prove the full curved geometric/jet subsidiary.
+\end{theorem}
+\begin{proof}
+The cyclic identity follows from the algebraic Weyl identity and the cyclic Schouten curl. Tracing the Weyl term gives zero. Tracing the Schouten terms gives $-\nabla^b L_{bd}+\nabla_d\operatorname{tr}L=-\kap j_d/2$, using the displayed expression for $L$. Let $X_{ij}=\mathfrak B_{i0j}$ and $Y_{i\ell}=\epsilon_{\ell jk}\mathfrak B_{ijk}/2$. The cyclic identity implies $X_{ij}-X_{ji}=\epsilon_{ijk}q_k$ and $\operatorname{tr}Y=0$. The timelike trace gives $\operatorname{tr}X=\kap j_0/2$; the spatial traces give $\epsilon_{ki\ell}Y_{i\ell}=\kap j_k/2-p_k$. Their symmetric, antisymmetric and trace decompositions yield~\eqref{eq:Breconstruct}. In a flat normal frame, two derivatives contracted on antisymmetric Weyl indices cancel; the Schouten terms give
+\[\partial^b\mathfrak B_{bcd}=\frac\kap2(\partial_dj_c-\partial_cj_d).\]
+Insert~\eqref{eq:Breconstruct}, select $(c,d)=(0,i)$ and dualize $(c,d)=(i,j)$ with $\epsilon_{kij}/2$. The resulting six identities are~\eqref{eq:Bprincipal}. Their spatial curl blocks are mutually adjoint. Curved covariant commutators contribute lower-order curvature/defect sources and are not evaluated by this principal calculation.
+\end{proof}
+
+\begin{proposition}[A dust-gradient nonalgebraicity witness]\label{prop:gradientgap}
+Let $F=(e_i{}^j)$ be the positively oriented dust-spatial orthonormal frame matrix and $m(X)>0$ the fixed material mass density. In synchronous material coordinates,
+\begin{equation}\label{eq:detgradient}
+\rho_d=m\det F,\qquad
+e_i(\rho_d)=\rho_d\,e_i{}^k\partial_k\log m+
+\rho_d\,e_i{}^k\operatorname{tr}(F^{-1}\partial_kF).
+\end{equation}
+The spatial dust gradient is not, in general, an algebraic function of $(F,\Gamma_{iab},\rho_d,m,\partial m)$ at a point, even on torsion-free flat spatial geometries. To see this, for each real $\alpha$ let
+\[e_1=(1+\alpha x)\partial_x,\quad e_2=\partial_y,\quad e_3=\partial_z,\quad
+\theta^1=\frac{dx}{1+\alpha x},\quad\theta^2=dy,\quad\theta^3=dz,
+\]
+with time-independent coframe, constant $m$, and $1+\alpha x>0$ locally. The coframe is closed, so the spatial Levi--Civita connection and torsion vanish. At $x=0$, all the declared pointwise 58-field frame/connection/density values can be equal for different $\alpha$, but
+\[e_1(\rho_d)\big|_{x=0}=m\alpha\]
+is arbitrary. Hence any claim that all spatial dust-Schouten derivatives are already algebraic functions of those field values requires additional variables, a gauge restriction or a different representation.
+\end{proposition}
+\begin{proof}The mass law follows from $\sqrt{\det h}=1/\det F$. Differentiate the determinant using Jacobi's identity. For the example, $d\theta^1=0$ despite arbitrary $\alpha$, and $\rho_d=m(1+\alpha x)$. The asserted pointwise values and different spatial gradients follow directly. These are off-shell geometric configurations: no nontrivial Einstein solution is claimed for the example.\end{proof}
+
+\begin{proposition}[Failure of the unadjusted dust-gradient augmentation]\label{prop:dustjordan}
+Suppose the spatial frame and connection retain the dust-geodesic transport principal part, so that the expansion $\Theta=\Gamma_{i0}{}^i$ has no spatial derivative in its evolution equation. Introduce three independent dust-gradient variables $p_i^d=e_i(\rho_d)$ and evolve them by differentiation of the exact dust mass equation, \emph{without any further constraint adjustments}. If $\partial_t e_i=-\Gamma_{i0}{}^k e_k$ and $\partial_t\rho_d=-\rho_d\Theta$, then
+\begin{equation}\label{eq:pdtransport}
+\partial_t p_i^d=-\Gamma_{i0}{}^k p_k^d-\Theta p_i^d-\rho_d\,e_i\Theta.
+\end{equation}
+At a frozen state with $\rho_d>0$ and a unit Fourier direction $n$, the transport-only subsystem containing $\Theta$ and $p^d_n$ has directional symbol
+\begin{equation}\label{eq:badjordan}
+\boxed{\begin{pmatrix}0&0\\\rho_d&0\end{pmatrix},}
+\end{equation}
+which is nonzero nilpotent and cannot admit a positive symmetrizer. Consequently the unadjusted augmentation of the candidate block-diagonal gravitational transport system by these three natural dust-gradient equations fails symmetric hyperbolicity. This does \emph{not} prohibit constraint-adjusted reductions, a different principal coupling, or mixed-regularity methods.
+\end{proposition}
+\begin{proof}
+The commutator $[e_0,e_i]=-\Gamma_{i0}{}^k e_k$ gives
+$e_0e_i(\rho_d)=-\Gamma_{i0}{}^k e_k(\rho_d)+e_i(-\rho_d\Theta)$, proving~\eqref{eq:pdtransport}. In the declared transport principal, $\partial_t\Theta\simeq0$ and $\partial_t p_n^d+\rho_d\partial_n\Theta\simeq0$. The matrix~\eqref{eq:badjordan} squares to zero but has rank one. Any matrix self-adjoint in a positive inner product is diagonalizable; this matrix is not. Equivalently, symmetrizing it by a positive $2\times2$ matrix forces its lower-right diagonal entry to vanish, a contradiction.
+\end{proof}
+
+\begin{remark}[Why this does not contradict the earlier frozen Weyl system]
+For comoving dust in a normal frame, its Schouten contribution has $L^d_{00}=\kap\rho_d/3$, $L^d_{0i}=0$, $L^d_{ij}=\kap\rho_d\delta_{ij}/6$. A spatial dust-density gradient enters $\mathfrak B_{00i}$, but the dust-gradient contribution to both symmetric-tracefree Weyl evolution projections is exactly zero. Thus the original 58-field Weyl \emph{evolution} skeleton need not already contain a dust-gradient derivative block; the missing first derivative occurs in the \emph{constraints}, and the naive additional dust-gradient evolution introduces~\eqref{eq:badjordan}. A proposed 58-variable Einstein-equivalent reduction must prove that these constraint derivatives close without the naive nilpotent block, rather than assuming that a connection-algebraic formula for $e_i(\rho_d)$ exists.
+\end{remark}
+
+
+\section{Paired dust gradients and the anisotropic shear-jet obstruction}\label{sec:a11}
+The counterexample in Proposition~\ref{prop:dustjordan} applies to evolving the spatial dust gradient while leaving the expansion as an unprolonged transport variable. A minimal first response is to carry both gradients as independent auxiliary fields. The following calculation gives the exact gain and also the next limitation; it does not assume a complete Einstein frame reduction.
+
+Let $e_0=u_d$ be geodesic and hypersurface-orthogonal. On the pre-caustic patch choose a spatial orthonormal triad parallel-transported along $e_0$. Decompose
+\begin{equation}\label{eq:thetaS}
+\nabla_i (u_d)_j=S_{ij}=\tfrac13\Theta\delta_{ij}+\sigma_{ij},\quad
+\sigma_{ij}=\sigma_{ji},\quad \sigma^j{}_j=0,\quad
+[e_0,e_i]=-S_i{}^je_j.
+\end{equation}
+In the dust triad write $u_r=\gamma(e_0+v^je_j)$ with $\gamma=(1-|v|^2)^{-1/2}$. The exact dust continuity and geodesic, irrotational Raychaudhuri equations are
+\begin{align}\label{eq:raycha}
+e_0\rho_d&=-\rho_d\Theta,\\
+e_0\Theta&=-\tfrac13\Theta^2-\sigma_{jk}\sigma^{jk}
+-\tfrac{\kap}{2}\rho_d
+-\tfrac{\kap}{3}\rho_r(4\gamma^2-1)+\Lambda.
+\end{align}
+The radiation contribution follows directly from $R_{ab}u_d^au_d^b=\kap(T_{ab}u_d^au_d^b+T/2)-\Lambda$, because $T^r$ is trace-free. This Raychaudhuri statement presupposes the Einstein equations; in an off-shell reduction its defect must be retained among the geometric zero quantities.
+
+Introduce candidate independent covariant-frame jets
+\begin{equation}\label{eq:paired-def}
+p_i=e_i\rho_d,\quad w_i=e_i\Theta,\quad
+Y_{ijk}=e_i\sigma_{jk},\quad r_i=e_i\rho_r,\quad V_{ij}=e_iv_j.
+\end{equation}
+The $Y$-jet is symmetric tracefree in its last two indices and therefore has fifteen components before further identities are applied. Here $r,V$ may be related to the radiation covariant jets used earlier, but equality is a separate defining constraint.
+
+\begin{proposition}[Exact material paired-gradient equations]\label{prop:paired}
+If the above definitions and the dust-frame commutator hold on a smooth Einstein--dust--radiation solution, then
+\begin{align}\label{eq:pairedp}
+e_0p_i&=-(S_i{}^j+\Theta\delta_i{}^j)p_j-\rho_dw_i,\\
+\label{eq:pairedw}
+e_0w_i&=-(S_i{}^j+\tfrac23\Theta\delta_i{}^j)w_j
+-2\sigma^{jk}Y_{ijk}-\tfrac\kap2 p_i\\
+&\quad -\tfrac\kap3\big[(4\gamma^2-1)r_i+8\rho_r\gamma^4v^jV_{ij}\big].\nonumber
+\end{align}
+In a first-order prolongation which includes $Y,r,V$ as genuine auxiliary state variables, equations~\eqref{eq:pairedp}--\eqref{eq:pairedw} contain no spatial derivative of $p$ or $w$. Thus their \emph{isolated} six-field spatial principal block is zero and is symmetrized by $I_6$. No positive symmetrizer for the entire enlarged geometric system follows from this fact.
+\end{proposition}
+\begin{proof}
+Apply $e_i$ to the two scalar evolution equations~\eqref{eq:raycha} and commute $e_0$ through $e_i$ using~\eqref{eq:thetaS}. The only nontrivial chain rule is
+$e_i\gamma=\gamma^3v^jV_{ij}$, hence
+$e_i(\gamma^2)=2\gamma^4v^jV_{ij}$.
+Differentiating the shear norm gives $e_i(\sigma_{jk}\sigma^{jk})=2\sigma^{jk}Y_{ijk}$ in the parallel-propagated triad. Collection of terms proves both equations. Each spatial first derivative on the right is explicitly represented by a declared jet, proving the asserted restricted principal statement.
+\end{proof}
+
+\begin{proposition}[Conditional paired-jet defining-constraint propagation]\label{prop:pairedconstraints}
+Put $C^p_i=p_i-e_i\rho_d$, $C^w_i=w_i-e_i\Theta$, and define $C^Y=Y-e\sigma$, $C^r=r-e\rho_r$, $C^V=V-ev$. If the frame commutator and the scalar dust evolution equations hold exactly, the prolongation~\eqref{eq:pairedp}--\eqref{eq:pairedw} implies
+\begin{align}\label{eq:paireddefects}
+e_0 C^p_i={}&-(S_i{}^j+\Theta\delta_i{}^j)C^p_j-\rho_d C^w_i,\\
+e_0 C^w_i={}&-(S_i{}^j+\tfrac23\Theta\delta_i{}^j)C^w_j
+-2\sigma^{jk}C^Y_{ijk}-\tfrac\kap2 C^p_i\nonumber\\
+&-\tfrac\kap3\big[(4\gamma^2-1)C^r_i
++8\rho_r\gamma^4 v^j C^V_{ij}\big].\nonumber
+\end{align}
+Thus these six constraints propagate from zero \emph{provided} the shear and radiation jet constraints also vanish and the geometric commutator/field-equation defects vanish. Off the Einstein and frame constraint surface, the omitted scalar-evolution and commutator residuals supply additional forcing and must be included in any full homogeneous subsidiary.
+\end{proposition}
+\begin{proof}Subtract the material derivatives of the defining relations from~\eqref{eq:pairedp}--\eqref{eq:pairedw}, retaining the differences of every auxiliary jet. No differentiated defect appears in this restricted calculation.\end{proof}
+
+The paired construction removes the old $p$--$\Theta$ principal Jordan block by substituting the new $w$-field for $e_i\Theta$. However it leaves the $\sigma$--$w$ derivative term unless $Y$ is promoted or a justified geometric constraint adjustment eliminates it. This is a real distinction between a conditional equation for declared jets and a complete closed first-order system.
+
+\begin{proposition}[Anisotropic transverse-shear Jordan witness]\label{prop:shearjordan}
+Freeze the transport principal part of a dust-adapted connection/shear evolution equation, so that the shear components have no spatial derivatives in their own evolution. Leave $Y_{ijk}=e_i\sigma_{jk}$ unprolonged in~\eqref{eq:pairedw}. At a state with $\sigma_{23}=\sigma_{32}=s\ne0$, the directional principal system for $y=\delta\sigma_{23}$ and $w_1$ contains the block
+\begin{equation}\label{eq:shearjordan}
+B(e_1)=\begin{pmatrix}0&0\\4s&0\end{pmatrix}.
+\end{equation}
+It is nonzero, has square zero and admits no positive definite symmetrizer. Moreover, the smooth transverse-shear family
+$\sigma_{23}(x)=\sigma_{32}(x)=s+\beta x$, with all other shear entries zero and constant $\Theta$, satisfies the frozen flat spatial momentum-divergence relation $\partial^j\sigma_{ij}-\tfrac23\partial_i\Theta=0$ for every $\beta$. Therefore this particular derivative is not excluded by that momentum constraint alone.
+\end{proposition}
+\begin{proof}
+Since $\sigma_{jk}\sigma^{jk}=2\sigma_{23}^2$, its $e_1$-derivative at a Euclidean frame point is $4s\partial_1\delta\sigma_{23}$. The $-2\sigma^{jk}e_i\sigma_{jk}$ source in~\eqref{eq:pairedw} consequently contributes $+4s\partial_1y$ on the left of the linearized $w_1$ equation. The unadjusted shear transport equation contributes no $\partial_1w_1$. This gives~\eqref{eq:shearjordan}. A nonzero nilpotent matrix is not diagonalizable, whereas every matrix self-adjoint in a positive inner product is. Finally, all nonzero shear components have indices $2,3$ and depend only on $x=x^1$, so their spatial divergence is identically zero. This verifies only the stated momentum relation, not the complete Einstein constraints for the family.
+\end{proof}
+
+\paragraph{Consequences for variable completion.}
+One sufficient variable-completion route for this particular derivative coupling is to introduce the full spatial shear jet $Y_{ijk}$ (fifteen components); a smaller contracted jet or a constraint adjustment might also be possible. Differentiating the classical shear propagation equation introduces first derivatives of the electric Weyl tensor and radiation anisotropic stress; controlling these may require Weyl jets and the corresponding curved integrability constraints. The count $58+6+15=79$ is therefore only an \emph{illustrative partial bookkeeping count}, not a proposed closed 79-field reduction, a minimum-dimensionality bound, or a complete source audit. A different gauge or constraint adjustment might avoid these particular variables. The full off-shell principal symbols and a common positive symmetrizer remain unknown.
+
+\paragraph{Independent tests.}
+The new symbolic verifier checks the full nonlinear material chain rule for arbitrary symmetric tracefree shear and radiation-velocity jets, the conditional defining-constraint identities, and the rank/positivity obstruction in~\eqref{eq:shearjordan}. An independently implemented standard-library \texttt{Fraction} verifier tests 1,000 exact rational jets of inhomogeneous material coframes and five exact on-shell homogeneous dust--radiation FLRW cases. The inhomogeneous coframes are explicitly \emph{kinematic} tests, not purported inhomogeneous solutions of the Einstein equations. The transverse-shear counterexample is algebraic and momentum-compatible only; it is not presented as a complete Einstein initial-data solution.
+
+\section{What the full nonlinear proof would require}
+Let $\cC_{\rm full}$ contain spatial $\Sigma,\Delta,\cB$, radiation $Z,\cF$, and the Einstein, frame, velocity normalization and dust material-label constraints $\mathcal N$. A successful reduced formulation must first specify the entire off-shell evolution
+\[A^0(V)\partial_tV+A^j(V)\partial_jV=S(V),\]
+including each constraint adjustment and every source. Differentiating its zero quantities must then produce \emph{actual} matrices, not a guessed block sum:
+\begin{equation}\label{eq:desired}
+\partial_t\cC_{\rm full}+B^j_{\rm full}(V)\partial_j\cC_{\rm full}
+=M(V,\partial V)\cC_{\rm full}.
+\end{equation}
+The $L_{ij}{}^\alpha$ in \eqref{eq:offdiag}, all curvature--jet couplings in \eqref{eq:torsioncurl}, and frame/Einstein source constraints must be derived and shown to leave no inhomogeneous residual. The decisive uniform conditions on a compact physical state region are
+\begin{equation}\label{eq:gate}
+H_{\rm full}(V)=H_{\rm full}(V)^T\ge h_0 I>0,\qquad
+H_{\rm full}B^j_{\rm full}=(B^j_{\rm full})^TH_{\rm full}\quad(j=1,2,3).
+\end{equation}
+Only then do standard quasilinear symmetric-hyperbolic energy estimates imply, at sufficient Sobolev regularity and with smooth background coefficients, a conditional estimate of the form
+\[\mathcal E_s(t)\le\mathcal E_s(0)\exp\left(\int_0^t K_s(V(\tau),\partial V(\tau))\,d\tau\right),\]
+thereby propagating $\cC_{\rm full}=0$. A separate constraint-compatible initial-data construction and proof that the reduced equations imply the complete Einstein and matter equations are also necessary.
+
+The material-gradient analysis supplies an exact conditional paired-gradient evolution and an anisotropic transverse-shear Jordan witness. Replacing $e_i\Theta$ by a declared jet $w_i$ removes the original transport-only dust-gradient derivative coupling, but leaving the shear jet unprolonged produces a new defective zero-speed symbol at nonzero shear. The coupled geometric/jet variables cannot be declared complete by merely adding six dust gradients. The dust-gradient analysis additionally shows: the spatial gradient $e_i(\rho_d)$ is not algebraic in the stated 58 pointwise unknowns and material label, and naively adjoining independent dust gradients with transport-only connection evolution creates a Jordan block. The complete sourceful constraint formulation must therefore retain the corresponding frame derivatives or use a different adjusted reduction. The current available 58-field skeleton does \emph{not} list all off-shell source terms or determine the $L_{ij}{}^\alpha$. The lack of a fully specified $B^j_{\rm full}$ is a mathematical underdetermination, not a failure of a completed positivity test. Accordingly neither \eqref{eq:desired} nor \eqref{eq:gate} is proved here, and no rigorous nonlinear Einstein-equivalent existence theorem follows from the material provided.
+
+
+\section{First-jet closure and a resonant Weyl--radiation obstruction}\label{sec:resonant}
+The previous dust-gradient tests show why adding isolated derivatives to transport fields may destroy diagonalizability. The Weyl--radiation coupling gives a second, independent mechanism. It is already present in the exact comoving frozen model, without gravitational-frame coefficient derivatives.
+
+Fix a unit wave covector $n=e^1$, radiation sound speed $c_s^2=1/3$, and a nonzero radiation source coefficient $b$. Consider the Weyl evolution
+\begin{equation}\label{eq:weql12}
+\partial_tE+\curl_{\mathrm{STF}}H=-b\,\STF(V),\qquad
+\partial_tH-\curl_{\mathrm{STF}}E=0,
+\end{equation}
+where the independently evolved radiation first jet is $W_i=(S_i,V_{i1},V_{i2},V_{i3})$ and obeys the three acoustic blocks
+$\partial_tW_i+R^k\partial_kW_i=0$.
+Promote the single directional Weyl jets $X_E=\partial_1E$, $X_H=\partial_1H$ to independent ten-component variables, but \emph{do not} promote derivatives of the radiation jets $W_i$. Differentiating~\eqref{eq:weql12} then gives a principal derivative $-b\STF(\partial_1V)$ in the $X_E$ equation. In the five-element trace-free basis of Section 4, the $22$-variable directional symbol is
+\begin{equation}\label{eq:B22}
+B_{22}(e^1)=
+\begin{pmatrix}
+W(e^1)&bT\\
+0&\operatorname{diag}(R(e^1),R(e^1),R(e^1))
+\end{pmatrix},
+\qquad T=\begin{pmatrix}S\\0_{5\times12}\end{pmatrix},
+\end{equation}
+where $W(e^1)$ is the ten-field Weyl curl matrix, $S$ maps the twelve radiation first-jet coordinates to the five trace-free coefficients of $\STF(V)$, and $R(e^1)$ is the symmetric acoustic principal matrix.
+
+\begin{theorem}[Exact defect of the incomplete Weyl--radiation jet completion]\label{thm:a12jordan}
+For every $b\ne0$, the matrix $B_{22}(e^1)$ has characteristic polynomial
+\begin{equation}\label{eq:p22}
+\chi_{22}(z)=z^8(z^2-1)^2(z^2-\tfrac14)^2(z^2-\tfrac13)^3,
+\end{equation}
+and its kernel has dimension seven. Thus its zero eigenvalue has algebraic multiplicity eight and geometric multiplicity seven. No positive definite symmetrizer can make this $22$-field off-shell principal block symmetric. The failure is specific to the unadjusted partial prolongation and is not an obstruction to the on-shell Einstein--matter equations.
+\end{theorem}
+\begin{proof}
+The Weyl block has characteristic polynomial $z^2(z^2-1)^2(z^2-1/4)^2$ and a two-dimensional kernel, consisting of one longitudinal electric and one longitudinal magnetic mode. Each radiation acoustic block has eigenvalues $0,0,\pm1/\sqrt3$; hence the radiation direct sum has a six-dimensional kernel. Because~\eqref{eq:B22} is block upper triangular, these facts give~\eqref{eq:p22}.
+
+It remains to test the off-diagonal coupling at the common zero speed. Choose the longitudinal electric zero mode $E_L=\operatorname{diag}(-2,1,1)$. Its $D$-weighted pairing with the STF source is
+\begin{equation}\label{eq:proj12}
+\langle E_L,\STF(V)\rangle=\operatorname{tr}(E_LV)
+=-2V_{11}+V_{22}+V_{33}.
+\end{equation}
+In the zero eigenspace of the radiation symbol along $e^1$, the velocity components $V_{i1}$ vanish, whereas $V_{i2},V_{i3}$ are free. In particular, the choice $V_{22}=1$ and all other entries zero is a radiation zero mode whose projected source~\eqref{eq:proj12} equals one. The longitudinal magnetic zero-mode projection vanishes because $T$ enters only the electric evolution.
+
+The Weyl block is self-adjoint for the positive Gram matrix $H_W$, so the inhomogeneous Weyl zero-mode equation $W(e^1)X=-bTY$ is solvable precisely when its projections onto both longitudinal modes vanish. These impose exactly one independent linear condition, $V_{22}+V_{33}=0$, on the six-dimensional radiation zero eigenspace. Therefore
+$\dim\ker B_{22}=2+(6-1)=7$.
+A matrix self-adjoint for a positive inner product is diagonalizable; the defective zero eigenvalue excludes such a symmetrizer. Independent exact-rational matrix elimination gives $\operatorname{rank}B_{22}=15$, agreeing with this argument.
+\end{proof}
+
+\begin{remark}[Off-shell versus physical constraints]
+A plane-wave radiation jet with $V_{22}$ varying only in the $x^1$ direction does not generally satisfy $W_i=\partial_iQ$. It is included deliberately because a symmetric-hyperbolic auxiliary formulation must act on an open set of off-shell variables, with defining constraints propagated separately. This result does not show that the on-shell reduced Einstein--matter system is defective. Constraint adjustments might remove the derivative coupling without introducing every second jet.
+\end{remark}
+
+There is a standard constructive alternative \emph{once a closed first-order symmetric-hyperbolic base equation is already known}. Its precise assumption prevents the argument from being misapplied to the proposed incomplete Einstein-frame system.
+
+\begin{theorem}[Finite complete first-jet prolongation]\label{thm:firstjet}
+Let $U\in\mathbb R^m$ solve a smooth quasilinear system on a coordinate patch,
+\begin{equation}\label{eq:basehyper}
+A^0(U)\partial_tU+\sum_{j=1}^3A^j(U)\partial_jU=F(U),
+\qquad A^0=A^{0T}>0,\quad A^j=A^{jT}.
+\end{equation}
+Suppose these are the \emph{complete} first-order evolution equations, with no omitted derivatives in their sources. Introducing all three independent spatial first jets $Q_i=\partial_iU$ gives a closed $4m$-field quasilinear symmetric-hyperbolic prolongation. Its principal matrices are
+\begin{equation}\label{eq:blockjet}
+\mathbb A^\mu=\operatorname{diag}(A^\mu,A^\mu,A^\mu,A^\mu),\qquad \mu=0,1,2,3,
+\end{equation}
+with positive $\mathbb A^0$. The defining constraints $C_i=Q_i-\partial_iU$ propagate homogeneously from compatible initial data.
+\end{theorem}
+\begin{proof}
+Write the algebraic replacement
+$\widehat U_t=(A^0)^{-1}(F-\sum_jA^jQ_j)$.
+For every $i$, differentiate~\eqref{eq:basehyper} formally and define the prolonged equation by replacing each first derivative on the right by $Q_j$ or $\widehat U_t$:
+\begin{equation}\label{eq:fulljet}
+A^0\partial_tQ_i+A^j\partial_jQ_i
+=DF[Q_i]-DA^0[Q_i]\widehat U_t
+-\sum_j DA^j[Q_i]Q_j.
+\end{equation}
+The right-hand side is smooth and algebraic in $(U,Q_1,Q_2,Q_3)$, establishing~\eqref{eq:blockjet}. Since~\eqref{eq:basehyper} is imposed, the differences between $(Q_j,\widehat U_t)$ and $(\partial_jU,\partial_tU)$ are algebraic linear combinations of the $C_j$. Subtracting the exact differentiated base equation from~\eqref{eq:fulljet} therefore gives a first-order system for $C_i$ with principal matrices $A^\mu$ and smooth homogeneous zeroth-order terms. Standard symmetric-hyperbolic uniqueness gives $C_i=0$ for compatible initial data. This is the familiar finite prolongation mechanism underlying symmetric-hyperbolic regularity theory \cite{Kato}.
+\end{proof}
+
+\begin{corollary}[Restricted field-count certificate, not an Einstein theorem]
+For an explicitly closed $33$-field symmetric material--shear--Weyl--radiation \emph{model} consisting of seven transport fields, ten Gram-symmetrized Weyl variables, and sixteen acoustic radiation/first-jet variables, the complete first spatial-jet enlargement contains $132$ variables. Its time matrix is positive and its three spatial matrices are symmetric by~\eqref{eq:blockjet}; this has also been checked directly using exact rational Weyl and acoustic matrices. Likewise, a fully specified, genuinely symmetric-hyperbolic $58$-field base system would admit a $232$-field complete spatial first-jet prolongation. Neither conclusion proves that the proposed $58$ fields possess the required closed nonlinear Einstein evolution or propagate their independent geometric zero quantities.
+\end{corollary}
+
+The finite prolongation result shows that an indefinite chain of new spatial jets is not \emph{forced by differentiation alone} after a closed symmetric-hyperbolic base formulation has been found. What remains unresolved is precisely that base formulation, including its gravitational connection equations and all off-shell matter/curvature defects. The full geometric zero-quantity subsidiary is not determined by~\eqref{eq:blockjet}.
+
+\section{Verification programme and limitations}
+The algebraic calculations have been checked by two independent code families wherever possible; details and the runnable scripts accompany this manuscript.
+\begin{center}\small\begin{tabular}{p{0.57\linewidth}p{0.26\linewidth}}\toprule
+Audited statement & Exact scope\\\midrule
+58-field block principal matrices & Exact rational tilts and 500 independently sampled subluminal states\\
+Frozen sourceful Weyl identities & Independent symbolic/Fraction tensor checks of 24 contracted components\\
+40-field time-jet commutators & Exact 40-by-40 blocks and independent curl checks\\
+Cartan and torsionful curved-jet identities & 9,600 plus 1,280 rational component checks\\
+Full Bianchi defect identity (Attack 009) & 120 noncommutative four-dimensional exact tests\\
+Spatial four-form coefficient identity & 300 rational sign/order tests\\
+Attack 010 sourceful 24-component Bianchi projection & 172 symbolic checks and 344 direct-tensor comparisons\\
+Attack 010 material dust-gradient obstruction & Exact Jacobi-determinant, flat coframe, and Jordan tests\\
+Constraint-adjustment Jordan witness & Exact symbolic rank and symmetrizer obstruction\\
+Attack 011 nonlinear paired-jet identities & Symbolic chain-rule/conditional defect checks\\
+Attack 011 independent material-frame controls & 1,000 exact rational point jets and 5 FLRW checks\\
+Anisotropic omitted-shear-jet failure & Momentum-compatible symbolic nilpotent block\\
+Incomplete Weyl-jet/radiation source coupling & Exact 22-by-22 Jordan obstruction; two independent code paths\\
+Complete first-jet positive principal construction & Exact 132-by-132 model; conditional on closed base equations\\
+Full nonlinear sourceful $B^j_{\rm full}$ & \textbf{Not available or certified}\\\bottomrule\end{tabular}\end{center}
+All finite verification is corroboration of the stated formulas, not a substitute for a continuum derivation. The tests are not a claim that any nontrivial full Einstein initial-value solution was evolved or that an astrophysical observable was obtained. The flat tangent model is a principal and subsidiary model, not a flat spacetime solution with simultaneously nonzero constant dust and radiation density.
+
+\section{Conclusion}
+The existing two-fluid programme has established useful restricted statements: an exact pre-caustic material dust law, a fixed-metric symmetric-hyperbolic radiation prolongation, frozen 36- and 40-component sourceful Weyl/radiation constraints, and an explicitly positive 58-field \emph{candidate} principal skeleton. The geometric Cartan and curved-jet identities identify the curvature and torsion defect couplings that an Einstein-equivalent reduction must retain.
+
+The Bianchi compatibility identity determines the missing off-diagonal principal coefficients in terms of temporal residual projections. The contracted Bianchi residual decomposition gives six principal propagation equations with the derivatives of the matter-conservation residual displayed. It also proves that the proposed frame/connection variables do not algebraically determine the spatial dust-density gradient, and that the naive unadjusted augmentation by dust gradients fails positivity at the principal level. It also proves by a concrete constraint-adjustment example that the constrained physical equations cannot, by themselves, select a unique symmetrizable off-shell subsidiary. A paired-gradient calculation supplies a conditional prolongation of the nonlinear material dust/Raychaudhuri equations and proves that it cures the isolated original dust-density/expansion derivative coupling. It also finds a residual non-symmetrizable shear--expansion-gradient block in an anisotropic state if spatial shear jets are omitted. This is a limitation of the unadjusted variable choice and not an Einstein--matter no-go theorem. An additional exact calculation shows that differentiating the Weyl source while leaving the radiation-stress jet unprolonged creates a $22$-field off-shell Jordan obstruction at a shared zero speed; a full first-jet prolongation of an already closed symmetric-hyperbolic system removes this generic partial-differentiation difficulty, without resolving the Einstein geometry. The next genuinely decisive step is therefore to write the complete reduced evolution with a declared constraint adjustment and to derive its full temporal Bianchi residuals. The next calculation must additionally decide how the dust gradient enters the geometric and matter subsidiary, either through controlled derivatives of the existing frame variables or through a different auxiliary and constraint-adjusted reduction. Only a complete off-shell calculation can decide whether a common nonlinear constraint symmetrizer exists for the proposed formulation. The full theorem remains open, as does external specialist originality assessment.
+
+\appendix
+\section{Exact expanding Einstein--dust--radiation control}\label{app:flrw}
+In conformal time and appropriate geometrized units, let
+\[g=a(\eta)^2(-d\eta^2+dx^2+dy^2+dz^2),\qquad a(\eta)=\eta+\eta^2,\quad
+\rho_d=4a^{-3},\quad\rho_r=a^{-4}.\]
+Choose $\kap=3$ and $\Lambda=0$. The conformal Friedmann equation $(a')^2=(\kap/3)(\rho_d a^4+\rho_r a^4)$ would then read $(1+2\eta)^2=4a+1$, which holds identically. Dust and radiation satisfy their respective continuity laws. The proper dust velocity is $u_d^\eta=a^{-1}$. At $\eta=1$, directly computing the relevant covariant commutator gives the nonzero value $[\nabla_\eta,\nabla_x]u_d^x=-5/8$ in the sign convention of the verification scripts. This example demonstrates the necessity of curvature subtraction in $\cF$ even on a genuine coupled solution.
+
+\section{Normal-form count and prior verification ancestry}
+In the frozen Weyl model, the sourceful six Weyl divergence constraints are independent of the twelve radiation defining, twelve radiation curl, three dust defining and three dust curl constraints. The time-jet extension adds four radiation constraints, raising 36 to 40; its finite-dimensional time symmetrizer inherits the radiation $A^0$. The 58-field candidate \emph{evolution} count is separate from the subsidiary count; the latter must include more than 40 components once spatial frame, connection, curvature, Einstein and curved-jet constraints are introduced. Treating these two counts as interchangeable would misstate the actual reduction.
+
+The accompanying packet includes an execution log rerunning all twelve prior Attack 006--008 verifier scripts, plus the new Attack 009 verifier. The previous 58-field and 40-field results are not reinterpreted as full nonlinear results. The independent exact component tests also highlight that a purely spatial curl $\partial_iW_j-\partial_jW_i$ is valid for the flat frozen setting but is not the correct vanishing integrability quantity for an independently evolved covariant vector jet in a curved background.
+
+\section{Symmetrizer testing instructions for a completed reduction}
+After fixing the full off-shell equations, collect $\cC_{\rm full}$ in a single declared ordering. Produce symbolic matrices $B^j_{\rm full}$ by differentiating the \emph{actual} equations, retaining every term with a derivative of a zero quantity. Verify the homogeneous lower-order right-hand side before attempting any spectral computation. For each physical tilt $v$ and each unit spatial covector $n$, evaluate $B(n)=n_jB^j_{\rm full}$ and check semisimplicity. At each shared eigenvalue of geometric and acoustic/jet sectors, compute $P_A(\lambda)C(n)P_D(\lambda)$ and record whether it vanishes. Finally solve the simultaneous linear matrix equations $HB^j=(B^j)^TH$ for a single symmetric $H$ and certify its positivity uniformly on a compact region. This is a necessary proof plan, not a substitute for the missing coefficient derivation.
+
+\begin{thebibliography}{99}
+\bibitem{Kato} T. Kato, \emph{The Cauchy problem for quasi-linear symmetric hyperbolic systems}, Arch. Ration. Mech. Anal. \textbf{58} (1975), 181--205. \url{https://doi.org/10.1007/BF00280740}.
+\bibitem{Friedrich} H. Friedrich, \emph{Evolution equations for gravitating ideal fluid bodies in general relativity}, Phys. Rev. D \textbf{57} (1998), 2317--2322. \url{https://doi.org/10.1103/PhysRevD.57.2317}.
+\bibitem{NormannVK} M. Normann and J. A. Valiente Kroon, \emph{Evolution equations for a wide range of Einstein--matter systems}, Gen. Relativ. Gravit. \textbf{52} (2020), article 103. \url{https://doi.org/10.1007/s10714-020-02759-y}.
+\bibitem{FMO} G. Fournodavlos, E. Marshall and T. A. Oliynyk, \emph{Future stability of tilted two-fluid Bianchi I spacetimes}, Ann. Henri Poincar\'e (2026), \url{https://doi.org/10.1007/s00023-026-01727-7}.
+\bibitem{Walton} R. A. Walton, \emph{Symmetric hyperbolic Euler equations for relativistic perfect fluids}, arXiv:astro-ph/0502233 (2005), \url{https://arxiv.org/abs/astro-ph/0502233}.
+\bibitem{Ellis} G. F. R. Ellis and H. van Elst, \emph{Cosmological models: Carg\`ese lectures 1998}, in \emph{Theoretical and Observational Cosmology} (1999), \url{https://arxiv.org/abs/gr-qc/9812046}.
+\bibitem{FOW} D. Fajman, M. Ofner and Z. Wyatt, \emph{Slowly Expanding Stable Dust Spacetimes}, Arch. Ration. Mech. Anal. \textbf{248} (2024), article 83. \url{https://doi.org/10.1007/s00205-024-02030-7}.
+\bibitem{HadSpeck} M. Had\v{z}i\'c and J. Speck, \emph{The global future stability of the FLRW solutions to the dust--Einstein system with a positive cosmological constant}, J. Hyperbolic Differ. Equ. \textbf{12} (2015), 87--188. \url{https://doi.org/10.1142/S0219891615500046}.
+\end{thebibliography}
+\end{document}
