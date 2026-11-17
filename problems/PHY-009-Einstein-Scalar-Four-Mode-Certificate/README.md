@@ -23,14 +23,15 @@ For a proposed weighted fixed-amplitude error ceiling of `1/3600`, a four-orbit 
 
 ## Files
 
-- [paper.tex](paper.tex): the full 25-page base manuscript source, including exact results through FT13 (the 26-page subsequently updated PDF adds the observation certificate).
+- [Revised 26-page PDF](Four_Mode_Einstein_Scalar_Updated_Observation_Bound.pdf): complete current paper including the exact observation-reconstruction certificate.
+- [paper.tex](paper.tex): the earlier full 25-page base manuscript source, including exact results through FT13 (the PDF contains an additional later section; see addendum).
 - [OBSERVATION_ADDENDUM.md](OBSERVATION_ADDENDUM.md): mathematical record of the subsequent exact-integer reconstruction bound.
 - [AUDIT.md](AUDIT.md): distinctions between theorems, saved-data certificates, numerical diagnostics and open results.
 - [verify.py](verify.py): no-dependency reproducer for finite Fourier combinatorics, the momentum-adjustment norm and arithmetic proof thresholds.
 - [PDF_FILENAME.txt](PDF_FILENAME.txt): required PDF stem for the repository build.
 - [requirements.txt](requirements.txt): verifier dependencies.
 
-**Figure availability:** this source calls figure files included in the author's distributed PDF/proof archive. Those binary figure files and the revised PDF are not yet uploaded into this repository; the published source file alone is not a complete figure-bearing build. Do not substitute manuscript source for a verified, compiled PDF. The author has the revised 26-page PDF and exact verification archive.
+**Figure/source caveat:** the revised **26-page PDF is now committed in this folder**. The accompanying LaTeX text is the earlier 25-page base edition; [OBSERVATION_ADDENDUM.md](OBSERVATION_ADDENDUM.md) documents the subsequent result. The separate figure/source arrays and 37 MB+ replay archive have not yet been pushed, so the TeX file alone is not a complete figure-bearing build.
 
 ## Related literature
 
