@@ -1,5 +1,20 @@
 # Eulerian Hyperbolicity Obstructions and Nonlinear Material-Frame Repairs for Einstein–Dust–Radiation Cauchy Systems
 
+## Current cumulative manuscript (through Attack 012)
+
+**[Constraint Propagation and First-Jet Hyperbolicity in Einstein–Dust–Radiation Reductions](Constraint_Propagation_and_First_Jet_Hyperbolicity_in_Einstein_Dust_Radiation_Reductions.tex)** (Tony Newton; 19-page LaTeX manuscript, compiled PDF supplied separately to the academic correspondent).
+
+**Main exact restricted result.** For the frozen, comoving Weyl–radiation system with nonzero radiation coefficient `b`, the *unadjusted partial first-jet prolongation* (differentiate the Weyl field while leaving radiation stress jets unprolonged) has a `22 × 22` directional symbol with zero eigenvalue of algebraic multiplicity 8 and geometric multiplicity 7, or equivalently rank 15. It is therefore not positive-symmetrizable in that off-shell variable choice. This is **not** a no-go theorem for the coupled Einstein equations.
+
+**Constructive comparison.** If a base `m`-field quasilinear symmetric-hyperbolic system is already fully specified, prolonging *all* three spatial first jets yields a `4m`-field symmetric-hyperbolic system with block-diagonal principal matrices. A 132-field restricted model illustrates this established principle; it does not establish Einstein equivalence.
+
+**Earlier restricted controls included in the paper:** material dust-density conservation, prescribed-metric tilted radiation-gradient prolongation, constant-coefficient 36- and 40-component homogeneous Weyl/jet subsidiaries, covariant torsion and curvature-defect compatibility, Bianchi residual structure, and precise dust-gradient/shear-gradient counterexamples to incomplete prolongations.
+
+**Main unresolved gate:** specify the actual complete nonlinear off-shell dust-adapted frame/connection/Weyl/radiation equations, including all stress/curvature sources and constraint adjustments; derive every principal coupling and the homogeneous all-zero-quantity subsidiary; certify one uniformly positive common symmetrizer and a closed nonlinear energy estimate. **No full nonlinear Einstein–dust–radiation local-existence theorem or new physical prediction is claimed.**
+
+The GitHub Actions reproducibility workflow also compiles this cumulative source into the downloadable `PHYSICS2026-PDF-manuscripts` artifact.
+
+
 **PHY-005 — a new Einstein–matter Cauchy-theory investigation**, separate from electron magnetohydrodynamics (PHY-001/002), lattice gauge theory (PHY-003), and Sol scalar topology (PHY-004).
 
 ## Exact mathematical findings
